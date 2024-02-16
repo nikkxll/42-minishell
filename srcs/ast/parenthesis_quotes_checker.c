@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parenthesis_quotes_checker.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:39:12 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/16 12:19:28 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:17:11 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include "libft/libft.h"
-#include "head.h"
+#include "../../headers/minishell.h"
 
 t_node_data	*set_node_data(char *str, int point, int type)
 {
@@ -198,7 +193,7 @@ int	main()
 	if (meta_characters_check(buffer))
 		node = parenthesis_quotes_checker(buffer, T_AND, 0);
 	else
-		node = set_node_data(buffer, (int)ft_strlen(buffer), CMD);
+		node = set_node_data(buffer, (int)ft_strlen(buffer), T_CMD);
 	printf("%d\n", node->type);
 	printf("%s\n", node->str_left);
 	printf("%s\n", node->str_right);

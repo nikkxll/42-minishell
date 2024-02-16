@@ -1,14 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   head.h                                             :+:      :+:    :+:   */
+/*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 12:12:25 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/16 12:09:08 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/02/16 13:16:20 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef DEFINES_H
+# define DEFINES_H
 
 enum	e_types
 {
@@ -19,7 +22,7 @@ enum	e_types
 	T_REDIR_RR,
 	T_REDIR_L,
 	T_REDIR_R,
-	CMD
+	T_CMD
 };
 
 enum	e_parenthesis
@@ -29,9 +32,8 @@ enum	e_parenthesis
 	ROUND,
 };
 
-typedef struct s_node_data
-{
-	int		type;
-	char	*str_left;
-	char	*str_right;
-}	t_node_data;
+# ifndef MALLOC_FAILURE
+#  define MALLOC_FAILURE 256
+# endif
+
+#endif
