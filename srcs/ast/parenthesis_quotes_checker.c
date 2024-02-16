@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parenthesis_quotes_checker.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:39:12 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/16 13:17:11 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/16 16:59:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_node_data	*set_node_data(char *str, int point, int type)
 {
 	t_node_data	*node;
 
-	str[point] = '\0';
+	str[point] = NULL_TERM;
 	node = ft_calloc(1, sizeof(node));
 	node->str_left = str;
 	node->str_right = NULL;
@@ -35,15 +35,15 @@ int	round_brackets_check(char *str, int point)
 	int	i;
 	int	key;
 
-	i = 0;
+	i = (int)ft_strlen(str);
 	key = 0;
-	while (i < point)
+	while (i > point)
 	{
-		if (str[i] == '(')
+		if (str[i] == O_ROUND)
 			key++;
-		if (str[i] == ')')
+		if (str[i] == C_ROUND)
 			key--;
-		i++;
+		i--;
 	}
 	return (!key);
 }
@@ -53,16 +53,16 @@ int	quote_check(char *str, int point, int symbol)
 	int		i;
 	int		pair[2];
 
-	i = 0;
+	i = (int)ft_strlen(str);
 	pair[0] = 0;
 	pair[1] = 0;
-	while (i < point)
+	while (i > point)
 	{
 		if (str[i] == symbol)
 			pair[0]++;
-		i++;
+		i--;
 	}
-	while (++point < (int)ft_strlen(str))
+	while (--point > 0)
 	{
 		if (str[point] == symbol)
 			pair[1]++;
@@ -72,95 +72,92 @@ int	quote_check(char *str, int point, int symbol)
 
 t_node_data	*parenthesis_quotes_checker(char *str, int type, int i)
 {
-	while (str[i] != '\0')
+	while (i > 0)
 	{
-		if (type == T_AND)
+		if (type == T_AND || type == T_OR)
 		{
-			if (str[i] == '&' && str[i + 1] == '&')
+			if (str[i] == '&' && str[i - 1] == '&')
 			{
-				if (round_brackets_check(str, i - 1)
+				if (round_brackets_check(str, i)
 					&& quote_check(str, i, '\'')
 					&& quote_check(str, i, '\"'))
 					return (set_node_data(str, i, T_AND));
 				else
-					parenthesis_quotes_checker(str, type, i + 2);
+					return (parenthesis_quotes_checker(str, type, i - 2));
 			}
-		}
-		else if (type == T_OR)
-		{
-			if (str[i] == '|' && str[i + 1] == '|')
+			else if (str[i] == '|' && str[i - 1] == '|')
 			{
-				if (round_brackets_check(str, i - 1)
+				if (round_brackets_check(str, i)
 					&& quote_check(str, i, '\'')
 					&& quote_check(str, i, '\"'))
 					return (set_node_data(str, i, T_OR));
 				else
-					parenthesis_quotes_checker(str, type, i + 2);
+					return (parenthesis_quotes_checker(str, type, i - 2));
 			}
 		}
 		else if (type == T_PIPE)
 		{
 			if (str[i] == '|')
 			{
-				if (round_brackets_check(str, i - 1)
+				if (round_brackets_check(str, i)
 					&& quote_check(str, i, '\'')
 					&& quote_check(str, i, '\"'))
 					return (set_node_data(str, i, T_PIPE));
 				else
-					parenthesis_quotes_checker(str, type, i + 1);
+					return (parenthesis_quotes_checker(str, type, i - 1));
 			}
 		}
 		else if (type == T_REDIR_L)
 		{
-			if (str[i] == '<' && str[i + 1] != '<')
+			if (str[i] == '<' && str[i - 1] != '<')
 			{
-				if (round_brackets_check(str, i - 1)
+				if (round_brackets_check(str, i)
 					&& quote_check(str, i, '\'')
 					&& quote_check(str, i, '\"'))
 					return (set_node_data(str, i, T_REDIR_L));
 				else
-					parenthesis_quotes_checker(str, type, i + 1);
+					return (parenthesis_quotes_checker(str, type, i - 1));
 			}
 		}
 		else if (type == T_REDIR_R)
 		{
-			if (str[i] == '>' && str[i + 1] != '>')
+			if (str[i] == '>' && str[i - 1] != '>')
 			{
-				if (round_brackets_check(str, i - 1)
+				if (round_brackets_check(str, i)
 					&& quote_check(str, i, '\'')
 					&& quote_check(str, i, '\"'))
 					return (set_node_data(str, i, T_REDIR_R));
 				else
-					parenthesis_quotes_checker(str, type, i + 1);
+					return (parenthesis_quotes_checker(str, type, i - 1));
 			}
 		}
 		else if (type == T_REDIR_LL)
 		{
-			if (str[i] == '>' && str[i + 1] == '>')
+			if (str[i] == '>' && str[i - 1] == '>')
 			{
-				if (round_brackets_check(str, i - 1)
+				if (round_brackets_check(str, i)
 					&& quote_check(str, i, '\'')
 					&& quote_check(str, i, '\"'))
 					return (set_node_data(str, i, T_REDIR_LL));
 				else
-					parenthesis_quotes_checker(str, type, i + 2);
+					parenthesis_quotes_checker(str, type, i - 2);
 			}
 		}
 		else
 		{
-			if (str[i] == '<' && str[i + 1] == '<')
+			if (str[i] == '<' && str[i - 1] == '<')
 			{
-				if (round_brackets_check(str, i - 1)
+				if (round_brackets_check(str, i)
 					&& quote_check(str, i, '\'')
 					&& quote_check(str, i, '\"'))
 					return (set_node_data(str, i, T_REDIR_RR));
 				else
-					parenthesis_quotes_checker(str, type, i + 2);
+					return (parenthesis_quotes_checker(str, type, i - 2));
 			}
 		}
-		i++;
+		i--;
 	}
-	return (parenthesis_quotes_checker(str, type + 1, 0));
+	return (parenthesis_quotes_checker(str, type + 1, (int)ft_strlen(str)));
 }
 
 int	meta_characters_check(char *str)
@@ -188,12 +185,12 @@ int	meta_characters_check(char *str)
 int	main()
 {
 	t_node_data	*node;
-	char buffer[1000] = "cmd > file";
+	char str[1000] = "(cmd || file) < cmd << cmd (cmd || cmd)";
 
-	if (meta_characters_check(buffer))
-		node = parenthesis_quotes_checker(buffer, T_AND, 0);
+	if (meta_characters_check(str))
+		node = parenthesis_quotes_checker(str, T_AND, ft_strlen(str));
 	else
-		node = set_node_data(buffer, (int)ft_strlen(buffer), T_CMD);
+		node = set_node_data(str, (int)ft_strlen(str), T_CMD);
 	printf("%d\n", node->type);
 	printf("%s\n", node->str_left);
 	printf("%s\n", node->str_right);
