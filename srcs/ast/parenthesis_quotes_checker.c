@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:39:12 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/16 16:59:50 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:36:42 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	round_brackets_check(char *str, int point)
 	int	i;
 	int	key;
 
-	i = (int)ft_strlen(str);
+	i = (int)ft_strlen(str) - 1;
 	key = 0;
-	while (i > point)
+	while (i >= point)
 	{
 		if (str[i] == O_ROUND)
 			key++;
@@ -53,10 +53,10 @@ int	quote_check(char *str, int point, int symbol)
 	int		i;
 	int		pair[2];
 
-	i = (int)ft_strlen(str);
+	i = (int)ft_strlen(str) - 1;
 	pair[0] = 0;
 	pair[1] = 0;
-	while (i > point)
+	while (i >= point)
 	{
 		if (str[i] == symbol)
 			pair[0]++;
@@ -157,7 +157,7 @@ t_node_data	*parenthesis_quotes_checker(char *str, int type, int i)
 		}
 		i--;
 	}
-	return (parenthesis_quotes_checker(str, type + 1, (int)ft_strlen(str)));
+	return (parenthesis_quotes_checker(str, type + 1, (int)ft_strlen(str) - 1));
 }
 
 int	meta_characters_check(char *str)
@@ -188,7 +188,7 @@ int	main()
 	char str[1000] = "(cmd || file) < cmd << cmd (cmd || cmd)";
 
 	if (meta_characters_check(str))
-		node = parenthesis_quotes_checker(str, T_AND, ft_strlen(str));
+		node = parenthesis_quotes_checker(str, T_AND, (int)ft_strlen(str) - 1);
 	else
 		node = set_node_data(str, (int)ft_strlen(str), T_CMD);
 	printf("%d\n", node->type);
