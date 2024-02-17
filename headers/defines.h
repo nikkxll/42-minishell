@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/16 16:11:09 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/17 21:39:14 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,27 @@ enum	e_types
 	T_REDIR_LL,
 	T_REDIR_RR,
 	T_REDIR_L,
-	T_REDIR_R,
+	T_REDIR_R
 };
 
-enum	e_parenthesis
+enum	e_characters
 {
 	NULL_TERM,
+	SPACE = 32,
 	D_QUOTE = 34,
+	AND = 38,
 	S_QUOTE = 39,
 	O_ROUND = 40,
-	C_ROUND = 41
+	C_ROUND = 41,
+	REDIR_L = 60,
+	REDIR_R = 62,
+	PIPE = 124
+};
+
+enum	e_validator
+{
+	VALID,
+	INVALID
 };
 
 # ifndef MALLOC_FAILURE

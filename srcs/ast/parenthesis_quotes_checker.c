@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:39:12 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/16 23:36:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/17 20:33:34 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,20 @@ t_node_data	*parenthesis_quotes_checker(char *str, int type, int i)
 	{
 		if (type == T_AND || type == T_OR)
 		{
-			if (str[i] == '&' && str[i - 1] == '&')
+			if (str[i] == AND && str[i - 1] == AND)
 			{
 				if (round_brackets_check(str, i)
-					&& quote_check(str, i, '\'')
-					&& quote_check(str, i, '\"'))
+					&& quote_check(str, i, S_QUOTE)
+					&& quote_check(str, i, D_QUOTE))
 					return (set_node_data(str, i, T_AND));
 				else
 					return (parenthesis_quotes_checker(str, type, i - 2));
 			}
-			else if (str[i] == '|' && str[i - 1] == '|')
+			else if (str[i] == PIPE && str[i - 1] == PIPE)
 			{
 				if (round_brackets_check(str, i)
-					&& quote_check(str, i, '\'')
-					&& quote_check(str, i, '\"'))
+					&& quote_check(str, i, S_QUOTE)
+					&& quote_check(str, i, D_QUOTE))
 					return (set_node_data(str, i, T_OR));
 				else
 					return (parenthesis_quotes_checker(str, type, i - 2));
@@ -97,11 +97,11 @@ t_node_data	*parenthesis_quotes_checker(char *str, int type, int i)
 		}
 		else if (type == T_PIPE)
 		{
-			if (str[i] == '|')
+			if (str[i] == PIPE)
 			{
 				if (round_brackets_check(str, i)
-					&& quote_check(str, i, '\'')
-					&& quote_check(str, i, '\"'))
+					&& quote_check(str, i, S_QUOTE)
+					&& quote_check(str, i, D_QUOTE))
 					return (set_node_data(str, i, T_PIPE));
 				else
 					return (parenthesis_quotes_checker(str, type, i - 1));
@@ -109,11 +109,11 @@ t_node_data	*parenthesis_quotes_checker(char *str, int type, int i)
 		}
 		else if (type == T_REDIR_L)
 		{
-			if (str[i] == '<' && str[i - 1] != '<')
+			if (str[i] == REDIR_L && str[i - 1] != REDIR_L)
 			{
 				if (round_brackets_check(str, i)
-					&& quote_check(str, i, '\'')
-					&& quote_check(str, i, '\"'))
+					&& quote_check(str, i, S_QUOTE)
+					&& quote_check(str, i, D_QUOTE))
 					return (set_node_data(str, i, T_REDIR_L));
 				else
 					return (parenthesis_quotes_checker(str, type, i - 1));
@@ -121,11 +121,11 @@ t_node_data	*parenthesis_quotes_checker(char *str, int type, int i)
 		}
 		else if (type == T_REDIR_R)
 		{
-			if (str[i] == '>' && str[i - 1] != '>')
+			if (str[i] == REDIR_R && str[i - 1] != REDIR_R)
 			{
 				if (round_brackets_check(str, i)
-					&& quote_check(str, i, '\'')
-					&& quote_check(str, i, '\"'))
+					&& quote_check(str, i, S_QUOTE)
+					&& quote_check(str, i, D_QUOTE))
 					return (set_node_data(str, i, T_REDIR_R));
 				else
 					return (parenthesis_quotes_checker(str, type, i - 1));
@@ -133,11 +133,11 @@ t_node_data	*parenthesis_quotes_checker(char *str, int type, int i)
 		}
 		else if (type == T_REDIR_LL)
 		{
-			if (str[i] == '>' && str[i - 1] == '>')
+			if (str[i] == REDIR_R && str[i - 1] == REDIR_R)
 			{
 				if (round_brackets_check(str, i)
-					&& quote_check(str, i, '\'')
-					&& quote_check(str, i, '\"'))
+					&& quote_check(str, i, S_QUOTE)
+					&& quote_check(str, i, D_QUOTE))
 					return (set_node_data(str, i, T_REDIR_LL));
 				else
 					parenthesis_quotes_checker(str, type, i - 2);
@@ -145,11 +145,11 @@ t_node_data	*parenthesis_quotes_checker(char *str, int type, int i)
 		}
 		else
 		{
-			if (str[i] == '<' && str[i - 1] == '<')
+			if (str[i] == REDIR_L && str[i - 1] == REDIR_L)
 			{
 				if (round_brackets_check(str, i)
-					&& quote_check(str, i, '\'')
-					&& quote_check(str, i, '\"'))
+					&& quote_check(str, i, S_QUOTE)
+					&& quote_check(str, i, D_QUOTE))
 					return (set_node_data(str, i, T_REDIR_RR));
 				else
 					return (parenthesis_quotes_checker(str, type, i - 2));
@@ -169,13 +169,13 @@ int	meta_characters_check(char *str)
 	meta[0] = 0;
 	meta[1] = 0;
 	meta[2] = 0;
-	while (str[i] != '\0')
+	while (str[i] != NULL_TERM)
 	{
-		if (str[i] == '|')
+		if (str[i] == PIPE)
 			meta[0]++;
-		if (str[i] == '&')
+		if (str[i] == AND)
 			meta[1]++;
-		if (str[i] == '<' || str[i] == '>')
+		if (str[i] == REDIR_L || str[i] == REDIR_R)
 			meta[2]++;
 		i++;
 	}
