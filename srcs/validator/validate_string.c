@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 22:53:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/17 21:48:35 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/18 13:07:16 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,45 @@ int validator(char *str)
         return (INVALID);
 }
 
+void remove_quotes(char *str)
+{
+    int i;
+    int j;
+
+	i = 0;
+	j = 0;
+    while (str[i] != NULL_TERM)
+	{
+        if ((str[i] == S_QUOTE && str[i + 1] == D_QUOTE
+			&& str[i + 2] == D_QUOTE && str[i + 3] == S_QUOTE) ||
+			(str[i] == D_QUOTE && str[i + 1] == S_QUOTE
+			&& str[i + 2] == S_QUOTE && str[i + 3] == D_QUOTE))
+		{
+			str[j++] = str[i + 1];
+			str[j++] = str[i + 2];
+			i += 4;
+        }
+        else if ((str[i] == S_QUOTE && str[i + 1] == S_QUOTE) ||
+			(str[i] == D_QUOTE && str[i + 1] == D_QUOTE))
+			i += 2;
+		else
+			str[j++] = str[i++];
+    }
+    str[j] = NULL_TERM;
+}
+
 int main(void)
 {
-    char str[1000] = "cat | <<a     >> aa";
-	if (validator(str))
+	int status;
+	
+    char str[1000] = "echo >>a >a";
+	status = validator(str);
+	if (status)
     	printf("%s\n", "INVALID");
 	else
+	{
     	printf("%s\n", "VALID");
+		remove_quotes(str);
+		printf("%s\n", str);
+	}
 }
