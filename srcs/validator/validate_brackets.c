@@ -6,12 +6,25 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:51:19 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/19 17:51:53 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:01:51 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+/*
+* Checks if the number of round brackets which are outside of the quotes is
+* even and number of opening are equal to the number of closing
+* Input:
+* - `str` - string that coming from readline function
+* - `point` - number to decrease until
+* - `key` - indicator of opening and closing brackets
+* - `quote_type` - int that tracks if we are within a quotes or not
+* 
+* Output:
+* - if number of opening and closing brackets don't match return is 0,
+* otherwise return is not 0
+*/
 int	check_if_round_brackets_num_is_even(char *str, int point,
 	int key, int quote_type)
 {
@@ -37,6 +50,17 @@ int	check_if_round_brackets_num_is_even(char *str, int point,
 	return (!key);
 }
 
+/*
+* Checks if there are two consecutive (opening and closing) round braces
+* outside of the quotes
+* Input:
+* - `str` - string that coming from readline function
+* - `key` - indicator of opening and closing brackets
+* - `quote_type` - int that tracks if we are within a quotes or not
+* 
+* Output:
+* - if key is more than 0 return is true, otherwise false
+*/
 int	two_consecutive_round_brackets_check(char *str, int key, int quote_type)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/19 17:59:36 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:32:31 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ t_redir_rr	*init_t_redir_rr(void);
 void		free_node_data(t_node_data *data);
 
 
-/* validator related functions */
+//validator
+
 void		remove_quotes(char *str);
 int			check_if_round_brackets_num_is_even(char *str, int point, int key,
 				int quote_type);

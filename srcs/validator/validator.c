@@ -6,12 +6,22 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:42:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/19 17:55:08 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:02:09 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+/*
+* Validates input string which is coming from prompt
+* Consists of checks for different meta characters, quotes, parenthesis etc
+*
+* Input:
+* - `str` - string that coming from readline function
+* 
+* Output:
+* - status that corresponds to the result of validation
+*/
 int	validate_input_string(char *str)
 {
 	if (check_if_round_brackets_num_is_even(str, 0, 0, 0)
@@ -30,21 +40,21 @@ int	validate_input_string(char *str)
 		return (INVALID);
 }
 
-int	main(void)
-{
-	int	status;
+// int	main(void)
+// {
+// 	int	status;
+ 
+// 	char str[1000] = "echo '<<<' \"&&&\" '())'";
+// 	status = validate_input_string(str);
+// 	if (status)
+// 	{
+// 		printf("%s\n", "INVALID");
+// 		printf("%s\n", str);
+// 	}
+// 	else
+// 	{
+// 		printf("%s\n", "VALID");
+// 		printf("%s\n", str);
+// 	}
 
-	char str[1000] = "echo '<<<' '()' k";
-	status = validate_input_string(str);
-	if (status)
-	{
-		printf("%s\n", "INVALID");
-		printf("%s\n", str);
-	}
-	else
-	{
-		printf("%s\n", "VALID");
-		printf("%s\n", str);
-	}
-
-}
+// }

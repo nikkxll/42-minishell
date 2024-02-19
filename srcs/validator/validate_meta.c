@@ -6,12 +6,22 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:34:13 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/19 17:57:31 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:55:08 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+/*
+* auxiliary function for the check_if_redirect_file_pattern_complied()
+*
+* Input:
+* - `str` - string that coming from readline function
+* - `i` - iteration index
+* 
+* Output:
+* - `0` (VALID) or `1` (INVALID)
+*/
 static int	check_if_redirect_file_pattern_complied_sequel(char *str, int i)
 {
 	while (str[i] == SPACE && str[i] != NULL_TERM)
@@ -21,6 +31,18 @@ static int	check_if_redirect_file_pattern_complied_sequel(char *str, int i)
 	return (VALID);
 }
 
+/*
+* Function that checks if redirection pattern is followed:
+* `> | < | >> | << file`
+*
+* Input:
+* - `str` - string that coming from readline function
+* - `quote_type` - int that tracks if we are within a quotes or not
+* - `i` - iteration index
+* 
+* Output:
+* - `0` (VALID) or `1` (INVALID)
+*/
 int	check_if_redirect_file_pattern_complied(char *str, int quote_type, int i)
 {
 	while (str[i] != NULL_TERM)
@@ -49,6 +71,18 @@ int	check_if_redirect_file_pattern_complied(char *str, int quote_type, int i)
 	return (VALID);
 }
 
+/*
+* Function that checks if redirections, &&, || are written in a proper way
+*
+* Input:
+* - `str` - string that coming from readline function
+* - `first` - first meta character
+* - `second` - second meta character
+* - `quote_type` - int that tracks if we are within a quotes or not
+* 
+* Output:
+* - `0` (VALID) or `1` (INVALID)
+*/
 int	check_if_redirects_and_or_are_correct(char *str, int first,
 	int second, int quote_type)
 {
