@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/16 23:19:27 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:59:36 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,24 @@ t_redir_ll	*init_t_redir_ll(void);
 t_redir_rr	*init_t_redir_rr(void);
 
 void		free_node_data(t_node_data *data);
+
+
+/* validator related functions */
+void		remove_quotes(char *str);
+int			check_if_round_brackets_num_is_even(char *str, int point, int key,
+				int quote_type);
+int			two_consecutive_round_brackets_check(char *str, int key,
+				int quote_type);
+int			check_if_redirect_file_pattern_complied(char *str, int quote_type,
+				int i);
+int			check_if_redirects_and_or_are_correct(char *str, int first,
+				int second, int quote_type);
+int			check_if_quotes_num_is_even(char *str, int type, int key,
+				int quote_type);
+void		check_if_inside_quotes_with_decr(char *str, int *i,
+				int *quote_type);
+void		check_if_inside_quotes_with_incr(char *str, int *i,
+				int *quote_type);
+int			check_if_backslash_or_semicolon_exist(char *str, int quote_type);
 
 #endif
