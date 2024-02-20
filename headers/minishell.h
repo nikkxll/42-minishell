@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/19 18:32:31 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:11:24 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,16 @@ void		check_if_inside_quotes_with_decr(char *str, int *i,
 void		check_if_inside_quotes_with_incr(char *str, int *i,
 				int *quote_type);
 int			check_if_backslash_or_semicolon_exist(char *str, int quote_type);
+
+//ast_string_splitter
+
+int			set_node_data(t_node_data **node, char *str, int point, int type);
+int			and_if_condition_block(t_node_data **node, char *str, int type, int i);
+int			parenthesis_quotes_checker(t_node_data **node, char *str, int type, int i);
+t_bool		if_odd(int number);
+int			round_brackets_check(char *str, int point);
+int			quote_check(char *str, int point, int symbol);
+int			first_nonspace_char_is_quote(char *str);
+int			last_nonspace_char_is_quote(char *str);
 
 #endif

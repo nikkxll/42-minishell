@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:42:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/19 20:02:09 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/20 10:35:19 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 * - `str` - string that coming from readline function
 * 
 * Output:
-* - status that corresponds to the result of validation
+* - `0` (VALID) or `1` (INVALID), status that corresponds to the result of
+* validation
 */
 int	validate_input_string(char *str)
 {
