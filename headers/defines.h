@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/20 12:31:59 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:20:44 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ enum	e_types
 	T_AND,
 	T_OR,
 	T_PIPE,
-	T_REDIR_LL,
-	T_REDIR_RR,
-	T_REDIR_L,
-	T_REDIR_R,
 	T_BRACKET,
-	T_CMD
+	T_COMMAND,
+	T_COMMAND_BR,
+	T_SIMPLE,
+	T_REDIR
 };
 
 enum	e_characters

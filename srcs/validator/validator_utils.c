@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:43:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/19 19:59:58 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:10:37 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,22 @@ void	check_if_inside_quotes_with_decr(char *str, int *i, int *quote_type)
 	if (str[*i] == S_QUOTE && *quote_type == S_QUOTE)
 	{
 		*quote_type = 0;
-		(*i)--;
+		// (*i)--;
 	}
 	else if (str[*i] == S_QUOTE && *quote_type == 0)
 	{
 		*quote_type = S_QUOTE;
-		(*i)--;
+		// (*i)--;
 	}
 	else if (str[*i] == D_QUOTE && *quote_type == D_QUOTE)
 	{
 		*quote_type = 0;
-		(*i)--;
+		// (*i)--;
 	}
 	else if (str[*i] == D_QUOTE && *quote_type == 0)
 	{
 		*quote_type = D_QUOTE;
-		(*i)--;
+		// (*i)--;
 	}
 }
 
@@ -61,22 +61,22 @@ void	check_if_inside_quotes_with_incr(char *str, int *i, int *quote_type)
 	if (str[*i] == S_QUOTE && *quote_type == S_QUOTE)
 	{
 		*quote_type = 0;
-		(*i)++;
+		// (*i)++;
 	}
 	else if (str[*i] == S_QUOTE && *quote_type == 0)
 	{
 		*quote_type = S_QUOTE;
-		(*i)++;
+		// (*i)++;
 	}
 	else if (str[*i] == D_QUOTE && *quote_type == D_QUOTE)
 	{
 		*quote_type = 0;
-		(*i)++;
+		// (*i)++;
 	}
 	else if (str[*i] == D_QUOTE && *quote_type == 0)
 	{
 		*quote_type = D_QUOTE;
-		(*i)++;
+		// (*i)++;
 	}
 }
 

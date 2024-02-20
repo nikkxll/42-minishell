@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:39:12 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/20 16:11:13 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:24:23 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,80 +49,43 @@ int	pipe_block(t_node_data **node, char *str, int type, int i)
 	return (0);
 }
 
-int	left_redirect_block(t_node_data **node, char *str, int type, int i)
-{
-	if (str[i] == REDIR_L && str[i - 1] != REDIR_L)
-	{
-		if (round_brackets_check(str, i)
-			&& quote_check(str, i, S_QUOTE)
-			&& quote_check(str, i, D_QUOTE))
-			return (set_node_data(node, str, i, T_REDIR_L));
-		else
-			return (parenthesis_quotes_checker(node, str, type, i - 1));
-	}
-	return (0);
-}
-
-int	right_redirect_block(t_node_data **node, char *str, int type, int i)
-{
-	if (str[i] == REDIR_R && str[i - 1] != REDIR_R)
-	{
-		if (round_brackets_check(str, i)
-			&& quote_check(str, i, S_QUOTE)
-			&& quote_check(str, i, D_QUOTE))
-			return (set_node_data(node, str, i, T_REDIR_R));
-		else
-			return (parenthesis_quotes_checker(node, str, type, i - 1));
-	}
-	return (0);
-}
-
-int	double_left_redirect_block(t_node_data **node, char *str, int type, int i)
-{
-	if (str[i] == REDIR_L && str[i - 1] == REDIR_L)
-	{
-		if (round_brackets_check(str, i)
-			&& quote_check(str, i, S_QUOTE)
-			&& quote_check(str, i, D_QUOTE))
-			return (set_node_data(node, str, i, T_REDIR_LL));
-		else
-			return (parenthesis_quotes_checker(node, str, type, i - 2));
-	}
-	return (0);
-}
-
-int	double_right_redirect_block(t_node_data **node, char *str, int type, int i)
-{
-	if (str[i] == REDIR_R && str[i - 1] == REDIR_R)
-	{
-		if (round_brackets_check(str, i)
-			&& quote_check(str, i, S_QUOTE)
-			&& quote_check(str, i, D_QUOTE))
-			return (set_node_data(node, str, i, T_REDIR_RR));
-		else
-			return (parenthesis_quotes_checker(node, str, type, i - 2));
-	}
-	return (0);
-}
-
-int	redirect_block(t_node_data **node, char *str, int type, int i)
-{
-	if (str[i] == REDIR_L && str[i - 1] != REDIR_L)
-		return (left_redirect_block(node, str, type, i));
-	else if (str[i] == REDIR_R && str[i - 1] != REDIR_R)
-		return (right_redirect_block(node, str, type, i));
-	else if (str[i] == REDIR_L && str[i - 1] == REDIR_L)
-		return (double_left_redirect_block(node, str, type, i));
-	else if (str[i] == REDIR_R && str[i - 1] == REDIR_R)
-		return (double_right_redirect_block(node, str, type, i));
-	return (0);
-}
-
 int	brackets_block(t_node_data **node, char *str, int type, int i)
 {
 	if (first_nonspace_char_is_quote(str)
 		&& last_nonspace_char_is_quote(str))
 		return (set_node_data(node, str, (int)ft_strlen(str), T_BRACKET));
+	return (0);
+}
+
+int	brackets_search(char *str)
+{
+	int	i;
+	int	quote_type;
+	int	key;
+
+	i = 0;
+	quote_type = 0;
+	key = 0;
+	while (str[i] != NULL_TERM)
+	{
+		check_if_inside_quotes_with_incr(str, &i, &quote_type);
+		if (!quote_type)
+		{
+			if (str[i] == O_ROUND)
+				key++;
+			i++;
+		}
+		else
+			i++;
+	}
+	return (key > 0);
+}
+
+int	compound_block(t_node_data **node, char *str, int type, int i)
+{
+	if (brackets_search(str))
+		return (set_node_data_compound_with_brackets(node, str,
+				(int)ft_strlen(str), T_COMMAND));
 	return (0);
 }
 
@@ -143,13 +106,12 @@ int	parenthesis_quotes_checker(t_node_data **node, char *str, int type,
 			status = and_if_condition_block(node, str, type, i);
 		else if (type == T_PIPE)
 			status = pipe_block(node, str, type, i);
-		else if (type == T_REDIR_L || type == T_REDIR_R
-			|| type == T_REDIR_LL || type == T_REDIR_RR)
-			status = redirect_block(node, str, type, i);
 		else if (type == T_BRACKET)
 			status = brackets_block(node, str, type, i);
-		else if (type == T_CMD)
-			status = set_node_data(node, str, (int)ft_strlen(str), T_CMD);
+		else if (type == T_COMMAND_BR)
+			status = compound_block(node, str, type, i);
+		else if (type == T_SIMPLE)
+			status = set_node_data(node, str, (int)ft_strlen(str), T_SIMPLE);
 		if (status > 0)
 			return (status);
 		else if (status < 0)
@@ -165,7 +127,7 @@ int	main()
 	t_node_data	*node;
 	int			status;
 
-	char str[1000] = "cmd || (cmd && cmd)";
+	char str[1000] = "(cmd && cmd) > out";
 	status = parenthesis_quotes_checker(&node, str, T_AND,
 			(int)ft_strlen(str) - 1);
 	printf("%d\n", node->type);
