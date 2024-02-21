@@ -6,19 +6,12 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/16 13:24:21 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:53:31 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
-typedef struct s_node_data
-{
-	int		type;
-	char	*str_left;
-	char	*str_right;
-}	t_node_data;
 
 typedef struct s_node
 {
@@ -26,6 +19,13 @@ typedef struct s_node
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;
+
+typedef struct s_node_data
+{
+	int		type;
+	char	*str_left;
+	char	*str_right;
+}	t_node_data;
 
 typedef struct s_and
 {
@@ -48,38 +48,36 @@ typedef struct s_pipe
 	t_node	*right;
 }	t_pipe;
 
-typedef struct s_redir_l
+typedef struct s_bracket
+{
+	int		type;
+	t_node	*left;
+}	t_bracket;
+
+typedef struct s_command
 {
 	int		type;
 	t_node	*left;
 	t_node	*right;
-}	t_redir_l;
+}	t_command;
 
-typedef struct s_redir_r
+typedef struct s_command_br
 {
 	int		type;
 	t_node	*left;
 	t_node	*right;
-}	t_redir_r;
+}	t_command_br;
 
-typedef struct s_redir_ll
+typedef struct s_cmd_simple
 {
 	int		type;
-	t_node	*left;
-	t_node	*right;
-}	t_redir_ll;
+	char	*cmd;
+}	t_cmd_simple;
 
-typedef struct s_redir_rr
+typedef struct s_redir
 {
 	int		type;
-	t_node	*left;
-	t_node	*right;
-}	t_redir_rr;
-
-typedef struct s_cmd
-{
-	int		type;
-	char	**cmd;
-}	t_cmd;
+	char	*str;
+}	t_redir;
 
 #endif

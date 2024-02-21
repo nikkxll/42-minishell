@@ -6,37 +6,36 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:54:02 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/16 13:38:52 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:38:44 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../headers/minishell.h"
 
-t_bool	create_node(t_node_data *data, t_node **base)
+t_bool	create_node(t_node_data *data, t_node **root)
 {
 	t_node	*node;
-	int		type;
 
-	type = data->type;
-	if (type == T_AND)
+	node == NULL;
+	if (data->type == T_AND)
 		node = (t_node *)init_t_and();
-	else if (type == T_OR)
+	else if (data->type == T_OR)
 		node = (t_node *)init_t_or();
-	else if (type == T_PIPE)
+	else if (data->type == T_PIPE)
 		node = (t_node *)init_t_pipe();
-	else if (type == T_REDIR_L)
-		node = (t_node *)init_t_redir_l();
-	else if (type == T_REDIR_R)
-		node = (t_node *)init_t_redir_r();
-	else if (type == T_REDIR_LL)
-		node = (t_node *)init_t_redir_lL();
-	else if (type == T_REDIR_RR)
-		node = (t_node *)init_t_redir_r();
+	else if (data->type == T_BRACKET)
+		node = (t_node *)init_t_bracket();
+	else if (data->type == T_COMMAND)
+		node = (t_node *)init_t_command();
+	else if (data->type == T_COMMAND_BR)
+		node = (t_node *)init_t_command_br();
+	else if (data->type == T_CMD_SIMPLE)
+		node = (t_node *)init_t_cmd_simple();
 	if (node == NULL)
 	{
 		free_node_data(data);
 		return (false);
 	}
-	*base = node;
+	*root = node;
 	return (true);
 }

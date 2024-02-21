@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/16 13:16:20 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:34:22 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ enum	e_types
 	T_AND,
 	T_OR,
 	T_PIPE,
-	T_REDIR_LL,
-	T_REDIR_RR,
-	T_REDIR_L,
-	T_REDIR_R,
-	T_CMD
+	T_BRACKET,
+	T_COMMAND,
+	T_COMMAND_BR,
+	T_CMD_SIMPLE,
+	T_REDIR
 };
 
 enum	e_parenthesis
