@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/20 19:06:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:33:13 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ int			check_if_backslash_or_semicolon_exist(char *str, int quote_type);
 //ast_string_splitter
 
 int			set_node_data(t_node_data **node, char *str, int point, int type);
-int			set_node_data_compound_with_brackets(t_node_data **node, char *str,
+int			set_node_data_command_with_brackets(t_node_data **node, char *str,
 				int point, int type);
+int			set_node_data_command_without_brackets(t_node_data **node,
+				char *str, int point, int type);
 int			and_if_condition_block(t_node_data **node, char *str, int type,
 				int i);
 int			parenthesis_quotes_checker(t_node_data **node, char *str, int type,
@@ -63,5 +65,18 @@ int			round_brackets_check(char *str, int point);
 int			quote_check(char *str, int point, int symbol);
 int			first_nonspace_char_is_quote(char *str);
 int			last_nonspace_char_is_quote(char *str);
+char		*command_part(char *str, int *i, int *j, int quote_type);
+int			modificate_str_command_without_br(char *str, char **redir, int i,
+				int j);
+int			and_if_condition_block(t_node_data **node, char *str, int type,
+				int i);
+int			pipe_block(t_node_data **node, char *str, int type, int i);
+int			brackets_block(t_node_data **node, char *str, int type, int i);
+int			command_block(t_node_data **node, char *str, int type, int i);
+int			command_without_bracket_block(t_node_data **node, char *str,
+				int type, int i);
+int			brackets_search(char *str);
+int			redir_search(char *str);
+int		ft_error(char *message, int code);
 
 #endif

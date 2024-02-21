@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:42:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/20 17:41:18 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:38:06 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,21 @@ int	validate_input_string(char *str)
 		return (INVALID);
 }
 
-int	main(void)
-{
-	int	status;
- 
-	char str[1000] = "ec""h''o 1";
-	status = validate_input_string(str);
-	if (status)
-	{
-		printf("%s\n", "INVALID");
-		printf("%s\n", str);
-	}
-	else
-	{
-		printf("%s\n", "VALID");
-		printf("%s\n", str);
-	}
+// int	main(void)
+// {
+// 	int	status;
 
-}
+// 	char str[1000] = "ec""h''o 1";
+// 	status = validate_input_string(str);
+// 	if (status)
+// 	{
+// 		printf("%s\n", "INVALID");
+// 		printf("%s\n", str);
+// 	}
+// 	else
+// 	{
+// 		printf("%s\n", "VALID");
+// 		printf("%s\n", str);
+// 	}
+
+// }
