@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_splitter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:39:12 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/21 15:10:37 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/21 22:07:40 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	parenthesis_quotes_checker(t_node_data **node, char *str, int type,
 		else if (type == T_PIPE)
 			status = pipe_block(node, str, type, i);
 		else if (type == T_BRACKET)
-			status = brackets_block(node, str, type, i);
+			status = brackets_block(node, str, type);
 		else if (type == T_COMMAND_BR)
-			status = command_block(node, str, type, i);
+			status = command_block(node, str, type);
 		else if (type == T_COMMAND)
-			status = command_without_bracket_block(node, str, type, i);
+			status = command_without_bracket_block(node, str, type);
 		else if (type == T_CMD_SIMPLE)
-			status = set_node_data(node, str, ft_strlen(str), T_CMD_SIMPLE);
+			status = set_node_cmd_simple(node, str, T_CMD_SIMPLE);
 		if (status > 0)
 			return (status);
 		else if (status < 0)
@@ -44,13 +44,14 @@ int	parenthesis_quotes_checker(t_node_data **node, char *str, int type,
 // int	main()
 // {
 // 	t_node_data	*node;
-// 	int			status;
 
-// 	char str[1000] = "cat cat";
-// 	status = parenthesis_quotes_checker(&node, str, T_AND,
+// 	char str[1000] = "((111 | 222) > out || 333) ";
+// 	int status = parenthesis_quotes_checker(&node, str, T_AND,
 // 			ft_strlen(str) - 1);
-// 	printf("%d\n", node->type);
-// 	printf("%s\n", node->str_left);
-// 	printf("%s\n", node->str_right);
+	
+// 	printf("status: %d\n", status);
+// 	printf("type: %d\n", node->type);
+// 	printf("$%s$\n", node->str_left);
+// 	printf("$%s$\n", node->str_right);
 // 	return (0);
 // }

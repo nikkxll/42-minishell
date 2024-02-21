@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/21 16:38:16 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/21 22:55:34 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ int				check_if_backslash_or_semicolon_exist(char *str, int quote_type);
 
 //ast_string_splitter
 
-int				set_node_data(t_node_data **node, char *str, int point, int type);
-int				set_node_data_command_with_brackets(t_node_data **node, char *str,
-					int point, int type);
-int				set_node_data_command_without_brackets(t_node_data **node,
-					char *str, int point, int type);
+int				set_node_data_and_or_pipe(t_node_data **node, char *str, int point, int type);
+int				set_node_data_command_br(t_node_data **node, char *str, int type);
+int				set_node_data_command(t_node_data **node, char *str, int type);
+int				set_node_data_bracket(t_node_data **node, char *str, int type);
+int				set_node_cmd_simple(t_node_data **node, char *str, int type);
 int				and_if_condition_block(t_node_data **node, char *str, int type,
 					int i);
 int				parenthesis_quotes_checker(t_node_data **node, char *str, int type,
@@ -83,10 +83,10 @@ int				modificate_str_command_without_br(char *str, char **redir, int i,
 int				and_if_condition_block(t_node_data **node, char *str, int type,
 					int i);
 int				pipe_block(t_node_data **node, char *str, int type, int i);
-int				brackets_block(t_node_data **node, char *str, int type, int i);
-int				command_block(t_node_data **node, char *str, int type, int i);
+int				brackets_block(t_node_data **node, char *str, int type);
+int				command_block(t_node_data **node, char *str, int type);
 int				command_without_bracket_block(t_node_data **node, char *str,
-					int type, int i);
+					int type);
 int				brackets_search(char *str);
 int				redir_search(char *str);
 int	ft_error(char *message, int code);

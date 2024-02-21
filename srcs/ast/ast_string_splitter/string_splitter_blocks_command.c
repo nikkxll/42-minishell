@@ -12,19 +12,16 @@
 
 #include "../../../headers/minishell.h"
 
-int	command_block(t_node_data **node, char *str, int type, int i)
+int	command_block(t_node_data **node, char *str, int type)
 {
 	if (brackets_search(str))
-		return (set_node_data_command_with_brackets(node, str,
-				(int)ft_strlen(str), T_COMMAND_BR));
+		return (set_node_data_command_br(node, str, type));
 	return (0);
 }
 
-int	command_without_bracket_block(t_node_data **node, char *str, int type,
-		int i)
+int	command_without_bracket_block(t_node_data **node, char *str, int type)
 {
 	if (redir_search(str))
-		return (set_node_data_command_without_brackets(node, str,
-				(int)ft_strlen(str), T_COMMAND));
+		return (set_node_data_command(node, str, type));
 	return (0);
 }
