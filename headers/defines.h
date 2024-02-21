@@ -19,17 +19,32 @@ enum	e_types
 	T_OR,
 	T_PIPE,
 	T_BRACKET,
-	T_COMMAND,
 	T_COMMAND_BR,
+	T_COMMAND,
 	T_CMD_SIMPLE,
 	T_REDIR
 };
 
-enum	e_parenthesis
+enum	e_characters
 {
-	S_QUOTE,
-	D_QUOTE,
-	ROUND,
+	NULL_TERM,
+	SPACE = 32,
+	D_QUOTE = 34,
+	AND = 38,
+	S_QUOTE = 39,
+	O_ROUND = 40,
+	C_ROUND = 41,
+	SEMICOLON = 59,
+	REDIR_L = 60,
+	REDIR_R = 62,
+	BACKSLASH = 92,
+	PIPE = 124
+};
+
+enum	e_validator
+{
+	VALID,
+	INVALID
 };
 
 # ifndef MALLOC_FAILURE
