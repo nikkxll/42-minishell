@@ -6,11 +6,11 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:01:13 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/21 14:13:13 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:12:04 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 void	free_tree(t_node **root)
 {

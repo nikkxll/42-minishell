@@ -6,17 +6,17 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:54:02 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/21 10:38:44 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:41:53 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 t_bool	create_node(t_node_data *data, t_node **root)
 {
 	t_node	*node;
 
-	node == NULL;
+	node = NULL;
 	if (data->type == T_AND)
 		node = (t_node *)init_t_and();
 	else if (data->type == T_OR)

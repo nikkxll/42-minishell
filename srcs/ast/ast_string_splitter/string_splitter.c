@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_splitter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:39:12 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/21 14:32:28 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:10:37 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ int	parenthesis_quotes_checker(t_node_data **node, char *str, int type,
 			ft_strlen(str) - 1));
 }
 
-int	main()
-{
-	t_node_data	*node;
-	int			status;
+// int	main()
+// {
+// 	t_node_data	*node;
+// 	int			status;
 
-	char str[1000] = "cat cat";
-	status = parenthesis_quotes_checker(&node, str, T_AND,
-			ft_strlen(str) - 1);
-	printf("%d\n", node->type);
-	printf("%s\n", node->str_left);
-	printf("%s\n", node->str_right);
-	return (0);
-}
+// 	char str[1000] = "cat cat";
+// 	status = parenthesis_quotes_checker(&node, str, T_AND,
+// 			ft_strlen(str) - 1);
+// 	printf("%d\n", node->type);
+// 	printf("%s\n", node->str_left);
+// 	printf("%s\n", node->str_right);
+// 	return (0);
+// }

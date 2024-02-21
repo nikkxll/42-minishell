@@ -6,13 +6,13 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:40:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/21 14:46:41 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:37:57 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
-int	*test(char *str, t_node_data **data);
+t_bool	get_type(char *str, t_node_data **data);
 
 t_bool	create_tree(char *str, t_node **root)
 {
@@ -20,7 +20,7 @@ t_bool	create_tree(char *str, t_node **root)
 	t_bool		status;
 	int			type;
 
-	status = test(str, &data);
+	status = get_type(str, &data);
 	if (status == false)
 		return (status);
 	if (create_node(data, root) == false)
@@ -39,5 +39,13 @@ t_bool	create_tree(char *str, t_node **root)
 	free_node_data(data);
 	if (status == false)
 		free_tree(root);
+	return (status);
+}
+
+t_bool	get_type(char *str, t_node_data **data)
+{
+	int	status;
+
+	status = parenthesis_quotes_checker(data, str, T_AND, ft_strlen(str) - 1);
 	return (status);
 }

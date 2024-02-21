@@ -6,11 +6,11 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:12:01 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/21 13:01:43 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:11:55 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 t_and	*init_t_and(void)
 {
