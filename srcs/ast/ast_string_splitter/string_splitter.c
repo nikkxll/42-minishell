@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_splitter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:39:12 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/22 20:50:51 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:29:47 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ int	string_splitter(t_node_data **node, char *str, int type,
 			ft_strlen(str) - 1));
 }
 
-int	main()
-{
-	t_node_data	*node;
+// int	main()
+// {
+// 	t_node_data	*node;
 
-	char str[1000] = "(111 | 222) > out 333 ";
-	int status = string_splitter(&node, str, T_AND,
-			ft_strlen(str) - 1);
+// 	char str[1000] = "(111 | 222) > out 333 ";
+// 	int status = string_splitter(&node, str, T_AND,
+// 			ft_strlen(str) - 1);
 	
-	printf("status: %d\n", status);
-	printf("type: %d\n", node->type);
-	printf("$%s$\n", node->str_left);
-	printf("$%s$\n", node->str_right);
-	return (0);
-}
+// 	printf("status: %d\n", status);
+// 	printf("type: %d\n", node->type);
+// 	printf("$%s$\n", node->str_left);
+// 	printf("$%s$\n", node->str_right);
+// 	return (0);
+// }

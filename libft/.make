@@ -37,5 +37,5 @@ GREY	=	\033[90m
 EC		=	\033[0m
 
 #######COMPILER_SETTINGS
-CC		= cc
-FLAGS	= -Wall -Wextra -Werror -g
+CC_LFT		= cc
+FLAGS_LFT	= -Wall -Wextra -Werror -g

@@ -1,58 +1,59 @@
-#PIPEX_PROJECT_MAKEFILE
+#MINISHELL_PROJECT_MAKEFILE
 include libft/.make
-NAME			:=	minishell
+NAME				:=	minishell
 
-SRCS_NAME		:=
-SRCS_PATH		:=	./srcs/
-SRCS			:=	$(addprefix $(SRCS_PATH), $(SRCS_NAME))
+CC					:=	cc
+FLAGS_LFT			:=	-Wall -Wextra -Werror -g
 
-OBJS_PATH		:=	./objs/
-OBJS			:= $(addprefix $(OBJS_PATH), $(SRCS_NAME:.c=.o))
+#########START_SOURSES#########
+SRCS_PATH			:=	srcs/
 
-LIBFT_PATH		:=	$(LIBFT_PATH)
-LIBFT			:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
-LIBFT_SOURSES	:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
+#####AST_TREE_CREATION#####
+AST_TREE_NAME		:=	create_tree.c add_nodes.c constructors.c constructors_2.c create_node.c \
+						free_node_data.c free_tree.c
+AST_TREE_PATH		:=	ast/ast_create_tree/
+AST_TREE			:=	$(addprefix $(AST_TREE_PATH), $(AST_TREE_NAME))
 
-##################################################
-#################__REMOVE IT!__###################
-#################__REMOVE IT!__###################
-##################################################
-_DS			:= dshatilo
-DS_NAME		:= create_tree.c create_node.c constructors.c constructors_2.c free_node_data.c
-DS_PATH		:=	./srcs/ast/
-DS			:=	$(addprefix $(SRCS_PATH), $(SRCS_NAME))
-
-ODS_PATH		:=	./objs/
-ODS			:= $(addprefix $(ODS_PATH), $(DS_NAME:.c=.o))
-
-##################################################
-#################__REMOVE IT!__###################
-#################__REMOVE IT!__###################
-##################################################
+#####AST_STRING_SPLITTER#####
+AST_SPLITTER_NAME	:=	create_node_data.c string_splitter_blocks_command.c string_splitter_blocks.c \
+						string_splitter_utils_2.c string_splitter_utils.c string_splitter.c
+AST_SPLITTER_PATH	:=	ast/ast_string_splitter/
+AST_SPLITTER		:=	$(addprefix $(AST_SPLITTER_PATH), $(AST_SPLITTER_NAME))
 
 
-all: $(_DS)
+#####AST_STRING_VALIDATOR#####
+VALIDATOR_NAME		:=	remove_quotes.c validate_brackets.c validate_meta.c validator_utils.c validator.c
+VALIDATOR_PATH		:=	validator/
+VALIDATOR			:=	$(addprefix $(VALIDATOR_PATH), $(VALIDATOR_NAME))
 
-# $(OBJS_PATH)%.o: $(SRCS_PATH)%.c | $(OBJS_PATH)
-# 	@$(CC) $(FLAGS) -c $< -o $@
+SRCS				:=	main.c $(AST_TREE) $(AST_SPLITTER) $(VALIDATOR)
 
-# $(NAME): $(OBJS) $(LIBFT)
-# 	@echo "$(GREEN)\n--------------->$(NAME) created successfully!<---------------$(EC)"
-# 	@cc $(FLAGS) $(OBJS) $(LIBFT) $ -o $(NAME)
+#########END_SOURSES#########
 
-# $(NAME): .mandatory
-# 	@echo "$(GREEN)\n--------------->$(NAME) created successfully!<---------------$(EC)"
+OBJS_PATH			:=	objs/
+OBJS				:=	$(addprefix $(OBJS_PATH), $(SRCS:.c=.o))
 
-# .mandatory: $(OBJS) $(LIBFT)
-# 	@cc $(FLAGS) $(OBJS) $(LIBFT) $ -o $(NAME)
-# 	@touch .mandatory
-# 	@rm -rf .bonus
+LIBFT_PATH			:=	$(LIBFT_PATH)
+LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
+LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
-$(LIBFT): $(LIBFT_SOURSES)
-	@$(MAKE) -C $(LIBFT_PATH)
+all: $(NAME)
+
+$(NAME): $(OBJS_PATH) $(OBJS) $(LIBFT) 
+	@cc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@echo "$(GREEN)\n--------------->$(NAME) created successfully!<---------------$(EC)"
 
 $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)
+	@mkdir -p $(OBJS_PATH)$(AST_TREE_PATH)
+	@mkdir -p $(OBJS_PATH)$(AST_SPLITTER_PATH)
+	@mkdir -p $(OBJS_PATH)$(VALIDATOR_PATH)
+
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
+	@$(CC) $(FLAGS) -c $< -o $@
+
+$(LIBFT): $(LIBFT_SOURSES)
+	@$(MAKE) -C $(LIBFT_PATH)
 
 clean:
 	@$(MAKE) clean -C $(LIBFT_PATH)
@@ -65,31 +66,3 @@ fclean: clean
 	@echo "$(GREEN)All files removed!$(EC)"
 
 re: fclean all
-
-##################################################
-#################__REMOVE IT!__###################
-#################__REMOVE IT!__###################
-##################################################
-
-
-$(ODS_PATH)%.o: $(DS_PATH)%.c | $(ODS_PATH)
-	@$(CC) $(FLAGS) -c $< -o $@
-$(_DS): $(ODS) $(LIBFT)
-	@echo "$(GREEN)\n--------------->$(_DS) created successfully!<---------------$(EC)"
-	@cc $(FLAGS) -lreadline $(ODS) $(LIBFT) $ -o $(_DS)
-
-
-r:
-	@$(MAKE) clean -C $(LIBFT_PATH)
-	@rm -rf $(ODS_PATH)
-	@echo "$(GREEN)*.o files removed!$(EC)"
-
-rr: clean
-	@rm -rf $(_DS)
-	@$(MAKE) fclean -C $(LIBFT_PATH)
-	@echo "$(GREEN)All files removed!$(EC)"
-	
-##################################################
-#################__REMOVE IT!__###################
-#################__REMOVE IT!__###################
-##################################################
