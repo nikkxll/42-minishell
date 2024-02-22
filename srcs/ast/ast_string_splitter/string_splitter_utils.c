@@ -6,17 +6,36 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:43:34 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/21 13:54:58 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:34:59 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
+/*
+* Function that checks if number if odd
+*
+* Input:
+* - `number` - number to check
+* 
+* Output:
+* - `1` if odd, `0` otherwise
+*/
 t_bool	if_odd(int number)
 {
 	return (number % 2);
 }
 
+/*
+* Function that checks if we are inside the round brackets
+*
+* Input:
+* - `str` - string that coming from readline function
+* - `point` - current index to point in `str`
+* 
+* Output:
+* - `0` if we are inside the brackets, `non zero` otherwise
+*/
 int	round_brackets_check(char *str, int point)
 {
 	int	i;
@@ -35,6 +54,17 @@ int	round_brackets_check(char *str, int point)
 	return (!key);
 }
 
+/*
+* Function that checks if we are inside the quotes
+*
+* Input:
+* - `str` - string that coming from readline function
+* - `point` - current index to point in `str`
+* - `symbol` - single or double quote
+* 
+* Output:
+* - `1` if we are outside of the quotes, `0` otherwise
+*/
 int	quote_check(char *str, int point, int symbol)
 {
 	int		i;
@@ -57,7 +87,16 @@ int	quote_check(char *str, int point, int symbol)
 	return (if_odd(pair[0]) == false && if_odd(pair[1]) == false);
 }
 
-int	first_nonspace_char_is_quote(char *str)
+/*
+* Function that checks if the first nonspace char is opening bracket
+*
+* Input:
+* - `str` - string that coming from readline function
+* 
+* Output:
+* - `1` if it is true, `0` otherwise
+*/
+int	first_nonspace_char_is_bracket(char *str)
 {
 	int		i;
 
@@ -74,7 +113,16 @@ int	first_nonspace_char_is_quote(char *str)
 	return (0);
 }
 
-int	last_nonspace_char_is_quote(char *str)
+/*
+* Function that checks if the last nonspace char is closing bracket
+*
+* Input:
+* - `str` - string that coming from readline function
+* 
+* Output:
+* - `1` if it is true, `0` otherwise
+*/
+int	last_nonspace_char_is_bracket(char *str)
 {
 	int		i;
 

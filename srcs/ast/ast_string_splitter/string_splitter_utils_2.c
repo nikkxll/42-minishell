@@ -6,13 +6,25 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:54:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/21 14:32:17 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:50:58 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-char	*command_part(char *str, int *i, int *j, int quote_type)
+/*
+* Function that divides str with type T_COMMAND_BR in two parts
+*
+* Input:
+* - `str` - string that coming from readline function
+* - `i` - index to iterate through the string
+* - `quote_type` - initialization for the variable in
+* check_if_inside_quotes_with_incr()
+* 
+* Output:
+* - modified string if success, `NULL` otherwise
+*/
+char	*command_part(char *str, int *i, int quote_type)
 {
 	while (str[*i] != NULL_TERM)
 	{
@@ -21,7 +33,6 @@ char	*command_part(char *str, int *i, int *j, int quote_type)
 		{
 			if (str[*i] == O_ROUND)
 			{
-				*j = *i + 1;
 				while (str[*i] != C_ROUND)
 					(*i)++;
 				if (str[*i] == C_ROUND)
@@ -38,6 +49,15 @@ char	*command_part(char *str, int *i, int *j, int quote_type)
 	return (NULL);
 }
 
+/*
+* Auxiliary function for modificate_str_command_without_br()
+*
+* Input:
+* - `str` - string that coming from readline function
+* - `r` - new string for redirects
+* - `i` - first index for iteration
+* - `j` - second index for iteration
+*/
 static void	modificate_str_utils(char *str, char *r, int *i, int *j)
 {
 	r[*j] = str[*i];
@@ -46,6 +66,18 @@ static void	modificate_str_utils(char *str, char *r, int *i, int *j)
 	(*i)++;
 }
 
+/*
+* Function that allocates string for redirects and modifies current one
+*
+* Input:
+* - `str` - string that coming from readline function
+* - `redir` - new string allocated to store redirects
+* - `i` - first index for iteration
+* - `j` - second index for iteration
+* 
+* Output:
+* - `-1` if malloc error occurs, `1` if success
+*/
 int	modificate_str_command_without_br(char *str, char **redir, int i,
 			int j)
 {
@@ -71,6 +103,15 @@ int	modificate_str_command_without_br(char *str, char **redir, int i,
 	return (1);
 }
 
+/*
+* Function that checks for brackets which are out of the quotes
+*
+* Input:
+* - `str` - string that coming from readline function
+* 
+* Output:
+* - `> 0` if exist, `0` otherwise
+*/
 int	brackets_search(char *str)
 {
 	int	i;
@@ -95,6 +136,15 @@ int	brackets_search(char *str)
 	return (key > 0);
 }
 
+/*
+* Function that checks for redirects which are out of the quotes
+*
+* Input:
+* - `str` - string that coming from readline function
+* 
+* Output:
+* - `> 0` if exist, `0` otherwise
+*/
 int	redir_search(char *str)
 {
 	int	i;
@@ -117,10 +167,4 @@ int	redir_search(char *str)
 			i++;
 	}
 	return (key > 0);
-}
-
-int	ft_error(char *message, int code)
-{
-	ft_putendl_fd(message, 2);
-	return (code);
 }

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:40:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/21 22:10:31 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:58:11 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ t_bool	get_type(char *str, t_node_data **data)
 {
 	int	status;
 
-	status = parenthesis_quotes_checker(data, str, T_AND, ft_strlen(str) - 1);
+	status = string_splitter(data, str, T_AND, ft_strlen(str) - 1);
 	return (status);
 }

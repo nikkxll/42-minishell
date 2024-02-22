@@ -6,12 +6,23 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:46:43 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/21 22:46:55 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:37:21 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
+/*
+* Function to initialize new node for T_COMMAND type
+*
+* Input:
+* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
+* - `str` - string that coming from readline function
+* - `type` - current meta character type
+* 
+* Output:
+* - `-1` if malloc error occurs, `1` if success
+*/
 int	set_node_data_command(t_node_data **node, char *str, int type)
 {
 	t_node_data	*new_node;
@@ -37,6 +48,18 @@ int	set_node_data_command(t_node_data **node, char *str, int type)
 	return (1);
 }
 
+/*
+* Function to initialize new node for T_AND, T_OR and T_PIPE types
+*
+* Input:
+* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
+* - `str` - string that coming from readline function
+* - `point` - shift for the string to point to the beginning of the right part
+* - `type` - current meta character type
+* 
+* Output:
+* - `-1` if malloc error occurs, `1` if success
+*/
 int	set_node_data_and_or_pipe(t_node_data **node, char *str, int point, int type)
 {
 	t_node_data	*new_node;
@@ -61,6 +84,17 @@ int	set_node_data_and_or_pipe(t_node_data **node, char *str, int point, int type
 	return (1);
 }
 
+/*
+* Function to initialize new node for T_BRACKET type
+*
+* Input:
+* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
+* - `str` - string that coming from readline function
+* - `type` - current meta character type
+* 
+* Output:
+* - `-1` if malloc error occurs, `1` if success
+*/
 int	set_node_data_bracket(t_node_data **node, char *str, int type)
 {
 	t_node_data	*new_node;
@@ -84,22 +118,31 @@ int	set_node_data_bracket(t_node_data **node, char *str, int type)
 	return (1);
 }
 
+/*
+* Function to initialize new node for T_COMMAND_BR type
+*
+* Input:
+* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
+* - `str` - string that coming from readline function
+* - `type` - current meta character type
+* 
+* Output:
+* - `-1` if malloc error occurs, `1` if success
+*/
 int	set_node_data_command_br(t_node_data **node, char *str, int type)
 {
 	t_node_data	*new_node;
 	char		*first;
 	int			i;
-	int			j;
 
 	i = 0;
-	j = 0;
 	new_node = ft_calloc(1, sizeof(t_node_data));
 	if (!new_node)
 	{
 		*node = new_node;
 		return (-1);
 	}
-	new_node->str_left = command_part(str, &i, &j, 0) + i;
+	new_node->str_left = command_part(str, &i, 0) + i;
 	first = ft_strchr(str, O_ROUND);
 	*first = ' ';
 	new_node->str_right = str;
@@ -108,6 +151,17 @@ int	set_node_data_command_br(t_node_data **node, char *str, int type)
 	return (1);
 }
 
+/*
+* Function to initialize new node for T_CMD_SIMPLE type
+*
+* Input:
+* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
+* - `str` - string that coming from readline function
+* - `type` - current meta character type
+* 
+* Output:
+* - `-1` if malloc error occurs, `1` if success
+*/
 int	set_node_cmd_simple(t_node_data **node, char *str, int type)
 {
 	t_node_data	*new_node;
