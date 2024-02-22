@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:55:41 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/21 22:03:01 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:26:33 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	and_if_condition_block(t_node_data **node, char *str, int type, int i)
 		if (round_brackets_check(str, i)
 			&& quote_check(str, i, S_QUOTE)
 			&& quote_check(str, i, D_QUOTE))
-			return (set_node_data_and_or_pipe(node, str, i, type));
+			return (set_node_data_and_or_pipe(node, str, i, T_AND));
 		else
 			return (parenthesis_quotes_checker(node, str, type, i - 2));
 	}
@@ -28,7 +28,7 @@ int	and_if_condition_block(t_node_data **node, char *str, int type, int i)
 		if (round_brackets_check(str, i)
 			&& quote_check(str, i, S_QUOTE)
 			&& quote_check(str, i, D_QUOTE))
-			return (set_node_data_and_or_pipe(node, str, i, type));
+			return (set_node_data_and_or_pipe(node, str, i, T_OR));
 		else
 			return (parenthesis_quotes_checker(node, str, type, i - 2));
 	}
