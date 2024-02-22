@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/22 20:50:18 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/22 22:40:30 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,7 @@ int				check_if_redirect_file_pattern_complied(char *str, int quote_type,
 					int i);
 int				check_if_redirects_and_or_are_correct(char *str, int first,
 					int second, int quote_type);
-int				check_if_quotes_num_is_even(char *str, int type, int key,
-					int quote_type);
-void			check_if_inside_quotes_with_decr(char *str, int *i,
-					int *quote_type);
-void			check_if_inside_quotes_with_incr(char *str, int *i,
+void			check_if_inside_quotes(char *str, int *i,
 					int *quote_type);
 int				check_if_backslash_or_semicolon_exist(char *str, int quote_type);
 

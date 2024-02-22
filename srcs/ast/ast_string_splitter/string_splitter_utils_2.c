@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:54:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/22 20:50:58 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/22 22:38:47 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 * - `str` - string that coming from readline function
 * - `i` - index to iterate through the string
 * - `quote_type` - initialization for the variable in
-* check_if_inside_quotes_with_incr()
+* check_if_inside_quotes()
 * 
 * Output:
 * - modified string if success, `NULL` otherwise
@@ -28,7 +28,7 @@ char	*command_part(char *str, int *i, int quote_type)
 {
 	while (str[*i] != NULL_TERM)
 	{
-		check_if_inside_quotes_with_incr(str, i, &quote_type);
+		check_if_inside_quotes(str, i, &quote_type);
 		if (!quote_type)
 		{
 			if (str[*i] == O_ROUND)
@@ -123,7 +123,7 @@ int	brackets_search(char *str)
 	key = 0;
 	while (str[i] != NULL_TERM)
 	{
-		check_if_inside_quotes_with_incr(str, &i, &quote_type);
+		check_if_inside_quotes(str, &i, &quote_type);
 		if (!quote_type)
 		{
 			if (str[i] == O_ROUND)
@@ -156,7 +156,7 @@ int	redir_search(char *str)
 	key = 0;
 	while (str[i] != NULL_TERM)
 	{
-		check_if_inside_quotes_with_incr(str, &i, &quote_type);
+		check_if_inside_quotes(str, &i, &quote_type);
 		if (!quote_type)
 		{
 			if (str[i] == REDIR_L || str[i] == REDIR_R)

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:34:13 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/19 18:55:08 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/22 22:39:17 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	check_if_redirect_file_pattern_complied(char *str, int quote_type, int i)
 {
 	while (str[i] != NULL_TERM)
 	{
-		check_if_inside_quotes_with_incr(str, &i, &quote_type);
+		check_if_inside_quotes(str, &i, &quote_type);
 		if (!quote_type)
 		{
 			if ((str[i] == REDIR_R && str[i + 1] != REDIR_R)
@@ -91,7 +91,7 @@ int	check_if_redirects_and_or_are_correct(char *str, int first,
 	i = 0;
 	while (str[i] != NULL_TERM)
 	{
-		check_if_inside_quotes_with_incr(str, &i, &quote_type);
+		check_if_inside_quotes(str, &i, &quote_type);
 		if (!quote_type)
 		{
 			if ((str[i] == first && str[i + 1] == second)
