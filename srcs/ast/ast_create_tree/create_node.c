@@ -6,12 +6,20 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:54:02 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/21 16:41:53 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:08:42 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
+/**
+ * @brief	 Creates a node based on the @c `type` in the @c `data` structure.
+ * 
+ * @param	data A pointer to the structure containing information about
+ * 			the type of current node.
+ * @param	root A double pointer indicating where to save the current node.
+ * @return	@c `true` if successful, @c `false` if an error occurs.
+ */
 t_bool	create_node(t_node_data *data, t_node **root)
 {
 	t_node	*node;

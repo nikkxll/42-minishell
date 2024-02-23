@@ -3,9 +3,11 @@ include libft/.make
 NAME				:=	minishell
 
 CC					:=	cc
-FLAGS_LFT			:=	-Wall -Wextra -Werror -g
+FLAGS				:=	-Wall -Wextra -Werror -g
 
-#########START_SOURSES#########
+###############################
+#########START_SOURCES#########
+###############################
 SRCS_PATH			:=	srcs/
 
 #####AST_TREE_CREATION#####
@@ -28,7 +30,9 @@ VALIDATOR			:=	$(addprefix $(VALIDATOR_PATH), $(VALIDATOR_NAME))
 
 SRCS				:=	main.c $(AST_TREE) $(AST_SPLITTER) $(VALIDATOR)
 
-#########END_SOURSES#########
+###############################
+##########END_SOURCES##########
+###############################
 
 OBJS_PATH			:=	objs/
 OBJS				:=	$(addprefix $(OBJS_PATH), $(SRCS:.c=.o))

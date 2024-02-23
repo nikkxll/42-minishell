@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:40:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/22 19:58:11 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:09:11 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 
 t_bool	get_type(char *str, t_node_data **data);
 
+
+/**
+ * @brief	Recursively creates binary tree. The function calls @c `get_type`
+ * 			functions to determine the type of the current node and creates node
+ * 			accordingly. If error occurs, it calls `free_tree` function and frees
+ * 			allocated memory.
+ * 
+ * @param	str String with command pipeline.
+ * @param	root A double pointer indicating where to save the current node.
+ * @return	@c `true` if successful, @c `false` if an error occurs.
+ */
 t_bool	create_tree(char *str, t_node **root)
 {
 	t_node_data	*data;

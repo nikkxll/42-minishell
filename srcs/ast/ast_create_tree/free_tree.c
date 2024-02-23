@@ -6,12 +6,17 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:01:13 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/22 12:21:11 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:01:21 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
+/**
+ * @brief	Recursively frees the memory allocated for a binary tree.
+ * 
+ * @param	root A double pointer to the root node of the tree
+ */
 void	free_tree(t_node **root)
 {
 	int	type;
