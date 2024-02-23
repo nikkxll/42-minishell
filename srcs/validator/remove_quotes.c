@@ -6,17 +6,15 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:53:22 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/19 18:33:09 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:25:18 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-/*
-* Removes consecutive quotes from the string is allowable
-* 
-* Input:
-* - `str` - string that coming from readline function
+/**
+* @brief	Removes consecutive quotes from the string is allowable
+* @param	str - string that coming from readline function
 */
 void	remove_quotes(char *str)
 {

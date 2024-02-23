@@ -6,21 +6,19 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:43:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/22 22:41:33 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:31:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-/*
-* Auxiliary function that checks if we are inside of the quotes
-*
-* Input:
-* - `str` - string that coming from readline function
-* - `i` - pointer to the index to increment
-* - `quote_type` - pointer to the int that tracks if we are within the quotes
-* or not
-* 
+/**
+* @brief	Auxiliary function that checks if we are inside of the quotes
+* @param	str string that coming from readline function
+* @param	i pointer to the index to increment
+* @param	quote_type pointer to the int that tracks if we are within
+* the quotes or not
+* @return	`void`
 */
 void	check_if_inside_quotes(char *str, int *i, int *quote_type)
 {
@@ -34,17 +32,13 @@ void	check_if_inside_quotes(char *str, int *i, int *quote_type)
 		*quote_type = D_QUOTE;
 }
 
-/*
-* Function that checks if there are any semicolons or backslashes outside
-* of the quotes
-*
-* Input:
-* - `str` - string that coming from readline function
-* - `quote_type` - pointer to the int that tracks if we are within the quotes
-* or not
-* 
-* Output:
-* - `0` (VALID) or `1` (INVALID)
+/**
+* @brief	Function that checks if there are any semicolons or
+* backslashes outside of the quotes
+* @param	str string that coming from readline function
+* @param	quote_type pointer to the int that tracks if we are within
+* the quotes or not
+* @return	`0` (VALID) or `1` (INVALID)
 */
 int	check_if_backslash_or_semicolon_exist(char *str, int quote_type)
 {

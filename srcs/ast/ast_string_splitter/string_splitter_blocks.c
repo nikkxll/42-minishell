@@ -6,23 +6,22 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:55:41 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/22 20:33:59 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:50:24 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-/*
-* Function which contains T_AND or T_OR block of string_splitter() recursion
-*
-* Input:
-* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
-* - `str` - string that coming from readline function
-* - `type` - current meta character type
-* - `i` - index
-* 
-* Output:
-* - `-1` if malloc error occurs, `1` if success, `0` if condition not met
+/**
+* @brief	Function which contains T_AND or T_OR block of string_splitter()
+* recursion
+* @param	node new node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	type current meta character type
+* @param	i index
+* @return	`-1` if malloc error occurs, `1` if success, `0` if condition not
+* met
 */
 int	and_if_condition_block(t_node_data **node, char *str, int type, int i)
 {
@@ -47,17 +46,16 @@ int	and_if_condition_block(t_node_data **node, char *str, int type, int i)
 	return (0);
 }
 
-/*
-* Function which contains T_PIPE block of string_splitter() recursion
-*
-* Input:
-* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
-* - `str` - string that coming from readline function
-* - `type` - current meta character type
-* - `i` - index
-* 
-* Output:
-* - `-1` if malloc error occurs, `1` if success, `0` if condition not met
+/**
+* @brief	Function which contains T_PIPE block of string_splitter()
+* recursion
+* @param	node new node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	type current meta character type
+* @param	i index
+* @return	`-1` if malloc error occurs, `1` if success, `0` if condition not
+* met
 */
 int	pipe_block(t_node_data **node, char *str, int type, int i)
 {
@@ -73,16 +71,15 @@ int	pipe_block(t_node_data **node, char *str, int type, int i)
 	return (0);
 }
 
-/*
-* Function which contains T_BRACKET block of string_splitter() recursion
-*
-* Input:
-* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
-* - `str` - string that coming from readline function
-* - `type` - current meta character type
-* 
-* Output:
-* - `-1` if malloc error occurs, `1` if success, `0` if condition not met
+/**
+* @brief Function which contains T_BRACKET block of string_splitter()
+* recursion
+* @param	node new node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	type current meta character type
+* @return	`-1` if malloc error occurs, `1` if success, `0` if condition not
+* met
 */
 int	brackets_block(t_node_data **node, char *str, int type)
 {

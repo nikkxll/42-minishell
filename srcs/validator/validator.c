@@ -6,22 +6,19 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:42:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/21 14:38:06 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:34:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-/*
-* Validates input string which is coming from prompt
-* Consists of checks for different meta characters, quotes, parenthesis etc
-*
-* Input:
-* - `str` - string that coming from readline function
-* 
-* Output:
-* - `0` (VALID) or `1` (INVALID), status that corresponds to the result of
-* validation
+/**
+* @brief	Validates input string which is coming from prompt
+* Consists of checks for different meta characters, quotes, parenthesis etc.
+* @note		Called in tree creation module while validating every node
+* @param	str string that coming from readline function
+* @return	`0` (VALID) or `1` (INVALID), status that corresponds to the result
+* of validation
 */
 int	validate_input_string(char *str)
 {

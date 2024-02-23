@@ -6,22 +6,19 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:46:43 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/22 20:37:21 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:42:10 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-/*
-* Function to initialize new node for T_COMMAND type
-*
-* Input:
-* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
-* - `str` - string that coming from readline function
-* - `type` - current meta character type
-* 
-* Output:
-* - `-1` if malloc error occurs, `1` if success
+/**
+* @brief	Function to initialize new node for T_COMMAND type
+* @param	node new node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	type current meta character type
+* @return	`-1` if malloc error occurs, `1` if success
 */
 int	set_node_data_command(t_node_data **node, char *str, int type)
 {
@@ -48,17 +45,16 @@ int	set_node_data_command(t_node_data **node, char *str, int type)
 	return (1);
 }
 
-/*
-* Function to initialize new node for T_AND, T_OR and T_PIPE types
-*
-* Input:
-* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
-* - `str` - string that coming from readline function
-* - `point` - shift for the string to point to the beginning of the right part
-* - `type` - current meta character type
+/**
+* @brief	Function to initialize new node for T_AND, T_OR and T_PIPE types
+* @param	node new node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	point shift for the string to point to the beginning of the
+* right part
+* @param	type current meta character type
 * 
-* Output:
-* - `-1` if malloc error occurs, `1` if success
+* @return	`-1` if malloc error occurs, `1` if success
 */
 int	set_node_data_and_or_pipe(t_node_data **node, char *str, int point, int type)
 {
@@ -84,16 +80,13 @@ int	set_node_data_and_or_pipe(t_node_data **node, char *str, int point, int type
 	return (1);
 }
 
-/*
-* Function to initialize new node for T_BRACKET type
-*
-* Input:
-* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
-* - `str` - string that coming from readline function
-* - `type` - current meta character type
-* 
-* Output:
-* - `-1` if malloc error occurs, `1` if success
+/**
+* @brief	Function to initialize new node for T_BRACKET type
+* @param	node new node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	type current meta character type
+* @return	`-1` if malloc error occurs, `1` if success
 */
 int	set_node_data_bracket(t_node_data **node, char *str, int type)
 {
@@ -118,16 +111,13 @@ int	set_node_data_bracket(t_node_data **node, char *str, int type)
 	return (1);
 }
 
-/*
-* Function to initialize new node for T_COMMAND_BR type
-*
-* Input:
-* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
-* - `str` - string that coming from readline function
-* - `type` - current meta character type
-* 
-* Output:
-* - `-1` if malloc error occurs, `1` if success
+/**
+* @brief	Function to initialize new node for T_COMMAND_BR type
+* @param	node new node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	type current meta character type
+* @return	`-1` if malloc error occurs, `1` if success
 */
 int	set_node_data_command_br(t_node_data **node, char *str, int type)
 {
@@ -151,16 +141,13 @@ int	set_node_data_command_br(t_node_data **node, char *str, int type)
 	return (1);
 }
 
-/*
-* Function to initialize new node for T_CMD_SIMPLE type
-*
-* Input:
-* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
-* - `str` - string that coming from readline function
-* - `type` - current meta character type
-* 
-* Output:
-* - `-1` if malloc error occurs, `1` if success
+/**
+* @brief	Function to initialize new node for T_CMD_SIMPLE type
+* @param	node new node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	type current meta character type
+* @return	`-1` if malloc error occurs, `1` if success
 */
 int	set_node_cmd_simple(t_node_data **node, char *str, int type)
 {

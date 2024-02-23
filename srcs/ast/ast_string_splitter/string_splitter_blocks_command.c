@@ -12,16 +12,15 @@
 
 #include "../../../headers/minishell.h"
 
-/*
-* Function which contains a T_COMMAND_BR block of string_splitter() recursion
-*
-* Input:
-* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
-* - `str` - string that coming from readline function
-* - `type` - current meta character type
-* 
-* Output:
-* - `-1` if malloc error occurs, `1` if success, `0` if condition not met
+/**
+* @brief	Function which contains a T_COMMAND_BR block of string_splitter()
+* recursion
+* @param	node new node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	type current meta character type
+* @return	`-1` if malloc error occurs, `1` if success, `0` if condition not
+* met
 */
 int	command_block(t_node_data **node, char *str, int type)
 {
@@ -30,16 +29,15 @@ int	command_block(t_node_data **node, char *str, int type)
 	return (0);
 }
 
-/*
-* Function which contains a T_COMMAND block of string_splitter() recursion
-*
-* Input:
-* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
-* - `str` - string that coming from readline function
-* - `type` - current meta character type
-* 
-* Output:
-* - `-1` if malloc error occurs, `1` if success, `0` if condition not met
+/**
+* @brief	Function which contains a T_COMMAND block of string_splitter()
+* recursion
+* @param	node new node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	type current meta character type
+* @return	`-1` if malloc error occurs, `1` if success, `0` if condition not
+* met
 */
 int	command_without_bracket_block(t_node_data **node, char *str, int type)
 {

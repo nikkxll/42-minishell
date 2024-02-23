@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   string_splitter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:39:12 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/22 21:29:47 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:30:13 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-/*
-* Function splits string in 2 parts according to the meta character type
-*
-* Input:
-* - `node` - new node to embed into the Abstract Syntax Tree (AST) structure
-* - `str` - string that coming from readline function
-* - `type` - current meta character type
-* - `i` - index to iterate throw the string
-* 
-* Output:
-* - `-1` if malloc error occurs, `1` if success
+/**
+* @brief	Function splits string in 2 parts according to the meta character
+* type
+* @param	node new node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	type current meta character type
+* @param	i index to iterate throw the string
+* @note		function uses recursion
+* @return	`-1` if malloc error occurs, `1` if success
 */
 int	string_splitter(t_node_data **node, char *str, int type,
 	int i)
