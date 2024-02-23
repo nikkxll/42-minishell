@@ -11,7 +11,7 @@ $(NAME): $(OBJS)
 	@echo "$(GREY)-LIBFT_PRJ is ready$(NC)"
 
 %.o: %.c
-	@$(CC) $(FLAGS) -c $< -o $@
+	@$(CC_LFT) $(FLAGS_LFT) -c $< -o $@
 
 clean:
 	@rm -f $(OBJS)
