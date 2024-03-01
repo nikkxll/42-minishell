@@ -8,9 +8,14 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 ###############################
 #########START_SOURCES#########
 ###############################
-SRCS_PATH			:=	srcs/
 
-SRCS				:=	main.c
+########VALIDATE_STRING########
+VALIDATE_INPUT_NAME	:=	validate_input.c is_word.c
+VALIDATE_INPUT_PATH	:=	/validate_input/
+VALIDATE_INPUT		:=	$(addprefix $(VALIDATE_INPUT_PATH), $(VALIDATE_INPUT_NAME))
+
+SRCS_PATH			:=	srcs/
+SRCS				:=	main.c $(VALIDATE_INPUT)
 
 ###############################
 ##########END_SOURCES##########
@@ -31,6 +36,7 @@ $(NAME): $(OBJS_PATH) $(OBJS) $(LIBFT)
 
 $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)
+	@mkdir -p $(OBJS_PATH)$(VALIDATE_INPUT_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(FLAGS) -c $< -o $@

@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   validate_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/01 16:21:18 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/03/01 16:16:14 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../headers/minishell.h"
 
-# include "../libft/libft.h"
+// validate_command<command>      ::=  <simple_cmd> | '(' <and_or> ')'
+// validate_simple_command<simple_cmd>   ::=  { <redirect> } <word> { ( <redirect> | <word> ) }
+// validate_redirect<redirect>     ::=  ( '<' | '>' | '<<' | '>>' ) <word>
 
-
-/*_____ Validate input_____*/
-t_bool	validate_input(char *str);
-t_bool	validate_and_or(char *str, int *pos);
-t_bool	validate_pipeline(char *str, int *pos);
-t_bool	validate_command(char *str, int *pos);
-t_bool	validate_simple_command(char *str, int *pos);
-t_bool	validate_redirect(char *str, int *pos);
-t_bool	is_word(char c);
-
-#endif
+t_bool	validate_command(char *str, int *pos)
+{
+	validate_simple_command(str, pos);
+}

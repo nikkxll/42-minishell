@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   is_word.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/01 16:21:18 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/03/01 16:19:51 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/03/01 18:36:11 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../headers/minishell.h"
 
-# include "../libft/libft.h"
+t_bool	is_word(char c)
+{
+	char	*special_characters;
 
-
-/*_____ Validate input_____*/
-t_bool	validate_input(char *str);
-t_bool	validate_and_or(char *str, int *pos);
-t_bool	validate_pipeline(char *str, int *pos);
-t_bool	validate_command(char *str, int *pos);
-t_bool	validate_simple_command(char *str, int *pos);
-t_bool	validate_redirect(char *str, int *pos);
-t_bool	is_word(char c);
-
-#endif
+	special_characters = "&|<>'\"() ";
+	if (ft_strchr(special_characters, c) == NULL)
+		return (true);
+	else
+		return (false);
+}
