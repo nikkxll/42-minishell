@@ -10,7 +10,7 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 ###############################
 
 ########VALIDATE_STRING########
-VALIDATE_INPUT_NAME	:=	validate_input.c is_word.c
+VALIDATE_INPUT_NAME	:=	validate_input.c is_word.c validate_redirect.c
 VALIDATE_INPUT_PATH	:=	/validate_input/
 VALIDATE_INPUT		:=	$(addprefix $(VALIDATE_INPUT_PATH), $(VALIDATE_INPUT_NAME))
 

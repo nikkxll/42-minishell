@@ -6,17 +6,16 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:40:56 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/01 18:37:03 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/01 19:10:39 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	// validate_input(NULL);
-	ft_printf("%d", is_word('f'));
-
+	ft_printf("%s\n", validate_redirect(argv[1]));
+	(void)argc;
 	return (0);
 }
 
