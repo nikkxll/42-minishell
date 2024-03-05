@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_splitter_blocks.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:55:41 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/23 13:50:24 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:43:10 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 * @return	`-1` if malloc error occurs, `1` if success, `0` if condition not
 * met
 */
-int	and_if_condition_block(t_node_data **node, char *str, int type, int i)
+int	and_if_condition_block(t_node_info **node, char *str, int type, int i)
 {
 	if (str[i] == AND && str[i - 1] == AND)
 	{
 		if (round_brackets_check(str, i)
 			&& quote_check(str, i, S_QUOTE)
 			&& quote_check(str, i, D_QUOTE))
-			return (set_node_data_and_or_pipe(node, str, i, T_AND));
+			return (set_node_info_and_or_pipe(node, str, i, T_AND));
 		else
 			return (string_splitter(node, str, type, i - 2));
 	}
@@ -39,7 +39,7 @@ int	and_if_condition_block(t_node_data **node, char *str, int type, int i)
 		if (round_brackets_check(str, i)
 			&& quote_check(str, i, S_QUOTE)
 			&& quote_check(str, i, D_QUOTE))
-			return (set_node_data_and_or_pipe(node, str, i, T_OR));
+			return (set_node_info_and_or_pipe(node, str, i, T_OR));
 		else
 			return (string_splitter(node, str, type, i - 2));
 	}
@@ -57,14 +57,14 @@ int	and_if_condition_block(t_node_data **node, char *str, int type, int i)
 * @return	`-1` if malloc error occurs, `1` if success, `0` if condition not
 * met
 */
-int	pipe_block(t_node_data **node, char *str, int type, int i)
+int	pipe_block(t_node_info **node, char *str, int type, int i)
 {
 	if (str[i] == PIPE)
 	{
 		if (round_brackets_check(str, i)
 			&& quote_check(str, i, S_QUOTE)
 			&& quote_check(str, i, D_QUOTE))
-			return (set_node_data_and_or_pipe(node, str, i, type));
+			return (set_node_info_and_or_pipe(node, str, i, type));
 		else
 			return (string_splitter(node, str, type, i - 1));
 	}
@@ -81,10 +81,10 @@ int	pipe_block(t_node_data **node, char *str, int type, int i)
 * @return	`-1` if malloc error occurs, `1` if success, `0` if condition not
 * met
 */
-int	brackets_block(t_node_data **node, char *str, int type)
+int	brackets_block(t_node_info **node, char *str, int type)
 {
 	if (first_nonspace_char_is_bracket(str)
 		&& last_nonspace_char_is_bracket(str))
-		return (set_node_data_bracket(node, str, type));
+		return (set_node_info_bracket(node, str, type));
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_node_data.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:46:43 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/23 13:42:10 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:55:21 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 * @param	type current meta character type
 * @return	`-1` if malloc error occurs, `1` if success
 */
-int	set_node_data_command(t_node_data **node, char *str, int type)
+int	set_node_info_command(t_node_info **node, char *str, int type)
 {
-	t_node_data	*new_node;
+	t_node_info	*new_node;
 	char		*redir;
 	int			status;
 
-	new_node = ft_calloc(1, sizeof(t_node_data));
+	new_node = ft_calloc(1, sizeof(t_node_info));
 	if (!new_node)
 	{
 		*node = new_node;
@@ -56,9 +56,10 @@ int	set_node_data_command(t_node_data **node, char *str, int type)
 * 
 * @return	`-1` if malloc error occurs, `1` if success
 */
-int	set_node_data_and_or_pipe(t_node_data **node, char *str, int point, int type)
+int	set_node_info_and_or_pipe(t_node_info **node, char *str,
+	int point, int type)
 {
-	t_node_data	*new_node;
+	t_node_info	*new_node;
 
 	if (type == T_AND || type == T_OR)
 	{
@@ -67,7 +68,7 @@ int	set_node_data_and_or_pipe(t_node_data **node, char *str, int point, int type
 	}
 	else
 		str[point] = NULL_TERM;
-	new_node = ft_calloc(1, sizeof(t_node_data));
+	new_node = ft_calloc(1, sizeof(t_node_info));
 	if (!new_node)
 	{
 		*node = new_node;
@@ -88,13 +89,13 @@ int	set_node_data_and_or_pipe(t_node_data **node, char *str, int point, int type
 * @param	type current meta character type
 * @return	`-1` if malloc error occurs, `1` if success
 */
-int	set_node_data_bracket(t_node_data **node, char *str, int type)
+int	set_node_info_bracket(t_node_info **node, char *str, int type)
 {
-	t_node_data	*new_node;
+	t_node_info	*new_node;
 	char		*first;
 	char		*last;
 
-	new_node = ft_calloc(1, sizeof(t_node_data));
+	new_node = ft_calloc(1, sizeof(t_node_info));
 	if (!new_node)
 	{
 		*node = new_node;
@@ -119,14 +120,14 @@ int	set_node_data_bracket(t_node_data **node, char *str, int type)
 * @param	type current meta character type
 * @return	`-1` if malloc error occurs, `1` if success
 */
-int	set_node_data_command_br(t_node_data **node, char *str, int type)
+int	set_node_info_command_br(t_node_info **node, char *str, int type)
 {
-	t_node_data	*new_node;
+	t_node_info	*new_node;
 	char		*first;
 	int			i;
 
 	i = 0;
-	new_node = ft_calloc(1, sizeof(t_node_data));
+	new_node = ft_calloc(1, sizeof(t_node_info));
 	if (!new_node)
 	{
 		*node = new_node;
@@ -149,10 +150,11 @@ int	set_node_data_command_br(t_node_data **node, char *str, int type)
 * @param	type current meta character type
 * @return	`-1` if malloc error occurs, `1` if success
 */
-int	set_node_cmd_simple(t_node_data **node, char *str, int type)
+int	set_node_cmd_simple(t_node_info **node, char *str, int type)
 {
-	t_node_data	*new_node;
-	new_node = ft_calloc(1, sizeof(t_node_data));
+	t_node_info	*new_node;
+
+	new_node = ft_calloc(1, sizeof(t_node_info));
 	if (!new_node)
 	{
 		*node = new_node;

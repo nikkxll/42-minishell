@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/21 13:53:31 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:37:00 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ typedef struct s_node
 	struct s_node	*right;
 }	t_node;
 
-typedef struct s_node_data
+typedef struct s_node_info
 {
 	int		type;
 	char	*str_left;
 	char	*str_right;
-}	t_node_data;
+}	t_node_info;
 
 typedef struct s_and
 {

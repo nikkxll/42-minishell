@@ -6,14 +6,13 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:40:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/23 16:09:11 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:48:03 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-t_bool	get_type(char *str, t_node_data **data);
-
+t_bool	get_type(char *str, t_node_info **info);
 
 /**
  * @brief	Recursively creates binary tree. The function calls @c `get_type`
@@ -27,36 +26,101 @@ t_bool	get_type(char *str, t_node_data **data);
  */
 t_bool	create_tree(char *str, t_node **root)
 {
-	t_node_data	*data;
+	t_node_info	*info;
 	t_bool		status;
 	int			type;
 
-	status = get_type(str, &data);
+	status = get_type(str, &info);
 	if (status == false)
 		return (status);
-	if (create_node(data, root) == false)
+	if (create_node(info, root) == false)
 		return (false);
-	type = data->type;
+	type = info->type;
 	if (type == T_AND || type == T_OR || type == T_PIPE)
-		status = add_and_or_pipe_trees(data, root);
+		status = add_and_or_pipe_trees(info, root);
 	else if (type == T_BRACKET)
-		status = add_bracket(data, root);
+		status = add_bracket(info, root);
 	else if (type == T_COMMAND)
-		status = add_command(data, root);
+		status = add_command(info, root);
 	else if (type == T_COMMAND_BR)
-		status = add_command_br(data, root);
+		status = add_command_br(info, root);
 	else if (type == T_CMD_SIMPLE)
-		status = add_cmd_simple(data, root);
-	free_node_data(data);
+		status = add_cmd_simple(info, root);
+	free(info);
 	if (status == false)
 		free_tree(root);
 	return (status);
 }
 
-t_bool	get_type(char *str, t_node_data **data)
+t_bool	get_type(char *str, t_node_info **info)
 {
 	int	status;
 
-	status = string_splitter(data, str, T_AND, ft_strlen(str) - 1);
+	status = string_splitter(info, str, T_AND, ft_strlen(str) - 1);
 	return (status);
 }
+
+// char	*return_type(int t)
+// {
+// 	if (t == T_AND)
+// 		return ("and");
+// 	if (t == T_OR)
+// 		return ("or");
+// 	if (t == T_PIPE)
+// 		return ("pipe");
+// 	if (t == T_BRACKET)
+// 		return ("bracket");
+// 	if (t == T_COMMAND)
+// 		return ("command");
+// 	if (t == T_COMMAND_BR)
+// 		return ("command_br");
+// 	if (t == T_CMD_SIMPLE)
+// 		return ("cmd_s");
+// 	if (t == T_REDIR)
+// 		return ("redir");
+// 	return (NULL);
+// }
+
+// void	inorder(t_node	*tree)
+// {
+// 	int	type;
+
+// 	type = tree->type;
+// 	if (type == T_AND || type == T_OR || type == T_PIPE
+// 		|| type == T_COMMAND || type == T_COMMAND_BR)
+// 	{
+// 		inorder(tree->left);
+// 		printf("[t:%s, t_l:%d, t_r:%d] ", return_type(tree->type),
+// 		tree->left->type, tree->right->type);
+// 		inorder(tree->right);
+// 	}
+// 	else if (type == T_BRACKET)
+// 	{
+// 		inorder(tree->left);
+// 		printf("[t:%s, t_l:%d] ", return_type(tree->type), tree->left->type);
+// 	}
+// 	else if (type == T_CMD_SIMPLE)
+// 		printf("[t:%s, cmd:%s] ", return_type(tree->type),
+// 		((t_cmd_simple *)tree)->cmd);
+// 	else if (type == T_REDIR)
+// 		printf("[t:%s, redir:%s] ", return_type(tree->type),
+// 		((t_redir *)tree)->str);
+// }
+
+// int	main(int argc, char **argv)
+// {
+// 	int				status;
+// 	t_node			*tree;
+// 	char			*str;
+
+// 	str = argv[1];
+
+// 	tree = NULL;
+// 	status = create_tree(str, &tree);
+// 	if (status == false)
+// 		printf("Can't create tree!\n", status);
+// 	inorder(tree);
+// 	free_tree(&tree);
+// 	(void)argc;
+// 	return (0);
+// }

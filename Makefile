@@ -12,7 +12,7 @@ SRCS_PATH			:=	srcs/
 
 #####AST_TREE_CREATION#####
 AST_TREE_NAME		:=	create_tree.c add_nodes.c constructors.c constructors_2.c create_node.c \
-						free_node_data.c free_tree.c
+						free_tree.c
 AST_TREE_PATH		:=	ast/ast_create_tree/
 AST_TREE			:=	$(addprefix $(AST_TREE_PATH), $(AST_TREE_NAME))
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_splitter_utils_2.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:54:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/23 15:17:33 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:58:29 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	modificate_str_command_without_br(char *str, char **redir, int i,
 	r = (char *)ft_calloc((int)ft_strlen(str), sizeof(char));
 	if (!r)
 		return (-1);
-	while (str[i++] != NULL_TERM)
+	while (str[i] != NULL_TERM)
 	{
 		while (str[i] != REDIR_L && str[i] != REDIR_R && str[i] != NULL_TERM)
 			i++;
@@ -91,7 +91,9 @@ int	modificate_str_command_without_br(char *str, char **redir, int i,
 				modificate_str_utils(str, r, &i, &j);
 			while (str[i] != SPACE && str[i] != NULL_TERM)
 				modificate_str_utils(str, r, &i, &j);
+			i--;
 		}
+		i++;
 	}
 	*redir = r;
 	return (1);
