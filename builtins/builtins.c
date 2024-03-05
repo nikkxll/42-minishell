@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/05 19:24:48 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/05 22:55:26 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	command_run(char **arr, char **envp)
 {
 	if (!ft_strncmp("echo", arr[0], ft_strlen(arr[0])))
-		return (run_echo(arr + 1, 1, 0, 0));
+		return (run_echo(arr + 1, 0, 0, 0));
 	else if (!ft_strncmp("cd", arr[0], ft_strlen(arr[0])))
 		return (run_cd(arr + 1, envp));
 	else if (!ft_strncmp("pwd", arr[0], ft_strlen(arr[0])))

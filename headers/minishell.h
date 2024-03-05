@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 19:18:36 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/05 22:47:45 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int				run_pwd(char **arr);
 int				run_export(char **arr, char **envp);
 void			remove_quotes(char *str, int i, int j);
 void			skip_characters(char *str, int *i, int symbol);
+int				env_var(char **envp, char *var, int i, int j);
 int				print_error_with_arg(char *error, char *arg, char *cmd);
 int				print_error(char *error, char *cmd);
 
