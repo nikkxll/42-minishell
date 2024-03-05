@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   preprocessing_utils.c                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 12:00:54 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/04 19:14:56 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:39:09 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../headers/minishell.h"
 /**
 * @brief	Removes consecutive quotes from the string is allowable
 * @param	str - string that coming from readline function
@@ -45,4 +45,10 @@ void	skip_characters(char *str, int *i, int symbol)
 {
 	while (str[*i] == symbol && str[*i] != NULL_TERM)
 		(*i)++;
+}
+
+void	processing(char **arr, int i)
+{
+	while (arr[i])
+		remove_quotes(arr[i++], 0, 0);
 }
