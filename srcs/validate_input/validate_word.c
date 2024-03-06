@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:19:51 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 10:20:11 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:47:45 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*validate_word(char *str)
 {
 	char	*special_characters;
 
-	special_characters = "&|<>() '\"";
+	special_characters = "&|<>() '\"\n";
 	while (*str && ft_strchr(special_characters, *str) == NULL)
 		str++;
 	if (*str == S_QUOTE || *str == D_QUOTE)
@@ -45,10 +45,10 @@ char	*validate_quotes(char *str)
 		while (curr[i] != NULL_TERM && curr[i] != S_QUOTE)
 			i++;
 	}
-	if (curr[i] == NULL_TERM)
-		return (curr);
-	else if (i == 0)
+	else
 		return (str);
+	if (curr[i] == NULL_TERM)
+		return ("\n");
 	else
 		return (curr + i + 1);
 }
