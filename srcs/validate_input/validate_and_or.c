@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validte_and_or.c                                   :+:      :+:    :+:   */
+/*   validate_and_or.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/01 16:11:37 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:48:02 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,18 @@
 // validate_redirect<redirect>     ::=  ( '<' | '>' | '<<' | '>>' ) <word>
 
 
-t_bool	validate_and_or(char *str, int *pos)
+char	*validate_and_or(char *str)
 {
-	validate_pipeline(str, *pos);
+	char	*next_token;
+
+	while (*str == SPACE)
+		str++;
+	next_token = validate_pipeline(str);
+	if (next_token == str)
+		return (next_token);
+	else if ((ft_strncmp("&&", next_token, 2) == 0
+			|| ft_strncmp("||", next_token, 2) == 0)
+		&& is_blank_string(next_token + 2) == false)
+		next_token = validate_and_or(next_token + 2);
+	return (next_token);
 }

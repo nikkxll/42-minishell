@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:41:05 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/01 16:35:55 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:19:33 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,20 @@
 // validate_and_or<and_or>       ::=  <pipeline> { ('&&' | '||') <pipeline> }        
 // validate_pipeline<pipeline>     ::=  <command> { '|' <command> }
 // validate_command<command>      ::=  <simple_cmd> | '(' <and_or> ')'
-// validate_simple_command<simple_cmd>   ::=  { <redirect> } <word> { ( <redirect> | <word> ) }
+// validate_simple_command<simple_cmd>   ::=  {( <redirect> | <word> | "anything" | 'anything')}
 // validate_redirect<redirect>     ::=  ( '<' | '>' | '<<' | '>>' ) <word>
 
-// t_bool	validate_input(char *str)
-// {
-// 	int	pos;
+t_bool	validate_input(char *str)
+{
+	char	*next_token;
 
-// 	pos = 0;
-// 	validate_and_or(str, &pos);
-// 	return (true);
-// }
+	next_token = validate_and_or(str);
+	if (*next_token != NULL_TERM)
+	{
+		ft_putstr_fd("bash: syntax error near unexpected token `", 2);
+		ft_putstr_fd(next_token, 2);
+		ft_putendl_fd("'", 2);
+		return (false);
+	}
+	return (true);
+}

@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_word.c                                          :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/01 16:19:51 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/01 18:57:07 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/03/06 10:34:00 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/03/06 10:34:28 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../libft.h"
 
-t_bool	is_word(char c)
+size_t	ft_arrlen(void **arr)
 {
-	char	*special_characters;
+	size_t	length;
 
-	special_characters = "&|<>'\"()";
-	if (ft_strchr(special_characters, c) == NULL)
-		return (true);
-	else
-		return (false);
+	length = 0;
+	while (arr[length] != NULL)
+		length++;
+	return (length);
 }

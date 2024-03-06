@@ -13,7 +13,7 @@ LFT_SRCS		:=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 #PRINTF_PRJ
 PRINTF_PATH		:=	printf/
 PRINTF_SRCS		:=	ft_printf.c ft_switch.c ft_print_char.c ft_putchar.c ft_print_str.c ft_putstr.c \
-					ft_print_hex.c ft_numlenbase.c ft_dec_tobase.c ft_print_dec.c
+					ft_print_hex.c ft_numlenbase.c ft_dec_tobase.c ft_print_dec.c 
 
 #GET_NEXT_LINE_PRJ
 GNL_PATH		:=	get_next_line/
@@ -22,7 +22,7 @@ GNL_HEADERS		:=	get_next_line.h
 
 #AUXILIARY_FUNCTIONS
 AUX_PATH		:=	auxiliary/
-AUX_SRCS		:=	ft_abs.c ft_do_nothing.c ft_free_2d_array.c ft_max.c ft_min.c 
+AUX_SRCS		:=	ft_abs.c ft_do_nothing.c ft_free_2d_array.c ft_max.c ft_min.c ft_arrlen.c 
 
 #MAIN_LIBFT
 LIBFT			:=	libft.a
