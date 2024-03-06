@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 12:00:54 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/05 22:47:26 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:39:19 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,17 @@ int	env_var(char **envp, char *var, int i, int j)
 	while (envp[++i])
 	{
 		if (ft_strncmp(envp[i], var, j) == 0)
-			return (i) ;
+			return (i);
+	}
+	return (-1);
+}
+
+int	arg_var(char **arr, char *var, int i, int j)
+{
+	while (--i >= 0)
+	{
+		if (ft_strncmp(arr[i], var, j) == 0)
+			return (i);
 	}
 	return (-1);
 }

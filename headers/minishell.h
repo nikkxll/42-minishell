@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 22:47:45 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/06 20:05:42 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,16 +115,37 @@ void			error_print(char *str);
 
 // builtins
 
+// common + utils
 int				command_run(char **arr, char **envp);
-void			processing(char **arr, int i);
-int				run_echo(char **arr, int i, int j, int nl_flag);
-int				run_cd(char **arr, char **envp);
-int				run_pwd(char **arr);
-int				run_export(char **arr, char **envp);
+char			**sort_string_arr(char **argv, int size);
+char			**cpy_env(char **envp);
 void			remove_quotes(char *str, int i, int j);
 void			skip_characters(char *str, int *i, int symbol);
+void			processing(char **arr, int i);
 int				env_var(char **envp, char *var, int i, int j);
+int				arg_var(char **arr, char *var, int i, int j);
+
+//errors_print
 int				print_error_with_arg(char *error, char *arg, char *cmd);
 int				print_error(char *error, char *cmd);
+
+//cd
+int				run_cd(char **arr, char **envp);
+
+//echo
+int				run_echo(char **arr, int i, int j, int nl_flag);
+
+//export
+int				run_export(char **arr, char ***envp);
+void			create_operations_array(char **arr, char **envp,
+					int *operations);
+int				check_operations(int *operations, int *i, int *j, int type);
+void			execute_error(char **arr, int *operations);
+int				edit_env_list(char ***new_env, char **arr, int *operations);
+int				add_to_env_list(char ***new_env, char **arr, char **envp,
+					int *operations);
+
+//pwd
+int				run_pwd(char **arr);
 
 #endif

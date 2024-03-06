@@ -6,13 +6,13 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:22:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/05 22:57:26 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/06 20:08:23 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int	cd_precheck(char **arr, char **envp)
+static int	cd_precheck(char **arr)
 {
 	int	len;
 
@@ -29,7 +29,7 @@ int	cd_precheck(char **arr, char **envp)
 
 int	run_cd(char **arr, char **envp)
 {
-	if (cd_precheck(arr, envp) == -1)
+	if (cd_precheck(arr) == -1)
 		return (-1);
 	if (arr[0][0] == NULL_TERM)
 	{
@@ -40,8 +40,7 @@ int	run_cd(char **arr, char **envp)
 	else if (!ft_strncmp(arr[0], "-", ft_strlen(arr[0])))
 	{
 		if (chdir(envp[env_var(envp, "OLDPWD=", -1, 7)] + 7) != 0)
-			return (print_error_with_arg("No such file or directory\n",
-					arr[0], "cd: "));
+			return (print_error("OLDPWD not set\n", "cd: "));
 		else
 			printf("%s\n", envp[env_var(envp, "OLDPWD=", -1, 7)] + 7);
 	}

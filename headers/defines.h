@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 23:38:58 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:55:24 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ enum	e_characters
 	EQUAL_SIGN = 61,
 	REDIR_R = 62,
 	BACKSLASH = 92,
+	UNSCORE = 95,
 	PIPE = 124,
 };
 
@@ -53,15 +54,17 @@ enum	e_validator
 
 enum	e_errors
 {
-	MALLOC_FAILURE = 256,
-	BRACKETS_NUM_ERROR,
-	QUOTES_NUM_ERROR,
-	BRACKETS_SYNTAX_ERROR,
-	BRACKETS_ARGS_SYNTAX_ERROR,
-	META_SYNTAX_ERROR,
-	META_NL_ERROR,
-	META_PATTERN_ERROR,
-	BACKSLASH_SEMICOLON_ERROR
+	SUCCESS,
+	MALLOC_ERR = 200,
+	CHDIR_ERR
+};
+
+enum	e_export_types
+{
+	EXPORT_ERROR = 1,
+	EXPORT_EDIT,
+	EXPORT_ADD,
+	EXPORT_SKIP
 };
 
 #endif

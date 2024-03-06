@@ -6,116 +6,82 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/06 11:11:05 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:41:20 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-char	**edit_env_list(char **envp, char *new_var, int position)
+static int	execute_export(char **new_env, char **arr, char **envp,
+	int *operations)
 {
-	envp[position] = ft_strdup(new_var);	
-	return (envp);
+	if (add_to_env_list(&new_env, arr, envp, operations) == MALLOC_ERR)
+		return (MALLOC_ERR);
+	if (edit_env_list(&new_env, arr, operations) == MALLOC_ERR)
+		return (MALLOC_ERR);
+	execute_error(arr, operations);
+	return (SUCCESS);
 }
 
-char	**add_to_env_list(char **res, char **arr, char **envp, int *operations)
+static int	export_with_args(char **arr, char ***envp)
 {
-	int		i;
-	int		j;
-	int		len;
-	
-	i = 0;
-	j = -1;
-	while (operations[++j])
-	{
-		if (operations[j] == 3)
-			i++;
-	}
-	len = ft_arrlen((void **)envp);
-	res = (char **)ft_calloc(len + i + 1, sizeof(char *));
-	if (res == NULL)
-		return (NULL);
-	ft_memcpy((void *)res, (void *)envp, sizeof(char *) * len);
-	j = -1;
-	i = 0;
-	while (operations[++j])
-	{
-		if (operations[j] == 3)
-			res[len + i++] = ft_strdup(arr[j]);
-	}
-	return (res);
-}
-
-int	arg_var(char **arr, char *var, int i, int j)
-{
-	while (--i >= 0)
-	{
-		if (ft_strncmp(arr[i], var, j) == 0)
-			return (i) ;
-	}
-	return (-1);
-}
-
-// 1 - error, 2 - edit, 3 - add, 4 - skip
-int check_operation(char **arr, char **envp, int *operations)
-{
-	int	i;
-	int	j;
-	
-	i = -1;
-	j = 0;
-	while (arr[++i] != NULL)
-	{
-		j = 0;
-		while (arr[i][j] != EQUAL_SIGN && arr[i][j] != NULL_TERM
-				&& arr[i][j] != SPACE && !ft_isdigit(arr[i][j]))
-				j++;
-		if ((arr[i][j] == SPACE) || (ft_isdigit(arr[i][j]) && j == 0))
-			operations[i] = 1;
-		else if (arr[i][j] == EQUAL_SIGN)
-		{
-			if (env_var(envp, arr[i], -1, j) != -1
-				|| arg_var(arr, arr[i], i, j) != -1)
-				operations[i] = 2;
-			else
-				operations[i] = 3;
-		}
-		else
-			operations[i] = 4;
-	}
-	return (0);
-}
-
-char	**execute_export(char **res, char **arr, char **envp, int *operations)
-{
-	res = add_to_env_list(res, arr, envp, operations);
-	// execute_edit(res, arr, envp, operations);
-	// execute_error(res, arr, envp, operations);
-	return (res);
-}
-
-int	export_with_args(char **arr, char **envp, int i)
-{
-	char	**res;
+	char	**new_env;
+	char	**env;
 	int		*operations;
 
+	env = *envp;
+	new_env = NULL;
 	operations = ft_calloc(ft_arrlen((void **)arr) + 1, sizeof(int));
 	if (!operations)
-		return (-1);
-	check_operation(arr, envp, operations);
-	res = execute_export(res, arr, envp, operations);
-	int k = -1;
-	while(res[++k])
-		printf("%s\n", res[k]);
-	return (1);
+		return (MALLOC_ERR);
+	create_operations_array(arr, env, operations);
+	if (execute_export(new_env, arr, env, operations) == MALLOC_ERR)
+		return (MALLOC_ERR);
+	*envp = new_env;
+	free(operations);
+	return (SUCCESS);
 }
 
-int	run_export(char **arr, char **envp)
+static int	export_without_args(char ***envp, int i, int j)
 {
-	int	arr_len;
+	char	**envp_sorted;
+
+	envp_sorted = sort_string_arr(*envp, ft_arrlen((void **)*envp));
+	if (!envp_sorted)
+		return (MALLOC_ERR);
+	while (envp_sorted[++i])
+	{
+		j = 0;
+		if (envp_sorted[i][j] == UNSCORE && envp_sorted[i][j + 1] == EQUAL_SIGN)
+			continue ;
+		ft_putstr_fd("declare -x ", 1);
+		while (envp_sorted[i][j] != EQUAL_SIGN)
+			ft_putchar_fd(envp_sorted[i][j++], 1);
+		ft_putchar_fd(EQUAL_SIGN, 1);
+		ft_putchar_fd(D_QUOTE, 1);
+		j++;
+		ft_putstr_fd(envp_sorted[i] + j, 1);
+		ft_putchar_fd(D_QUOTE, 1);
+		ft_putchar_fd(NL, 1);
+	}
+	free(envp_sorted);
+	return (SUCCESS);
+}
+
+int	run_export(char **arr, char ***envp)
+{
+	int		arr_len;
 
 	arr_len = ft_arrlen((void **)arr);
 	if (arr_len > 0)
-		export_with_args(arr, envp, 0);
-	return (1);
+	{
+		if (export_with_args(arr, envp) == MALLOC_ERR)
+			return (MALLOC_ERR);
+	}
+	else
+	{
+		if (export_without_args(envp, -1, 0) == MALLOC_ERR)
+			return (MALLOC_ERR);
+	}
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:26:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/04 19:15:56 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:24:33 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	run_echo(char **arr, int i, int j, int nl_flag)
 {
 	int	k;
 
-	k = 0;
+	if (!arr[i])
+		ft_putchar_fd(NL, 1);
 	while (arr[i])
 	{
 		k = i;
