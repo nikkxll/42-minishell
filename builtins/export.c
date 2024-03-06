@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/06 19:41:20 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/06 23:47:41 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ static int	export_with_args(char **arr, char ***envp)
 		return (MALLOC_ERR);
 	create_operations_array(arr, env, operations);
 	if (execute_export(new_env, arr, env, operations) == MALLOC_ERR)
+	{
+		free(operations);
 		return (MALLOC_ERR);
+	}
 	*envp = new_env;
 	free(operations);
 	return (SUCCESS);

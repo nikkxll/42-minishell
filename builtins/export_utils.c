@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:32:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/06 19:33:11 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/06 23:56:21 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int	check_operations(int *operations, int *i, int *j, int type)
 	}
 	if (*i == 0)
 		return (1);
+	*j = -1;
 	return (0);
 }

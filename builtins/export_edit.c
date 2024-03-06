@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:28:14 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/06 20:02:37 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/06 23:56:35 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static int	edit_env_list_substitution(char **arr, char **result, int *i,
 	position = env_var(result, arr[*j], -1, *i);
 	new_var = ft_strdup(arr[*j]);
 	if (new_var == NULL)
+	{
+		ft_free_2d_array(result);
 		return (MALLOC_ERR);
+	}
 	free(result[position]);
 	result[position] = new_var;
 	return (SUCCESS);
@@ -39,7 +42,6 @@ int	edit_env_list(char ***new_env, char **arr, int *operations)
 	if (check_operations(operations, &i, &j, EXPORT_EDIT))
 		return (SUCCESS);
 	i = 0;
-	j = -1;
 	while (operations[++j])
 	{
 		if (operations[j] == EXPORT_EDIT)

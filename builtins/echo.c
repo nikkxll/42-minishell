@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:26:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/06 15:24:33 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/06 23:59:47 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	echo_write(char **arr, int flag, int i)
 			i++;
 		}
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 int	run_echo(char **arr, int i, int j, int nl_flag)
@@ -64,5 +64,5 @@ int	run_echo(char **arr, int i, int j, int nl_flag)
 		else
 			return (echo_write(arr + k, nl_flag, 0));
 	}
-	return (1);
+	return (SUCCESS);
 }

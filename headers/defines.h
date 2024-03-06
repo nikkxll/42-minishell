@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/06 17:55:24 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 00:04:35 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,10 @@ enum	e_validator
 	PART_VALIDATION
 };
 
-enum	e_errors
+enum	e_exit_status
 {
 	SUCCESS,
 	MALLOC_ERR = 200,
-	CHDIR_ERR
 };
 
 enum	e_export_types

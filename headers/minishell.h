@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/06 20:05:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 00:02:13 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ int				env_var(char **envp, char *var, int i, int j);
 int				arg_var(char **arr, char *var, int i, int j);
 
 //errors_print
-int				print_error_with_arg(char *error, char *arg, char *cmd);
-int				print_error(char *error, char *cmd);
+void			print_error_with_arg(char *error, char *arg, char *cmd);
+void			print_error(char *error, char *cmd);
 
 //cd
 int				run_cd(char **arr, char **envp);
