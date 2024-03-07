@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:04:34 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/07 19:50:44 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:02:47 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	run_env(char **arr, char ***envp)
 	}
 	else if (len >= 1)
 	{
-		print_error_with_arg("No such file or directory\n", arr[0], "env: ");
+		print_error_with_arg("arguments not supported\n", arr[0], "env: ");
 		return (SUCCESS);
 	}
 	else
-		print_env(*envp, -1);
+		print_env(new_env, -1);
 	return (SUCCESS);
 }

@@ -6,19 +6,27 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/07 19:50:58 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:32:09 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int	execute_export(char **new_env, char **arr, char **envp,
+static int	execute_export(char ***new_env, char **arr, char ***envp,
 	int *operations)
 {
-	if (add_to_env_list(&new_env, arr, envp, operations) == MALLOC_ERR)
+	if (add_to_env_list(new_env, arr, *envp, operations) == MALLOC_ERR)
 		return (MALLOC_ERR);
-	if (edit_env_list(&new_env, arr, operations) == MALLOC_ERR)
-		return (MALLOC_ERR);
+	if (*new_env)
+	{
+		if (edit_env_list(new_env, arr, operations) == MALLOC_ERR)
+			return (MALLOC_ERR);
+	}
+	else
+	{
+		if (edit_env_list(envp, arr, operations) == MALLOC_ERR)
+			return (MALLOC_ERR);
+	}
 	execute_error(arr, operations);
 	return (SUCCESS);
 }
@@ -26,21 +34,20 @@ static int	execute_export(char **new_env, char **arr, char **envp,
 static int	export_with_args(char **arr, char ***envp)
 {
 	char	**new_env;
-	char	**env;
 	int		*operations;
 
-	env = *envp;
 	new_env = NULL;
 	operations = ft_calloc(ft_arrlen((void **)arr) + 1, sizeof(int));
 	if (!operations)
 		return (MALLOC_ERR);
-	create_operations_array(arr, env, operations);
-	if (execute_export(new_env, arr, env, operations) == MALLOC_ERR)
+	create_operations_array(arr, *envp, operations);
+	if (execute_export(&new_env, arr, envp, operations) == MALLOC_ERR)
 	{
 		free(operations);
 		return (MALLOC_ERR);
 	}
-	*envp = new_env;
+	if (new_env)
+		*envp = new_env;
 	free(operations);
 	return (SUCCESS);
 }

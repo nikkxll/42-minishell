@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:22:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/07 19:50:40 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 22:32:07 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	cd_precheck(char **arr)
 		print_error_with_arg("options not supported\n", arr[0], "cd: ");
 		return (-1);
 	}
-	if (len > 2)
+	if (len >= 2)
 	{
 		print_error("too many arguments\n", "cd: ");
 		return (-1);
@@ -37,7 +37,7 @@ int	run_cd(char **arr, char **envp)
 {
 	if (cd_precheck(arr) == -1)
 		return (SUCCESS);
-	if (arr[0][0] == NULL_TERM || !ft_strncmp(arr[0], "--", ft_strlen(arr[0])))
+	if (arr[0][0] == NULL_TERM || !ft_strncmp(arr[0], "--", 2))
 	{
 		if (chdir(envp[env_var(envp, "HOME=", -1, 5)] + 5) != 0)
 			print_error_with_arg("No such file or directory\n",

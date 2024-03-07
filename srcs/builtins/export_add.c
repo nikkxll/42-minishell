@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:35:13 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/07 19:50:49 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:25:47 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int	add_to_env_list(char ***new_env, char **arr, char **envp,
 			result[len + i++] = new_var;
 		}
 	}
+	*new_env = result;
 	return (SUCCESS);
 }

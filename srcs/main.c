@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:40:56 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/07 19:48:18 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:20:36 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av, char **envp)
 	}
 	arr[i] = NULL;
 	processing(arr, 0);
-	status = command_run(arr, env);
+	status = command_run(arr, &env);
 	if (status == MALLOC_ERR)
 		printf("%s\n", "malloc error");
 	ft_free_2d_array(arr);
