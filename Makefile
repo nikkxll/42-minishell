@@ -8,9 +8,17 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 ###############################
 #########START_SOURCES#########
 ###############################
-SRCS_PATH			:=	srcs/
 
-SRCS				:=	main.c
+#####BUILTINS#####
+BUILTINS_NAME		:=	builtins.c cd.c echo.c env.c export_add.c export_edit.c export_error.c export_utils.c export.c \
+						pwd.c unset.c
+BUILTINS_UTILS_NAME	:=	errors_print.c utils.c utils_2.c
+BUILTINS_PATH		:=	builtins/
+BUILTINS_UTILS_PATH	:=	builtins/utils/
+BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) $(addprefix $(BUILTINS_UTILS_PATH), $(BUILTINS_UTILS_NAME))
+
+SRCS				:=	main.c $(BUILTINS)
+SRCS_PATH			:=	srcs/
 
 ###############################
 ##########END_SOURCES##########
@@ -31,6 +39,8 @@ $(NAME): $(OBJS_PATH) $(OBJS) $(LIBFT)
 
 $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)
+	@mkdir -p $(OBJS_PATH)$(BUILTINS_PATH)
+	@mkdir -p $(OBJS_PATH)$(BUILTINS_UTILS_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(FLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/07 00:04:35 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:05:55 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ enum	e_characters
 	S_QUOTE = 39,
 	O_ROUND = 40,
 	C_ROUND = 41,
+	DASH = 45,
 	SEMICOLON = 59,
 	REDIR_L = 60,
-	EQUAL_SIGN = 61,
+	EQUAL = 61,
 	REDIR_R = 62,
 	BACKSLASH = 92,
 	UNSCORE = 95,

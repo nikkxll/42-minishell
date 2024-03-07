@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/06 23:47:41 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:50:58 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../headers/minishell.h"
 
 static int	execute_export(char **new_env, char **arr, char **envp,
 	int *operations)
@@ -55,12 +55,12 @@ static int	export_without_args(char ***envp, int i, int j)
 	while (envp_sorted[++i])
 	{
 		j = 0;
-		if (envp_sorted[i][j] == UNSCORE && envp_sorted[i][j + 1] == EQUAL_SIGN)
+		if (envp_sorted[i][0] == UNSCORE && envp_sorted[i][1] == EQUAL)
 			continue ;
 		ft_putstr_fd("declare -x ", 1);
-		while (envp_sorted[i][j] != EQUAL_SIGN)
+		while (envp_sorted[i][j] != EQUAL)
 			ft_putchar_fd(envp_sorted[i][j++], 1);
-		ft_putchar_fd(EQUAL_SIGN, 1);
+		ft_putchar_fd(EQUAL, 1);
 		ft_putchar_fd(D_QUOTE, 1);
 		j++;
 		ft_putstr_fd(envp_sorted[i] + j, 1);
@@ -76,7 +76,13 @@ int	run_export(char **arr, char ***envp)
 	int		arr_len;
 
 	arr_len = ft_arrlen((void **)arr);
-	if (arr_len > 0)
+	if (arr_len >= 1 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
+	{
+		arr[0][2] = NULL_TERM;
+		print_error_with_arg("options not supported\n", arr[0], "env: ");
+		return (SUCCESS);
+	}
+	else if (arr_len > 0)
 	{
 		if (export_with_args(arr, envp) == MALLOC_ERR)
 			return (MALLOC_ERR);

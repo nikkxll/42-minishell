@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:21:06 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/07 00:01:36 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:51:00 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../headers/minishell.h"
 
 int	run_pwd(char **arr)
 {
@@ -18,10 +18,10 @@ int	run_pwd(char **arr)
 	int		len;
 
 	len = ft_arrlen((void **)arr);
-	if (len > 1 && ft_strlen(arr[0]) > 1 && arr[0][0] == '-')
+	if (len >= 1 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
 	{
 		arr[0][2] = NULL_TERM;
-		print_error_with_arg("invalid option\n", arr[0], "pwd: ");
+		print_error_with_arg("options not supported\n", arr[0], "pwd: ");
 		return (SUCCESS);
 	}
 	working_dir = getcwd(NULL, 0);

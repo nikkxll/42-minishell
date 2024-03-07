@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:26:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/06 23:59:47 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:50:42 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../headers/minishell.h"
 
 static int	echo_write(char **arr, int flag, int i)
 {
@@ -48,7 +48,7 @@ int	run_echo(char **arr, int i, int j, int nl_flag)
 	{
 		k = i;
 		j = 0;
-		if (arr[i][j] == '-')
+		if (arr[i][j] == DASH)
 		{
 			j++;
 			while (arr[i][j] != NULL_TERM)

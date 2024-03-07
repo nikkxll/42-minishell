@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:28:14 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/06 23:56:35 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:50:51 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../headers/minishell.h"
 
 static int	edit_env_list_substitution(char **arr, char **result, int *i,
 	int *j)
@@ -18,7 +18,7 @@ static int	edit_env_list_substitution(char **arr, char **result, int *i,
 	int		position;
 	char	*new_var;
 
-	while (arr[*j][*i] != EQUAL_SIGN)
+	while (arr[*j][*i] != EQUAL)
 		(*i)++;
 	position = env_var(result, arr[*j], -1, *i);
 	new_var = ft_strdup(arr[*j]);

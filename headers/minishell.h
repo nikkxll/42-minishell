@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/07 00:02:13 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:10:05 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,11 @@ int				add_to_env_list(char ***new_env, char **arr, char **envp,
 
 //pwd
 int				run_pwd(char **arr);
+
+//unset
+int				run_unset(char **arr, char ***envp);
+
+//
+int				run_env(char **arr, char ***envp);
 
 #endif

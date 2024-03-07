@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:35:29 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/06 19:38:20 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:50:32 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 static int	ft_strcmp(const char *s1, const char *s2)
 {
