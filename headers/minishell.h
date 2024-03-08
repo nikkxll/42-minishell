@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/06 10:57:13 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:27:59 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,16 @@
 
 # include "../libft/libft.h"
 
-
 /*_____ Validate input_____*/
 t_bool	validate_input(char *str);
-char	*validate_and_or(char *str);
-char	*validate_pipeline(char *str);
-char	*validate_command(char *str);
+char	*validate_and_or(char *str, t_bool *status);
+char	*validate_pipeline(char *str, t_bool *status);
+char	*validate_command(char *str, t_bool *status);
 char	*validate_simple_command(char *str);
 char	*validate_redirect(char *str);
 char	*validate_word(char *str);
 t_bool	is_blank_string(char *str);
-
-
-char	**sort_string_arr(char **argv, int size);
+void	print_syntax_error(char *str);
 
 enum	e_characters
 {

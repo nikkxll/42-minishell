@@ -12,6 +12,7 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 ########VALIDATE_STRING########
 VALIDATE_INPUT_NAME	:=	validate_input.c validate_word.c validate_redirect.c validate_simple_command.c \
 						validate_command.c validate_pipeline.c is_blank_string.c validate_and_or.c \
+						print_syntax_error.c 
 						
 VALIDATE_INPUT_PATH	:=	/validate_input/
 VALIDATE_INPUT		:=	$(addprefix $(VALIDATE_INPUT_PATH), $(VALIDATE_INPUT_NAME))

@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:40:56 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/06 18:50:45 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:48:06 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ int	main(int argc, char **argv)
 // 	ft_printf("Hello world!\n");
 // 	return (0);
 // }
-

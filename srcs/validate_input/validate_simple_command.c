@@ -6,11 +6,18 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 13:24:49 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:55:30 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
+// <v_input> 		::=  <and_or> <newline>
+// <and_or>			::=  <pipeline> { ('&&' | '||') <pipeline> }
+// <pipeline>		::=  <command> { '|' <command> }
+// <command>		::=  <simple_cmd> | '(' <and_or> ')' {<redirect>}
+// <simple_cmd>		::=  {( <redirect> | <word> | "any" | 'any')}
+// <redirect>		::=  ( '<' | '>' | '<<' | '>>' ) <word>
 
 char	*validate_simple_command(char *str)
 {
