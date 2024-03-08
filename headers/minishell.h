@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/07 23:21:35 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:26:22 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void			skip_characters(char *str, int *i, int symbol);
 void			processing(char **arr, int i);
 int				env_var(char **envp, char *var, int i, int j);
 int				arg_var(char **arr, char *var, int i, int j);
+t_bool			ft_isenv(char c, int *j);
 
 //errors_print
 void			print_error_with_arg(char *error, char *arg, char *cmd);
@@ -151,7 +152,9 @@ int				run_pwd(char **arr);
 //unset
 int				run_unset(char **arr, char ***envp);
 
-//
+//env
 int				run_env(char **arr, char ***envp);
+
+int				dollar_sign_expansion(char **arr, char **envp);
 
 #endif

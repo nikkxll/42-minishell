@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:35:29 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/07 19:50:32 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:00:04 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,11 @@ char	**cpy_env(char **envp)
 		i++;
 	}
 	return (env);
+}
+
+t_bool	ft_isenv(char c, int *j)
+{
+	if (*j == 0 && ft_isdigit(c))
+		return (false);
+	return (ft_isalnum(c) || c == UNSCORE);
 }

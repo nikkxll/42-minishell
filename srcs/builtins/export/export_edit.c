@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:28:14 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/07 19:50:51 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/08 13:22:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 static int	edit_env_list_substitution(char **arr, char **result, int *i,
 	int *j)

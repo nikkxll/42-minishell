@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:35:13 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/07 23:25:47 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/08 13:22:11 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 static int	add_to_env_list_new_env_creation(char **envp, char ***result,
 	int *i, int *len)

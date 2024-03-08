@@ -10,14 +10,16 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 ###############################
 
 #####BUILTINS#####
-BUILTINS_NAME		:=	builtins.c cd.c echo.c env.c export_add.c export_edit.c export_error.c export_utils.c export.c \
-						pwd.c unset.c
+BUILTINS_NAME		:=	builtins.c cd.c echo.c env.c pwd.c unset.c
 BUILTINS_UTILS_NAME	:=	errors_print.c utils.c utils_2.c
+BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_error.c export_utils.c export.c
 BUILTINS_PATH		:=	builtins/
 BUILTINS_UTILS_PATH	:=	builtins/utils/
-BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) $(addprefix $(BUILTINS_UTILS_PATH), $(BUILTINS_UTILS_NAME))
-
-SRCS				:=	main.c $(BUILTINS)
+BUILTINS_EXPORT_PATH:=	builtins/export/
+BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
+	$(addprefix $(BUILTINS_UTILS_PATH), $(BUILTINS_UTILS_NAME)) \
+	$(addprefix $(BUILTINS_EXPORT_PATH), $(BUILTINS_EXPORT_NAME))
+SRCS				:=	main.c dollar_sign_expansion.c $(BUILTINS)
 SRCS_PATH			:=	srcs/
 
 ###############################
@@ -41,6 +43,7 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_PATH)
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_UTILS_PATH)
+	@mkdir -p $(OBJS_PATH)$(BUILTINS_EXPORT_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(FLAGS) -c $< -o $@
