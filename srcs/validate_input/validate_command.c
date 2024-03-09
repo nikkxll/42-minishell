@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/08 19:02:11 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/09 11:48:22 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,27 @@ char	*validate_command(char *str, t_bool *status)
 {
 	char	*next_token;
 
+	if (*status == false)
+		return (str);
 	while (*str == SPACE)
 		str++;
 	next_token = validate_simple_command(str);
 	if (next_token != str)
 		return (next_token);
-	else if (*next_token == O_ROUND && is_blank_string(next_token + 1) == false)
-		;
+	else if (*str == O_ROUND && is_blank_string(str + 1) == false)
+	{
+		next_token = validate_and_or(str + 1, status);
+		if (next_token == str + 1)
+			return (str);
+		if (*next_token != C_ROUND)
+		{
+			*status = false;
+			return (next_token);
+		}
+		next_token++;
+		while (*next_token == SPACE)
+			next_token++;
+		next_token = validate_redirect(next_token);
+	}
 	return (next_token);
 }
-
-// else if (*next_token == O_ROUND && is_blank_string(next_token + 1) == false)
-// 	{
-// 		i = 1;
-// 		while (next_token[i] == SPACE)
-// 			i++;
-// 		and_or = validate_and_or(next_token + i);
-// 		if (and_or == next_token + i)
-// 			return (next_token);
-// 		if (*and_or != C_ROUND)
-// 			return (next_token);
-// 		else
-// 			next_token = and_or + 1;
-// 		while (*next_token == SPACE)
-// 			next_token++;
-// 		next_token = validate_redirect(next_token);
-// 	}
-// 	return (next_token);

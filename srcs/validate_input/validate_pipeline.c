@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:25:35 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/09 11:38:40 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*validate_pipeline(char *str, t_bool *status)
 	char	*next_pipeline;
 	int		i;
 
+	if (*status == false)
+		return (str);
 	while (*str == SPACE)
 		str++;
 	next_token = validate_command(str, status);
