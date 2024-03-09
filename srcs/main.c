@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:40:56 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:28:38 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:58:32 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@
 
 int	main(int ac, char **av, char **envp)
 {
-	int		status;
 	char	**arr;
 	char	**env;
 	int		i;
 
-	av[2] = "$PATH$PATH";
+	av[2] = "$^$PWD$";
 	i = 0;
 	arr = ft_calloc(ac, sizeof(char *));
 	env = cpy_env(envp);
@@ -36,22 +35,24 @@ int	main(int ac, char **av, char **envp)
 		i++;
 	}
 	arr[i] = NULL;
+	i = 0;
+	
+//execute
 	processing(arr, 0);
-	dollar_sign_expansion(arr, env);
-//
-	// i = -1;
-	// while (arr[++i])
-	// 	printf("%s\n", arr[i]);
-//
-	status = command_run(arr, &env);
-	if (status == MALLOC_ERR)
+	while (arr[i])
+	{
+		if (expand_dollar_sign(&arr[i++], env, 0, 0) == MALLOC_ERR)
+			printf("%s\n", "malloc error");
+	}
+	if (command_run(arr, &env) == MALLOC_ERR)
 		printf("%s\n", "malloc error");
 //
+
 	// printf("\n\n\n\n\n");
 	// int k = -1;
 	// while (env[++k])
 	// 	printf("%s\n", env[k]);
-//
+
 	ft_free_2d_array(arr);
 	ft_free_2d_array(env);
 	return (0);

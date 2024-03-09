@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/07 23:22:00 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/10 01:02:45 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,8 @@ int	command_run(char **arr, char ***envp)
 	// else if (!ft_strncmp("exit", arr[0], ft_strlen(arr[0])))
 	// 	return (run_exit(arr, 1, 0));
 	else
+	{
+		printf("EXECVE: |%s|\n", arr[0]);
 		return (1);
+	}
 }

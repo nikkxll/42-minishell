@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/08 15:01:27 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/10 01:13:08 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,13 @@ enum	e_export_types
 	EXPORT_ADD,
 	EXPORT_SKIP
 };
+
+# ifndef NOTHING_TO_EXPAND
+#  define NOTHING_TO_EXPAND -2
+# endif
+
+# ifndef NOT_FOUND
+#  define NOT_FOUND -1
+# endif
 
 #endif

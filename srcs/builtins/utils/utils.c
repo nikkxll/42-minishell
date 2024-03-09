@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 12:00:54 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/07 19:50:35 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/10 01:13:43 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	env_var(char **envp, char *var, int i, int j)
 		if (ft_strncmp(envp[i], var, j) == 0)
 			return (i);
 	}
-	return (-1);
+	return (NOT_FOUND);
 }
 
 int	arg_var(char **arr, char *var, int i, int j)
@@ -70,5 +70,5 @@ int	arg_var(char **arr, char *var, int i, int j)
 		if (ft_strncmp(arr[i], var, j) == 0)
 			return (i);
 	}
-	return (-1);
+	return (NOT_FOUND);
 }

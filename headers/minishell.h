@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/08 17:26:22 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/10 01:06:00 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ int				run_unset(char **arr, char ***envp);
 //env
 int				run_env(char **arr, char ***envp);
 
-int				dollar_sign_expansion(char **arr, char **envp);
+int				expand_dollar_sign(char **str, char **envp,
+					int last_part_ind, int new_str_len);
 
 #endif
