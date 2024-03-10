@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/08 10:57:26 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/10 19:08:22 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,29 @@
 // <simple_cmd>		::=  {( <redirect> | <word> | "any" | 'any')}
 // <redirect>		::=  ( '<' | '>' | '<<' | '>>' ) <word>
 
-char	*validate_redirect(char *str)
+char	*validate_redirect(char *str, t_bool *status)
 {
 	char	*next_token;
-	int		i;
 
-	i = 0;
 	if (ft_strncmp(">>", str, 2) == 0)
-		i += 2;
+		str += 2;
 	else if (ft_strncmp("<<", str, 2) == 0)
-		i += 2;
+		str += 2;
 	else if (ft_strncmp(">", str, 1) == 0)
-		i += 1;
+		str += 1;
 	else if (ft_strncmp("<", str, 1) == 0)
-		i += 1;
+		str += 1;
 	else
 		return (str);
-	while (str[i] == SPACE)
-		i++;
-	next_token = validate_word(str + i);
-	if (next_token == str + i)
-		return (str);
-	i = 0;
-	while (next_token[i] == SPACE)
-		i++;
-	str = validate_redirect(next_token + i);
-	return (str);
+	while (*str == SPACE)
+		str++;
+	next_token = validate_word(str, status);
+	if (next_token == str)
+		*status = false;
+	if (*status == false || *next_token == C_ROUND)
+		return (next_token);
+	while (*next_token == SPACE)
+		next_token++;
+	next_token = validate_redirect(next_token, status);
+	return (next_token);
 }

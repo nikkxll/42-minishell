@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:41:05 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:27:30 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/10 18:20:31 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ t_bool	validate_input(char *str)
 	t_bool	status;
 
 	status = true;
+	while (*str == SPACE)
+		str++;
 	next_token = validate_and_or(str, &status);
-	if (*next_token != NULL_TERM)
+	if (*next_token != NULL_TERM || status == false)
 	{
 		print_syntax_error(next_token);
 		return (false);

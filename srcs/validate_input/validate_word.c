@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:19:51 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/08 15:19:10 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/10 21:50:34 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,43 +19,38 @@
 // v_simple_command<simple_cmd>	::=  {( <redirect> | <word> | "any" | 'any')}
 // v_redirect<redirect>			::=  ( '<' | '>' | '<<' | '>>' ) <word>
 
-char	*validate_quotes(char *str);
+static char	*validate_quotes(char *str, t_bool *status);
 
-char	*validate_word(char *str)
+char	*validate_word(char *str, t_bool *status)
 {
 	char	*special_characters;
 
-	special_characters = "&|<>() '\"\n";
+	special_characters = "&|<>() '\"";
 	while (*str && ft_strchr(special_characters, *str) == NULL)
 		str++;
 	if (*str == S_QUOTE || *str == D_QUOTE)
-		str = validate_quotes(str);
+		str = validate_quotes(str, status);
 	return (str);
 }
 
-char	*validate_quotes(char *str)
+static char	*validate_quotes(char *str, t_bool *status)
 {
-	int		i;
-	char	*curr;
-
-	i = 0;
-	curr = str;
-	if (curr[i] == D_QUOTE)
+	if (*str == D_QUOTE)
 	{
-		i++;
-		while (curr[i] != NULL_TERM && curr[i] != D_QUOTE)
-			i++;
+		str++;
+		while (*str != NULL_TERM && *str != D_QUOTE)
+			str++;
 	}
-	else if (curr[i] == S_QUOTE)
+	else if (*str == S_QUOTE)
 	{
-		i++;
-		while (curr[i] != NULL_TERM && curr[i] != S_QUOTE)
-			i++;
+		str++;
+		while (*str != NULL_TERM && *str != S_QUOTE)
+			str++;
 	}
-	else
+	if (*str == NULL_TERM)
+	{
+		*status = false;
 		return (str);
-	if (curr[i] == NULL_TERM)
-		return ("\n");
-	else
-		return (curr + i + 1);
+	}
+	return (str + 1);
 }
