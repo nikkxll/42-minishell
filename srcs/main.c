@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:40:56 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/10 12:58:32 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:07:13 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av, char **envp)
 	char	**env;
 	int		i;
 
-	av[2] = "$^$PWD$";
+	av[2] = "\"$PWD$'PWD'\"";
 	i = 0;
 	arr = ft_calloc(ac, sizeof(char *));
 	env = cpy_env(envp);
@@ -37,13 +37,13 @@ int	main(int ac, char **av, char **envp)
 	arr[i] = NULL;
 	i = 0;
 	
-//execute
-	processing(arr, 0);
-	while (arr[i])
+//execute	
+	while (arr[i])	
 	{
-		if (expand_dollar_sign(&arr[i++], env, 0, 0) == MALLOC_ERR)
+		if (expand_dollar_sign(&arr[i++], env, 0) == MALLOC_ERR)
 			printf("%s\n", "malloc error");
 	}
+	processing(arr, 0);
 	if (command_run(arr, &env) == MALLOC_ERR)
 		printf("%s\n", "malloc error");
 //

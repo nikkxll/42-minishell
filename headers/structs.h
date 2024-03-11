@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/21 13:53:31 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:49:35 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct s_dollar_exp
+{
+	char	*env_part;
+	int		last_part_ind;
+	int		env_list_pos;
+	int		single_q;
+	int		double_q;
+}	t_dollar_exp;
 
 typedef struct s_node
 {
