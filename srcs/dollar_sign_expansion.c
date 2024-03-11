@@ -6,13 +6,13 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:30:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/11 13:02:43 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:24:34 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-static int	search_env_var_exp_module(char **envp, char *var, int i, int j)
+static int	enviroment_search_exp_module(char **envp, char *var, int i, int j)
 {
 	while (envp[++i])
 	{
@@ -41,43 +41,51 @@ static void	index_quotes(char *str, int i, int *single_q, int *double_q)
 		*double_q = 0;
 }
 
+static void	process_dollar_sign_in_string(char *str, char **envp,
+	t_dollar_exp *dollar)
+{
+	dollar->k = dollar->i;
+	while (ft_isenv(str[dollar->i], &(dollar->i)))
+		(dollar->i)++;
+	dollar->last_part_ind = dollar->i;
+	dollar->env_list_pos = enviroment_search_exp_module(envp,
+		str + dollar->k, -1, dollar->i - dollar->k);
+	if (dollar->env_list_pos != NOT_FOUND)
+		dollar->env_part = envp[dollar->env_list_pos] + dollar->i
+			- dollar->k + 1;
+	else
+		dollar->env_part = "\0";
+	(dollar->k)--;
+	str[(dollar->k)++] = NULL_TERM;
+	while (ft_isenv(str[dollar->k], &(dollar->k)))
+		str[(dollar->k)++] = NULL_TERM;
+}
+
 static int	expansion(char *str, char **envp, char **env_part,
 	int *last_part_ind)
 {
-	int				i;
-	int				k;
 	t_dollar_exp	dollar;
 
-	i = 0;
-	k = 0;
+	dollar.i = 0;
+	dollar.k = 0;
 	dollar.env_list_pos = 0;
 	dollar.single_q = 0;
 	dollar.double_q = 0;
 	dollar.last_part_ind = *last_part_ind;
 	dollar.env_part = *env_part;
-	while (str[i] != NULL_TERM)
+	while (str[dollar.i] != NULL_TERM)
 	{
-		if ((dollar.double_q == 0 || dollar.double_q == 1) && dollar.single_q != 1 && str[i] == D_SIGN && ++i && ft_isenv(str[i], &i))
+		if ((dollar.double_q == 0 || dollar.double_q == 1)
+			&& dollar.single_q != 1 && str[dollar.i] == D_SIGN
+			&& ++(dollar.i) && ft_isenv(str[dollar.i], &(dollar.i)))
 		{
-			k = i;
-			while (ft_isenv(str[i], &i))
-				i++;
-			dollar.last_part_ind = i;
-			dollar.env_list_pos = search_env_var_exp_module(envp, str + k, -1, i - k);
-			if (dollar.env_list_pos != NOT_FOUND)
-				dollar.env_part = envp[dollar.env_list_pos] + i - k + 1;
-			else
-				dollar.env_part = "\0";
-			k--;
-			str[k++] = NULL_TERM;
-			while (ft_isenv(str[k], &k))
-				str[k++] = NULL_TERM;
+			process_dollar_sign_in_string(str, envp, &dollar);
 			*env_part = dollar.env_part;
 			*last_part_ind = dollar.last_part_ind;
 			return (dollar.env_list_pos);
 		}
-		index_quotes(str, i, &(dollar.single_q), &(dollar.double_q));
-		i++;
+		index_quotes(str, dollar.i, &(dollar.single_q), &(dollar.double_q));
+		(dollar.i)++;
 	}
 	return (NOTHING_TO_EXPAND);
 }

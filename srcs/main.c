@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:40:56 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/11 13:07:13 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:25:54 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av, char **envp)
 	char	**env;
 	int		i;
 
-	av[2] = "\"$PWD$'PWD'\"";
+	av[2] = "\"$PWD\"''";
 	i = 0;
 	arr = ft_calloc(ac, sizeof(char *));
 	env = cpy_env(envp);

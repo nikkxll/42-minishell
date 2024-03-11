@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/11 07:34:04 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:28:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,6 @@ void			meta_nl_error_handler(void);
 void			extra_characters_error_handler(int key);
 void			error_print(char *str);
 
-// builtins
-
-// common + utils
 int				command_run(char **arr, char ***envp);
 char			**sort_string_arr(char **argv, int size);
 char			**cpy_env(char **envp);
@@ -125,18 +122,10 @@ void			processing(char **arr, int i);
 int				env_var(char **envp, char *var, int i, int j);
 int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);
-
-//errors_print
 void			print_error_with_arg(char *error, char *arg, char *cmd);
 void			print_error(char *error, char *cmd);
-
-//cd
 int				run_cd(char **arr, char **envp);
-
-//echo
 int				run_echo(char **arr, int i, int j, int nl_flag);
-
-//export
 int				run_export(char **arr, char ***envp);
 void			create_operations_array(char **arr, char **envp,
 					int *operations);
@@ -145,16 +134,9 @@ void			execute_error(char **arr, int *operations);
 int				edit_env_list(char ***new_env, char **arr, int *operations);
 int				add_to_env_list(char ***new_env, char **arr, char **envp,
 					int *operations);
-
-//pwd
 int				run_pwd(char **arr);
-
-//unset
 int				run_unset(char **arr, char ***envp);
-
-//env
 int				run_env(char **arr, char ***envp);
-
 int				expand_dollar_sign(char **str, char **envp, int last_part_ind);
 
 #endif
