@@ -1,0 +1,96 @@
+./minishell "abc | () | cat"
+./minishell ">abc   )"
+./minishell "a||abc   )"
+./minishell ">abc asd)"
+./minishell ">abc (asd)"
+./minishell "echo '('|')'&&('')"
+./minishell "echo |"
+./minishell "echo |||"
+./minishell "echo |&&&"
+./minishell "echo |>"
+./minishell "echo |> a"
+./minishell "echo |<>a"
+./minishell "echo |>>a"
+./minishell "echo |>>a|<a"
+./minishell "echo a |>>a|<a"
+./minishell "echo a&&b |>>a|<a"
+./minishell "echo a&|&b |>>a|<a"
+./minishell "echo a&''&b |>>a|<a"
+./minishell "echo a&&b'' |>>a|<a"
+
+Valid ✅
+./minishell "echo | '' | echo"
+echo | '' | echo
+"bash: : command not found
+"
+
+./minishell "echo | [] | echo"
+echo | [] | echo
+"bash: []: command not found
+"
+
+./minishell "echo | (echo) | echo"
+echo | (echo) | echo
+"
+"
+
+./minishell "echo '('')'"
+echo '('')'
+"()"
+
+./minishell "echo '('|')'"
+echo '('|')'
+"bash: ): command not found"
+
+./minishell "echo '('|')'''"
+echo '('|')'''
+"bash: ): command not found"
+_______________________________________________________
+Invalid ❌
+
+./minishell "echo '('\"')'"
+e-bash: syntax error near unexpected token `newline'
+echo '('\"')'
+"(")"
+
+./minishell "echo |  | echo"
+echo |  | echo
+"bash: syntax error near unexpected token `|'"
+
+./minishell "echo | () | echo" ❌
+echo | () | echo
+"bash: syntax error near unexpected token `)'"
+
+./minishell "echo '('|)'|'" ❌
+echo '('|)'|'
+bash: syntax error near unexpected token `)'
+
+./minishell "echo '('()')'"
+echo '('()')'
+"bash: syntax error near unexpected token `('"
+
+./minishell "echo '('|')'(''"
+echo '('|')'(''
+bash: syntax error near unexpected token `'''
+
+./minishell "a('''''')" ❌
+a('''''')
+bash: syntax error near unexpected token `'''''''
+
+
+
+
+echo '('|')'&&('')
+echo |
+echo |||
+echo |&&&
+echo |>
+echo |> a
+echo |<>a
+echo |>>a
+echo |>>a|<a
+echo a |>>a|<a
+echo a&&b |>>a|<a
+echo a&|&b |>>a|<a
+echo a&''&b |>>a|<a
+echo a&&b'' |>>a|<a

@@ -5,5 +5,5 @@ libft/libft.a
 .DS_Store
 *.pdf
 .vscode
-./srcs/ast/ast_main.c
+objs/
 README.md
