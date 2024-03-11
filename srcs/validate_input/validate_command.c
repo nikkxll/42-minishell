@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/10 21:50:19 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:26:33 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static char	*validate_brackets(char *str, t_bool *status)
 {
 	char	*next_token;
 
+	while (*str == SPACE)
+		str++;
 	next_token = validate_and_or(str, status);
 	if (next_token == str || *status == false)
 		return (str);

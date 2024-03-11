@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:41:05 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/10 18:20:31 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:57:33 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_bool	validate_input(char *str)
 	char	*next_token;
 	t_bool	status;
 
+	if (is_blank_string(str) == true)
+		return (true);
 	status = true;
 	while (*str == SPACE)
 		str++;
@@ -35,3 +37,16 @@ t_bool	validate_input(char *str)
 	}
 	return (true);
 }
+
+// int	main(int argc, char **argv)
+// {
+// 	if (argc != 2)
+// 	{
+// 		ft_printf("INCORRECT NUMBER OF ARGUMENTS!\n");
+// 		return (1);
+// 	}
+// 	if (validate_input(argv[1]) == true)
+// 		ft_printf("Input is correct!\n");
+// 	(void)argc;
+// 	return (0);
+// }
