@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrlen.c                                        :+:      :+:    :+:   */
+/*   errors_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 12:50:22 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/05 12:58:24 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/03/05 13:35:52 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/03/08 11:52:13 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../../../headers/minishell.h"
 
-size_t	ft_arrlen(void **arr)
+void	print_error_with_arg(char *error, char *arg, char *cmd)
 {
-	size_t	length;
+	ft_putstr_fd(cmd, 2);
+	ft_putchar_fd('`', 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd("': ", 2);
+	ft_putstr_fd(error, 2);
+}
 
-	length = 0;
-	while (arr[length] != NULL)
-		length++;
-	return (length);
+void	print_error(char *error, char *cmd)
+{
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(error, 2);
 }

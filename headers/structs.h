@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrlen.c                                        :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 12:50:22 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/05 12:58:24 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/03/12 11:09:42 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-size_t	ft_arrlen(void **arr)
+typedef struct s_dollar_exp
 {
-	size_t	length;
+	char	*env_part;
+	int		i;
+	int		k;
+	int		single_q;
+	int		double_q;
+	int		last_part_ind;
+	int		env_list_pos;
+}	t_dollar_exp;
 
-	length = 0;
-	while (arr[length] != NULL)
-		length++;
-	return (length);
-}
+#endif
