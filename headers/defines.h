@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/10 01:13:08 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:34:22 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 enum	e_types
 {
-	T_ERR,
-	T_STRING_ERR,
 	T_AND,
 	T_OR,
 	T_PIPE,
@@ -46,12 +44,6 @@ enum	e_characters
 	BACKSLASH = 92,
 	UNSCORE = 95,
 	PIPE = 124,
-};
-
-enum	e_validator
-{
-	PRE_VALIDATION,
-	PART_VALIDATION
 };
 
 enum	e_exit_status

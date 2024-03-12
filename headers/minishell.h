@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/11 20:28:15 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:45:20 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,69 @@
 # include "defines.h"
 
 #include <stdio.h>
+
+/*_____ Validate-input _____*/
+t_bool	validate_input(char *str);
+char	*validate_and_or(char *str, t_bool *status);
+char	*validate_pipeline(char *str, t_bool *status);
+char	*validate_command(char *str, t_bool *status);
+char	*validate_simple_command(char *str, t_bool *status);
+char	*validate_redirect(char *str, t_bool *status);
+char	*validate_word(char *str, t_bool *status);
+t_bool	is_blank_string(char *str);
+void	print_syntax_error(char *str);
+
+/*_____ Create-tree _____*/
+t_and			*init_t_and(void);
+t_or			*init_t_or(void);
+t_pipe			*init_t_pipe(void);
+t_bracket		*init_t_bracket(void);
+t_command		*init_t_command(void);
+t_command_br	*init_t_command_br(void);
+t_cmd_simple	*init_t_cmd_simple(void);
+t_redir			*init_t_redir(void);
+t_bool			create_tree(char *str, t_node **root);
+t_bool			create_node(t_node_info *data, t_node **base);
+void			free_tree(t_node **root);
+t_bool			add_and_or_pipe_trees(t_node_info *data, t_node **root);
+t_bool			add_bracket(t_node_info *data, t_node **root);
+t_bool			add_command(t_node_info *data, t_node **root);
+t_bool			add_command_br(t_node_info *data, t_node **root);
+t_bool			add_cmd_simple(t_node_info *data, t_node **root);
+
+/*_____ String-splitter _____*/
+int				set_node_info_and_or_pipe(t_node_info **node, char *str,
+					int point, int type);
+int				set_node_info_command_br(t_node_info **node, char *str,
+					int type);
+int				set_node_info_command(t_node_info **node, char *str, int type);
+int				set_node_info_bracket(t_node_info **node, char *str, int type);
+int				set_node_cmd_simple(t_node_info **node, char *str, int type);
+int				and_if_condition_block(t_node_info **node, char *str, int type,
+					int i);
+int				string_splitter(t_node_info **node, char *str, int type,
+					int i);
+t_bool			is_odd(int number);
+void			check_if_inside_quotes(char *str, int *i, int *quote_type);
+int				round_brackets_check(char *str, int point);
+int				quote_check(char *str, int point, int symbol);
+int				first_nonspace_char_is_bracket(char *str);
+int				last_nonspace_char_is_bracket(char *str);
+char			*command_part(char *str, int *i, int quote_type);
+int				modificate_str_command_without_br(char *str, char **redir,
+					int i, int j);
+int				and_if_condition_block(t_node_info **node, char *str, int type,
+					int i);
+int				pipe_block(t_node_info **node, char *str, int type, int i);
+int				brackets_block(t_node_info **node, char *str, int type);
+int				command_block(t_node_info **node, char *str, int type);
+int				command_without_bracket_block(t_node_info **node, char *str,
+					int type);
+int				brackets_search(char *str);
+int				redir_search(char *str);
+
+/*_____ Dollar-sign-expansion _____*/
+int				expand_dollar_sign(char **str, char **envp, int last_part_ind);
 
 /*_____ Built-ins _____*/
 int				command_run(char **arr, char ***envp);
@@ -44,19 +107,5 @@ int				add_to_env_list(char ***new_env, char **arr, char **envp,
 int				run_pwd(char **arr);
 int				run_unset(char **arr, char ***envp);
 int				run_env(char **arr, char ***envp);
-
-/*_____ Dollar-sign-expansion _____*/
-int				expand_dollar_sign(char **str, char **envp, int last_part_ind);
-
-/*_____ Validate-input _____*/
-t_bool	validate_input(char *str);
-char	*validate_and_or(char *str, t_bool *status);
-char	*validate_pipeline(char *str, t_bool *status);
-char	*validate_command(char *str, t_bool *status);
-char	*validate_simple_command(char *str, t_bool *status);
-char	*validate_redirect(char *str, t_bool *status);
-char	*validate_word(char *str, t_bool *status);
-t_bool	is_blank_string(char *str);
-void	print_syntax_error(char *str);
 
 #endif
