@@ -80,4 +80,15 @@ typedef struct s_redir
 	char	*str;
 }	t_redir;
 
+typedef struct s_dollar_exp
+{
+	char	*env_part;
+	int		i;
+	int		k;
+	int		single_q;
+	int		double_q;
+	int		last_part_ind;
+	int		env_list_pos;
+}	t_dollar_exp;
+
 #endif

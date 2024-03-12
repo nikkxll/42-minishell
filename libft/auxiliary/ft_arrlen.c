@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/12 12:47:52 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/03/05 12:50:22 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/03/05 12:58:24 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../libft.h"
 
-int	main(void)
+size_t	ft_arrlen(void **arr)
 {
-	ft_printf("Hello world!\n");
-	return (0);
+	size_t	length;
+
+	length = 0;
+	while (arr[length] != NULL)
+		length++;
+	return (length);
 }

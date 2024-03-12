@@ -22,7 +22,26 @@ AST_SPLITTER_NAME	:=	create_node_data.c string_splitter_blocks_command.c string_
 AST_SPLITTER_PATH	:=	ast/ast_string_splitter/
 AST_SPLITTER		:=	$(addprefix $(AST_SPLITTER_PATH), $(AST_SPLITTER_NAME))
 
-SRCS				:=	main.c $(AST_TREE) $(AST_SPLITTER)
+###########BUILTINS############
+BUILTINS_NAME		:=	builtins.c cd.c echo.c env.c pwd.c unset.c
+BUILTINS_UTILS_NAME	:=	errors_print.c utils.c utils_2.c
+BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_error.c export_utils.c export.c
+BUILTINS_PATH		:=	builtins/
+BUILTINS_UTILS_PATH	:=	builtins/utils/
+BUILTINS_EXPORT_PATH:=	builtins/export/
+BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
+	$(addprefix $(BUILTINS_UTILS_PATH), $(BUILTINS_UTILS_NAME)) \
+	$(addprefix $(BUILTINS_EXPORT_PATH), $(BUILTINS_EXPORT_NAME))
+
+########VALIDATE_STRING########
+VALIDATE_INPUT_NAME	:=	validate_input.c validate_word.c validate_redirect.c validate_simple_command.c \
+						validate_command.c validate_pipeline.c is_blank_string.c validate_and_or.c \
+						print_syntax_error.c 
+						
+VALIDATE_INPUT_PATH	:=	/validate_input/
+VALIDATE_INPUT		:=	$(addprefix $(VALIDATE_INPUT_PATH), $(VALIDATE_INPUT_NAME))
+
+SRCS				:=	main.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) dollar_sign_expansion.c
 SRCS_PATH			:=	srcs/
 
 ###############################
@@ -46,6 +65,10 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)
 	@mkdir -p $(OBJS_PATH)$(AST_TREE_PATH)
 	@mkdir -p $(OBJS_PATH)$(AST_SPLITTER_PATH)
+	@mkdir -p $(OBJS_PATH)$(BUILTINS_PATH)
+	@mkdir -p $(OBJS_PATH)$(BUILTINS_UTILS_PATH)
+	@mkdir -p $(OBJS_PATH)$(BUILTINS_EXPORT_PATH)
+	@mkdir -p $(OBJS_PATH)$(VALIDATE_INPUT_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(FLAGS) -c $< -o $@
