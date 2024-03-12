@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:30:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/11 20:24:34 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/12 10:37:21 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	process_dollar_sign_in_string(char *str, char **envp,
 		(dollar->i)++;
 	dollar->last_part_ind = dollar->i;
 	dollar->env_list_pos = enviroment_search_exp_module(envp,
-		str + dollar->k, -1, dollar->i - dollar->k);
+			str + dollar->k, -1, dollar->i - dollar->k);
 	if (dollar->env_list_pos != NOT_FOUND)
 		dollar->env_part = envp[dollar->env_list_pos] + dollar->i
 			- dollar->k + 1;
