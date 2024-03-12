@@ -3,17 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/12 12:47:52 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:56:09 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int	main(void)
+// int	main(void)
+// {
+// 	ft_printf("Hello world!\n");
+// 	return (0);
+// }
+
+int	main(int ac, char **av, char **envp)
 {
-	ft_printf("Hello world!\n");
+	char	**arr;
+	char	*str;
+	char	**env;
+	int		i;
+
+	i = 0;
+	(void)ac;
+	str = ft_strdup(av[1]);
+	arr = wrapper_ft_split_with_quotes(str);
+	env = cpy_env(envp);
+	while (arr[i])
+	{
+		if (expand_dollar_sign(&arr[i++], env, 0) == MALLOC_ERR)
+			printf("%s\n", "malloc error");
+	}
+	processing(arr, 0);
+	if (command_run(arr, &env) == MALLOC_ERR)
+		printf("%s\n", "malloc error");
+	// printf("\n\n\n\n\n");
+	// int k = -1;
+	// while (env[++k])
+	// 	printf("%s\n", env[k]);
+	ft_free_2d_array(arr);
+	ft_free_2d_array(env);
 	return (0);
 }

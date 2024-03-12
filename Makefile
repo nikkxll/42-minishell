@@ -1,5 +1,6 @@
 #MINISHELL_PROJECT_MAKEFILE
 include libft/.make
+
 NAME				:=	minishell
 
 CC					:=	cc
@@ -37,11 +38,15 @@ BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
 VALIDATE_INPUT_NAME	:=	validate_input.c validate_word.c validate_redirect.c validate_simple_command.c \
 						validate_command.c validate_pipeline.c is_blank_string.c validate_and_or.c \
 						print_syntax_error.c 
-						
 VALIDATE_INPUT_PATH	:=	/validate_input/
 VALIDATE_INPUT		:=	$(addprefix $(VALIDATE_INPUT_PATH), $(VALIDATE_INPUT_NAME))
 
-SRCS				:=	main.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) dollar_sign_expansion.c
+########EXECUTION########
+EXECUTION_NAME		:=	ft_split_with_quotes.c
+EXECUTION_PATH		:=	execution/
+EXECUTION			:= $(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME))
+
+SRCS				:=	main.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) $(EXECUTION) dollar_sign_expansion.c
 SRCS_PATH			:=	srcs/
 
 ###############################
@@ -55,11 +60,15 @@ LIBFT_PATH			:=	$(LIBFT_PATH)
 LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
+TOTAL_OBJS			:= $(words $(OBJS))
+COMPILED_OBJS		:= 0
+MSG_PRINTED 		:= false
+
 all: $(NAME)
 
-$(NAME): $(OBJS_PATH) $(OBJS) $(LIBFT) 
+$(NAME): $(LIBFT) $(OBJS_PATH) $(OBJS)
 	@cc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
-	@echo "$(GREEN)\n--------------->$(NAME) created successfully!<---------------$(EC)"
+	@echo "$(GREEN)\n\n$(NAME) created successfully!$(EC)"
 
 $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)
@@ -69,9 +78,11 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_UTILS_PATH)
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_EXPORT_PATH)
 	@mkdir -p $(OBJS_PATH)$(VALIDATE_INPUT_PATH)
+	@mkdir -p $(OBJS_PATH)$(EXECUTION_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(FLAGS) -c $< -o $@
+	@$(call progress,"minishell")
 
 $(LIBFT): $(LIBFT_SOURSES)
 	@$(MAKE) -C $(LIBFT_PATH)
@@ -79,11 +90,13 @@ $(LIBFT): $(LIBFT_SOURSES)
 clean:
 	@$(MAKE) clean -C $(LIBFT_PATH)
 	@rm -rf $(OBJS_PATH)
-	@echo "$(GREEN)*.o files removed!$(EC)"
+	@echo "$(RED)*.o files removed!$(EC)"
 
 fclean: clean
 	@rm -rf $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_PATH)
-	@echo "$(GREEN)All files removed!$(EC)"
+	@echo "$(RED)All files removed!$(EC)"
 
 re: fclean all
+
+.PHONY: all clean fclean re
