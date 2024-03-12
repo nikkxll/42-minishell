@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_splitter_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:43:34 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/02/23 15:25:52 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:02:11 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 * @param	number number to check
 * @return	`1` if odd, `0` otherwise
 */
-t_bool	if_odd(int number)
+t_bool	is_odd(int number)
 {
 	return (number % 2);
 }
@@ -32,16 +32,24 @@ int	round_brackets_check(char *str, int point)
 {
 	int	i;
 	int	key;
+	int	quote_type;
 
 	i = (int)ft_strlen(str) - 1;
 	key = 0;
+	quote_type = 0;
 	while (i >= point)
 	{
-		if (str[i] == O_ROUND)
-			key++;
-		if (str[i] == C_ROUND)
-			key--;
-		i--;
+		check_if_inside_quotes(str, &i, &quote_type);
+		if (!quote_type)
+		{
+			if (str[i] == O_ROUND)
+				key++;
+			if (str[i] == C_ROUND)
+				key--;
+			i--;
+		}
+		else
+			i--;
 	}
 	return (!key);
 }
@@ -72,7 +80,7 @@ int	quote_check(char *str, int point, int symbol)
 		if (str[point] == symbol)
 			pair[1]++;
 	}
-	return (if_odd(pair[0]) == false && if_odd(pair[1]) == false);
+	return (is_odd(pair[0]) == false && is_odd(pair[1]) == false);
 }
 
 /**

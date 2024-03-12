@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:40:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 11:48:03 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:09:44 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_bool	get_type(char *str, t_node_info **info)
 // 	return (NULL);
 // }
 
-// void	inorder(t_node	*tree)
+// void	preorder(t_node	*tree)
 // {
 // 	int	type;
 
@@ -89,21 +89,21 @@ t_bool	get_type(char *str, t_node_info **info)
 // 	if (type == T_AND || type == T_OR || type == T_PIPE
 // 		|| type == T_COMMAND || type == T_COMMAND_BR)
 // 	{
-// 		inorder(tree->left);
-// 		printf("[t:%s, t_l:%d, t_r:%d] ", return_type(tree->type),
+// 		printf("[t:%s, t_l:%d, t_r:%d] \n", return_type(tree->type),
 // 		tree->left->type, tree->right->type);
-// 		inorder(tree->right);
+// 		preorder(tree->left);
+// 		preorder(tree->right);
 // 	}
 // 	else if (type == T_BRACKET)
 // 	{
-// 		inorder(tree->left);
-// 		printf("[t:%s, t_l:%d] ", return_type(tree->type), tree->left->type);
+// 		printf("[t:%s, t_l:%d]  \n", return_type(tree->type), tree->left->type);
+// 		preorder(tree->left);
 // 	}
 // 	else if (type == T_CMD_SIMPLE)
-// 		printf("[t:%s, cmd:%s] ", return_type(tree->type),
+// 		printf("[t:%s, cmd:%s]  \n", return_type(tree->type),
 // 		((t_cmd_simple *)tree)->cmd);
 // 	else if (type == T_REDIR)
-// 		printf("[t:%s, redir:%s] ", return_type(tree->type),
+// 		printf("[t:%s, redir:%s]  \n", return_type(tree->type),
 // 		((t_redir *)tree)->str);
 // }
 
@@ -118,8 +118,9 @@ t_bool	get_type(char *str, t_node_info **info)
 // 	tree = NULL;
 // 	status = create_tree(str, &tree);
 // 	if (status == false)
-// 		printf("Can't create tree!\n", status);
-// 	inorder(tree);
+// 		printf("Can't create tree!\n");
+// 	preorder(tree);
+// 	printf("\n");
 // 	free_tree(&tree);
 // 	(void)argc;
 // 	return (0);

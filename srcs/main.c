@@ -6,14 +6,14 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 11:47:13 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:47:52 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int	main(void)
-{
-	pritnf("Hello World!\n");
-	return (0);
-}
+// int	main(void)
+// {
+// 	printf("Hello World!\n");
+// 	return (0);
+// }
