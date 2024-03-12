@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrlen.c                                        :+:      :+:    :+:   */
+/*   is_blank_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 12:50:22 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/05 12:58:24 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/03/05 16:12:04 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/03/06 18:47:10 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../../headers/minishell.h"
 
-size_t	ft_arrlen(void **arr)
+t_bool	is_blank_string(char *str)
 {
-	size_t	length;
-
-	length = 0;
-	while (arr[length] != NULL)
-		length++;
-	return (length);
+	if (ft_strlen(str) == 0)
+		return (true);
+	while (*str == SPACE)
+		str++;
+	return (*str == NULL_TERM);
 }

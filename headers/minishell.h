@@ -19,100 +19,7 @@
 
 #include <stdio.h>
 
-# include <readline/readline.h>
-# include <readline/history.h>
-
-t_and			*init_t_and(void);
-t_or			*init_t_or(void);
-t_pipe			*init_t_pipe(void);
-t_bracket		*init_t_bracket(void);
-t_command		*init_t_command(void);
-t_command_br	*init_t_command_br(void);
-t_cmd_simple	*init_t_cmd_simple(void);
-t_redir			*init_t_redir(void);
-
-t_bool			create_tree(char *str, t_node **root);
-t_bool			create_node(t_node_data *data, t_node **base);
-void			free_node_data(t_node_data *data);
-void			free_tree(t_node **root);
-
-t_bool			add_and_or_pipe_trees(t_node_data *data, t_node **root);
-t_bool			add_bracket(t_node_data *data, t_node **root);
-t_bool			add_command(t_node_data *data, t_node **root);
-t_bool			add_command_br(t_node_data *data, t_node **root);
-t_bool			add_cmd_simple(t_node_data *data, t_node **root);
-
-//validator
-
-t_bool			tree_validation(char *str);
-t_bool			pre_validataion(char *str);
-void			remove_quotes(char *str, int i, int j);
-int				check_if_round_brackets_num_is_even(char *str, int key,
-					int quote_type);
-int				check_if_quotes_num_is_even(char *str, int i, int counter);
-int				round_brackets_without_args_check(char *str, int key,
-					int quote_type);
-int				check_if_redirect_file_pattern_complied_sequel(char *str,
-					int i);
-int				round_brackets_with_args_check(char *str, int key,
-					int quote_type);
-int				check_if_file_pattern_complied(char *str, int quote_type,
-					int i);
-int				one_and_symbol_check(char *str, int quote_type, int i);
-int				check_if_redirects_are_correct(char *str, int quote_type);
-int				check_if_redirects_without_nl(char *str);
-void			check_if_inside_quotes(char *str, int *i,
-					int *quote_type);
-int				check_if_backslash_or_semicolon_exist(char *str,
-					int quote_type);
-
-//ast_string_splitter
-
-t_bool			get_type(char *str, t_node_data **data);
-int				set_node_data_and_or_pipe(t_node_data **node, char *str,
-					int point, int type);
-int				set_node_data_command_br(t_node_data **node, char *str,
-					int type);
-int				set_node_data_command(t_node_data **node, char *str, int type);
-int				set_node_data_bracket(t_node_data **node, char *str, int type);
-int				set_node_cmd_simple(t_node_data **node, char *str, int type);
-int				and_if_condition_block(t_node_data **node, char *str, int type,
-					int i);
-int				string_splitter(t_node_data **node, char *str, int type,
-					int i);
-t_bool			if_odd(int number);
-int				round_brackets_check(char *str, int point);
-int				quote_check(char *str, int point, int symbol);
-int				first_nonspace_char_is_bracket(char *str);
-int				last_nonspace_char_is_bracket(char *str);
-char			*command_part(char *str, int *i, int quote_type);
-int				modificate_str_command_without_br(char *str, char **redir,
-					int i, int j);
-int				and_if_condition_block(t_node_data **node, char *str, int type,
-					int i);
-int				pipe_block(t_node_data **node, char *str, int type, int i);
-int				brackets_block(t_node_data **node, char *str, int type);
-int				command_block(t_node_data **node, char *str, int type);
-int				command_without_bracket_block(t_node_data **node, char *str,
-					int type);
-int				brackets_search(char *str);
-int				redir_search(char *str);
-
-// errors
-
-void			error_processing(char *str, int type, int key);
-void			brackets_syntax_error_handler(char *str, int i, int j,
-					int quote_type);
-void			bracket_error_handler(int key);
-void			quotes_error_handler(int key);
-void			brackets_args_syntax_error_handler(char *str, int i, int j,
-					int quote_type);
-void			meta_syntax_error_handler(char *str, int i);
-void			meta_pattern_error_handler(char *str, int i);
-void			meta_nl_error_handler(void);
-void			extra_characters_error_handler(int key);
-void			error_print(char *str);
-
+/*_____ Built-ins _____*/
 int				command_run(char **arr, char ***envp);
 char			**sort_string_arr(char **argv, int size);
 char			**cpy_env(char **envp);
@@ -137,6 +44,19 @@ int				add_to_env_list(char ***new_env, char **arr, char **envp,
 int				run_pwd(char **arr);
 int				run_unset(char **arr, char ***envp);
 int				run_env(char **arr, char ***envp);
+
+/*_____ Dollar-sign-expansion _____*/
 int				expand_dollar_sign(char **str, char **envp, int last_part_ind);
+
+/*_____ Validate-input _____*/
+t_bool	validate_input(char *str);
+char	*validate_and_or(char *str, t_bool *status);
+char	*validate_pipeline(char *str, t_bool *status);
+char	*validate_command(char *str, t_bool *status);
+char	*validate_simple_command(char *str, t_bool *status);
+char	*validate_redirect(char *str, t_bool *status);
+char	*validate_word(char *str, t_bool *status);
+t_bool	is_blank_string(char *str);
+void	print_syntax_error(char *str);
 
 #endif

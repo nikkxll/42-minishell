@@ -9,7 +9,8 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 #########START_SOURCES#########
 ###############################
 
-#####BUILTINS#####
+
+###########BUILTINS############
 BUILTINS_NAME		:=	builtins.c cd.c echo.c env.c pwd.c unset.c
 BUILTINS_UTILS_NAME	:=	errors_print.c utils.c utils_2.c
 BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_error.c export_utils.c export.c
@@ -19,7 +20,16 @@ BUILTINS_EXPORT_PATH:=	builtins/export/
 BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
 	$(addprefix $(BUILTINS_UTILS_PATH), $(BUILTINS_UTILS_NAME)) \
 	$(addprefix $(BUILTINS_EXPORT_PATH), $(BUILTINS_EXPORT_NAME))
-SRCS				:=	main.c dollar_sign_expansion.c $(BUILTINS)
+
+########VALIDATE_STRING########
+VALIDATE_INPUT_NAME	:=	validate_input.c validate_word.c validate_redirect.c validate_simple_command.c \
+						validate_command.c validate_pipeline.c is_blank_string.c validate_and_or.c \
+						print_syntax_error.c 
+						
+VALIDATE_INPUT_PATH	:=	/validate_input/
+VALIDATE_INPUT		:=	$(addprefix $(VALIDATE_INPUT_PATH), $(VALIDATE_INPUT_NAME))
+
+SRCS				:=	main.c $(VALIDATE_INPUT) $(BUILTINS) dollar_sign_expansion.c
 SRCS_PATH			:=	srcs/
 
 ###############################
@@ -44,6 +54,7 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_PATH)
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_UTILS_PATH)
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_EXPORT_PATH)
+	@mkdir -p $(OBJS_PATH)$(VALIDATE_INPUT_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(FLAGS) -c $< -o $@
