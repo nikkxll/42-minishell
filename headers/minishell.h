@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/12 14:07:38 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/13 22:59:19 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,7 @@ int				run_unset(char **arr, char ***envp);
 int				run_env(char **arr, char ***envp);
 
 char			**wrapper_ft_split_with_quotes(char *str);
+
+int				wildcards(char **str);
 
 #endif

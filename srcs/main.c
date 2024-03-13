@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/12 18:56:09 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/13 22:58:19 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int ac, char **av, char **envp)
 	str = ft_strdup(av[1]);
 	arr = wrapper_ft_split_with_quotes(str);
 	env = cpy_env(envp);
+	wildcards(&arr[i]);
 	while (arr[i])
 	{
 		if (expand_dollar_sign(&arr[i++], env, 0) == MALLOC_ERR)

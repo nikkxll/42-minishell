@@ -46,7 +46,7 @@ EXECUTION_NAME		:=	ft_split_with_quotes.c
 EXECUTION_PATH		:=	execution/
 EXECUTION			:= $(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME))
 
-SRCS				:=	main.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) $(EXECUTION) dollar_sign_expansion.c
+SRCS				:=	main.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) $(EXECUTION) dollar_sign_expansion.c wildcards.c
 SRCS_PATH			:=	srcs/
 
 ###############################
