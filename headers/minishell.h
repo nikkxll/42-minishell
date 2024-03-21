@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/15 14:10:40 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:40:28 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include "structs.h"
 # include "defines.h"
+# include <dirent.h>
 
 #include <stdio.h>
 
@@ -112,12 +113,13 @@ int				run_env(char **arr, char ***envp);
 
 char			**wrapper_ft_split_with_quotes(char *str);
 
-int				wildcards(char ***arr);
+int				wildcards(char ***arr, int i, int j, int k);
 
 t_bool			wildcard_strcmp(char *line, char *pattern);
 t_bool			if_only_asterisk(char *pattern);
 void			quote_checker(char *str, int *i, int *wc_flag);
 void			string_quotes_transform(char *line, char *pattern);
-void			string_quotes_transform_back(char *line, char *pattern);
+t_bool			string_quotes_transform_back(char *line, char *pattern, t_bool res);
+int				array_with_entities_len(int sub_arr_len);
 
 #endif

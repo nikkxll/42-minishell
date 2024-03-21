@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:09:14 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/15 14:09:58 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:23:09 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	string_quotes_transform(char *line, char *pattern)
 	remove_quotes(pattern, 0, 0);
 }
 
-void	string_quotes_transform_back(char *line, char *pattern)
+t_bool	string_quotes_transform_back(char *line, char *pattern, t_bool res)
 {
 	int	i;
 
@@ -78,4 +78,32 @@ void	string_quotes_transform_back(char *line, char *pattern)
 			pattern[i] = ASTERISK;
 		i++;
 	}
+	return (res);
+}
+
+int	array_with_entities_len(int sub_arr_len)
+{
+	DIR			*dir;
+	t_dirent	*entry;
+
+	dir = opendir(".");
+	if (dir == NULL)
+	{
+		perror("Unable to open directory");
+		return (SYSTEM_ERROR);
+	}
+	entry = readdir(dir);
+	while (entry != NULL)
+	{
+		sub_arr_len++;
+		entry = readdir(dir);
+	}
+	if (closedir(dir) == SYSTEM_ERROR)
+	{
+		perror("Unable to close directory");
+		return (SYSTEM_ERROR);
+	}
+	if (entry == NULL)
+		return (sub_arr_len);
+	return (SYSTEM_ERROR);
 }
