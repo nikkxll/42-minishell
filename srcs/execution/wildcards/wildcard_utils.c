@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:45:50 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/22 15:53:10 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:43:54 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	allocate_temp_array(char ***arr, t_w_cards *wc)
 	i = 0;
 	wc->arr_len = ft_arrlen((void **)(*arr));
 	wc->ent_len = array_with_entities_len(0);
+	if (wc->ent_len == SYSTEM_ERROR)
+		return (SYSTEM_ERROR);
 	wc->temp_arr = ft_calloc(wc->arr_len + 1, sizeof(char **));
 	if (!wc->temp_arr)
 		return (MALLOC_ERR);

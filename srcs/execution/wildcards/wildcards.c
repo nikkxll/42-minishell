@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 22:16:41 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/22 15:52:57 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:44:21 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	wildcards(char ***arr)
 	status = allocate_temp_array(arr, &wc);
 	if (status == MALLOC_ERR)
 		return (MALLOC_ERR);
+	if (status == SYSTEM_ERROR)
+		return (SYSTEM_ERROR);
 	status = fill_temp_array(arr, &wc);
 	if (status == SYSTEM_ERROR)
 		return (SYSTEM_ERROR);
