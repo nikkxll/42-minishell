@@ -47,7 +47,7 @@ EXECUTION_PATH		:=	execution/
 EXECUTION			:= $(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME))
 
 SRCS				:=	main.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) $(EXECUTION) \
-						dollar_sign_expansion.c wildcards.c wildcards_core.c wildcards_core_utils.c
+						dollar_sign_expansion.c wildcards.c wildcards_core.c wildcards_core_utils.c wildcards_entities_expand.c
 SRCS_PATH			:=	srcs/
 
 ###############################

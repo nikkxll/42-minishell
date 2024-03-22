@@ -6,124 +6,102 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 22:16:41 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/21 23:48:30 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/22 11:22:10 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int	entities_expand(char ***temp_arr, char *str, int ent_len)
+static int	allocate_temp_array(char ***arr, t_w_cards *wc)
 {
-	DIR			*dir;
-	t_dirent	*entry;
-	int			i;
-	char		**temp_arr_local;
-	t_bool		dot_ind;
+	int	i;
 
 	i = 0;
-	temp_arr_local = *temp_arr;
-	dot_ind = false;
-	if (str[0] == '.')
-		dot_ind = true;
-	dir = opendir(".");
-	if (dir == NULL)
+	wc->arr_len = ft_arrlen((void **)(*arr));
+	wc->ent_len = array_with_entities_len(0);
+	wc->temp_arr = ft_calloc(wc->arr_len + 1, sizeof(char **));
+	if (!wc->temp_arr)
+		return (MALLOC_ERR);
+	while (i < wc->arr_len)
 	{
-		perror("Unable to open directory");
-		return (SYSTEM_ERROR);
-	}
-	entry = readdir(dir);
-	i = 0;
-	while (entry != NULL && i < ent_len)
-	{
-		if (entry->d_name[0] == '.' && dot_ind == false)
+		(wc->temp_arr)[i] = ft_calloc(array_with_entities_len(0) + 1, sizeof(char *));
+		if (!(wc->temp_arr)[i++])
 		{
-			entry = readdir(dir);
-			continue ;
-		}
-		if (wildcard_strcmp(entry->d_name, str)
-			&& ft_strncmp(entry->d_name, ".", ft_strlen(entry->d_name))
-			&& ft_strncmp(entry->d_name, "..", ft_strlen(entry->d_name)))
-		{
-			temp_arr_local[i] = ft_strdup(entry->d_name);
-			if (!temp_arr_local[i++])
-			{
-				closedir(dir);
-				return (MALLOC_ERR);
-			}
-		}
-		entry = readdir(dir);
-	}
-	if (closedir(dir) == SYSTEM_ERROR)
-	{
-		perror("Unable to close directory");
-		return (SYSTEM_ERROR);
-	}
-	if (ft_arrlen((void **)temp_arr_local) == 0)
-	{
-		temp_arr_local[0] = ft_strdup(str);
-		if (!temp_arr_local[0])
+			ft_free_3d_array(wc->temp_arr, 0);
 			return (MALLOC_ERR);
+		}
 	}
 	return (SUCCESS);
 }
 
-int	wildcards(char ***arr, int i, int j, int k)
+static int	fill_temp_array(char ***arr, t_w_cards *wc)
 {
-	char	***temp_arr;
-	char	**new_arr;
-	int		arr_len;
-	int		status;
-	int		ent_len;
+	int	i;
 
-	arr_len = ft_arrlen((void **)(*arr));
-	ent_len = array_with_entities_len(0);
-	temp_arr = ft_calloc(arr_len + 1, sizeof(char **));
-	if (!temp_arr)
-		return (MALLOC_ERR);
-	while (i < arr_len)
-	{
-		temp_arr[i] = ft_calloc(array_with_entities_len(0) + 1, sizeof(char *));
-		if (!temp_arr[i++])
-		{
-			ft_free_3d_array(temp_arr, 0);
-			return (MALLOC_ERR);
-		}
-	}
 	i = -1;
-	while (++i < arr_len)
+	while (++i < wc->arr_len)
 	{
-		status = entities_expand(&(temp_arr[i]), (*arr)[i], ent_len);
-		if (status == MALLOC_ERR)
+		wc->status = entities_expand(&((wc->temp_arr)[i]), (*arr)[i], wc);
+		if (wc->status == MALLOC_ERR)
 		{
-			ft_free_3d_array(temp_arr, 0);
+			ft_free_3d_array(wc->temp_arr, 0);
 			return (MALLOC_ERR);
 		}
-		else if (status == SYSTEM_ERROR)
+		else if (wc->status == SYSTEM_ERROR)
 		{
-			ft_free_3d_array(temp_arr, 0);
+			ft_free_3d_array(wc->temp_arr, 0);
 			return (SYSTEM_ERROR);
 		}
 	}
+	return (SUCCESS);
+}
+
+static int	allocate_and_fill_expanded_array(t_w_cards *wc)
+{
+	int	i;
+	int	j;
+	int	k;
+
 	i = -1;
-	arr_len = 0;
-	while (temp_arr[++i] != NULL)
-		arr_len += ft_arrlen((void **)temp_arr[i]);
-	new_arr = ft_calloc(arr_len + 1, sizeof(char *));
-	if (!new_arr)
+	j = -1;
+	k = -1;
+	wc->arr_len = 0;
+	while ((wc->temp_arr)[++i] != NULL)
+		wc->arr_len += ft_arrlen((void **)(wc->temp_arr)[i]);
+	wc->new_arr = ft_calloc(wc->arr_len + 1, sizeof(char *));
+	if (!wc->new_arr)
 	{
-		ft_free_3d_array(temp_arr, 0);
+		ft_free_3d_array(wc->temp_arr, 0);
 		return (MALLOC_ERR);
 	}
 	i = -1;
-	while(temp_arr[++j])
+	while ((wc->temp_arr)[++j])
 	{
 		k = -1;
-		while (temp_arr[j][++k])
-			new_arr[++i] = temp_arr[j][k];
+		while ((wc->temp_arr)[j][++k])
+			(wc->new_arr)[++i] = (wc->temp_arr)[j][k];
 	}
-	i = -1;
+	return (SUCCESS);
+}
+
+int	wildcards(char ***arr)
+{
+	t_w_cards	wc;
+	int			status;
+
+	status = allocate_temp_array(arr, &wc);
+	if (status == MALLOC_ERR)
+		return (MALLOC_ERR);
+	status = fill_temp_array(arr, &wc);
+	if (status == SYSTEM_ERROR)
+		return (SYSTEM_ERROR);
+	if (status == MALLOC_ERR)
+		return (MALLOC_ERR);
+	status = allocate_and_fill_expanded_array(&wc);
+	if (status == MALLOC_ERR)
+		return (MALLOC_ERR);
 	ft_free_2d_array(*arr);
-	ft_free_3d_array(temp_arr, 1);
-	*arr = new_arr;
+	ft_free_3d_array(wc.temp_arr, 1);
+	*arr = wc.new_arr;
 	return (SUCCESS);
 }

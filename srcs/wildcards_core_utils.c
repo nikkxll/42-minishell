@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:09:14 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/21 23:23:09 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/22 11:23:18 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_bool	if_only_asterisk(char *pattern)
 	return (true);
 }
 
-void	quote_checker(char *str, int *i, int *wc_flag)
+static void	quote_checker(char *str, int *i, int *wc_flag)
 {
 	if (str[*i] == S_QUOTE && *wc_flag == 0)
 		*wc_flag = 1;

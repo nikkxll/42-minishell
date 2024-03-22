@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/21 22:27:11 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/22 11:18:42 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char **av, char **envp)
 	str = ft_strdup(av[1]);
 	arr = wrapper_ft_split_with_quotes(str);
 	env = cpy_env(envp);
-	if (wildcards(&arr, 0, -1, -1) != 0)
+	if (wildcards(&arr) != 0)
 	{
 		printf("%s\n", "error occured");
 		return (0);
