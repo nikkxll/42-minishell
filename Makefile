@@ -44,10 +44,16 @@ VALIDATE_INPUT		:=	$(addprefix $(VALIDATE_INPUT_PATH), $(VALIDATE_INPUT_NAME))
 ########EXECUTION########
 EXECUTION_NAME		:=	ft_split_with_quotes.c
 EXECUTION_PATH		:=	execution/
-EXECUTION			:= $(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME))
+EXECUTION_DS_NAME	:=	dollar_sign_expansion_utils.c dollar_sign_expansion.c
+EXECUTION_DS_PATH	:=	execution/dollar_sign_expand/
+EXECUTION_WC_NAME	:=	wildcards.c wildcards_core.c wildcards_core_utils.c wildcards_entities_expand.c \
+						wildcard_utils.c
+EXECUTION_WC_PATH	:=	execution/wildcards/
+EXECUTION			:= $(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME)) \
+	$(addprefix $(EXECUTION_WC_PATH), $(EXECUTION_WC_NAME)) \
+	$(addprefix $(EXECUTION_DS_PATH), $(EXECUTION_DS_NAME))
 
-SRCS				:=	main.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) $(EXECUTION) \
-						dollar_sign_expansion.c wildcards.c wildcards_core.c wildcards_core_utils.c wildcards_entities_expand.c
+SRCS				:=	main.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) $(EXECUTION)
 SRCS_PATH			:=	srcs/
 
 ###############################
@@ -80,6 +86,8 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_EXPORT_PATH)
 	@mkdir -p $(OBJS_PATH)$(VALIDATE_INPUT_PATH)
 	@mkdir -p $(OBJS_PATH)$(EXECUTION_PATH)
+	@mkdir -p $(OBJS_PATH)$(EXECUTION_DS_PATH)
+	@mkdir -p $(OBJS_PATH)$(EXECUTION_WC_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(FLAGS) -c $< -o $@

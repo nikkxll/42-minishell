@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/22 11:18:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:51:16 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	main(int ac, char **av, char **envp)
 
 	i = 0;
 	(void)ac;
+	// (void)envp;
+	// (void)av;
 	str = ft_strdup(av[1]);
 	arr = wrapper_ft_split_with_quotes(str);
 	env = cpy_env(envp);
@@ -47,17 +49,3 @@ int	main(int ac, char **av, char **envp)
 	ft_free_2d_array(env);
 	return (0);
 }
-
-// int main()
-// {
-//     char string[200] = "minishll";
-//     char pattern[200] = "minishll";
-
-//     if (wildcard_strcmp(string, pattern))
-//         printf("Match\n");
-
-//     else
-//         printf("No Match\n");
-
-//     return 0;
-// }

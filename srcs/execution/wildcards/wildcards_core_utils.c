@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:09:14 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/22 11:23:18 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:29:46 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 t_bool	if_only_asterisk(char *pattern)
 {

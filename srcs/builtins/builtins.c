@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/12 14:06:37 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:08:49 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,3 @@ int	command_run(char **arr, char ***envp)
 		return (1);
 	}
 }
-
-// int	main(int ac, char **av, char **envp)
-// {
-// 	char	**arr;
-// 	char	**env;
-// 	int		i;
-
-// 	i = 0;
-// 	arr = wrapper_ft_split_with_quotes(av[1]);
-// 	env = cpy_env(envp);
-// 	while (arr[i])
-// 	{
-// 		if (expand_dollar_sign(&arr[i++], env, 0) == MALLOC_ERR)
-// 			printf("%s\n", "malloc error");
-// 	}
-// 	processing(arr, 0);
-// 	if (command_run(arr, &env) == MALLOC_ERR)
-// 		printf("%s\n", "malloc error");
-
-// 	printf("\n\n\n\n\n");
-// 	int k = -1;
-// 	while (env[++k])
-// 		printf("%s\n", env[k]);
-
-// 	ft_free_2d_array(arr);
-// 	ft_free_2d_array(env);
-// 	return (0);
-// }

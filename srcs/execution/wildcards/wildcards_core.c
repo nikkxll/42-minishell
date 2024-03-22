@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 01:01:56 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/21 19:15:01 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:29:44 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 static int	process_pattern_match(char **line, char **pattern,
 	t_bool *wildcard, char **placeholder)
@@ -54,7 +54,7 @@ t_bool	wildcard_strcmp(char *line, char *pattern)
 	while (*line)
 	{
 		status = process_pattern_match(&line, &pattern, &wildcard,
-			&placeholder);
+				&placeholder);
 		if (status == 1)
 			return (string_quotes_transform_back(line, pattern, true));
 		else if (status == -1)

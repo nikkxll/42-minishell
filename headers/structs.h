@@ -6,14 +6,14 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/22 10:49:11 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:41:51 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include <dirent.h>
+# include "minishell.h"
 
 typedef struct dirent	t_dirent;
 
@@ -23,9 +23,12 @@ typedef struct s_wildcards
 	t_dirent	*entry;
 	char		***temp_arr;
 	char		**new_arr;
+	char		**sorted_new_arr;
+	char		**final_new_arr;
 	int			arr_len;
 	int			ent_len;
 	int			status;
+	t_bool		dot_ind;
 }	t_w_cards;
 
 typedef struct s_dollar_exp

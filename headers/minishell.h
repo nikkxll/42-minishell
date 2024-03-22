@@ -6,13 +6,14 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/22 11:23:43 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:57:10 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <dirent.h>
 # include "../libft/libft.h"
 # include "structs.h"
 # include "defines.h"
@@ -81,10 +82,11 @@ int				redir_search(char *str);
 
 /*_____ Execution _____*/
 
-	/*_____ Dollar-sign-expansion _____*/
 int				expand_dollar_sign(char **str, char **envp, int last_part_ind);
+int				enviroment_search_exp_module(char **envp, char *var, int i,
+					int j);
+void			index_quotes(char *str, int i, int *single_q, int *double_q);
 
-	/*_____ Built-ins _____*/
 int				command_run(char **arr, char ***envp);
 char			**sort_string_arr(char **argv, int size);
 char			**cpy_env(char **envp);
@@ -112,13 +114,18 @@ int				run_env(char **arr, char ***envp);
 
 char			**wrapper_ft_split_with_quotes(char *str);
 
-int				wildcards(char ***arr);
-
-t_bool			wildcard_strcmp(char *line, char *pattern);
-int				entities_expand(char ***temp_arr, char *str, t_w_cards *wc);
+int				allocate_temp_array(char ***arr, t_w_cards *wc);
+int				fill_temp_array(char ***arr, t_w_cards *wc);
+int				allocate_and_fill_expanded_array(t_w_cards *wc);
+char			**str_array_join(char **arr, char *str);
+int				sort_and_fill_final_array(t_w_cards *wc);
 t_bool			if_only_asterisk(char *pattern);
 void			string_quotes_transform(char *line, char *pattern);
-t_bool			string_quotes_transform_back(char *line, char *pattern, t_bool res);
+t_bool			string_quotes_transform_back(char *line, char *pattern,
+					t_bool res);
 int				array_with_entities_len(int sub_arr_len);
+t_bool			wildcard_strcmp(char *line, char *pattern);
+int				entities_expand(char ***temp_arr, char *str, t_w_cards *wc);
+int				wildcards(char ***arr);
 
 #endif

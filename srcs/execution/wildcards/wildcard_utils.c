@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wildcards.c                                        :+:      :+:    :+:   */
+/*   wildcard_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 22:16:41 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/22 11:22:10 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/03/22 15:45:50 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/03/22 15:53:10 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
-static int	allocate_temp_array(char ***arr, t_w_cards *wc)
+int	allocate_temp_array(char ***arr, t_w_cards *wc)
 {
 	int	i;
 
@@ -24,7 +24,8 @@ static int	allocate_temp_array(char ***arr, t_w_cards *wc)
 		return (MALLOC_ERR);
 	while (i < wc->arr_len)
 	{
-		(wc->temp_arr)[i] = ft_calloc(array_with_entities_len(0) + 1, sizeof(char *));
+		(wc->temp_arr)[i] = ft_calloc(array_with_entities_len(0) + 1,
+				sizeof(char *));
 		if (!(wc->temp_arr)[i++])
 		{
 			ft_free_3d_array(wc->temp_arr, 0);
@@ -34,7 +35,7 @@ static int	allocate_temp_array(char ***arr, t_w_cards *wc)
 	return (SUCCESS);
 }
 
-static int	fill_temp_array(char ***arr, t_w_cards *wc)
+int	fill_temp_array(char ***arr, t_w_cards *wc)
 {
 	int	i;
 
@@ -56,7 +57,7 @@ static int	fill_temp_array(char ***arr, t_w_cards *wc)
 	return (SUCCESS);
 }
 
-static int	allocate_and_fill_expanded_array(t_w_cards *wc)
+int	allocate_and_fill_expanded_array(t_w_cards *wc)
 {
 	int	i;
 	int	j;
@@ -84,24 +85,34 @@ static int	allocate_and_fill_expanded_array(t_w_cards *wc)
 	return (SUCCESS);
 }
 
-int	wildcards(char ***arr)
+char	**str_array_join(char **arr, char *str)
 {
-	t_w_cards	wc;
-	int			status;
+	char	**joined_arr;
+	int		len;
+	int		i;
 
-	status = allocate_temp_array(arr, &wc);
-	if (status == MALLOC_ERR)
+	i = -1;
+	len = ft_arrlen((void **)arr);
+	joined_arr = ft_calloc(len + 2, sizeof(char *));
+	if (!joined_arr)
+		return (NULL);
+	joined_arr[0] = str;
+	while (++i < len)
+		joined_arr[i + 1] = arr[i];
+	return (joined_arr);
+}
+
+int	sort_and_fill_final_array(t_w_cards *wc)
+{
+	wc->sorted_new_arr = sort_string_arr(wc->new_arr + 1,
+			ft_arrlen((void **)wc->new_arr) - 1);
+	if (!wc->sorted_new_arr)
+	{
+		ft_free_2d_array(wc->new_arr);
 		return (MALLOC_ERR);
-	status = fill_temp_array(arr, &wc);
-	if (status == SYSTEM_ERROR)
-		return (SYSTEM_ERROR);
-	if (status == MALLOC_ERR)
-		return (MALLOC_ERR);
-	status = allocate_and_fill_expanded_array(&wc);
-	if (status == MALLOC_ERR)
-		return (MALLOC_ERR);
-	ft_free_2d_array(*arr);
-	ft_free_3d_array(wc.temp_arr, 1);
-	*arr = wc.new_arr;
+	}
+	wc->final_new_arr = str_array_join(wc->sorted_new_arr, (wc->new_arr)[0]);
+	free(wc->new_arr);
+	free(wc->sorted_new_arr);
 	return (SUCCESS);
 }
