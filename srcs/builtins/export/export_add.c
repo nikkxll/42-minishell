@@ -6,12 +6,20 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:35:13 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/12 10:47:08 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/25 22:33:06 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
+/**
+* @brief	A function that allocates new array for addition
+* @param	envp enviroment array
+* @param	result pointer to the new enviroment array
+* @param	i pointer to the index
+* @param	len pointer to the enviroment list length
+* @return	`MALLOC_ERR` if malloc failure occured, `SUCCESS` otherwise
+*/
 static int	add_to_env_list_new_env_creation(char **envp, char ***result,
 	int *i, int *len)
 {
@@ -25,6 +33,15 @@ static int	add_to_env_list_new_env_creation(char **envp, char ***result,
 	return (SUCCESS);
 }
 
+/**
+* @brief	A function that adds argument to the enviroment list
+* @param	new_env pointer to the new enviroment array
+* @param	arr array of arguments or options if allowed
+* @param	envp enviroment array
+* @param	operations auxiliary array to calculate the number of operations
+* of different type
+* @return	`MALLOC_ERR` if malloc failure occured, `SUCCESS` otherwise
+*/
 int	add_to_env_list(char ***new_env, char **arr, char **envp, int *operations)
 {
 	int		i;

@@ -6,12 +6,19 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:35:29 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/08 17:00:04 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/25 22:54:58 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
+/**
+* @brief	A function that compare two strings (like original strcmp)
+* @param	s1 first string
+* @param	s2 second string
+* @return	an integer greater than, equal to, or less than 0, according as
+* the string s1 is greater than, equal to, or less than the string s2
+*/
 static int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
@@ -29,6 +36,12 @@ static int	ft_strcmp(const char *s1, const char *s2)
 		return (0);
 }
 
+/**
+* @brief	A function that sorts subarray
+* @param	argv input array
+* @param	size array size
+* @return	`void`
+*/
 static void	sort_subarray(char *argv[], int size)
 {
 	int		j;
@@ -53,6 +66,12 @@ static void	sort_subarray(char *argv[], int size)
 	}
 }
 
+/**
+* @brief	A function that sorts an array according to ASCII
+* @param	argv input array
+* @param	size array size
+* @return	sorted array
+*/
 char	**sort_string_arr(char **argv, int size)
 {
 	int		i;
@@ -71,6 +90,11 @@ char	**sort_string_arr(char **argv, int size)
 	return (res);
 }
 
+/**
+* @brief	A function that allocates new array for the enviroment list
+* @param	envp an enviroment array
+* @return	new array
+*/
 char	**cpy_env(char **envp)
 {
 	char	**env;
@@ -95,6 +119,13 @@ char	**cpy_env(char **envp)
 	return (env);
 }
 
+/**
+* @brief	A function that checks if characters allowed to be in the name
+* of the env variable
+* @param	c character
+* @param	j pointer to the index
+* @return	`true` if allowed, `false` otherwise
+*/
 t_bool	ft_isenv(char c, int *j)
 {
 	if (*j == 0 && ft_isdigit(c))

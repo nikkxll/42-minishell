@@ -6,12 +6,17 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:22:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/08 23:17:46 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:24:46 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+/**
+* @brief	A function that makes cd precheck for args amount
+* @param	arr array of arguments or options if allowed
+* @return	`-1` if input is not correct, `0` otherwise
+*/
 static int	cd_precheck(char **arr)
 {
 	int	len;
@@ -22,7 +27,7 @@ static int	cd_precheck(char **arr)
 		if (arr[0][1] == DASH && arr[0][2] == NULL_TERM)
 			return (0);
 		arr[0][2] = NULL_TERM;
-		print_error_with_arg("options not supported\n", arr[0], "cd: ");
+		print_error_with_arg("options are not supported\n", arr[0], "cd: ");
 		return (-1);
 	}
 	if (len >= 2)
@@ -33,6 +38,12 @@ static int	cd_precheck(char **arr)
 	return (0);
 }
 
+/**
+* @brief	A function that runs cd built-in command
+* @param	arr array of arguments or options if allowed
+* @param	envp an enviroment array
+* @return	`SUCCESS`
+*/
 int	run_cd(char **arr, char **envp)
 {
 	if (cd_precheck(arr) == -1)

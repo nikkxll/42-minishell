@@ -6,12 +6,19 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:54:18 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/07 19:51:25 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:32:34 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+/**
+* @brief	A function that searches for `var` in the `envp`
+* @param	envp pointer to the enviroment array
+* @param	var variable to search for
+* @param	i index
+* @return	`-1` if position not found, `position` (>= 0) otherwise
+*/
 static int	env_position_search(char ***envp, char *var, int i)
 {
 	char	**new_env;
@@ -34,6 +41,13 @@ static int	env_position_search(char ***envp, char *var, int i)
 	return (-1);
 }
 
+/**
+* @brief	A function that unsetting argument from the enviroment list
+* @param	envp pointer to the enviroment array
+* @param	position position of an argument in the enviroment list
+* @param	i index
+* @return	`SUCCESS`
+*/
 static int	execute_unset(char ***envp, int position, int i)
 {
 	char	**new_env;
@@ -55,6 +69,14 @@ static int	execute_unset(char ***envp, int position, int i)
 	return (SUCCESS);
 }
 
+/**
+* @brief	A function that iterates through args and checks if they are
+* in the enviroment list
+* @param	arr array of arguments or options if allowed
+* @param	envp pointer to the enviroment array
+* @param	j pointer to the index
+* @return	`void`
+*/
 static void	iterate_through_args(char **arr, char ***envp, int *j)
 {
 	int	position;
@@ -75,6 +97,12 @@ static void	iterate_through_args(char **arr, char ***envp, int *j)
 	return ;
 }
 
+/**
+* @brief	A function that runs unset built-in command
+* @param	arr array of arguments or options if allowed
+* @param	envp pointer to the enviroment array
+* @return	`SUCCESS`
+*/
 int	run_unset(char **arr, char ***envp)
 {
 	int	len;
@@ -85,7 +113,7 @@ int	run_unset(char **arr, char ***envp)
 	if (len >= 1 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
 	{
 		arr[0][2] = NULL_TERM;
-		print_error_with_arg("options not supported\n", arr[0], "unset: ");
+		print_error_with_arg("options are not supported\n", arr[0], "unset: ");
 		return (SUCCESS);
 	}
 	else if (len > 0)

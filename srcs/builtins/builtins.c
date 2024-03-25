@@ -6,12 +6,19 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/22 12:08:49 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:02:52 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+/**
+* @brief	A function that runs either built-in command or calling execution
+* module to run execve
+* @param	arr array of arguments or options if allowed
+* @param	envp pointer to the enviroment array
+* @return	execution exit status
+*/
 int	command_run(char **arr, char ***envp)
 {
 	if (!ft_strncmp("echo", arr[0], ft_strlen(arr[0])))

@@ -6,12 +6,20 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:32:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/08 16:59:51 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/25 22:39:26 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
+/**
+* @brief	A function that creates an array of quantities of various types of
+* operations
+* @param	arr array of arguments or options if allowed
+* @param	envp an enviroment array
+* @param	operations array to create
+* @return	`MALLOC_ERR` if malloc failure occured, `SUCCESS` otherwise
+*/
 void	create_operations_array(char **arr, char **envp, int *operations)
 {
 	int	j;
@@ -39,6 +47,16 @@ void	create_operations_array(char **arr, char **envp, int *operations)
 	}
 }
 
+/**
+* @brief	A function that checks if any operation of `type` exist in an
+* array `operations`
+* @param	operations auxiliary array to calculate the number of operations
+* of different type
+* @param	i pointer to the index
+* @param	j pointer to the index
+* @param	type type to check
+* @return	`1` if no operations with corresponding type, `0` otherwise
+*/
 int	check_operations(int *operations, int *i, int *j, int type)
 {
 	*i = 0;

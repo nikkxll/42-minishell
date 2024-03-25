@@ -6,12 +6,21 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/08 13:22:21 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:25:12 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
+/**
+* @brief	A function that executes different possible export operations
+* @param	new_env pointer to the new enviroment array
+* @param	arr array of arguments or options if allowed
+* @param	envp pointer to the enviroment array
+* @param	operations auxiliary array to calculate the number of operations
+* of different type
+* @return	`MALLOC_ERR` if malloc failure occured, `SUCCESS` otherwise
+*/
 static int	execute_export(char ***new_env, char **arr, char ***envp,
 	int *operations)
 {
@@ -31,6 +40,12 @@ static int	execute_export(char ***new_env, char **arr, char ***envp,
 	return (SUCCESS);
 }
 
+/**
+* @brief	A function that runs export with arguments
+* @param	arr array of arguments or options if allowed
+* @param	envp pointer to the enviroment array
+* @return	`MALLOC_ERR` if malloc failure occured, `SUCCESS` otherwise
+*/
 static int	export_with_args(char **arr, char ***envp)
 {
 	char	**new_env;
@@ -52,6 +67,13 @@ static int	export_with_args(char **arr, char ***envp)
 	return (SUCCESS);
 }
 
+/**
+* @brief	A function that runs export without arguments
+* @param	envp pointer to the enviroment array
+* @param	i index
+* @param	j index
+* @return	`MALLOC_ERR` if malloc failure occured, `SUCCESS` otherwise
+*/
 static int	export_without_args(char ***envp, int i, int j)
 {
 	char	**envp_sorted;
@@ -78,6 +100,12 @@ static int	export_without_args(char ***envp, int i, int j)
 	return (SUCCESS);
 }
 
+/**
+* @brief	A function that runs export built-in command
+* @param	arr array of arguments or options if allowed
+* @param	envp pointer to the enviroment array
+* @return	`MALLOC_ERR` if malloc failure occured, `SUCCESS` otherwise
+*/
 int	run_export(char **arr, char ***envp)
 {
 	int		arr_len;
@@ -86,7 +114,7 @@ int	run_export(char **arr, char ***envp)
 	if (arr_len >= 1 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
 	{
 		arr[0][2] = NULL_TERM;
-		print_error_with_arg("options not supported\n", arr[0], "env: ");
+		print_error_with_arg("options are not supported\n", arr[0], "env: ");
 		return (SUCCESS);
 	}
 	else if (arr_len > 0)
