@@ -6,18 +6,18 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:54:18 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/25 23:32:34 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:05:18 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 /**
-* @brief	A function that searches for `var` in the `envp`
-* @param	envp pointer to the enviroment array
+* @brief	A function that searches for @c `var` in the @c `envp`
+* @param	envp pointer to the environment array
 * @param	var variable to search for
 * @param	i index
-* @return	`-1` if position not found, `position` (>= 0) otherwise
+* @return	@c `-1` if position not found, @c `position` (>= 0) otherwise
 */
 static int	env_position_search(char ***envp, char *var, int i)
 {
@@ -42,11 +42,11 @@ static int	env_position_search(char ***envp, char *var, int i)
 }
 
 /**
-* @brief	A function that unsetting argument from the enviroment list
-* @param	envp pointer to the enviroment array
-* @param	position position of an argument in the enviroment list
+* @brief	A function that unsetting argument from the environment list
+* @param	envp pointer to the environment array
+* @param	position position of an argument in the environment list
 * @param	i index
-* @return	`SUCCESS`
+* @return	@c `SUCCESS`
 */
 static int	execute_unset(char ***envp, int position, int i)
 {
@@ -71,11 +71,11 @@ static int	execute_unset(char ***envp, int position, int i)
 
 /**
 * @brief	A function that iterates through args and checks if they are
-* in the enviroment list
+* in the environment list
 * @param	arr array of arguments or options if allowed
-* @param	envp pointer to the enviroment array
+* @param	envp pointer to the environment array
 * @param	j pointer to the index
-* @return	`void`
+* @return	@c `void`
 */
 static void	iterate_through_args(char **arr, char ***envp, int *j)
 {
@@ -100,8 +100,8 @@ static void	iterate_through_args(char **arr, char ***envp, int *j)
 /**
 * @brief	A function that runs unset built-in command
 * @param	arr array of arguments or options if allowed
-* @param	envp pointer to the enviroment array
-* @return	`SUCCESS`
+* @param	envp pointer to the environment array
+* @return	@c `SUCCESS`
 */
 int	run_unset(char **arr, char ***envp)
 {

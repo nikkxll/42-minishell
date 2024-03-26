@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/22 15:57:10 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:17:32 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int				redir_search(char *str);
 /*_____ Execution _____*/
 
 int				expand_dollar_sign(char **str, char **envp, int last_part_ind);
-int				enviroment_search_exp_module(char **envp, char *var, int i,
+int				environment_search_exp_module(char **envp, char *var, int i,
 					int j);
 void			index_quotes(char *str, int i, int *single_q, int *double_q);
 

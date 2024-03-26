@@ -1,17 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wildcard_utils.c                                   :+:      :+:    :+:   */
+/*   wildcards_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:45:50 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/22 17:43:54 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:02:49 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
-
+int	sort_array_with_command(char ***arr);
+/**
+* @brief	Function that allocates @c `len(arr)` 2d arrays
+* @param	arr pointer to the initial array
+* @param	wc pointer to the structure with local variables initiated in
+* @c `wildcards()`
+* @return	@c `SUCCESS` if no errors occured, @c `MALLOC_ERR` if one of the
+* mallocs failed, @c `SYSTEM_ERROR` if error occured in the functions from
+* imported libraries
+*/
 int	allocate_temp_array(char ***arr, t_w_cards *wc)
 {
 	int	i;
@@ -37,6 +46,15 @@ int	allocate_temp_array(char ***arr, t_w_cards *wc)
 	return (SUCCESS);
 }
 
+/**
+* @brief	Function that fills @c `len(arr)` 2d arrays
+* @param	arr pointer to the initial array
+* @param	wc pointer to the structure with local variables initiated in
+* @c `wildcards()`
+* @return	@c `SUCCESS` if no errors occured, @c `MALLOC_ERR` if one of the
+* mallocs failed, @c `SYSTEM_ERROR` if error occured in the functions from
+* imported libraries
+*/
 int	fill_temp_array(char ***arr, t_w_cards *wc)
 {
 	int	i;
@@ -59,6 +77,13 @@ int	fill_temp_array(char ***arr, t_w_cards *wc)
 	return (SUCCESS);
 }
 
+/**
+ * @brief	Function that create and fill extended 2d array
+ * @param	wc pointer to the structure with local variables initiated in
+ * @c `wildcards()`
+ * @return	@c `SUCCESS` if no errors occured, @c `MALLOC_ERR` if one of the
+ * mallocs failed
+ */
 int	allocate_and_fill_expanded_array(t_w_cards *wc)
 {
 	int	i;
@@ -87,6 +112,12 @@ int	allocate_and_fill_expanded_array(t_w_cards *wc)
 	return (SUCCESS);
 }
 
+/**
+ * @brief	Function that joins sorted final array with command string
+ * @param	arr pointer to the initial array
+ * @param	str command string
+ * @return	joined array
+ */
 char	**str_array_join(char **arr, char *str)
 {
 	char	**joined_arr;
@@ -104,6 +135,13 @@ char	**str_array_join(char **arr, char *str)
 	return (joined_arr);
 }
 
+/**
+ * @brief	Function that sorts and then joins final array
+ * @param	wc pointer to the structure with local variables initiated in
+ * @c `wildcards()`
+ * @return	@c `SUCCESS` if no errors occured, @c `MALLOC_ERR` if one of the
+ * mallocs failed
+ */
 int	sort_and_fill_final_array(t_w_cards *wc)
 {
 	wc->sorted_new_arr = sort_string_arr(wc->new_arr + 1,

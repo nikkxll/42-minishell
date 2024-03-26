@@ -6,12 +6,17 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:09:14 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/22 13:29:46 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:28:23 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
+/**
+ * @brief	Function that checks if string consists of asterisks only
+ * @param	pattern string to check in
+ * @return	@c `true` if yes, @c `false` otherwise
+ */
 t_bool	if_only_asterisk(char *pattern)
 {
 	while (*pattern)
@@ -22,6 +27,16 @@ t_bool	if_only_asterisk(char *pattern)
 	return (true);
 }
 
+/**
+ * @brief	Function to check for quotes in a string
+ * @note	This function checks if a single or double quote character
+ * appears in a string and updates a flag accordingly
+ * @param	str The string to check for quotes
+ * @param	i Pointer to the index of the current character being checked
+ * in the string
+ * @param	wc_flag Pointer to an integer flag indicating the status of quotes
+ * @return	@c `void`
+ */
 static void	quote_checker(char *str, int *i, int *wc_flag)
 {
 	if (str[*i] == S_QUOTE && *wc_flag == 0)
@@ -33,6 +48,14 @@ static void	quote_checker(char *str, int *i, int *wc_flag)
 		*wc_flag = 0;
 }
 
+/**
+ * @brief	Function to transform strings by replacing specific characters
+ * @note	This function transforms a given string by replacing occurrences
+ * of a certain character with another specified character
+ * @param	line The input string to be transformed
+ * @param	pattern The pattern string used for transformation
+ * @return	@c `void`
+ */
 void	string_quotes_transform(char *line, char *pattern)
 {
 	int	wc_flag;
@@ -60,6 +83,15 @@ void	string_quotes_transform(char *line, char *pattern)
 	remove_quotes(pattern, 0, 0);
 }
 
+/**
+ * @brief   Function to transform strings back by restoring specific characters
+ * @note This function transforms a given string back by restoring
+ * occurrences of a certain character to their original characters
+ * @param	line The input string to be transformed back.
+ * @param	pattern The pattern string used for transformation back.
+ * @param	res he result of wildcard check.
+ * @return	The result of the transformation (res) - unmodified.
+ */
 t_bool	string_quotes_transform_back(char *line, char *pattern, t_bool res)
 {
 	int	i;
@@ -81,6 +113,16 @@ t_bool	string_quotes_transform_back(char *line, char *pattern, t_bool res)
 	return (res);
 }
 
+/**
+ * @brief	Function to determine the length of an array containing
+ * entities in the current directory
+ * @note	This function opens the current directory, iterates
+ * through its contents,
+ * and counts the number of entities (files and directories) present
+ * @param	sub_arr_len  The length of the sub-array, initialized to 0
+ * @return	The length of the array containing entities if successful,
+ * or @c `SYSTEM_ERROR` if an error occurs during directory processing
+ */
 int	array_with_entities_len(int sub_arr_len)
 {
 	DIR			*dir;

@@ -6,12 +6,21 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:44:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/22 13:29:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:58:26 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
+/**
+ * @brief	Function to fill the temporary array with strings matching the
+ * wildcard pattern
+ * @param	str The wildcard pattern string
+ * @param	temp_arr_local Temporary array
+ * @param	wc Pointer to wildcard expansion data
+ * @return	@c `SUCCESS` if the array is successfully filled,
+ * @c `MALLOC_ERR` if memory allocation fails
+ */
 static int	fill_temp_array_with_strings(char *str, char **temp_arr_local,
 	t_w_cards *wc)
 {
@@ -39,6 +48,13 @@ static int	fill_temp_array_with_strings(char *str, char **temp_arr_local,
 	return (SUCCESS);
 }
 
+/**
+ * @brief	Function to fill an empty array with a single string
+ * @param	temp_arr_local Temporary array
+ * @param	str The string to fill the array with
+ * @return	@c `SUCCESS` if the array is successfully filled,
+ * @c `MALLOC_ERR` if memory allocation fails
+ */
 static int	empty_array_fill(char **temp_arr_local, char *str)
 {
 	if (ft_arrlen((void **)temp_arr_local) == 0)
@@ -50,6 +66,16 @@ static int	empty_array_fill(char **temp_arr_local, char *str)
 	return (SUCCESS);
 }
 
+/**
+ * @brief	Function to expand wildcard entities and populate a temporary
+ * array with matching strings
+ * @param	temp_arr Pointer to the temporary array
+ * @param	str The wildcard pattern string
+ * @param	wc Pointer to wildcard expansion data
+ * @return	@c `SUCCESS` if expansion and population succeed,
+ * @c `MALLOC_ERR` if memory allocation fails,
+ * @c `SYSTEM_ERROR` if an error occurs in file operations
+ */
 int	entities_expand(char ***temp_arr, char *str, t_w_cards *wc)
 {
 	char	**temp_arr_local;

@@ -12,10 +12,10 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ar -crs $(NAME) $(OBJS)
 	@ar -crs ../libft.a $(OBJS)
-	@echo "$(GREEN)\n\nLIBFT_PRJ is ready$(NC)"
-	@echo "$(GREY)PRINTF_PRJ is not ready$(NC)"
-	@echo "$(GREY)GET_NEXT_LINE_PRJ is not ready$(NC)"
-	@echo "$(GREY)AUXILIARY_FUNCTIONS is not ready$(NC)"
+	@echo "$(GREEN)\n\nLIBFT is ready$(NC)"
+	@echo "$(GREY)FT_PRINTF is ready$(NC)"
+	@echo "$(GREY)GET_NEXT_LINE is ready$(NC)"
+	@echo "$(GREY)AUXILIARY_FUNCTIONS_SET is ready$(NC)"
 
 %.o: %.c
 	@$(CC_LFT) $(FLAGS_LFT) -c $< -o $@

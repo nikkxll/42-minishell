@@ -17,22 +17,11 @@ AST_TREE_PATH		:=	ast/ast_create_tree/
 AST_TREE			:=	$(addprefix $(AST_TREE_PATH), $(AST_TREE_NAME))
 
 ######AST_STRING_SPLITTER######
-AST_SPLITTER_NAME	:=	create_node_data.c string_splitter_blocks_command.c string_splitter_blocks.c \
+AST_SPLITTER_NAME	:=	create_node_info.c string_splitter_blocks_command.c string_splitter_blocks.c \
 						string_splitter_utils_2.c string_splitter_utils.c string_splitter.c \
 						check_if_inside_quotes.c
 AST_SPLITTER_PATH	:=	ast/ast_string_splitter/
 AST_SPLITTER		:=	$(addprefix $(AST_SPLITTER_PATH), $(AST_SPLITTER_NAME))
-
-###########BUILTINS############
-BUILTINS_NAME		:=	builtins.c cd.c echo.c env.c pwd.c unset.c
-BUILTINS_UTILS_NAME	:=	errors_print.c utils.c utils_2.c
-BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_error.c export_utils.c export.c
-BUILTINS_PATH		:=	builtins/
-BUILTINS_UTILS_PATH	:=	builtins/utils/
-BUILTINS_EXPORT_PATH:=	builtins/export/
-BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
-	$(addprefix $(BUILTINS_UTILS_PATH), $(BUILTINS_UTILS_NAME)) \
-	$(addprefix $(BUILTINS_EXPORT_PATH), $(BUILTINS_EXPORT_NAME))
 
 ########VALIDATE_STRING########
 VALIDATE_INPUT_NAME	:=	validate_input.c validate_word.c validate_redirect.c validate_simple_command.c \
@@ -42,16 +31,27 @@ VALIDATE_INPUT_PATH	:=	/validate_input/
 VALIDATE_INPUT		:=	$(addprefix $(VALIDATE_INPUT_PATH), $(VALIDATE_INPUT_NAME))
 
 ########EXECUTION########
-EXECUTION_NAME		:=	ft_split_with_quotes.c
+BUILTINS_NAME		:=	builtins.c cd.c echo.c env.c pwd.c unset.c
+BUILTINS_UTILS_NAME	:=	errors_print.c utils.c utils_2.c
+BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_error.c export_utils.c export.c
+BUILTINS_PATH		:=	execution/builtins/
+BUILTINS_UTILS_PATH	:=	execution/builtins/utils/
+BUILTINS_EXPORT_PATH:=	execution/builtins/export/
 EXECUTION_PATH		:=	execution/
 EXECUTION_DS_NAME	:=	dollar_sign_expansion_utils.c dollar_sign_expansion.c
-EXECUTION_DS_PATH	:=	execution/dollar_sign_expand/
+EXECUTION_DS_PATH	:=	execution/dollar_sign_expansion/
 EXECUTION_WC_NAME	:=	wildcards.c wildcards_core.c wildcards_core_utils.c wildcards_entities_expand.c \
-						wildcard_utils.c
+						wildcards_utils.c
 EXECUTION_WC_PATH	:=	execution/wildcards/
+EXECUTION_UTILS_NAME:=	ft_split_with_quotes.c
+EXECUTION_UTILS_PATH:=	execution/utils/
+BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
+	$(addprefix $(BUILTINS_UTILS_PATH), $(BUILTINS_UTILS_NAME)) \
+	$(addprefix $(BUILTINS_EXPORT_PATH), $(BUILTINS_EXPORT_NAME))
 EXECUTION			:= $(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME)) \
 	$(addprefix $(EXECUTION_WC_PATH), $(EXECUTION_WC_NAME)) \
-	$(addprefix $(EXECUTION_DS_PATH), $(EXECUTION_DS_NAME))
+	$(addprefix $(EXECUTION_DS_PATH), $(EXECUTION_DS_NAME)) \
+	$(addprefix $(EXECUTION_UTILS_PATH), $(EXECUTION_UTILS_NAME))
 
 SRCS				:=	main.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) $(EXECUTION)
 SRCS_PATH			:=	srcs/
@@ -88,6 +88,7 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)$(EXECUTION_PATH)
 	@mkdir -p $(OBJS_PATH)$(EXECUTION_DS_PATH)
 	@mkdir -p $(OBJS_PATH)$(EXECUTION_WC_PATH)
+	@mkdir -p $(OBJS_PATH)$(EXECUTION_UTILS_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(FLAGS) -c $< -o $@

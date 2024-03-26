@@ -6,18 +6,18 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 12:00:54 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/25 22:48:27 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:05:41 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../../../../headers/minishell.h"
 
 /**
 * @brief	Removes quotes from the string if allowable
 * @param	str string that coming from readline function
 * @param	i index
 * @param	j index
-* @return	`void`
+* @return	@c `void`
 */
 void	remove_quotes(char *str, int i, int j)
 {
@@ -46,11 +46,11 @@ void	remove_quotes(char *str, int i, int j)
 }
 
 /**
-* @brief	Skips all `symbol` characters in a string
+* @brief	Skips all @c `symbol` characters in a string
 * @param	str string to skip chars in
 * @param	i pointer to the index
 * @param	symbol character
-* @return	`void`
+* @return	@c `void`
 */
 void	skip_characters(char *str, int *i, int symbol)
 {
@@ -59,10 +59,10 @@ void	skip_characters(char *str, int *i, int symbol)
 }
 
 /**
-* @brief	A function that runs `remove_quotes()` function in a loop
+* @brief	A function that runs @c `remove_quotes()` function in a loop
 * @param	arr array of arguments
 * @param	i an index
-* @return	`void`
+* @return	@c `void`
 */
 void	processing(char **arr, int i)
 {
@@ -71,13 +71,13 @@ void	processing(char **arr, int i)
 }
 
 /**
-* @brief	A function that checks if `var` included in the enviroment
+* @brief	A function that checks if @c `var` included in the environment
 * list
-* @param	envp an enviroment array
+* @param	envp an environment array
 * @param	var search string
 * @param	i an index
 * @param	j an index
-* @return	`i` if var was found, `NOT_FOUND` otherwise
+* @return	@c `i` if var was found, @c `NOT_FOUND` otherwise
 */
 int	env_var(char **envp, char *var, int i, int j)
 {
@@ -90,12 +90,12 @@ int	env_var(char **envp, char *var, int i, int j)
 }
 
 /**
-* @brief	A function that checks if `var` included in the `arr`
+* @brief	A function that checks if @c `var` included in the @c `arr`
 * @param	arr array of arguments
 * @param	var search string
 * @param	i an index
 * @param	j an index
-* @return	`i` if var was found, `NOT_FOUND` otherwise
+* @return	@c `i` if var was found, @c `NOT_FOUND` otherwise
 */
 int	arg_var(char **arr, char *var, int i, int j)
 {

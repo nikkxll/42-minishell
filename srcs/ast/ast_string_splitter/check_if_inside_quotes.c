@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_if_quotes.c                                  :+:      :+:    :+:   */
+/*   check_if_inside_quotes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:42:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/12 12:42:55 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:51:46 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 * @param	i pointer to the index to increment
 * @param	quote_type pointer to the int that tracks if we are within
 * the quotes or not
-* @return	`void`
+* @return	@c `void`
 */
 void	check_if_inside_quotes(char *str, int *i, int *quote_type)
 {

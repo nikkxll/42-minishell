@@ -51,10 +51,8 @@ define progress
 		printf "$(GREY)\n$(EC)"; \
 		$(eval MSG_PRINTED=true) \
 	fi
-	@printf "\r$(GREY)"
-	@perl -e 'printf "%-50s", "~" x int(($(COMPILED_OBJS) * 50 / $(TOTAL_OBJS)));'
-	@printf "$(EC)$(CURSOR_SAVE)"
-	@printf "\033[3C"
-	@printf "$(GREY)%.2f%%$(EC)" "$(shell echo "$(COMPILED_OBJS) / $(TOTAL_OBJS) * 100" | bc -l)"
-	@printf "$(CURSOR_RESTORE)"
+	@printf "\r$(GREY)["
+	@perl -e 'printf "%-48s", "-" x int(($(COMPILED_OBJS) * 48 / $(TOTAL_OBJS)));'
+	@printf "] $(GREY)%.2f%%$(EC)" "$(shell echo "$(COMPILED_OBJS) / $(TOTAL_OBJS) * 100" | bc -l)"
 endef
+

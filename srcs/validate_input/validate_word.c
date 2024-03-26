@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   validate_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:19:51 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/10 21:50:34 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:08:44 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-// v_input <complete_cmd> 		::=  <and_or> <newline>
-// v_and_or<and_or>				::=  <pipeline> { ('&&' | '||') <pipeline> }
-// v_pipeline<pipeline>			::=  <command> { '|' <command> }
-// v_command<command>			::=  <simple_cmd> | '(' <and_or> ')'
-// v_simple_command<simple_cmd>	::=  {( <redirect> | <word> | "any" | 'any')}
-// v_redirect<redirect>			::=  ( '<' | '>' | '<<' | '>>' ) <word>
+// <v_input> 		::=  <and_or> <newline>
+// <and_or>			::=  <pipeline> { ('&&' | '||') <pipeline> }
+// <pipeline>		::=  <command> { '|' <command> }
+// <command>		::=  <simple_cmd> | '(' <and_or> ')' {<redirect>}
+// <simple_cmd>		::=  {( <redirect> | <word> | "any" | 'any')}
+// <redirect>		::=  ( '<' | '>' | '<<' | '>>' ) <word>
 
 static char	*validate_quotes(char *str, t_bool *status);
 

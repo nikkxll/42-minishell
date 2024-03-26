@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_splitter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:39:12 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/05 11:55:34 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:29:39 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 * @param	type current meta character type
 * @param	i index to iterate throw the string
 * @note		function uses recursion
-* @return	`-1` if malloc error occurs, `1` if success
+* @return	@c `-1` if malloc error occurs, @c `1` if success
 */
 int	string_splitter(t_node_info **node, char *str, int type,
 	int i)
@@ -51,17 +51,3 @@ int	string_splitter(t_node_info **node, char *str, int type,
 	return (string_splitter(node, str, type + 1,
 			ft_strlen(str) - 1));
 }
-
-// int	main()
-// {
-// 	t_node_info	*node;
-
-// 	char str[1000] = "(111 | 222) > out 333 ";
-// 	int status = string_splitter(&node, str, T_AND,
-// 			ft_strlen(str) - 1);
-// 	printf("status: %d\n", status);
-// 	printf("type: %d\n", node->type);
-// 	printf("$%s$\n", node->str_left);
-// 	printf("$%s$\n", node->str_right);
-// 	return (0);
-// }
