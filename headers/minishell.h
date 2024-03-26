@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/26 15:17:32 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:39:14 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ int				allocate_temp_array(char ***arr, t_w_cards *wc);
 int				fill_temp_array(char ***arr, t_w_cards *wc);
 int				allocate_and_fill_expanded_array(t_w_cards *wc);
 char			**str_array_join(char **arr, char *str);
-int				sort_and_fill_final_array(t_w_cards *wc);
+int				sort_array_with_command_inside(t_w_cards *wc, char ***arr);
+int				array_sorting_process(t_w_cards *wc, int *i);
 t_bool			if_only_asterisk(char *pattern);
 void			string_quotes_transform(char *line, char *pattern);
 t_bool			string_quotes_transform_back(char *line, char *pattern,

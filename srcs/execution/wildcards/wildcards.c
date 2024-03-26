@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 22:16:41 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 20:02:54 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:30:44 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	wildcards(char ***arr)
 		return (MALLOC_ERR);
 	ft_free_2d_array(*arr);
 	ft_free_3d_array(wc.temp_arr, 1);
-	if (sort_and_fill_final_array(&wc) == MALLOC_ERR)
-		return (MALLOC_ERR);
-	*arr = wc.final_new_arr;
+	*arr = wc.new_arr;
 	return (SUCCESS);
 }
