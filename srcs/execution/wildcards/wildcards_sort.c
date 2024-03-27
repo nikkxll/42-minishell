@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:42:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 20:42:59 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:00:34 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	sort_array_with_command_inside(t_w_cards *wc, char ***arr)
 int	array_sorting_process(t_w_cards *wc, int *i)
 {
 	char	**sorted_arr;
-
 	if (*i == 0)
 	{
 		if (sort_array_with_command_inside(wc, &((wc->temp_arr)[*i]))

@@ -31,7 +31,7 @@ VALIDATE_INPUT_PATH	:=	/validate_input/
 VALIDATE_INPUT		:=	$(addprefix $(VALIDATE_INPUT_PATH), $(VALIDATE_INPUT_NAME))
 
 ########EXECUTION########
-BUILTINS_NAME		:=	builtins.c cd.c echo.c env.c pwd.c unset.c
+BUILTINS_NAME		:=	builtins.c cd.c echo.c env.c pwd.c unset.c exit.c
 BUILTINS_UTILS_NAME	:=	errors_print.c utils.c utils_2.c
 BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_error.c export_utils.c export.c
 BUILTINS_PATH		:=	execution/builtins/
@@ -53,7 +53,7 @@ EXECUTION			:= $(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME)) \
 	$(addprefix $(EXECUTION_DS_PATH), $(EXECUTION_DS_NAME)) \
 	$(addprefix $(EXECUTION_UTILS_PATH), $(EXECUTION_UTILS_NAME))
 
-SRCS				:=	main.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) $(EXECUTION)
+SRCS				:=	main.c minishell.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) $(EXECUTION)
 SRCS_PATH			:=	srcs/
 
 ###############################
@@ -67,14 +67,28 @@ LIBFT_PATH			:=	$(LIBFT_PATH)
 LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
+# RL					:=	/opt/homebrew/opt/readline/lib/
+# RLH					:=	/opt/homebrew/opt/readline/lib/
+# RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
+# RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
+
+RL					:=	~/.brew/Cellar/readline/8.2.7/lib
+RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
+RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
+RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
+
+HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)
+INCLUDES			:=	$(addprefix -I , $(HEADERS))
+LIBS				:=	-lft -L $(LIBFT_PATH) -lreadline -L $(RL) -lhistory -L $(RL)
+
 TOTAL_OBJS			:= $(words $(OBJS))
 COMPILED_OBJS		:= 0
 MSG_PRINTED 		:= false
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS_PATH) $(OBJS)
-	@cc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(LIBFT) $(OBJS_PATH) $(OBJS) $(HEADERS)
+	@cc $(FLAGS) $(INCLUDES) $(LIBS) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)\n\n$(NAME) created successfully!$(EC)"
 
 $(OBJS_PATH):
@@ -90,8 +104,8 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)$(EXECUTION_WC_PATH)
 	@mkdir -p $(OBJS_PATH)$(EXECUTION_UTILS_PATH)
 
-$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
-	@$(CC) $(FLAGS) -c $< -o $@
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.c $(HEADERS)
+	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 	@$(call progress,"minishell")
 
 $(LIBFT): $(LIBFT_SOURSES)

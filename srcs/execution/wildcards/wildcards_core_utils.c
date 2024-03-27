@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:09:14 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 19:28:23 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:15:02 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	quote_checker(char *str, int *i, int *wc_flag)
  * @param	pattern The pattern string used for transformation
  * @return	@c `void`
  */
-void	string_quotes_transform(char *line, char *pattern)
+void	string_transform(char *line, char *pattern)
 {
 	int	wc_flag;
 	int	i;
@@ -80,7 +80,7 @@ void	string_quotes_transform(char *line, char *pattern)
 		}
 		i++;
 	}
-	remove_quotes(pattern, 0, 0);
+	// remove_quotes(pattern, 0, 0);
 }
 
 /**
@@ -92,7 +92,7 @@ void	string_quotes_transform(char *line, char *pattern)
  * @param	res he result of wildcard check.
  * @return	The result of the transformation (res) - unmodified.
  */
-t_bool	string_quotes_transform_back(char *line, char *pattern, t_bool res)
+t_bool	string_transform_back(char *line, char *pattern, t_bool res)
 {
 	int	i;
 

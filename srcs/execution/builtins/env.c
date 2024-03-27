@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:04:34 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 17:05:12 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:54:26 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	run_env(char **arr, char ***envp)
 	}
 	else if (len >= 1)
 	{
-		print_error_with_arg("arguments not supported\n", arr[0], "env: ");
+		print_error_with_arg("arguments are not supported\n", arr[0], "env: ");
 		return (SUCCESS);
 	}
 	else

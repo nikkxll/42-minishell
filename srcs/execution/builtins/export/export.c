@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/27 11:18:54 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:20:11 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	export_without_args(char ***envp, int i, int j)
 		if (envp_sorted[i][0] == UNSCORE && envp_sorted[i][1] == EQUAL)
 			continue ;
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		while (envp_sorted[i][j] != EQUAL)
+		while (envp_sorted[i][j] != EQUAL && envp_sorted[i][j] != NULL_TERM)
 			ft_putchar_fd(envp_sorted[i][j++], STDOUT_FILENO);
 		ft_putchar_fd(EQUAL, STDOUT_FILENO);
 		ft_putchar_fd(D_QUOTE, STDOUT_FILENO);

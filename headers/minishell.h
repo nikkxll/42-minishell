@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/26 20:39:14 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:14:40 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include "defines.h"
 
 #include <stdio.h>
+
+/*_____ Readline _____*/
+void			rl_clear_history(void);
+void			rl_replace_line(const char *text, int clear_undo);
 
 /*_____ Validate-input _____*/
 t_bool			validate_input(char *str);
@@ -111,6 +115,7 @@ int				add_to_env_list(char ***new_env, char **arr, char **envp,
 int				run_pwd(char **arr);
 int				run_unset(char **arr, char ***envp);
 int				run_env(char **arr, char ***envp);
+int				run_exit(char **arr);
 
 char			**wrapper_ft_split_with_quotes(char *str);
 
@@ -121,12 +126,14 @@ char			**str_array_join(char **arr, char *str);
 int				sort_array_with_command_inside(t_w_cards *wc, char ***arr);
 int				array_sorting_process(t_w_cards *wc, int *i);
 t_bool			if_only_asterisk(char *pattern);
-void			string_quotes_transform(char *line, char *pattern);
-t_bool			string_quotes_transform_back(char *line, char *pattern,
+void			string_transform(char *line, char *pattern);
+t_bool			string_transform_back(char *line, char *pattern,
 					t_bool res);
 int				array_with_entities_len(int sub_arr_len);
 t_bool			wildcard_strcmp(char *line, char *pattern);
 int				entities_expand(char ***temp_arr, char *str, t_w_cards *wc);
 int				wildcards(char ***arr);
+
+int				minishell(char **arr, char ***env);
 
 #endif

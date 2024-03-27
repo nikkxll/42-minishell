@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/21 22:23:18 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:40:18 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,17 @@ enum	e_characters
 	BACKSLASH = 92,
 	UNSCORE = 95,
 	PIPE = 124,
+};
+
+enum	e_builtins
+{
+	CD_LEN = 3,
+	ENV_LEN = 4,
+	PWD_LEN = 4,
+	ECHO_LEN = 5,
+	EXIT_LEN = 5,
+	UNSET_LEN = 6,
+	EXPORT_LEN = 7,
 };
 
 enum	e_exit_status

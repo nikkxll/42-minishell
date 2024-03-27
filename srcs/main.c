@@ -5,47 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/26 20:11:01 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/03/27 16:20:17 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
-// int	main(void)
-// {
-// 	ft_printf("Hello world!\n");
-// 	return (0);
-// }
-
-int	main(int ac, char **av, char **envp)
+int	main(void)
 {
-	char	**arr;
-	char	*str;
-	char	**env;
-	int		i;
+	char		*command;
+	extern char	**environ;
+	char		**arr;
+	char		**env;
 
-	i = 0;
-	(void)ac;
-	// (void)envp;
-	// (void)av;
-	str = ft_strdup(av[1]);
-	arr = wrapper_ft_split_with_quotes(str);
-	env = cpy_env(envp);
-	if (wildcards(&arr) != 0)
+	env = cpy_env(environ);
+	while (1)
 	{
-		printf("%s\n", "error occured");
-		return (0);
+		command = readline("litbash-0.0.1$ ");
+		if (!command)
+		{
+			printf("\n");
+			break ;
+		}
+		if (command && *command)
+			add_history(command);
+		arr = wrapper_ft_split_with_quotes(command);
+		minishell(arr, &env);
 	}
-	while (arr[i])
-	{
-		if (expand_dollar_sign(&arr[i++], env, 0) == MALLOC_ERR)
-			printf("%s\n", "malloc error");
-	}
-	processing(arr, 0);
-	if (command_run(arr, &env) == MALLOC_ERR)
-		printf("%s\n", "malloc error");
-	ft_free_2d_array(arr);
+	rl_clear_history();
 	ft_free_2d_array(env);
 	return (0);
 }
+
+// int	main(void)
+// {
+// 	char		*command;
+// 	extern char	**environ;
+// 	char		**arr;
+// 	char		**env;
+
+// 	env = cpy_env(environ);
+// 	command = ft_strdup("echo a*b");
+// 	// while (1)
+// 	// {
+// 	// 	command = readline("e-bash > ");
+// 	// 	if (!command)
+// 	// 	{
+// 	// 		printf("\n");
+// 	// 		break ;
+// 	// 	}
+// 	// 	if (command && *command)
+// 	// 		add_history(command);
+// 		arr = wrapper_ft_split_with_quotes(command);
+// 		minishell(arr, &env);
+// 	// }
+// 	// rl_clear_history();
+// 	ft_free_2d_array(env);
+// 	return (0);
+// }

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 01:01:56 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 19:28:23 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:14:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,26 @@ t_bool	wildcard_strcmp(char *line, char *pattern)
 	int		status;
 	char	*placeholder;
 	t_bool	wildcard;
+	char	*line_copy;
+	char	*pattern_copy;
 
 	status = 0;
 	placeholder = NULL;
 	wildcard = false;
-	string_quotes_transform(line, pattern);
+	string_transform(line, pattern);
+	line_copy = line;
+	pattern_copy = pattern;
 	while (*line)
 	{
 		status = process_pattern_match(&line, &pattern, &wildcard,
 				&placeholder);
 		if (status == 1)
-			return (string_quotes_transform_back(line, pattern, true));
+			return (string_transform_back(line_copy, pattern_copy, true));
 		else if (status == -1)
-			return (string_quotes_transform_back(line, pattern, false));
+			return (string_transform_back(line_copy, pattern_copy, false));
 	}
 	if (*pattern == NULL_TERM || if_only_asterisk(pattern))
-		return (string_quotes_transform_back(line, pattern, true));
+		return (string_transform_back(line_copy, pattern_copy, true));
 	else
-		return (string_quotes_transform_back(line, pattern, false));
+		return (string_transform_back(line_copy, pattern_copy, false));
 }

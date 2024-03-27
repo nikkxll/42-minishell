@@ -6,8 +6,14 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:11:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 17:05:14 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:16:48 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
+
+//need to change later
+int	run_exit(char **arr)
+{
+	exit(ft_atoi(arr[0]));
+}
