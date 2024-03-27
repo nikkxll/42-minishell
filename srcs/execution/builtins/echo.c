@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:26:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 17:05:10 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:18:44 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ static int	echo_write(char **arr, int flag, int i)
 	{
 		while (arr[i])
 		{
-			ft_putstr_fd(arr[i], 1);
+			ft_putstr_fd(arr[i], STDOUT_FILENO);
 			if (arr[i + 1])
-				ft_putchar_fd(SPACE, 1);
+				ft_putchar_fd(SPACE, STDOUT_FILENO);
 			i++;
 		}
-		ft_putchar_fd(NL, 1);
+		ft_putchar_fd(NL, STDOUT_FILENO);
 	}
 	else
 	{
 		while (arr[i])
 		{
-			ft_putstr_fd(arr[i], 1);
+			ft_putstr_fd(arr[i], STDOUT_FILENO);
 			if (arr[i + 1])
-				ft_putchar_fd(SPACE, 1);
+				ft_putchar_fd(SPACE, STDOUT_FILENO);
 			i++;
 		}
 	}
@@ -58,7 +58,7 @@ int	run_echo(char **arr, int i, int j, int nl_flag)
 	int	k;
 
 	if (!arr[i])
-		ft_putchar_fd(NL, 1);
+		ft_putchar_fd(NL, STDOUT_FILENO);
 	while (arr[i])
 	{
 		k = i;

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 17:05:35 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:18:54 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,15 @@ static int	export_without_args(char ***envp, int i, int j)
 		j = 0;
 		if (envp_sorted[i][0] == UNSCORE && envp_sorted[i][1] == EQUAL)
 			continue ;
-		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		while (envp_sorted[i][j] != EQUAL)
-			ft_putchar_fd(envp_sorted[i][j++], 1);
-		ft_putchar_fd(EQUAL, 1);
-		ft_putchar_fd(D_QUOTE, 1);
+			ft_putchar_fd(envp_sorted[i][j++], STDOUT_FILENO);
+		ft_putchar_fd(EQUAL, STDOUT_FILENO);
+		ft_putchar_fd(D_QUOTE, STDOUT_FILENO);
 		j++;
-		ft_putstr_fd(envp_sorted[i] + j, 1);
-		ft_putchar_fd(D_QUOTE, 1);
-		ft_putchar_fd(NL, 1);
+		ft_putstr_fd(envp_sorted[i] + j, STDOUT_FILENO);
+		ft_putchar_fd(D_QUOTE, STDOUT_FILENO);
+		ft_putchar_fd(NL, STDOUT_FILENO);
 	}
 	free(envp_sorted);
 	return (SUCCESS);

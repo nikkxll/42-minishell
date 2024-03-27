@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:35:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 17:05:37 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:19:07 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 */
 void	print_error_with_arg(char *error, char *arg, char *cmd)
 {
-	ft_putstr_fd(cmd, 2);
-	ft_putchar_fd('`', 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd("': ", 2);
-	ft_putstr_fd(error, 2);
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putchar_fd('`', STDERR_FILENO);
+	ft_putstr_fd(arg, STDERR_FILENO);
+	ft_putstr_fd("': ", STDERR_FILENO);
+	ft_putstr_fd(error, STDERR_FILENO);
 }
 
 /**
@@ -36,6 +36,6 @@ void	print_error_with_arg(char *error, char *arg, char *cmd)
 */
 void	print_error(char *error, char *cmd)
 {
-	ft_putstr_fd(cmd, 2);
-	ft_putstr_fd(error, 2);
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd(error, STDERR_FILENO);
 }

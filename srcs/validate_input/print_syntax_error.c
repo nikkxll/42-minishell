@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:31:52 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/26 19:28:23 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:19:22 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_syntax_error(char *str)
 			i++;
 	if (i != 0)
 		str[i] = NULL_TERM;
-	ft_putstr_fd("e-bash: syntax error near unexpected token `", 2);
-	ft_putstr_fd(str, 2);
-	ft_putendl_fd("'", 2);
+	ft_putstr_fd("e-bash: syntax error near unexpected token `", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putendl_fd("'", STDERR_FILENO);
 }
