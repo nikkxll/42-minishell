@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:21:06 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 17:05:16 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 13:53:47 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	run_pwd(char **arr)
 	if (len >= 1 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
 	{
 		arr[0][2] = NULL_TERM;
-		print_error_with_arg("options are not supported\n", arr[0], "pwd: ");
+		print_arg_err_msg("pwd: `", arr[0], "': options are not supported\n");
 		return (SUCCESS);
 	}
 	working_dir = getcwd(NULL, 0);
 	if (!working_dir)
 	{
-		print_error("allocation error occured\n", "pwd: ");
+		print_err_msg("pwd: ", "allocation error occured\n");
 		return (MALLOC_ERR);
 	}
 	ft_printf("%s\n", working_dir);

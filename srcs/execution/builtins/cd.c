@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:22:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/27 23:18:25 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 13:52:03 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static int	cd_precheck(char **arr)
 		if (arr[0][1] == DASH && arr[0][2] == NULL_TERM)
 			return (0);
 		arr[0][2] = NULL_TERM;
-		print_error_with_arg("options are not supported\n", arr[0], "cd: ");
+		print_arg_err_msg("cd: `", arr[0], "': options are not supported\n");
 		return (-1);
 	}
 	if (len >= 2)
 	{
-		print_error("too many arguments\n", "cd: ");
+		print_err_msg("cd: ", "too many arguments\n");
 		return (-1);
 	}
 	return (0);
@@ -47,7 +47,7 @@ int	update_pwd(char ***envp)
 {
 	int		position;
 	char	*cwd;
-	
+
 	position = env_var(*envp, "PWD=", -1, 4);
 	if (position != -1)
 	{
@@ -79,21 +79,21 @@ int	run_cd(char **arr, char **envp)
 	if (arr[0][0] == NULL_TERM || !ft_strncmp(arr[0], "--", 2))
 	{
 		if (chdir(envp[env_var(envp, "HOME=", -1, 5)] + 5) != 0)
-			print_error_with_arg("No such file or directory\n",
-				arr[0], "cd: ");
+			print_arg_err_msg("cd: ", arr[0],
+				": No such file or directory\n");
 	}
 	else if (!ft_strncmp(arr[0], "-", ft_strlen(arr[0])))
 	{
 		if (chdir(envp[env_var(envp, "OLDPWD=", -1, 7)] + 7) != 0)
-			print_error("OLDPWD not set\n", "cd: ");
+			print_err_msg("cd: ", "OLDPWD not set\n");
 		else
 			ft_printf("%s\n", envp[env_var(envp, "OLDPWD=", -1, 7)] + 7);
 	}
 	else
 	{
 		if (chdir(arr[0]) != 0)
-			print_error_with_arg("No such file or directory\n",
-				arr[0], "cd: ");
+			print_arg_err_msg("cd: ", arr[0],
+				": No such file or directory\n");
 	}
 	if (update_pwd(&envp) == MALLOC_ERR)
 		return (MALLOC_ERR);

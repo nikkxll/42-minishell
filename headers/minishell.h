@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/27 16:14:40 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 20:41:19 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@ int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);
 void			print_error_with_arg(char *error, char *arg, char *cmd);
 void			print_error(char *error, char *cmd);
+
+void			print_err_msg(char *cmd, char *msg);
+void			print_arg_err_msg(char *cmd, char *arg, char *msg);
+
 int				run_cd(char **arr, char **envp);
 int				run_echo(char **arr, int i, int j, int nl_flag);
 int				run_export(char **arr, char ***envp);
@@ -131,7 +135,11 @@ t_bool			string_transform_back(char *line, char *pattern,
 					t_bool res);
 int				array_with_entities_len(int sub_arr_len);
 t_bool			wildcard_strcmp(char *line, char *pattern);
-int				entities_expand(char ***temp_arr, char *str, t_w_cards *wc);
+int				entities_expand(char ***temp_arr, char *str, t_w_cards *wc,
+					char **local);
+int				fill_temp_array_conditions_block(t_w_cards *wc,
+					char **temp_arr_local, char *str, int *i);
+int				if_abs_path(t_w_cards *wc, char *str);
 int				wildcards(char ***arr);
 
 int				minishell(char **arr, char ***env);

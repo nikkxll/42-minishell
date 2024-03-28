@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:45:50 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/27 16:00:49 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 20:14:28 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,12 @@ int	fill_temp_array(char ***arr, t_w_cards *wc)
 	i = -1;
 	while (++i < wc->arr_len)
 	{
-		wc->status = entities_expand(&((wc->temp_arr)[i]), (*arr)[i], wc);
+		if (if_abs_path(wc, (*arr)[i]) == MALLOC_ERR)
+		{
+			ft_free_3d_array(wc->temp_arr, 0);
+			return (MALLOC_ERR);
+		}
+		wc->status = entities_expand(&((wc->temp_arr)[i]), (*arr)[i], wc, NULL);
 		if (wc->status == MALLOC_ERR)
 		{
 			ft_free_3d_array(wc->temp_arr, 0);
@@ -111,5 +116,73 @@ int	allocate_and_fill_expanded_array(t_w_cards *wc)
 		while ((wc->temp_arr)[j][++k])
 			(wc->new_arr)[++i] = (wc->temp_arr)[j][k];
 	}
+	return (SUCCESS);
+}
+
+/**
+ * @brief	Auxiliary function for a @c `if_abs_path()`
+ * @param	wc pointer to the structure with local variables initiated in
+ * @c `wildcards()`
+ * @param	str string to iterate in
+ * @param	len_to_slash_cwd length of the current working directory
+ * up to the last slash
+ * @param	len_to_slash_str length of the string up to the last slash
+ * @return	@c `SUCCESS` if no errors occured, @c `MALLOC_ERR` if one of the
+ * mallocs failed
+ */
+static int	absolute_path_check(t_w_cards *wc, char *str,
+	int len_to_slash_cwd, int len_to_slash_str)
+{
+	char	*cwd;
+	char	*cwd_join;
+
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return (MALLOC_ERR);
+	cwd_join = ft_strjoin(cwd, "/");
+	if (!cwd_join)
+	{
+		free(cwd);
+		return (MALLOC_ERR);
+	}
+	len_to_slash_cwd = ft_strrchr(cwd_join, SLASH) - cwd_join + 1;
+	if (len_to_slash_str > len_to_slash_cwd)
+		len_to_slash_cwd = len_to_slash_str;
+	if (str[0] == DOT && str[1] == SLASH)
+		wc->abs_path_flag = DOT_PATH;
+	else if (!ft_strncmp(cwd_join, str, len_to_slash_cwd))
+		wc->abs_path_flag = ABS_PATH;
+	free(cwd);
+	free(cwd_join);
+	return (SUCCESS);
+}
+
+/**
+ * @brief	Function that checks for an path in a string
+ * @param	wc pointer to the structure with local variables initiated in
+ * @c `wildcards()`
+ * @param	str string to iterate in
+ * @return	@c `SUCCESS` if no errors occured, @c `MALLOC_ERR` if one of the
+ * mallocs failed
+ */
+int	if_abs_path(t_w_cards *wc, char *str)
+{
+	int		len_to_slash_str;
+	int		len_to_slash_cwd;
+	char	*temp;
+
+	len_to_slash_str = 0;
+	len_to_slash_cwd = 0;
+	temp = ft_strrchr(str, SLASH);
+	if (temp != NULL)
+		len_to_slash_str = temp - str + 1;
+	if (len_to_slash_str != 0 && ft_strlen(str) > 0)
+	{
+		if (absolute_path_check(wc, str, len_to_slash_cwd,
+				len_to_slash_str) == MALLOC_ERR)
+			return (MALLOC_ERR);
+	}
+	else
+		wc->abs_path_flag = NO_PATH;
 	return (SUCCESS);
 }

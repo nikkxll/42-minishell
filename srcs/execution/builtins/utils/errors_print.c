@@ -6,36 +6,51 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:35:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/27 11:19:07 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 13:58:37 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../headers/minishell.h"
 
 /**
-* @brief	A function that prints an error with an argument in it
-* @param	error error message
-* @param	arg argument
+* @brief	A function that prints an error without any arguments in it
 * @param	cmd command
+* @param	msg error message
 * @return	@c `void`
 */
-void	print_error_with_arg(char *error, char *arg, char *cmd)
+void	print_err_msg(char *cmd, char *msg)
 {
-	ft_putstr_fd(cmd, STDERR_FILENO);
-	ft_putchar_fd('`', STDERR_FILENO);
-	ft_putstr_fd(arg, STDERR_FILENO);
-	ft_putstr_fd("': ", STDERR_FILENO);
-	ft_putstr_fd(error, STDERR_FILENO);
+	cmd = ft_strjoin("\033[0;31me-bash: \033[0;0m", cmd);
+	if (!cmd)
+		return ;
+	msg = ft_strjoin(cmd, msg);
+	free(cmd);
+	if (!msg)
+		return ;
+	ft_putstr_fd(msg, STDERR_FILENO);
+	free(msg);
 }
 
 /**
-* @brief	A function that prints an error without any arguments in it
-* @param	error error message
+* @brief	A function that prints an error with an argument in it
 * @param	cmd command
+* @param	arg argument
+* @param	msg error message
 * @return	@c `void`
 */
-void	print_error(char *error, char *cmd)
+void	print_arg_err_msg(char *cmd, char *arg, char *msg)
 {
-	ft_putstr_fd(cmd, STDERR_FILENO);
-	ft_putstr_fd(error, STDERR_FILENO);
+	cmd = ft_strjoin("\033[0;31me-bash: \033[0;0m", cmd);
+	if (!cmd)
+		return ;
+	arg = ft_strjoin(cmd, arg);
+	free(cmd);
+	if (!arg)
+		return ;
+	msg = ft_strjoin(arg, msg);
+	free(arg);
+	if (!msg)
+		return ;
+	ft_putstr_fd(msg, STDERR_FILENO);
+	free(msg);
 }

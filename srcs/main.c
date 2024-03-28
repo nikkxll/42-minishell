@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/27 23:24:50 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 20:12:27 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(void)
 		if (command && *command)
 			add_history(command);
 		else
-			continue;
+			continue ;
 		arr = wrapper_ft_split_with_quotes(command);
 		minishell(arr, &env);
 	}
@@ -50,7 +50,7 @@ int	main(void)
 // 	char		**env;
 
 // 	env = cpy_env(environ);
-// 	command = ft_strdup("echo a*b");
+// 	command = ft_strdup("*");
 // 	// while (1)
 // 	// {
 // 	// 	command = readline("e-bash > ");

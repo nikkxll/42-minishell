@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:44:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/27 16:03:59 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 20:40:38 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
  * @return	@c `SUCCESS` if the array is successfully filled,
  * @c `MALLOC_ERR` if memory allocation fails
  */
-static int	fill_temp_array_with_strings(char *str, char **temp_arr_local,
+int	fill_temp_array_with_strings(char *str, char **temp_arr_local,
 	t_w_cards *wc)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (wc->entry != NULL && i < wc->ent_len)
@@ -34,15 +34,9 @@ static int	fill_temp_array_with_strings(char *str, char **temp_arr_local,
 			wc->entry = readdir(wc->dir);
 			continue ;
 		}
-		if (wildcard_strcmp(wc->entry->d_name, str))
-		{
-			temp_arr_local[i] = ft_strdup(wc->entry->d_name);
-			if (!temp_arr_local[i++])
-			{
-				closedir(wc->dir);
-				return (MALLOC_ERR);
-			}
-		}
+		if (fill_temp_array_conditions_block(wc, temp_arr_local, str, &i)
+			== MALLOC_ERR)
+			return (MALLOC_ERR);
 		wc->entry = readdir(wc->dir);
 	}
 	return (SUCCESS);
@@ -72,17 +66,20 @@ static int	empty_array_fill(char **temp_arr_local, char *str)
  * @param	temp_arr Pointer to the temporary array
  * @param	str The wildcard pattern string
  * @param	wc Pointer to wildcard expansion data
+ * @param	local local array to dereference temporary array
  * @return	@c `SUCCESS` if expansion and population succeed,
  * @c `MALLOC_ERR` if memory allocation fails,
  * @c `SYSTEM_ERROR` if an error occurs in file operations
  */
-int	entities_expand(char ***temp_arr, char *str, t_w_cards *wc)
+int	entities_expand(char ***temp_arr, char *str, t_w_cards *wc, char **local)
 {
-	char	**temp_arr_local;
+	char	*slash_searcher;
 
-	temp_arr_local = *temp_arr;
+	local = *temp_arr;
+	slash_searcher = ft_strrchr(str, SLASH);
 	wc->dot_ind = false;
-	if (str[0] == '.')
+	if ((slash_searcher != NULL && slash_searcher[1] == '.')
+		|| (slash_searcher == NULL && str[0] == '.'))
 		wc->dot_ind = true;
 	wc->dir = opendir(".");
 	if (wc->dir == NULL)
@@ -91,14 +88,14 @@ int	entities_expand(char ***temp_arr, char *str, t_w_cards *wc)
 		return (SYSTEM_ERROR);
 	}
 	wc->entry = readdir(wc->dir);
-	if (fill_temp_array_with_strings(str, temp_arr_local, wc) == MALLOC_ERR)
+	if (fill_temp_array_with_strings(str, local, wc) == MALLOC_ERR)
 		return (MALLOC_ERR);
 	if (closedir(wc->dir) == SYSTEM_ERROR)
 	{
 		perror("Unable to close directory");
 		return (SYSTEM_ERROR);
 	}
-	if (empty_array_fill(temp_arr_local, str) == MALLOC_ERR)
+	if (empty_array_fill(local, str) == MALLOC_ERR)
 		return (MALLOC_ERR);
 	return (SUCCESS);
 }

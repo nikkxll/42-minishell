@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:54:18 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 17:05:18 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 13:56:08 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ static void	iterate_through_args(char **arr, char ***envp, int *j)
 
 	if (arr[*j][0] == DASH)
 	{
-		print_error_with_arg("not a valid identifier\n", arr[*j],
-			"unset: ");
+		print_arg_err_msg("unset: `", arr[*j],
+			"': not a valid identifier\n");
 		return ;
 	}
 	if (arr[*j][0] == UNSCORE && arr[*j][1] == NULL_TERM)
@@ -113,7 +113,7 @@ int	run_unset(char **arr, char ***envp)
 	if (len >= 1 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
 	{
 		arr[0][2] = NULL_TERM;
-		print_error_with_arg("options are not supported\n", arr[0], "unset: ");
+		print_arg_err_msg("unset: `", arr[0], "': options are not supported\n");
 		return (SUCCESS);
 	}
 	else if (len > 0)

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/22 15:41:51 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:12:02 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_wildcards
 	int			arr_len;
 	int			ent_len;
 	int			status;
+	int			abs_path_flag;
 	t_bool		dot_ind;
 }	t_w_cards;
 

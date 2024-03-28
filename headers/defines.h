@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/27 12:40:18 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:05:01 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ enum	e_characters
 	C_ROUND = 41,
 	ASTERISK = 42,
 	DASH = 45,
+	DOT = 46,
+	SLASH = 47,
 	SEMICOLON = 59,
 	REDIR_L = 60,
 	EQUAL = 61,
@@ -72,6 +74,13 @@ enum	e_export_types
 	EXPORT_EDIT,
 	EXPORT_ADD,
 	EXPORT_SKIP
+};
+
+enum	e_wc_paths
+{
+	NO_PATH = 1,
+	DOT_PATH,
+	ABS_PATH,
 };
 
 # ifndef NOTHING_TO_EXPAND

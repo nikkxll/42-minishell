@@ -41,7 +41,7 @@ EXECUTION_PATH		:=	execution/
 EXECUTION_DS_NAME	:=	dollar_sign_expansion_utils.c dollar_sign_expansion.c
 EXECUTION_DS_PATH	:=	execution/dollar_sign_expansion/
 EXECUTION_WC_NAME	:=	wildcards.c wildcards_core.c wildcards_core_utils.c wildcards_entities_expand.c \
-						wildcards_utils.c wildcards_sort.c
+						wildcards_utils.c wildcards_sort.c wildcards_fill_array_with_entities.c
 EXECUTION_WC_PATH	:=	execution/wildcards/
 EXECUTION_UTILS_NAME:=	ft_split_with_quotes.c
 EXECUTION_UTILS_PATH:=	execution/utils/

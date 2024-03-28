@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:31:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 17:05:29 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:24:18 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	execute_error(char **arr, int *operations)
 	while (operations[++j])
 	{
 		if (operations[j] == EXPORT_ERROR)
-			print_error_with_arg("not a valid identifier\n", arr[j],
-				"export: ");
+			print_arg_err_msg("export: `", arr[j],
+				"': not a valid identifier\n");
 	}
 }

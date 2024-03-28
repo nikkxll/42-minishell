@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:42:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/27 16:00:34 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:46:19 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ int	sort_array_with_command_inside(t_w_cards *wc, char ***arr)
 }
 
 /**
- * @brief	Processes sorting for elements in an array based on if a
- * command inside the array
+ * @brief	Processes sorting for elements in an array
  * @param	wc Pointer to the wildcard structure
  * @param	i Pointer to the index of the current element being processed
  * @return	@c `SUCCESS` if sorting is successful, @c `MALLOC_ERR`
@@ -76,23 +75,15 @@ int	sort_array_with_command_inside(t_w_cards *wc, char ***arr)
 int	array_sorting_process(t_w_cards *wc, int *i)
 {
 	char	**sorted_arr;
-	if (*i == 0)
+
+	sorted_arr = sort_string_arr((wc->temp_arr)[*i],
+			ft_arrlen((void **)((wc->temp_arr)[*i])));
+	if (!(wc->temp_arr)[*i])
 	{
-		if (sort_array_with_command_inside(wc, &((wc->temp_arr)[*i]))
-				== MALLOC_ERR)
-			return (MALLOC_ERR);
+		ft_free_3d_array(wc->temp_arr, 0);
+		return (MALLOC_ERR);
 	}
-	else
-	{
-		sorted_arr = sort_string_arr((wc->temp_arr)[*i],
-				ft_arrlen((void **)((wc->temp_arr)[*i])));
-		if (!(wc->temp_arr)[*i])
-		{
-			ft_free_3d_array(wc->temp_arr, 0);
-			return (MALLOC_ERR);
-		}
-		free((wc->temp_arr)[*i]);
-		(wc->temp_arr)[*i] = sorted_arr;
-	}
+	free((wc->temp_arr)[*i]);
+	(wc->temp_arr)[*i] = sorted_arr;
 	return (SUCCESS);
 }
