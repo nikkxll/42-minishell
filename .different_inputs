@@ -96,3 +96,4 @@ echo a&''&b |>>a|<a
 echo a&&b'' |>>a|<a
 
 protestit povedenie wildcards when permissions denied dlya foldera
+-wild redirects

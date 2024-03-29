@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 14:14:39 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:08:10 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_pipe			*init_t_pipe(void);
 t_bracket		*init_t_bracket(void);
 t_command		*init_t_command(void);
 t_command_br	*init_t_command_br(void);
-t_cmd_simple	*init_t_cmd_simple(void);
 t_redir			*init_t_redir(void);
 t_bool			create_tree(char *str, t_node **root);
 t_bool			create_node(t_node_info *data, t_node **base);
@@ -53,7 +52,6 @@ t_bool			add_and_or_pipe_trees(t_node_info *data, t_node **root);
 t_bool			add_bracket(t_node_info *data, t_node **root);
 t_bool			add_command(t_node_info *data, t_node **root);
 t_bool			add_command_br(t_node_info *data, t_node **root);
-t_bool			add_cmd_simple(t_node_info *data, t_node **root);
 
 /*_____ String-splitter _____*/
 int				set_node_info_and_or_pipe(t_node_info **node, char *str,
@@ -85,6 +83,16 @@ int				command_without_bracket_block(t_node_info **node, char *str,
 					int type);
 int				brackets_search(char *str);
 int				redir_search(char *str);
+
+/*_____ Traverse-tree _____*/
+int				traverse_tree(t_node *node, char ***envp);
+int				traverse_and(t_node *node, char ***envp);
+int				traverse_or(t_node *node, char ***envp);
+int				traverse_pipe(t_node *node, char ***envp);
+int				traverse_bracket(t_node *node, char ***envp);
+int				traverse_command_br(t_node *node, char ***envp);
+int				traverse_command(t_node *node, char ***envp);
+int				wait_children(int pids[2], int num);
 
 /*_____ Execution _____*/
 

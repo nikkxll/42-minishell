@@ -10,6 +10,12 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 #########START_SOURCES#########
 ###############################
 
+#######AST_TRAVERSE_TREE#######
+AST_TRAVERSE_NAME	:=	traverse_tree.c traverse_bracket.c traverse_pipe.c wait_children.c \
+						traverse_command_br.c traverse_command.c
+AST_TRAVERSE_PATH	:=	ast/ast_traverse_tree/
+AST_TRAVERSE		:=	$(addprefix $(AST_TRAVERSE_PATH), $(AST_TRAVERSE_NAME))
+
 #########COMMON_UTILS##########
 COMMON_UTILS_NAME	:=	remove_quotes.c errors_print.c
 COMMON_UTILS_PATH	:=	common_utils/
@@ -61,8 +67,8 @@ BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
 EXECUTION			:=	$(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME)) \
 						$(addprefix $(EXECUTION_UTILS_PATH), $(EXECUTION_UTILS_NAME))
 
-SRCS				:=	main.c minishell.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_SPLITTER) $(BUILTINS) \
-						$(EXECUTION) $(D_SIGN) $(WILDCARDS) $(COMMON_UTILS)
+SRCS				:=	main.c minishell.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_TRAVERSE) $(AST_SPLITTER) \
+						$(BUILTINS) $(EXECUTION) $(D_SIGN) $(WILDCARDS) $(COMMON_UTILS)
 SRCS_PATH			:=	srcs/
 
 ###############################
@@ -104,6 +110,7 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)
 	@mkdir -p $(OBJS_PATH)$(AST_TREE_PATH)
 	@mkdir -p $(OBJS_PATH)$(AST_SPLITTER_PATH)
+	@mkdir -p $(OBJS_PATH)$(AST_TRAVERSE_PATH)
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_PATH)
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_UTILS_PATH)
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_EXPORT_PATH)
