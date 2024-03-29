@@ -100,4 +100,10 @@ protestit povedenie wildcards when permissions denied dlya foldera
 ____
 bash-3.2$ unset HOME
 bash-3.2$ cd
+bash-3.2$ cd ''
+____
+
+____
+bash-3.2$ export a="echo *"
+bash-3.2$ $a
 ____

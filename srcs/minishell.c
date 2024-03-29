@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 14:20:05 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:09:52 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	minishell(char **arr, char ***env)
 		if (expand_dollar_sign(&arr[i++], *env, 0) == MALLOC_ERR)
 			printf("%s\n", "malloc error");
 	}
+	if (array_build_before_wc(&arr, -1, -1, -1) == MALLOC_ERR)
+		printf("%s\n", "malloc error");
 	if (wildcards(&arr) != 0)
 	{
 		printf("%s\n", "error occured");
@@ -71,7 +73,7 @@ int	minishell(char **arr, char ***env)
 // 	char		**env;
 
 // 	env = cpy_env(environ);
-// 	command = ft_strdup("*");
+// 	command = ft_strdup("echo $PWD/*");
 // 	// while (1)
 // 	// {
 // 	// 	command = readline("e-bash > ");

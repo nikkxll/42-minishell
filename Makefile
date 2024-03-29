@@ -4,14 +4,14 @@ include libft/.make
 NAME				:=	minishell
 
 CC					:=	cc
-FLAGS				:=	-Wall -Wextra -Werror -g
+FLAGS				:=	-Wall -Wextra -Werror -g -fsanitize=address
 
 ###############################
 #########START_SOURCES#########
 ###############################
 
 #########COMMON_UTILS##########
-COMMON_UTILS_NAME	:=	remove_quotes.c errors_print.c
+COMMON_UTILS_NAME	:=	remove_quotes.c errors_print.c split_before_wildcards.c
 COMMON_UTILS_PATH	:=	common_utils/
 COMMON_UTILS		:=	$(addprefix $(COMMON_UTILS_PATH), $(COMMON_UTILS_NAME))
 

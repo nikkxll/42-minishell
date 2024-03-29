@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 14:14:39 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:01:33 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ int				fill_temp_array_conditions_block(t_w_cards *wc,
 int				if_abs_path(t_w_cards *wc, char *str);
 int				wildcards(char ***arr);
 
+int				array_build_before_wc(char ***arr, int i, int k, int j);
 int				minishell(char **arr, char ***env);
 
 #endif
