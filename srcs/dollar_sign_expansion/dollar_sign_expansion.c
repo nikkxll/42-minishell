@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign_expansion.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:30:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 19:28:23 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/29 13:50:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../../headers/minishell.h"
 
 /**
 * @brief	Auxiliary function for @c `expansion()` function

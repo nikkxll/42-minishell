@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 13:28:20 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:20:05 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	minishell(char **arr, char ***env)
 // 	env = cpy_env(environ);
 // 	while (1)
 // 	{
-// 		command = readline("\033[1;36mlitbash-1.0.0\033[0m $ ");
+// 		command = readline("\033[1;36me-bash:\033[0m $ ");
 // 		if (!command)
 // 		{
 // 			printf("\n");
@@ -54,7 +54,7 @@ int	minishell(char **arr, char ***env)
 // 			add_history(command);
 // 		else
 // 			continue ;
-// 		// validate_input(command);
+// 		validate_input(command);
 // 		arr = wrapper_ft_split_with_quotes(command);
 // 		minishell(arr, &env);
 // 	}

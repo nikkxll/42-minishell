@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_entities_expand.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:44:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/28 20:40:38 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/29 13:50:30 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../../headers/minishell.h"
 
 /**
  * @brief	Function to fill the temporary array with strings matching the

@@ -1,16 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_syntax_error.c                               :+:      :+:    :+:   */
+/*   errors_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 17:31:52 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/27 11:19:22 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/03/05 13:35:52 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/03/29 14:10:49 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
+/**
+* @brief	A function that prints an error without any arguments in it
+* @param	cmd command
+* @param	msg error message
+* @return	@c `void`
+*/
+void	print_err_msg(char *cmd, char *msg)
+{
+	cmd = ft_strjoin("\033[0;31me-bash: \033[0;0m", cmd);
+	if (!cmd)
+		return ;
+	msg = ft_strjoin(cmd, msg);
+	free(cmd);
+	if (!msg)
+		return ;
+	ft_putstr_fd(msg, STDERR_FILENO);
+	free(msg);
+}
+
+/**
+* @brief	A function that prints an error with an argument in it
+* @param	cmd command
+* @param	arg argument
+* @param	msg error message
+* @return	@c `void`
+*/
+void	print_arg_err_msg(char *cmd, char *arg, char *msg)
+{
+	cmd = ft_strjoin("\033[0;31me-bash: \033[0;0m", cmd);
+	if (!cmd)
+		return ;
+	arg = ft_strjoin(cmd, arg);
+	free(cmd);
+	if (!arg)
+		return ;
+	msg = ft_strjoin(arg, msg);
+	free(arg);
+	if (!msg)
+		return ;
+	ft_putstr_fd(msg, STDERR_FILENO);
+	free(msg);
+}
 
 /**
  * @brief	Handles printing syntax error messages for unexpected tokens
@@ -40,7 +83,8 @@ void	print_syntax_error(char *str)
 			i++;
 	if (i != 0)
 		str[i] = NULL_TERM;
-	ft_putstr_fd("e-bash: syntax error near unexpected token `", STDERR_FILENO);
+	ft_putstr_fd("\033[0;31me-bash: \033[0;0msyntax error near "
+		"unexpected token `", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putendl_fd("'", STDERR_FILENO);
 }

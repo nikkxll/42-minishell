@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/28 20:41:19 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:14:39 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "../libft/libft.h"
 # include "structs.h"
 # include "defines.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 
 #include <stdio.h>
 
@@ -100,12 +102,8 @@ void			processing(char **arr, int i);
 int				env_var(char **envp, char *var, int i, int j);
 int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);
-void			print_error_with_arg(char *error, char *arg, char *cmd);
-void			print_error(char *error, char *cmd);
-
 void			print_err_msg(char *cmd, char *msg);
 void			print_arg_err_msg(char *cmd, char *arg, char *msg);
-
 int				run_cd(char **arr, char **envp);
 int				run_echo(char **arr, int i, int j, int nl_flag);
 int				run_export(char **arr, char ***envp);
