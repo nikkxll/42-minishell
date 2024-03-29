@@ -21,6 +21,6 @@ fclean: clean
 	@$(MAKE) fclean -C $(PRINTF_PATH)
 	@$(MAKE) fclean -C $(GNL_PATH)
 	@$(MAKE) fclean -C $(AUX_PATH)
-	@echo "$(RED)Libft removed!$(EC)"
+	@echo "$(RED)LIBFT REMOVED!$(EC)"
 
 re: fclean all
