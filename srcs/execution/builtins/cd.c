@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:22:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/28 13:52:03 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:35:16 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,42 @@ int	update_pwd(char ***envp)
 }
 
 /**
+* @brief	A function that handles change of directory to @c `OLDPWD`
+* @param	envp an environment array
+* @param	str argument to apply for @c `chdir()`
+* @return	@c `void`
+*/
+void	handle_cd_oldpwd(char **envp, char *str)
+{
+	int	env_variable;
+
+	env_variable = env_var(envp, "OLDPWD=", -1, 7);
+	if (env_variable == -1)
+		print_err_msg("cd: ", "OLDPWD not set\n");
+	else if (chdir(envp[env_variable] + 7) != 0)
+		print_arg_err_msg("cd: ", str, ": chdir error occured\n");
+	else
+		ft_printf("%s\n", envp[env_variable] + 7);
+}
+
+/**
+* @brief	A function that handles change of directory to @c `HOME`
+* @param	envp an environment array
+* @param	str argument to apply for @c `chdir()`
+* @return	@c `void`
+*/
+void	handle_cd_home(char **envp, char *str)
+{
+	int	env_variable;
+
+	env_variable = env_var(envp, "HOME=", -1, 5);
+	if (env_variable == -1)
+		print_err_msg("cd: ", "HOME not set\n");
+	else if (chdir(envp[env_variable] + 5) != 0)
+		print_arg_err_msg("cd: ", str, ": chdir error occured\n");
+}
+
+/**
 * @brief	A function that runs cd built-in command
 * @param	arr array of arguments or options if allowed
 * @param	envp an environment array
@@ -76,18 +112,15 @@ int	run_cd(char **arr, char **envp)
 {
 	if (cd_precheck(arr) == -1)
 		return (SUCCESS);
-	if (arr[0][0] == NULL_TERM || !ft_strncmp(arr[0], "--", 2))
+	if (ft_arrlen((void **)arr) == 0 || !ft_strncmp(arr[0], "--", 2))
+		handle_cd_home(envp, arr[0]);
+	else if (!ft_strncmp(arr[0], "-", ft_strlen(arr[0]))
+		&& ft_strlen(arr[0]) > 0)
+		handle_cd_oldpwd(envp, arr[0]);
+	else if (ft_strlen(arr[0]) == 0)
 	{
-		if (chdir(envp[env_var(envp, "HOME=", -1, 5)] + 5) != 0)
-			print_arg_err_msg("cd: ", arr[0],
-				": No such file or directory\n");
-	}
-	else if (!ft_strncmp(arr[0], "-", ft_strlen(arr[0])))
-	{
-		if (chdir(envp[env_var(envp, "OLDPWD=", -1, 7)] + 7) != 0)
-			print_err_msg("cd: ", "OLDPWD not set\n");
-		else
-			ft_printf("%s\n", envp[env_var(envp, "OLDPWD=", -1, 7)] + 7);
+		if (chdir(".") != 0)
+			print_arg_err_msg("cd: ", arr[0], ": No such file or directory\n");
 	}
 	else
 	{

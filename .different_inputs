@@ -96,3 +96,8 @@ echo a&''&b |>>a|<a
 echo a&&b'' |>>a|<a
 
 protestit povedenie wildcards when permissions denied dlya foldera
+
+____
+bash-3.2$ unset HOME
+bash-3.2$ cd
+____
