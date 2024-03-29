@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 16:39:49 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:24:39 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ enum	e_characters
 
 enum	e_builtins
 {
-	CD_LEN = 3,
-	ENV_LEN = 4,
-	PWD_LEN = 4,
-	ECHO_LEN = 5,
-	EXIT_LEN = 5,
-	UNSET_LEN = 6,
-	EXPORT_LEN = 7,
+	CD_LEN = 2,
+	ENV_LEN = 3,
+	PWD_LEN = 3,
+	ECHO_LEN = 4,
+	EXIT_LEN = 4,
+	UNSET_LEN = 5,
+	EXPORT_LEN = 6,
 };
 
 enum	e_exit_status

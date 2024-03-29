@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:40:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 16:15:07 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/30 00:19:15 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	preorder(t_node	*tree)
 	else if (type == T_COMMAND)
 	{
 		printf("[t:%s, t_l:%d, cmd:%s]  \n", return_type(tree->type),
-		tree->left->type,((t_command *)tree)->str);
+			((t_command *)tree)->redir->type, ((t_command *)tree)->cmd);
 		preorder(tree->left);
 	}
 	else if (type == T_BRACKET)
@@ -102,7 +102,7 @@ void	preorder(t_node	*tree)
 	}
 	else if (type == T_REDIR)
 		printf("[t:%s, redir:%s]  \n", return_type(tree->type),
-		((t_redir *)tree)->str);
+			((t_redir *)tree)->str);
 }
 
 int	main(int argc, char **argv)

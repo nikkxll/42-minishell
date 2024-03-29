@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:01:13 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 16:52:05 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/30 00:20:18 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_tree(t_node **root)
 	}
 	else if ((*root)->type == T_COMMAND)
 	{
-		free_tree(&((t_command *)(*root))->left);
+		free_tree(&((t_command *)(*root))->redir);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:44:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 16:51:39 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/30 00:20:00 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ t_bool	add_command(t_node_info *info, t_node **root)
 	if (redir == NULL)
 		return (false);
 	redir->str = info->str_left;
-	((t_command *)(*root))->left = (t_node *)redir;
-	((t_command *)(*root))->str = info->str_right;
+	((t_command *)(*root))->redir = (t_node *)redir;
+	((t_command *)(*root))->cmd = info->str_right;
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 16:50:40 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/30 00:19:28 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ typedef struct s_bracket
 typedef struct s_command
 {
 	int		type;
-	t_node	*left;
-	char	*str;
+	t_node	*redir;
+	char	*cmd;
 }	t_command;
 
 typedef struct s_command_br
