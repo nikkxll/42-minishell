@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:54:18 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/28 13:56:08 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/29 12:36:53 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,18 @@ static int	execute_unset(char ***envp, int position, int i)
 static void	iterate_through_args(char **arr, char ***envp, int *j)
 {
 	int	position;
+	int	i;
 
-	if (arr[*j][0] == DASH)
+	i = 0;
+	while (arr[*j][i] != NULL_TERM)
 	{
-		print_arg_err_msg("unset: `", arr[*j],
-			"': not a valid identifier\n");
-		return ;
+		if (!ft_isenv(arr[*j][i], &i))
+		{
+			print_arg_err_msg("unset: `", arr[*j],
+				"': not a valid identifier\n");
+			return ;
+		}
+		i++;
 	}
 	if (arr[*j][0] == UNSCORE && arr[*j][1] == NULL_TERM)
 		return ;
