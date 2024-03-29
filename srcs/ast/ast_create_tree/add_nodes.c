@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:44:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 11:38:10 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:51:39 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,14 @@ t_bool	add_bracket(t_node_info *info, t_node **root)
 
 t_bool	add_command(t_node_info *info, t_node **root)
 {
-	t_bool	status;
 	t_redir	*redir;
 
 	redir = init_t_redir();
 	if (redir == NULL)
 		return (false);
 	redir->str = info->str_left;
-	(*root)->left = (t_node *)redir;
-	status = create_tree(info->str_right, &((*root)->right));
-	if (status == false)
-		return (false);
+	((t_command *)(*root))->left = (t_node *)redir;
+	((t_command *)(*root))->str = info->str_right;
 	return (true);
 }
 
@@ -74,11 +71,5 @@ t_bool	add_command_br(t_node_info *info, t_node **root)
 	status = create_tree(info->str_right, &((*root)->right));
 	if (status == false)
 		return (false);
-	return (true);
-}
-
-t_bool	add_cmd_simple(t_node_info *info, t_node **root)
-{
-	((t_cmd_simple *)(*root))->cmd = info->str_left;
 	return (true);
 }

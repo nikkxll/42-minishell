@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/28 15:12:02 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:50:40 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_command
 {
 	int		type;
 	t_node	*left;
-	t_node	*right;
+	char	*str;
 }	t_command;
 
 typedef struct s_command_br
@@ -97,12 +97,6 @@ typedef struct s_command_br
 	t_node	*left;
 	t_node	*right;
 }	t_command_br;
-
-typedef struct s_cmd_simple
-{
-	int		type;
-	char	*cmd;
-}	t_cmd_simple;
 
 typedef struct s_redir
 {

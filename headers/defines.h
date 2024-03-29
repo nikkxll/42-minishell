@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/28 15:05:01 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:39:49 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ enum	e_types
 	T_BRACKET,
 	T_COMMAND_BR,
 	T_COMMAND,
-	T_CMD_SIMPLE,
 	T_REDIR
 };
 
@@ -66,6 +65,9 @@ enum	e_exit_status
 	SYSTEM_ERROR = -1,
 	SUCCESS,
 	MALLOC_ERR = 200,
+	FORK_FAILURE = 999,
+	PIPE_FAILURE = 999,
+	DUP_FAILURE = 999,
 };
 
 enum	e_export_types
@@ -89,6 +91,26 @@ enum	e_wc_paths
 
 # ifndef NOT_FOUND
 #  define NOT_FOUND -1
+# endif
+
+# ifndef READ
+#  define READ 0
+# endif
+
+# ifndef WRITE
+#  define WRITE 1
+# endif
+
+# ifndef CHILD
+#  define CHILD 0
+# endif
+
+# ifndef FIRST
+#  define FIRST 0
+# endif
+
+# ifndef SECOND
+#  define SECOND 1
 # endif
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:21:27 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/21 15:11:48 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:07:16 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,6 @@ t_command_br	*init_t_command_br(void)
 	if (!node)
 		return (0);
 	node->type = T_COMMAND_BR;
-	return (node);
-}
-
-t_cmd_simple	*init_t_cmd_simple(void)
-{
-	t_cmd_simple	*node;
-
-	node = (t_cmd_simple *)ft_calloc(1, sizeof(t_cmd_simple));
-	if (!node)
-		return (0);
-	node->type = T_CMD_SIMPLE;
 	return (node);
 }
 

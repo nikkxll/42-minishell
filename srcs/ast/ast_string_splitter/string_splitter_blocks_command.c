@@ -43,5 +43,7 @@ int	command_without_bracket_block(t_node_info **node, char *str, int type)
 {
 	if (redir_search(str))
 		return (set_node_info_command(node, str, type));
+	else
+		return (set_node_cmd_simple(node, str, T_COMMAND));
 	return (0);
 }
