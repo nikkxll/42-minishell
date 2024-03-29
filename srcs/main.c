@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/12 12:47:52 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/03/29 13:28:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
 int	main(void)
 {

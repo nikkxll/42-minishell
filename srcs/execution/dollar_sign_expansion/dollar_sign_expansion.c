@@ -6,41 +6,19 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:30:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/12 10:37:21 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:28:23 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
-static int	enviroment_search_exp_module(char **envp, char *var, int i, int j)
-{
-	while (envp[++i])
-	{
-		if (ft_strncmp(envp[i], var, j) == 0)
-		{
-			if (envp[i][j] == EQUAL)
-				return (i);
-		}
-	}
-	return (NOT_FOUND);
-}
-
-static void	index_quotes(char *str, int i, int *single_q, int *double_q)
-{
-	if (str[i] == S_QUOTE && !(*single_q) && !(*double_q))
-		*single_q = 1;
-	else if (str[i] == D_QUOTE && !(*double_q) && !(*single_q))
-		*double_q = 1;
-	else if (str[i] == S_QUOTE && !(*single_q) && *double_q == 1)
-		*single_q = 2;
-	else if (str[i] == D_QUOTE && !(*double_q) && *single_q == 1)
-		*double_q = 2;
-	else if (str[i] == S_QUOTE && *single_q)
-		*single_q = 0;
-	else if (str[i] == D_QUOTE && *double_q)
-		*double_q = 0;
-}
-
+/**
+* @brief	Auxiliary function for @c `expansion()` function
+* @param	str string to search in
+* @param	envp environment array
+* @param	dollar pointer to structure which consist of used variables
+* @return	@c `void`
+*/
 static void	process_dollar_sign_in_string(char *str, char **envp,
 	t_dollar_exp *dollar)
 {
@@ -48,7 +26,7 @@ static void	process_dollar_sign_in_string(char *str, char **envp,
 	while (ft_isenv(str[dollar->i], &(dollar->i)))
 		(dollar->i)++;
 	dollar->last_part_ind = dollar->i;
-	dollar->env_list_pos = enviroment_search_exp_module(envp,
+	dollar->env_list_pos = environment_search_exp_module(envp,
 			str + dollar->k, -1, dollar->i - dollar->k);
 	if (dollar->env_list_pos != NOT_FOUND)
 		dollar->env_part = envp[dollar->env_list_pos] + dollar->i
@@ -61,6 +39,15 @@ static void	process_dollar_sign_in_string(char *str, char **envp,
 		str[(dollar->k)++] = NULL_TERM;
 }
 
+/**
+* @brief	Function that runs while loop to search for dollar signs
+* @param	str string to search in
+* @param	envp environment array
+* @param	env_part pointer to the env string that has been found
+* @param	last_part_ind pointer to the last part of the new string
+* @return	enviroment list position of expanding string if exist,
+* @c `NOTHING_TO_EXPAND` otherwise
+*/
 static int	expansion(char *str, char **envp, char **env_part,
 	int *last_part_ind)
 {
@@ -90,6 +77,19 @@ static int	expansion(char *str, char **envp, char **env_part,
 	return (NOTHING_TO_EXPAND);
 }
 
+/**
+ * @brief	Function to expand environment variables indicated by '$'
+ * in a string
+ * @note	This function iterates through the string and expands
+ * environment variables indicated by '$'
+ * It replaces each '$' followed by a variable name with the corresponding
+ * value from the environment
+ * @param	str Pointer to the string to be expanded
+ * @param	envp Environment variables array
+ * @param	last_ind The index of the last part of the string
+ * @return	@c `SUCCESS` if the expansion is successful,
+ * @c `MALLOC_ERR` if memory allocation fails during expansion
+ */
 int	expand_dollar_sign(char **str, char **envp, int last_ind)
 {
 	char	*new_str;

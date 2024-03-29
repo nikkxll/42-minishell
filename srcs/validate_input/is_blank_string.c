@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   is_blank_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:12:04 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/06 18:47:10 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:03:02 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+/**
+ * @brief	Function to check if a string consists only of whitespace
+ * characters
+ * @param	str Pointer to the string to be checked
+ * @return	@c `true` if the string is empty or contains only whitespace
+ * characters, @c `false` otherwise
+ */
 t_bool	is_blank_string(char *str)
 {
 	if (ft_strlen(str) == 0)

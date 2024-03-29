@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_pipeline.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/10 21:32:43 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/29 12:00:09 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	*validate_pipeline(char *str, t_bool *status)
 			*status = false;
 			return (next_token);
 		}
+		while (*next_token == SPACE)
+			next_token++;
 		next_pipeline = next_token;
 		next_token = validate_pipeline(next_pipeline, status);
 		if (next_token == next_pipeline)

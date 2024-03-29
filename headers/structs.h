@@ -3,15 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 11:37:00 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:12:02 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# include "minishell.h"
+
+typedef struct dirent	t_dirent;
+
+typedef struct s_wildcards
+{
+	DIR			*dir;
+	t_dirent	*entry;
+	char		***temp_arr;
+	char		**new_arr;
+	char		**sorted_new_arr;
+	char		**final_new_arr;
+	int			arr_len;
+	int			ent_len;
+	int			status;
+	int			abs_path_flag;
+	t_bool		dot_ind;
+}	t_w_cards;
+
+typedef struct s_dollar_exp
+{
+	char	*env_part;
+	int		i;
+	int		k;
+	int		single_q;
+	int		double_q;
+	int		last_part_ind;
+	int		env_list_pos;
+}	t_dollar_exp;
 
 typedef struct s_node
 {
@@ -79,16 +109,5 @@ typedef struct s_redir
 	int		type;
 	char	*str;
 }	t_redir;
-
-typedef struct s_dollar_exp
-{
-	char	*env_part;
-	int		i;
-	int		k;
-	int		single_q;
-	int		double_q;
-	int		last_part_ind;
-	int		env_list_pos;
-}	t_dollar_exp;
 
 #endif

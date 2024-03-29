@@ -6,14 +6,18 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 12:00:54 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/10 01:13:43 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:05:41 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../../../../headers/minishell.h"
+
 /**
-* @brief	Removes consecutive quotes from the string is allowable
-* @param	str - string that coming from readline function
+* @brief	Removes quotes from the string if allowable
+* @param	str string that coming from readline function
+* @param	i index
+* @param	j index
+* @return	@c `void`
 */
 void	remove_quotes(char *str, int i, int j)
 {
@@ -41,18 +45,40 @@ void	remove_quotes(char *str, int i, int j)
 	str[j] = NULL_TERM;
 }
 
+/**
+* @brief	Skips all @c `symbol` characters in a string
+* @param	str string to skip chars in
+* @param	i pointer to the index
+* @param	symbol character
+* @return	@c `void`
+*/
 void	skip_characters(char *str, int *i, int symbol)
 {
 	while (str[*i] == symbol && str[*i] != NULL_TERM)
 		(*i)++;
 }
 
+/**
+* @brief	A function that runs @c `remove_quotes()` function in a loop
+* @param	arr array of arguments
+* @param	i an index
+* @return	@c `void`
+*/
 void	processing(char **arr, int i)
 {
 	while (arr[i])
 		remove_quotes(arr[i++], 0, 0);
 }
 
+/**
+* @brief	A function that checks if @c `var` included in the environment
+* list
+* @param	envp an environment array
+* @param	var search string
+* @param	i an index
+* @param	j an index
+* @return	@c `i` if var was found, @c `NOT_FOUND` otherwise
+*/
 int	env_var(char **envp, char *var, int i, int j)
 {
 	while (envp[++i])
@@ -63,6 +89,14 @@ int	env_var(char **envp, char *var, int i, int j)
 	return (NOT_FOUND);
 }
 
+/**
+* @brief	A function that checks if @c `var` included in the @c `arr`
+* @param	arr array of arguments
+* @param	var search string
+* @param	i an index
+* @param	j an index
+* @return	@c `i` if var was found, @c `NOT_FOUND` otherwise
+*/
 int	arg_var(char **arr, char *var, int i, int j)
 {
 	while (--i >= 0)

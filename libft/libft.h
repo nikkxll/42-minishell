@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:06:39 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 12:53:55 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:07:43 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef enum e_bool
 long	ft_abs(long value);
 size_t	ft_arrlen(void **arr);
 void	ft_free_2d_array(void *ptr);
+void	ft_free_3d_array(void *ptr, int mode);
 void	ft_do_nothing(void *arg);
 long	ft_max(long num1, long num2);
 long	ft_min(long num1, long num2);

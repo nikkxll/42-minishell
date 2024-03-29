@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_splitter_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:43:34 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/12 13:02:11 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:59:42 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
 * @brief	Function that checks if number if odd
 * @param	number number to check
-* @return	`1` if odd, `0` otherwise
+* @return	@c `1` if odd, @c `0` otherwise
 */
 t_bool	is_odd(int number)
 {
@@ -25,8 +25,8 @@ t_bool	is_odd(int number)
 /**
 * @brief	Function that checks if we are inside the round brackets
 * @param	str string that coming from readline function
-* @param	point current index to point in `str`
-* @return	`0` if we are inside the brackets, `non zero` otherwise
+* @param	point current index to point in @c `str`
+* @return	@c `0` if we are inside the brackets, @c `!0` otherwise
 */
 int	round_brackets_check(char *str, int point)
 {
@@ -57,9 +57,9 @@ int	round_brackets_check(char *str, int point)
 /**
 * @brief	Function that checks if we are inside the quotes
 * @param	str string that coming from readline function
-* @param	point current index to point in `str`
+* @param	point current index to point in @c `str`
 * @param	symbol single or double quote
-* @return	`1` if we are outside of the quotes, `0` otherwise
+* @return	@c `1` if we are outside of the quotes, @c `0` otherwise
 */
 int	quote_check(char *str, int point, int symbol)
 {
@@ -87,7 +87,7 @@ int	quote_check(char *str, int point, int symbol)
 * @brief	Function that checks if the first nonspace char is opening
 * bracket
 * @param	str string that coming from readline function
-* @return	`1` if it is true, `0` otherwise
+* @return	@c `1` if it is true, @c `0` otherwise
 */
 int	first_nonspace_char_is_bracket(char *str)
 {
@@ -109,7 +109,7 @@ int	first_nonspace_char_is_bracket(char *str)
 /**
 * @brief	Function that checks if the last nonspace char is closing bracket
 * @param	str string that coming from readline function
-* @return	`1` if it is true, `0` otherwise
+* @return	@c `1` if it is true, @c `0` otherwise
 */
 int	last_nonspace_char_is_bracket(char *str)
 {

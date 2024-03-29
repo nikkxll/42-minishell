@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_print.c                                     :+:      :+:    :+:   */
+/*   ft_free_3d_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 13:35:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/08 11:52:13 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/03/14 19:37:20 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/03/15 16:01:09 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../libft.h"
 
-void	print_error_with_arg(char *error, char *arg, char *cmd)
+void	ft_free_3d_array(void *ptr, int mode)
 {
-	ft_putstr_fd(cmd, 2);
-	ft_putchar_fd('`', 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd("': ", 2);
-	ft_putstr_fd(error, 2);
-}
+	void	***arr;
+	void	(*f)(void *);
+	size_t	i;
 
-void	print_error(char *error, char *cmd)
-{
-	ft_putstr_fd(cmd, 2);
-	ft_putstr_fd(error, 2);
+	if (mode == 0)
+		f = ft_free_2d_array;
+	else
+		f = free;
+	arr = (void ***)ptr;
+	i = 0;
+	while (arr[i])
+		f(arr[i++]);
+	free(arr);
 }

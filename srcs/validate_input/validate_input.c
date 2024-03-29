@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:41:05 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/11 12:57:33 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:33:57 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

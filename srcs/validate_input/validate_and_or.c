@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_and_or.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/10 21:33:29 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:33:48 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

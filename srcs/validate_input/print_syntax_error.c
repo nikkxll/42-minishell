@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   print_syntax_error.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:31:52 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/10 21:40:16 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:19:22 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+/**
+ * @brief	Handles printing syntax error messages for unexpected tokens
+ * @note	This function prints a syntax error message indicating unexpected
+ * tokens in a given string. It identifies the type of token and modifies the
+ * string to null-terminate at the token position,
+ * then prints the error message
+ * @param	str String representing the unexpected token
+ * @return	@c `void`
+ */
 void	print_syntax_error(char *str)
 {
 	int	i;
@@ -31,7 +40,7 @@ void	print_syntax_error(char *str)
 			i++;
 	if (i != 0)
 		str[i] = NULL_TERM;
-	ft_putstr_fd("e-bash: syntax error near unexpected token `", 2);
-	ft_putstr_fd(str, 2);
-	ft_putendl_fd("'", 2);
+	ft_putstr_fd("e-bash: syntax error near unexpected token `", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putendl_fd("'", STDERR_FILENO);
 }

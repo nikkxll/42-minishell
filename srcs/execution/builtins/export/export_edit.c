@@ -6,12 +6,20 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:28:14 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/08 13:22:15 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:05:27 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../../../../headers/minishell.h"
 
+/**
+* @brief	A function that substitute edited string with previous version
+* @param	arr array of arguments or options if allowed
+* @param	result the new environment array
+* @param	i pointer to the index
+* @param	j pointer to the index
+* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+*/
 static int	edit_env_list_substitution(char **arr, char **result, int *i,
 	int *j)
 {
@@ -32,6 +40,14 @@ static int	edit_env_list_substitution(char **arr, char **result, int *i,
 	return (SUCCESS);
 }
 
+/**
+* @brief	A function that edit an argument int the environment list
+* @param	new_env pointer to the new environment array
+* @param	arr array of arguments or options if allowed
+* @param	operations auxiliary array to calculate the number of operations
+* of different type
+* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+*/
 int	edit_env_list(char ***new_env, char **arr, int *operations)
 {
 	int		i;

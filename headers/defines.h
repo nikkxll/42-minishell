@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/02/20 21:34:22 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:05:01 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ enum	e_characters
 {
 	NULL_TERM,
 	NL = 10,
+	SEPARATOR = 31,
 	SPACE = 32,
 	D_QUOTE = 34,
 	D_SIGN = 36,
@@ -36,7 +37,10 @@ enum	e_characters
 	S_QUOTE = 39,
 	O_ROUND = 40,
 	C_ROUND = 41,
+	ASTERISK = 42,
 	DASH = 45,
+	DOT = 46,
+	SLASH = 47,
 	SEMICOLON = 59,
 	REDIR_L = 60,
 	EQUAL = 61,
@@ -46,8 +50,20 @@ enum	e_characters
 	PIPE = 124,
 };
 
+enum	e_builtins
+{
+	CD_LEN = 3,
+	ENV_LEN = 4,
+	PWD_LEN = 4,
+	ECHO_LEN = 5,
+	EXIT_LEN = 5,
+	UNSET_LEN = 6,
+	EXPORT_LEN = 7,
+};
+
 enum	e_exit_status
 {
+	SYSTEM_ERROR = -1,
 	SUCCESS,
 	MALLOC_ERR = 200,
 };
@@ -58,6 +74,13 @@ enum	e_export_types
 	EXPORT_EDIT,
 	EXPORT_ADD,
 	EXPORT_SKIP
+};
+
+enum	e_wc_paths
+{
+	NO_PATH = 1,
+	DOT_PATH,
+	ABS_PATH,
 };
 
 # ifndef NOTHING_TO_EXPAND

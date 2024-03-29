@@ -3,32 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/12 12:45:20 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/28 20:41:19 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <dirent.h>
 # include "../libft/libft.h"
 # include "structs.h"
 # include "defines.h"
 
 #include <stdio.h>
 
+/*_____ Readline _____*/
+void			rl_clear_history(void);
+void			rl_replace_line(const char *text, int clear_undo);
+
 /*_____ Validate-input _____*/
-t_bool	validate_input(char *str);
-char	*validate_and_or(char *str, t_bool *status);
-char	*validate_pipeline(char *str, t_bool *status);
-char	*validate_command(char *str, t_bool *status);
-char	*validate_simple_command(char *str, t_bool *status);
-char	*validate_redirect(char *str, t_bool *status);
-char	*validate_word(char *str, t_bool *status);
-t_bool	is_blank_string(char *str);
-void	print_syntax_error(char *str);
+t_bool			validate_input(char *str);
+char			*validate_and_or(char *str, t_bool *status);
+char			*validate_pipeline(char *str, t_bool *status);
+char			*validate_command(char *str, t_bool *status);
+char			*validate_simple_command(char *str, t_bool *status);
+char			*validate_redirect(char *str, t_bool *status);
+char			*validate_word(char *str, t_bool *status);
+t_bool			is_blank_string(char *str);
+void			print_syntax_error(char *str);
 
 /*_____ Create-tree _____*/
 t_and			*init_t_and(void);
@@ -79,10 +84,13 @@ int				command_without_bracket_block(t_node_info **node, char *str,
 int				brackets_search(char *str);
 int				redir_search(char *str);
 
-/*_____ Dollar-sign-expansion _____*/
-int				expand_dollar_sign(char **str, char **envp, int last_part_ind);
+/*_____ Execution _____*/
 
-/*_____ Built-ins _____*/
+int				expand_dollar_sign(char **str, char **envp, int last_part_ind);
+int				environment_search_exp_module(char **envp, char *var, int i,
+					int j);
+void			index_quotes(char *str, int i, int *single_q, int *double_q);
+
 int				command_run(char **arr, char ***envp);
 char			**sort_string_arr(char **argv, int size);
 char			**cpy_env(char **envp);
@@ -94,6 +102,10 @@ int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);
 void			print_error_with_arg(char *error, char *arg, char *cmd);
 void			print_error(char *error, char *cmd);
+
+void			print_err_msg(char *cmd, char *msg);
+void			print_arg_err_msg(char *cmd, char *arg, char *msg);
+
 int				run_cd(char **arr, char **envp);
 int				run_echo(char **arr, int i, int j, int nl_flag);
 int				run_export(char **arr, char ***envp);
@@ -107,5 +119,29 @@ int				add_to_env_list(char ***new_env, char **arr, char **envp,
 int				run_pwd(char **arr);
 int				run_unset(char **arr, char ***envp);
 int				run_env(char **arr, char ***envp);
+int				run_exit(char **arr);
+
+char			**wrapper_ft_split_with_quotes(char *str);
+
+int				allocate_temp_array(char ***arr, t_w_cards *wc);
+int				fill_temp_array(char ***arr, t_w_cards *wc);
+int				allocate_and_fill_expanded_array(t_w_cards *wc);
+char			**str_array_join(char **arr, char *str);
+int				sort_array_with_command_inside(t_w_cards *wc, char ***arr);
+int				array_sorting_process(t_w_cards *wc, int *i);
+t_bool			if_only_asterisk(char *pattern);
+void			string_transform(char *line, char *pattern);
+t_bool			string_transform_back(char *line, char *pattern,
+					t_bool res);
+int				array_with_entities_len(int sub_arr_len);
+t_bool			wildcard_strcmp(char *line, char *pattern);
+int				entities_expand(char ***temp_arr, char *str, t_w_cards *wc,
+					char **local);
+int				fill_temp_array_conditions_block(t_w_cards *wc,
+					char **temp_arr_local, char *str, int *i);
+int				if_abs_path(t_w_cards *wc, char *str);
+int				wildcards(char ***arr);
+
+int				minishell(char **arr, char ***env);
 
 #endif

@@ -23,7 +23,7 @@ GNL_HEADERS		:=	get_next_line.h
 #AUXILIARY_FUNCTIONS
 AUX_PATH		:=	auxiliary/
 
-AUX_SRCS		:=	ft_abs.c ft_do_nothing.c ft_free_2d_array.c ft_max.c ft_min.c ft_arrlen.c
+AUX_SRCS		:=	ft_abs.c ft_do_nothing.c ft_free_2d_array.c ft_free_3d_array.c ft_max.c ft_min.c ft_arrlen.c
 
 #MAIN_LIBFT
 LIBFT			:=	libft.a
@@ -33,10 +33,26 @@ LIBFT_SOURSES	:=	$(addprefix $(LFT_PATH), $(LFT_SRCS)) $(addprefix $(PRINTF_PATH
 					$(addprefix $(AUX_PATH), $(AUX_SRCS)) 
 
 #######COLORS_FOR_MESSAGES
-GREEN	=	\033[32m
-GREY	=	\033[90m
-EC		=	\033[0m
+RED				:=	\033[0;31m
+GREEN			:=	\033[0;32m
+BLUE			:=	\033[0;34m
+CYAN			:=	\033[0;36m
+GREY			:=	\033[90m
+EC				:=	\033[0m
 
 #######COMPILER_SETTINGS
-CC_LFT		= cc
-FLAGS_LFT	= -Wall -Wextra -Werror -g
+CC_LFT			:= cc
+FLAGS_LFT		:= -Wall -Wextra -Werror -g
+
+define progress
+	@$(eval COMPILED_OBJS=$(shell echo "$$(($(COMPILED_OBJS) + 1))"))
+	@if [ "$(MSG_PRINTED)" = false ]; then \
+		printf "$(GREY)\nCompiling $(EC)$(CYAN)$(1)$(EC)$(GREY), please wait$(EC)"; \
+		printf "$(GREY)\n$(EC)"; \
+		$(eval MSG_PRINTED=true) \
+	fi
+	@printf "\r$(GREY)["
+	@perl -e 'printf "%-48s", "#" x int(($(COMPILED_OBJS) * 48 / $(TOTAL_OBJS)));'
+	@printf "] $(GREY)%.2f%%$(EC)" "$(shell echo "$(COMPILED_OBJS) / $(TOTAL_OBJS) * 100" | bc -l)"
+endef
+
