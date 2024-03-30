@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 19:09:52 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/30 12:50:48 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,40 @@ int	minishell(char **arr, char ***env)
 	return (0);
 }
 
-// int	main(void)
-// {
-// 	char		*command;
-// 	extern char	**environ;
-// 	char		**arr;
-// 	char		**env;
+int	main(void)
+{
+	char		*command;
+	extern char	**environ;
+	char		**arr;
+	char		**env;
+	char		*folder_name;
+	char		*prompt;
 
-// 	env = cpy_env(environ);
-// 	while (1)
-// 	{
-// 		command = readline("\033[1;36me-bash:\033[0m $ ");
-// 		if (!command)
-// 		{
-// 			printf("\n");
-// 			exit (0);
-// 		}
-// 		if (command && *command)
-// 			add_history(command);
-// 		else
-// 			continue ;
-// 		validate_input(command);
-// 		arr = wrapper_ft_split_with_quotes(command);
-// 		minishell(arr, &env);
-// 	}
-// 	rl_clear_history();
-// 	ft_free_2d_array(env);
-// 	return (0);
-// }
+	env = cpy_env(environ);
+	while (1)
+	{
+		get_current_folder_name(&folder_name);
+		get_prompt(folder_name, &prompt);
+		command = readline(prompt);
+		if (!command || !ft_strncmp(command, "key", 3))
+		{
+			printf("\n");
+			return (0);
+		}
+		if (command && *command)
+			add_history(command);
+		else
+			continue ;
+		validate_input(command);
+		arr = wrapper_ft_split_with_quotes(command);
+		minishell(arr, &env);
+		free(folder_name);
+		free(prompt);
+	}
+	rl_clear_history();
+	ft_free_2d_array(env);
+	return (0);
+}
 
 // int	main(void)
 // {
