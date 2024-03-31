@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 18:24:39 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:58:20 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ enum	e_characters
 	DASH = 45,
 	DOT = 46,
 	SLASH = 47,
+	COLON = 58,
 	SEMICOLON = 59,
 	REDIR_L = 60,
 	EQUAL = 61,
