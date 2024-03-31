@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 16:08:10 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/01 02:04:37 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,10 @@ int				traverse_or(t_node *node, char ***envp);
 int				traverse_pipe(t_node *node, char ***envp);
 int				traverse_bracket(t_node *node, char ***envp);
 int				traverse_command_br(t_node *node, char ***envp);
-int				traverse_command(t_node *node, char ***envp);
+int				traverse_command(char *cmd, char *redir, char ***envp);
+int				parse_cmd(char *cmd, char ***res, char **envp);
 int				wait_children(int pids[2], int num);
+t_bool			is_builtin(char *cmd);
 
 /*_____ Execution _____*/
 

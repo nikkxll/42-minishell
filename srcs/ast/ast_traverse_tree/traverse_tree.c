@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:17:46 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/30 00:17:17 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/31 23:47:22 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	traverse_tree(t_node *node, char ***envp)
 	else if (type == T_COMMAND_BR)
 		status = traverse_command_br(node, envp);
 	// else if (type == T_COMMAND)
-	// 	status = traverse_command(node, envp);
+	// 	status = traverse_command(((t_command *)node)->cmd,
+	// 			((t_redir *)((t_command *)node)->redir)->str, envp);
 	return (status);
 }
 
