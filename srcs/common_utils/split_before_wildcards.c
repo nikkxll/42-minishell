@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:00:17 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/29 19:06:53 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/31 18:23:38 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	array_build_before_wc(char ***arr, int i, int k, int j)
 			(new_built)[++i] = (temp_3d_arr)[j][k];
 	}
 	ft_free_3d_array(temp_3d_arr, 1);
+	ft_free_2d_array(*arr);
 	*arr = new_built;
 	return (SUCCESS);
 }

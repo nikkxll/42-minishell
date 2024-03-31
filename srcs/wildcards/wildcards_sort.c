@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:42:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/29 13:50:37 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/31 17:45:44 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	array_sorting_process(t_w_cards *wc, int *i)
 
 	sorted_arr = sort_string_arr((wc->temp_arr)[*i],
 			ft_arrlen((void **)((wc->temp_arr)[*i])));
-	if (!(wc->temp_arr)[*i])
+	if (!sorted_arr)
 	{
 		ft_free_3d_array(wc->temp_arr, 0);
 		return (MALLOC_ERR);

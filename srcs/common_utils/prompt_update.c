@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:45:53 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/30 12:50:06 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/31 18:35:34 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,18 @@ int	get_prompt(char *folder_name, char **prompt)
 	
 	s1 = ft_strjoin("", "\033[1;36me-bash \033[0m\033[1;35m");
 	if (!s1)
+	{
+		free(folder_name);
 		return (MALLOC_ERR);
+	}
 	s2 = ft_strjoin(s1, folder_name);
-	if (!s2)
-	{
-		free(s1);
-		return (MALLOC_ERR);
-	}
-	*prompt = ft_strjoin(s2, "\033[0m $ ");
-	if (!(*prompt))
-	{
-		free(s1);
-		free(s2);
-		return (MALLOC_ERR);
-	}
+	free(folder_name);
 	free(s1);
+	if (!s2)
+		return (MALLOC_ERR);
+	*prompt = ft_strjoin(s2, "\033[0m $ ");
 	free(s2);
+	if (!(*prompt))
+		return (MALLOC_ERR);
     return (SUCCESS);
 }

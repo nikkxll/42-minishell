@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/30 12:50:48 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/31 18:36:41 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	main(void)
 			continue ;
 		validate_input(command);
 		arr = wrapper_ft_split_with_quotes(command);
+		free(command);
 		minishell(arr, &env);
-		free(folder_name);
 		free(prompt);
 	}
 	rl_clear_history();

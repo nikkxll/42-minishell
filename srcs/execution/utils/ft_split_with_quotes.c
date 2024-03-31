@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:19:28 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/27 12:32:48 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/31 18:21:07 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	**wrapper_ft_split_with_quotes(char *str)
 		i++;
 	}
 	res = ft_split(str, SEPARATOR);
-	free(str);
+	if (!res)
+		return (NULL);
 	return (res);
 }
