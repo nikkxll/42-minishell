@@ -6,20 +6,20 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:32:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 17:05:32 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:41:11 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../headers/minishell.h"
 
 /**
-* @brief	A function that creates an array of quantities of various types of
-* operations
-* @param	arr array of arguments or options if allowed
-* @param	envp an environment array
-* @param	operations array to create
-* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
-*/
+ * @brief	A function that creates an array of quantities of various types of
+ * operations
+ * @param	arr array of arguments or options if allowed
+ * @param	envp an environment array
+ * @param	operations array to create
+ * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ */
 void	create_operations_array(char **arr, char **envp, int *operations)
 {
 	int	j;
@@ -48,15 +48,15 @@ void	create_operations_array(char **arr, char **envp, int *operations)
 }
 
 /**
-* @brief	A function that checks if any operation of @c `type` exist in an
-* array @c `operations`
-* @param	operations auxiliary array to calculate the number of operations
-* of different type
-* @param	i pointer to the index
-* @param	j pointer to the index
-* @param	type type to check
-* @return	@c `1` if no operations with corresponding type, @c `0` otherwise
-*/
+ * @brief	A function that checks if any operation of @c `type` exist in an
+ * array @c `operations`
+ * @param	operations auxiliary array to calculate the number of operations
+ * of different type
+ * @param	i pointer to the index
+ * @param	j pointer to the index
+ * @param	type type to check
+ * @return	@c `1` if no operations with corresponding type, @c `0` otherwise
+ */
 int	check_operations(int *operations, int *i, int *j, int type)
 {
 	*i = 0;

@@ -6,23 +6,23 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:55:41 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 14:57:34 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:40:12 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
 /**
-* @brief	Function which contains @c `T_AND` or @c `T_OR` block of
-* @c `string_splitter()` recursion
-* @param	node new node to embed into the Abstract Syntax Tree (AST)
-* structure
-* @param	str string that coming from readline function
-* @param	type current meta character type
-* @param	i index
-* @return	@c `-1` if malloc error occurs, @c `1` if success, @c `0`
-* if condition not met
-*/
+ * @brief	Function which contains @c `T_AND` or @c `T_OR` block of
+ * @c `string_splitter()` recursion
+ * @param	node new node to embed into the Abstract Syntax Tree (AST)
+ * structure
+ * @param	str string that coming from readline function
+ * @param	type current meta character type
+ * @param	i index
+ * @return	@c `-1` if malloc error occurs, @c `1` if success, @c `0`
+ * if condition not met
+ */
 int	and_if_condition_block(t_node_info **node, char *str, int type, int i)
 {
 	if (str[i] == AND && str[i - 1] == AND)
@@ -47,16 +47,16 @@ int	and_if_condition_block(t_node_info **node, char *str, int type, int i)
 }
 
 /**
-* @brief	Function which contains @c `T_PIPE` block of @c `string_splitter()`
-* recursion
-* @param	node new node to embed into the Abstract Syntax Tree (AST)
-* structure
-* @param	str string that coming from readline function
-* @param	type current meta character type
-* @param	i index
-* @return	@c `-1` if malloc error occurs, @c `1` if success, @c `0`
-* if condition not met
-*/
+ * @brief	Function which contains @c `T_PIPE` block of @c `string_splitter()`
+ * recursion
+ * @param	node new node to embed into the Abstract Syntax Tree (AST)
+ * structure
+ * @param	str string that coming from readline function
+ * @param	type current meta character type
+ * @param	i index
+ * @return	@c `-1` if malloc error occurs, @c `1` if success, @c `0`
+ * if condition not met
+ */
 int	pipe_block(t_node_info **node, char *str, int type, int i)
 {
 	if (str[i] == PIPE)
@@ -72,15 +72,15 @@ int	pipe_block(t_node_info **node, char *str, int type, int i)
 }
 
 /**
-* @brief	Function which contains @c `T_BRACKET` block of
-* @c `string_splitter()` recursion
-* @param	node new node to embed into the Abstract Syntax Tree (AST)
-* structure
-* @param	str string that coming from readline function
-* @param	type current meta character type
-* @return	@c `-1` if malloc error occurs, @c `1` if success, @c `0`
-* if condition not met
-*/
+ * @brief	Function which contains @c `T_BRACKET` block of
+ * @c `string_splitter()` recursion
+ * @param	node new node to embed into the Abstract Syntax Tree (AST)
+ * structure
+ * @param	str string that coming from readline function
+ * @param	type current meta character type
+ * @return	@c `-1` if malloc error occurs, @c `1` if success, @c `0`
+ * if condition not met
+ */
 int	brackets_block(t_node_info **node, char *str, int type)
 {
 	if (first_nonspace_char_is_bracket(str)

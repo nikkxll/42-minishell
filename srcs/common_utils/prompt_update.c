@@ -6,17 +6,17 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:45:53 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/31 18:35:34 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:40:36 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 /**
-* @brief	Getting current working directory
-* @param	folder_name pointer to string to fill with cwd
-* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
-*/
+ * @brief	Getting current working directory
+ * @param	folder_name pointer to string to fill with cwd
+ * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ */
 int	get_current_folder_name(char **folder_name)
 {
 	char	*cwd;
@@ -37,11 +37,11 @@ int	get_current_folder_name(char **folder_name)
 }
 
 /**
-* @brief	Function that builds the full prompt
-* @param	folder_name current working directory
-* @param	prompt prompt to fill with info
-* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
-*/
+ * @brief	Function that builds the full prompt
+ * @param	folder_name current working directory
+ * @param	prompt prompt to fill with info
+ * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ */
 int	get_prompt(char *folder_name, char **prompt)
 {
 	char	*s1;

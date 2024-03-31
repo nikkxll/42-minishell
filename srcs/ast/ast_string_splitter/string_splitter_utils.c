@@ -6,28 +6,28 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:43:34 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 14:59:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:40:23 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
 /**
-* @brief	Function that checks if number if odd
-* @param	number number to check
-* @return	@c `1` if odd, @c `0` otherwise
-*/
+ * @brief	Function that checks if number if odd
+ * @param	number number to check
+ * @return	@c `1` if odd, @c `0` otherwise
+ */
 t_bool	is_odd(int number)
 {
 	return (number % 2);
 }
 
 /**
-* @brief	Function that checks if we are inside the round brackets
-* @param	str string that coming from readline function
-* @param	point current index to point in @c `str`
-* @return	@c `0` if we are inside the brackets, @c `!0` otherwise
-*/
+ * @brief	Function that checks if we are inside the round brackets
+ * @param	str string that coming from readline function
+ * @param	point current index to point in @c `str`
+ * @return	@c `0` if we are inside the brackets, @c `!0` otherwise
+ */
 int	round_brackets_check(char *str, int point)
 {
 	int	i;
@@ -55,12 +55,12 @@ int	round_brackets_check(char *str, int point)
 }
 
 /**
-* @brief	Function that checks if we are inside the quotes
-* @param	str string that coming from readline function
-* @param	point current index to point in @c `str`
-* @param	symbol single or double quote
-* @return	@c `1` if we are outside of the quotes, @c `0` otherwise
-*/
+ * @brief	Function that checks if we are inside the quotes
+ * @param	str string that coming from readline function
+ * @param	point current index to point in @c `str`
+ * @param	symbol single or double quote
+ * @return	@c `1` if we are outside of the quotes, @c `0` otherwise
+ */
 int	quote_check(char *str, int point, int symbol)
 {
 	int		i;
@@ -84,11 +84,11 @@ int	quote_check(char *str, int point, int symbol)
 }
 
 /**
-* @brief	Function that checks if the first nonspace char is opening
-* bracket
-* @param	str string that coming from readline function
-* @return	@c `1` if it is true, @c `0` otherwise
-*/
+ * @brief	Function that checks if the first nonspace char is opening
+ * bracket
+ * @param	str string that coming from readline function
+ * @return	@c `1` if it is true, @c `0` otherwise
+ */
 int	first_nonspace_char_is_bracket(char *str)
 {
 	int		i;
@@ -107,10 +107,10 @@ int	first_nonspace_char_is_bracket(char *str)
 }
 
 /**
-* @brief	Function that checks if the last nonspace char is closing bracket
-* @param	str string that coming from readline function
-* @return	@c `1` if it is true, @c `0` otherwise
-*/
+ * @brief	Function that checks if the last nonspace char is closing bracket
+ * @param	str string that coming from readline function
+ * @return	@c `1` if it is true, @c `0` otherwise
+ */
 int	last_nonspace_char_is_bracket(char *str)
 {
 	int		i;

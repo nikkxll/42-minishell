@@ -6,21 +6,21 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/28 13:57:05 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:41:13 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../headers/minishell.h"
 
 /**
-* @brief	A function that executes different possible export operations
-* @param	new_env pointer to the new environment array
-* @param	arr array of arguments or options if allowed
-* @param	envp pointer to the environment array
-* @param	operations auxiliary array to calculate the number of operations
-* of different type
-* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
-*/
+ * @brief	A function that executes different possible export operations
+ * @param	new_env pointer to the new environment array
+ * @param	arr array of arguments or options if allowed
+ * @param	envp pointer to the environment array
+ * @param	operations auxiliary array to calculate the number of operations
+ * of different type
+ * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ */
 static int	execute_export(char ***new_env, char **arr, char ***envp,
 	int *operations)
 {
@@ -41,11 +41,11 @@ static int	execute_export(char ***new_env, char **arr, char ***envp,
 }
 
 /**
-* @brief	A function that runs export with arguments
-* @param	arr array of arguments or options if allowed
-* @param	envp pointer to the environment array
-* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
-*/
+ * @brief	A function that runs export with arguments
+ * @param	arr array of arguments or options if allowed
+ * @param	envp pointer to the environment array
+ * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ */
 static int	export_with_args(char **arr, char ***envp)
 {
 	char	**new_env;
@@ -68,12 +68,12 @@ static int	export_with_args(char **arr, char ***envp)
 }
 
 /**
-* @brief	A function that runs export without arguments
-* @param	envp pointer to the environment array
-* @param	i index
-* @param	j index
-* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
-*/
+ * @brief	A function that runs export without arguments
+ * @param	envp pointer to the environment array
+ * @param	i index
+ * @param	j index
+ * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ */
 static int	export_without_args(char ***envp, int i, int j)
 {
 	char	**envp_sorted;
@@ -101,11 +101,11 @@ static int	export_without_args(char ***envp, int i, int j)
 }
 
 /**
-* @brief	A function that runs export built-in command
-* @param	arr array of arguments or options if allowed
-* @param	envp pointer to the environment array
-* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
-*/
+ * @brief	A function that runs export built-in command
+ * @param	arr array of arguments or options if allowed
+ * @param	envp pointer to the environment array
+ * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ */
 int	run_export(char **arr, char ***envp)
 {
 	int		arr_len;

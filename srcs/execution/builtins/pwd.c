@@ -6,17 +6,17 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:21:06 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/28 13:53:47 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:41:36 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
 /**
-* @brief	A function that runs pwd built-in command
-* @param	arr array of arguments or options if allowed
-* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
-*/
+ * @brief	A function that runs pwd built-in command
+ * @param	arr array of arguments or options if allowed
+ * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ */
 int	run_pwd(char **arr)
 {
 	char	*working_dir;

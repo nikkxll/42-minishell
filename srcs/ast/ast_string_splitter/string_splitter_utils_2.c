@@ -6,21 +6,21 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:54:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 14:58:46 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:40:19 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
 /**
-* @brief	Function that divides str with type @c `T_COMMAND_BR` in two parts
-* @param	str string that coming from readline function
-* @param	i index to iterate through the string
-* @param	quote_type initialization for the variable in
-* @c `check_if_inside_quotes()`
-* @note		index @c `i` is changing using dereference operation
-* @return	modified string if success, @c `NULL` otherwise
-*/
+ * @brief	Function that divides str with type @c `T_COMMAND_BR` in two parts
+ * @param	str string that coming from readline function
+ * @param	i index to iterate through the string
+ * @param	quote_type initialization for the variable in
+ * @c `check_if_inside_quotes()`
+ * @note		index @c `i` is changing using dereference operation
+ * @return	modified string if success, @c `NULL` otherwise
+ */
 char	*command_part(char *str, int *i, int quote_type)
 {
 	while (str[*i] != NULL_TERM)
@@ -47,14 +47,14 @@ char	*command_part(char *str, int *i, int quote_type)
 }
 
 /**
-* @brief	Auxiliary function for @c `modificate_str_command_without_br()`
-* @param	str string that coming from readline function
-* @param	r new string for redirects
-* @param	i pointer to the first index for iteration
-* @param	j pointer to the second index for iteration
-* @note		indexes @c `i` and @c `j` are changing using dereference operation
-* @return	@c `void`
-*/
+ * @brief	Auxiliary function for @c `modificate_str_command_without_br()`
+ * @param	str string that coming from readline function
+ * @param	r new string for redirects
+ * @param	i pointer to the first index for iteration
+ * @param	j pointer to the second index for iteration
+ * @note		indexes @c `i` and @c `j` are changing using dereference operation
+ * @return	@c `void`
+ */
 static void	modificate_str_utils(char *str, char *r, int *i, int *j)
 {
 	r[*j] = str[*i];
@@ -64,14 +64,14 @@ static void	modificate_str_utils(char *str, char *r, int *i, int *j)
 }
 
 /**
-* @brief	Function that allocates string for redirects and modifies
-* current one
-* @param	str string that coming from readline function
-* @param	redir new string allocated to store redirects
-* @param	i first index for iteration
-* @param	j second index for iteration
-* @return	@c `-1` if malloc error occurs, @c `1` if success
-*/
+ * @brief	Function that allocates string for redirects and modifies
+ * current one
+ * @param	str string that coming from readline function
+ * @param	redir new string allocated to store redirects
+ * @param	i first index for iteration
+ * @param	j second index for iteration
+ * @return	@c `-1` if malloc error occurs, @c `1` if success
+ */
 int	modificate_str_command_without_br(char *str, char **redir, int i,
 			int j)
 {
@@ -100,10 +100,10 @@ int	modificate_str_command_without_br(char *str, char **redir, int i,
 }
 
 /**
-* @brief	Function that checks for brackets which are out of the quotes
-* @param	str string that coming from readline function
-* @return	@c `> 0` if exist, @c `0` otherwise
-*/
+ * @brief	Function that checks for brackets which are out of the quotes
+ * @param	str string that coming from readline function
+ * @return	@c `> 0` if exist, @c `0` otherwise
+ */
 int	brackets_search(char *str)
 {
 	int	i;
@@ -129,10 +129,10 @@ int	brackets_search(char *str)
 }
 
 /**
-* @brief	Function that checks for redirects which are out of the quotes
-* @param	@c `str` - string that coming from readline function
-* @return	@c `> 0` if exist, @c `0` otherwise
-*/
+ * @brief	Function that checks for redirects which are out of the quotes
+ * @param	@c `str` - string that coming from readline function
+ * @return	@c `> 0` if exist, @c `0` otherwise
+ */
 int	redir_search(char *str)
 {
 	int	i;

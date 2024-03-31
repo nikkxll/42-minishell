@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/31 18:36:25 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:01:00 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void			execute_error(char **arr, int *operations);
 int				edit_env_list(char ***new_env, char **arr, int *operations);
 int				add_to_env_list(char ***new_env, char **arr, char **envp,
 					int *operations);
+int				add_to_env_list_new_env_creation(char **envp, char ***result,
+					int *i, int *len);
 int				run_pwd(char **arr);
 int				run_unset(char **arr, char ***envp);
 int				run_env(char **arr, char ***envp);
@@ -138,6 +140,7 @@ int				entities_expand(char ***temp_arr, char *str, t_w_cards *wc,
 int				fill_temp_array_conditions_block(t_w_cards *wc,
 					char **temp_arr_local, char *str, int *i);
 int				if_abs_path(t_w_cards *wc, char *str);
+t_bool			if_asterisk_in_arr(char **arr, int i, int j);
 int				wildcards(char ***arr);
 
 int				array_build_before_wc(char ***arr, int i, int k, int j);
@@ -145,5 +148,8 @@ int				minishell(char **arr, char ***env);
 
 int				get_current_folder_name(char **folder_name);
 int				get_prompt(char *folder_name, char **command);
+
+int				shlvl_init(char ***envp);
+int				pwd_init(char ***envp);
 
 #endif

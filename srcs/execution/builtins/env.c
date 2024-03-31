@@ -6,18 +6,18 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:04:34 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/28 13:38:30 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:41:29 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
 /**
-* @brief	A function that writes environment list in stdout
-* @param	env an environment array
-* @param	j index
-* @return	@c `void`
-*/
+ * @brief	A function that writes environment list in stdout
+ * @param	env an environment array
+ * @param	j index
+ * @return	@c `void`
+ */
 static void	print_env(char **env, int j)
 {
 	while (env[++j])
@@ -25,11 +25,11 @@ static void	print_env(char **env, int j)
 }
 
 /**
-* @brief	A function that runs env built-in command
-* @param	arr array of arguments or options if allowed
-* @param	envp pointer to the environment array
-* @return	@c `SUCCESS`
-*/
+ * @brief	A function that runs env built-in command
+ * @param	arr array of arguments or options if allowed
+ * @param	envp pointer to the environment array
+ * @return	@c `SUCCESS`
+ */
 int	run_env(char **arr, char ***envp)
 {
 	char	**new_env;

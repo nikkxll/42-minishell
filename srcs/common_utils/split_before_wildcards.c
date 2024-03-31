@@ -6,21 +6,21 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:00:17 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/31 18:23:38 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:40:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 /**
-* @brief	Auxiliary function for the @c `array_build_before_wc()` that gets
-* info from splits of initial arr
-* @param	temp_3d_arr pointer to the temporary array of splits
-* @param	arr pointer to the array of strings which are coming from dollar
-* sign expansion block
-* @param	new_arr_len pointer to the new array length
-* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
-*/
+ * @brief	Auxiliary function for the @c `array_build_before_wc()` that gets
+ * info from splits of initial arr
+ * @param	temp_3d_arr pointer to the temporary array of splits
+ * @param	arr pointer to the array of strings which are coming from dollar
+ * sign expansion block
+ * @param	new_arr_len pointer to the new array length
+ * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ */
 static int	array_build_before_wc_split(char ****temp_3d_arr, char ***arr,
 	int *new_arr_len)
 {
@@ -50,15 +50,15 @@ static int	array_build_before_wc_split(char ****temp_3d_arr, char ***arr,
 }
 
 /**
-* @brief	Function that splits strings in an array after dollar sign
-* expansion block
-* @param	arr array of strings which are coming from dollar sign
-* expansion block
-* @param	i index
-* @param	j index
-* @param	k index
-* @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
-*/
+ * @brief	Function that splits strings in an array after dollar sign
+ * expansion block
+ * @param	arr array of strings which are coming from dollar sign
+ * expansion block
+ * @param	i index
+ * @param	j index
+ * @param	k index
+ * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ */
 int	array_build_before_wc(char ***arr, int i, int k, int j)
 {
 	char	***temp_3d_arr;

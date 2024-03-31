@@ -107,3 +107,7 @@ ____
 bash-3.2$ export a="echo *"
 bash-3.2$ $a
 ____
+
+____
+export SHLVL=-10
+____

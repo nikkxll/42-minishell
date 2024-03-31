@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/31 18:36:41 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 00:58:28 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,22 @@ int	main(void)
 	char		**env;
 	char		*folder_name;
 	char		*prompt;
+	int			status;
 
 	env = cpy_env(environ);
+	status = pwd_init(&env);
+	if (status != 0)
+		return (status);
+	status = shlvl_init(&env);
+	if (status != 0)
+		return (status);
 	while (1)
 	{
 		get_current_folder_name(&folder_name);
 		get_prompt(folder_name, &prompt);
 		command = readline(prompt);
+		if (is_blank_string(command))
+			continue ;
 		if (!command || !ft_strncmp(command, "key", 3))
 		{
 			printf("\n");

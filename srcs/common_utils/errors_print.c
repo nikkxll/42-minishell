@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   errors_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:35:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/29 14:10:49 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:39:18 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 /**
-* @brief	A function that prints an error without any arguments in it
-* @param	cmd command
-* @param	msg error message
-* @return	@c `void`
-*/
+ * @brief	A function that prints an error without any arguments in it
+ * @param	cmd command
+ * @param	msg error message
+ * @return	@c `void`
+ */
 void	print_err_msg(char *cmd, char *msg)
 {
 	cmd = ft_strjoin("\033[0;31me-bash: \033[0;0m", cmd);
@@ -32,12 +32,12 @@ void	print_err_msg(char *cmd, char *msg)
 }
 
 /**
-* @brief	A function that prints an error with an argument in it
-* @param	cmd command
-* @param	arg argument
-* @param	msg error message
-* @return	@c `void`
-*/
+ * @brief	A function that prints an error with an argument in it
+ * @param	cmd command
+ * @param	arg argument
+ * @param	msg error message
+ * @return	@c `void`
+ */
 void	print_arg_err_msg(char *cmd, char *arg, char *msg)
 {
 	cmd = ft_strjoin("\033[0;31me-bash: \033[0;0m", cmd);

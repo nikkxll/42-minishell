@@ -6,19 +6,19 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:26:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/27 11:18:44 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:41:27 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
 /**
-* @brief	A function that writes to the stdout
-* @param	arr array of arguments or options if allowed
-* @param	flag new line flag
-* @param	i index
-* @return	@c `SUCCESS`
-*/
+ * @brief	A function that writes to the stdout
+ * @param	arr array of arguments or options if allowed
+ * @param	flag new line flag
+ * @param	i index
+ * @return	@c `SUCCESS`
+ */
 static int	echo_write(char **arr, int flag, int i)
 {
 	if (!flag)
@@ -46,13 +46,13 @@ static int	echo_write(char **arr, int flag, int i)
 }
 
 /**
-* @brief	A function that runs echo built-in command
-* @param	arr array of arguments or options if allowed
-* @param	i index
-* @param	j index
-* @param	nl_flag new line flag
-* @return	@c `SUCCESS`
-*/
+ * @brief	A function that runs echo built-in command
+ * @param	arr array of arguments or options if allowed
+ * @param	i index
+ * @param	j index
+ * @param	nl_flag new line flag
+ * @return	@c `SUCCESS`
+ */
 int	run_echo(char **arr, int i, int j, int nl_flag)
 {
 	int	k;

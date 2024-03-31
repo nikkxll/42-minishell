@@ -11,7 +11,8 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 ###############################
 
 #########COMMON_UTILS##########
-COMMON_UTILS_NAME	:=	remove_quotes.c errors_print.c split_before_wildcards.c prompt_update.c
+COMMON_UTILS_NAME	:=	remove_quotes.c errors_print.c split_before_wildcards.c prompt_update.c \
+						pwd_init.c shlvl_init.c
 COMMON_UTILS_PATH	:=	common_utils/
 COMMON_UTILS		:=	$(addprefix $(COMMON_UTILS_PATH), $(COMMON_UTILS_NAME))
 
@@ -36,7 +37,8 @@ VALIDATE_INPUT		:=	$(addprefix $(VALIDATE_INPUT_PATH), $(VALIDATE_INPUT_NAME))
 
 ###########WILDCARDS###########
 WILDCARDS_NAME		:=	wildcards.c wildcards_core.c wildcards_core_utils.c wildcards_entities_expand.c \
-						wildcards_utils.c wildcards_sort.c wildcards_fill_array_with_entities.c
+						wildcards_utils.c wildcards_sort.c wildcards_fill_array_with_entities.c \
+						wildcards_asterisk_check.c
 WILDCARDS_PATH		:=	wildcards/
 WILDCARDS			:=	$(addprefix $(WILDCARDS_PATH), $(WILDCARDS_NAME))
 
@@ -76,15 +78,15 @@ LIBFT_PATH			:=	$(LIBFT_PATH)
 LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
-RL					:=	/opt/homebrew/opt/readline/lib/
-RLH					:=	/opt/homebrew/opt/readline/lib/
-RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
-RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
+# RL					:=	/opt/homebrew/opt/readline/lib/
+# RLH					:=	/opt/homebrew/opt/readline/lib/
+# RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
+# RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
 
-# RL					:=	~/.brew/Cellar/readline/8.2.7/lib
-# RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
-# RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
-# RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
+RL					:=	~/.brew/Cellar/readline/8.2.7/lib
+RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
+RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
+RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
 
 HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)
 INCLUDES			:=	$(addprefix -I , $(HEADERS))
