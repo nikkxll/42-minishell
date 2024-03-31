@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:45:53 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:40:36 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:44:29 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@
 int	get_current_folder_name(char **folder_name)
 {
 	char	*cwd;
-	
-    cwd = getcwd(NULL, 0);
-    if (cwd)
+
+	cwd = getcwd(NULL, 0);
+	if (cwd)
 	{
-        *folder_name = ft_strdup(ft_strrchr(cwd, SLASH));
+		*folder_name = ft_strdup(ft_strrchr(cwd, SLASH));
 		if (!(*folder_name))
 		{
 			free(cwd);
 			return (MALLOC_ERR);
 		}
 		free(cwd);
-        return (SUCCESS);
-    }
-    return (MALLOC_ERR);
+		return (SUCCESS);
+	}
+	return (MALLOC_ERR);
 }
 
 /**
@@ -46,7 +46,7 @@ int	get_prompt(char *folder_name, char **prompt)
 {
 	char	*s1;
 	char	*s2;
-	
+
 	s1 = ft_strjoin("", "\033[1;36me-bash \033[0m\033[1;35m");
 	if (!s1)
 	{
@@ -62,5 +62,5 @@ int	get_prompt(char *folder_name, char **prompt)
 	free(s2);
 	if (!(*prompt))
 		return (MALLOC_ERR);
-    return (SUCCESS);
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/01 00:58:28 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 02:04:46 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,17 @@ int	main(void)
 	char		*command;
 	extern char	**environ;
 	char		**arr;
-	char		**env;
 	char		*folder_name;
 	char		*prompt;
-	int			status;
+	t_minishell	ms;
 
-	env = cpy_env(environ);
-	status = pwd_init(&env);
-	if (status != 0)
-		return (status);
-	status = shlvl_init(&env);
-	if (status != 0)
-		return (status);
+	ms.env = cpy_env(environ);
+	ms.exit_status = pwd_init(&ms.env);
+	if (ms.exit_status != 0)
+		return (ms.exit_status);
+	ms.exit_status = shlvl_init(&ms.env);
+	if (ms.exit_status != 0)
+		return (ms.exit_status);
 	while (1)
 	{
 		get_current_folder_name(&folder_name);
@@ -72,11 +71,11 @@ int	main(void)
 		validate_input(command);
 		arr = wrapper_ft_split_with_quotes(command);
 		free(command);
-		minishell(arr, &env);
+		minishell(arr, &ms.env);
 		free(prompt);
 	}
 	rl_clear_history();
-	ft_free_2d_array(env);
+	ft_free_2d_array(ms.env);
 	return (0);
 }
 

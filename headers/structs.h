@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/28 15:12:02 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:52:55 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 # include "minishell.h"
 
 typedef struct dirent	t_dirent;
+
+typedef struct s_minishell
+{
+	char			**env;
+	char			*pwd;
+	char			*oldpwd;
+	unsigned char	exit_status;
+}	t_minishell;
 
 typedef struct s_wildcards
 {

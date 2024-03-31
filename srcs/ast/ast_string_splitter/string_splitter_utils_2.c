@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:54:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:40:19 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:44:49 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param	i index to iterate through the string
  * @param	quote_type initialization for the variable in
  * @c `check_if_inside_quotes()`
- * @note		index @c `i` is changing using dereference operation
+ * @note	index @c `i` is changing using dereference operation
  * @return	modified string if success, @c `NULL` otherwise
  */
 char	*command_part(char *str, int *i, int quote_type)
@@ -52,7 +52,8 @@ char	*command_part(char *str, int *i, int quote_type)
  * @param	r new string for redirects
  * @param	i pointer to the first index for iteration
  * @param	j pointer to the second index for iteration
- * @note		indexes @c `i` and @c `j` are changing using dereference operation
+ * @note	indexes @c `i` and @c `j` are changing using dereference
+ * operation
  * @return	@c `void`
  */
 static void	modificate_str_utils(char *str, char *r, int *i, int *j)
