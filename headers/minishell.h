@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/01 01:01:00 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:51:21 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int				environment_search_exp_module(char **envp, char *var, int i,
 					int j);
 void			index_quotes(char *str, int i, int *single_q, int *double_q);
 
-int				command_run(char **arr, char ***envp);
+void			command_run(char **arr, t_minishell *ms);
 char			**sort_string_arr(char **argv, int size);
 char			**cpy_env(char **envp);
 void			remove_quotes(char *str, int i, int j);
@@ -104,22 +104,22 @@ int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);
 void			print_err_msg(char *cmd, char *msg);
 void			print_arg_err_msg(char *cmd, char *arg, char *msg);
-int				run_cd(char **arr, char **envp);
-int				run_echo(char **arr, int i, int j, int nl_flag);
-int				run_export(char **arr, char ***envp);
+void			run_cd(char **arr, t_minishell *ms);
+void			run_echo(char **arr, int i, int j, int nl_flag);
+void			run_export(char **arr, t_minishell *ms);
 void			create_operations_array(char **arr, char **envp,
 					int *operations);
 int				check_operations(int *operations, int *i, int *j, int type);
-void			execute_error(char **arr, int *operations);
+int				execute_error(char **arr, int *operations);
 int				edit_env_list(char ***new_env, char **arr, int *operations);
 int				add_to_env_list(char ***new_env, char **arr, char **envp,
 					int *operations);
 int				add_to_env_list_new_env_creation(char **envp, char ***result,
 					int *i, int *len);
-int				run_pwd(char **arr);
-int				run_unset(char **arr, char ***envp);
-int				run_env(char **arr, char ***envp);
-int				run_exit(char **arr);
+void			run_pwd(char **arr, t_minishell *ms);
+void			run_unset(char **arr, t_minishell *ms);
+void			run_env(char **arr, t_minishell *ms);
+void			run_exit(char **arr, t_minishell *ms);
 
 char			**wrapper_ft_split_with_quotes(char *str);
 
@@ -144,7 +144,7 @@ t_bool			if_asterisk_in_arr(char **arr, int i, int j);
 int				wildcards(char ***arr);
 
 int				array_build_before_wc(char ***arr, int i, int k, int j);
-int				minishell(char **arr, char ***env);
+int				minishell(char **arr, t_minishell *ms);
 
 int				get_current_folder_name(char **folder_name);
 int				get_prompt(char *folder_name, char **command);

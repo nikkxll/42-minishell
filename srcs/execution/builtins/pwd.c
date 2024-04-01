@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:21:06 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:41:36 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:33:18 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param	arr array of arguments or options if allowed
  * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
  */
-int	run_pwd(char **arr)
+void	run_pwd(char **arr, t_minishell *ms)
 {
 	char	*working_dir;
 	int		len;
@@ -27,15 +27,16 @@ int	run_pwd(char **arr)
 	{
 		arr[0][2] = NULL_TERM;
 		print_arg_err_msg("pwd: `", arr[0], "': options are not supported\n");
-		return (SUCCESS);
+		ms->exit_status = CMD_ARG_ERROR;
+		return ;
 	}
 	working_dir = getcwd(NULL, 0);
 	if (!working_dir)
 	{
 		print_err_msg("pwd: ", "allocation error occured\n");
-		return (MALLOC_ERR);
+		ms->exit_status = MALLOC_ERR;
+		return ;
 	}
 	ft_printf("%s\n", working_dir);
 	free(working_dir);
-	return (SUCCESS);
 }

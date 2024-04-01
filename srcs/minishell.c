@@ -6,20 +6,20 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/01 02:04:46 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:50:11 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int	minishell(char **arr, char ***env)
+int	minishell(char **arr, t_minishell *ms)
 {
 	int	i;
 
 	i = 0;
 	while (arr[i])
 	{
-		if (expand_dollar_sign(&arr[i++], *env, 0) == MALLOC_ERR)
+		if (expand_dollar_sign(&arr[i++], ms->env, 0) == MALLOC_ERR)
 			printf("%s\n", "malloc error");
 	}
 	if (array_build_before_wc(&arr, -1, -1, -1) == MALLOC_ERR)
@@ -30,8 +30,7 @@ int	minishell(char **arr, char ***env)
 		return (0);
 	}
 	processing(arr, 0);
-	if (command_run(arr, env) == MALLOC_ERR)
-		printf("%s\n", "malloc error");
+	command_run(arr, ms);
 	ft_free_2d_array(arr);
 	return (0);
 }
@@ -71,7 +70,7 @@ int	main(void)
 		validate_input(command);
 		arr = wrapper_ft_split_with_quotes(command);
 		free(command);
-		minishell(arr, &ms.env);
+		minishell(arr, &ms);
 		free(prompt);
 	}
 	rl_clear_history();
@@ -84,10 +83,10 @@ int	main(void)
 // 	char		*command;
 // 	extern char	**environ;
 // 	char		**arr;
-// 	char		**env;
+// 	t_minishell	ms;
 
-// 	env = cpy_env(environ);
-// 	command = ft_strdup("echo $PWD/*");
+// 	ms.env = cpy_env(environ);
+// 	command = ft_strdup("echo *");
 // 	// while (1)
 // 	// {
 // 	// 	command = readline("e-bash > ");
@@ -99,9 +98,9 @@ int	main(void)
 // 	// 	if (command && *command)
 // 	// 		add_history(command);
 // 		arr = wrapper_ft_split_with_quotes(command);
-// 		minishell(arr, &env);
+// 		minishell(arr, &ms);
 // 	// }
 // 	// rl_clear_history();
-// 	ft_free_2d_array(env);
+// 	ft_free_2d_array(ms.env);
 // 	return (0);
 // }

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:41:22 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:50:49 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,23 @@
  * @param	envp pointer to the environment array
  * @return	execution exit status
  */
-int	command_run(char **arr, char ***envp)
+void	command_run(char **arr, t_minishell *ms)
 {
+	ms->exit_status = SUCCESS;
 	if (!ft_strncmp("echo", arr[0], ECHO_LEN))
-		return (run_echo(arr + 1, 0, 0, 0));
+		run_echo(arr + 1, 0, 0, 0);
 	else if (!ft_strncmp("cd", arr[0], CD_LEN))
-		return (run_cd(arr + 1, *envp));
+		run_cd(arr + 1, ms);
 	else if (!ft_strncmp("pwd", arr[0], PWD_LEN))
-		return (run_pwd(arr + 1));
+		run_pwd(arr + 1, ms);
 	else if (!ft_strncmp("export", arr[0], EXPORT_LEN))
-		return (run_export(arr + 1, envp));
+		run_export(arr + 1, ms);
 	else if (!ft_strncmp("unset", arr[0], UNSET_LEN))
-		return (run_unset(arr + 1, envp));
+		run_unset(arr + 1, ms);
 	else if (!ft_strncmp("env", arr[0], ENV_LEN))
-		return (run_env(arr + 1, envp));
+		run_env(arr + 1, ms);
 	else if (!ft_strncmp("exit", arr[0], EXIT_LEN))
-		return (run_exit(arr + 1));
+		run_exit(arr + 1, ms);
 	else
-	{
 		printf("EXECVE: |%s|\n", arr[0]);
-		return (1);
-	}
 }

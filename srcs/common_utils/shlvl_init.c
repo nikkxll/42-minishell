@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:39:31 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:40:46 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:33:22 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static int	shlvl_init_when_no_shlvl_exists(char ***envp, int i)
 	if (!new_env[len + i])
 	{
 		ft_free_2d_array(new_env);
-		perror("\033[0;31me-bash: \033[0;0m getcwd");
 		return (MALLOC_ERR);
 	}
 	*envp = new_env;
@@ -72,10 +71,8 @@ static int	shlvl_init_when_no_shlvl_exists(char ***envp, int i)
 int	shlvl_init(char ***envp)
 {
 	int		position;
-	int		i;
 	int		status;
 
-	i = 1;
 	status = 0;
 	position = env_var(*envp, "SHLVL=", -1, 6);
 	if (position == -1)

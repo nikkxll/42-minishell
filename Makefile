@@ -78,15 +78,15 @@ LIBFT_PATH			:=	$(LIBFT_PATH)
 LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
-# RL					:=	/opt/homebrew/opt/readline/lib/
-# RLH					:=	/opt/homebrew/opt/readline/lib/
-# RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
-# RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
+RL					:=	/opt/homebrew/opt/readline/lib/
+RLH					:=	/opt/homebrew/opt/readline/lib/
+RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
+RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
 
-RL					:=	~/.brew/Cellar/readline/8.2.7/lib
-RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
-RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
-RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
+# RL					:=	~/.brew/Cellar/readline/8.2.7/lib
+# RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
+# RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
+# RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
 
 HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)
 INCLUDES			:=	$(addprefix -I , $(HEADERS))
@@ -131,7 +131,7 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_PATH)
-	@echo "$(RED)All files removed!$(EC)"
+	@echo "$(RED)\nFull clean up completed successfully!$(EC)"
 
 re: fclean all
 

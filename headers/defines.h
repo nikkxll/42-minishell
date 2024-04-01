@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/28 15:05:01 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:11:17 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ enum	e_characters
 	REDIR_R = 62,
 	BACKSLASH = 92,
 	UNSCORE = 95,
+	N_LOWER = 110,
 	PIPE = 124,
 };
 
@@ -63,9 +64,11 @@ enum	e_builtins
 
 enum	e_exit_status
 {
-	SYSTEM_ERROR = -1,
 	SUCCESS,
+	GENERIC_ERROR,
+	CMD_ARG_ERROR,
 	MALLOC_ERR = 200,
+	SYSTEM_ERROR = 201,
 };
 
 enum	e_export_types

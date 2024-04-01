@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:26:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:41:27 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:52:33 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param	i index
  * @return	@c `SUCCESS`
  */
-static int	echo_write(char **arr, int flag, int i)
+static void	echo_write(char **arr, int flag, int i)
 {
 	if (!flag)
 	{
@@ -42,7 +42,6 @@ static int	echo_write(char **arr, int flag, int i)
 			i++;
 		}
 	}
-	return (SUCCESS);
 }
 
 /**
@@ -53,31 +52,31 @@ static int	echo_write(char **arr, int flag, int i)
  * @param	nl_flag new line flag
  * @return	@c `SUCCESS`
  */
-int	run_echo(char **arr, int i, int j, int nl_flag)
+void	run_echo(char **arr, int i, int j, int nl_flag)
 {
-	int	k;
-
 	if (!arr[i])
 		ft_putchar_fd(NL, STDOUT_FILENO);
 	while (arr[i])
 	{
-		k = i;
 		j = 0;
-		if (arr[i][j] == DASH)
+		if (arr[i][j++] == DASH)
 		{
-			j++;
 			while (arr[i][j] != NULL_TERM)
 			{
-				skip_characters(arr[i], &j, 110);
+				skip_characters(arr[i], &j, N_LOWER);
 				if (arr[i][j] != NULL_TERM)
-					return (echo_write(arr + k, nl_flag, 0));
+				{
+					echo_write(arr + i, nl_flag, 0);
+					return ;
+				}
 			}
-			i++;
 			nl_flag = 1;
-			continue ;
+			i++;
 		}
 		else
-			return (echo_write(arr + k, nl_flag, 0));
+		{
+			echo_write(arr + i, nl_flag, 0);
+			return ;
+		}
 	}
-	return (SUCCESS);
 }

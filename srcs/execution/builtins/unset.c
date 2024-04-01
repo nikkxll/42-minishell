@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:54:18 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:41:38 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:42:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	execute_unset(char ***envp, int position, int i)
  * @param	j pointer to the index
  * @return	@c `void`
  */
-static void	iterate_through_args(char **arr, char ***envp, int *j)
+static void	iterate_through_args(char **arr, t_minishell *ms, int *j)
 {
 	int	position;
 	int	i;
@@ -89,17 +89,18 @@ static void	iterate_through_args(char **arr, char ***envp, int *j)
 		{
 			print_arg_err_msg("unset: `", arr[*j],
 				"': not a valid identifier\n");
+			ms->exit_status = GENERIC_ERROR;
 			return ;
 		}
 		i++;
 	}
 	if (arr[*j][0] == UNSCORE && arr[*j][1] == NULL_TERM)
 		return ;
-	position = env_position_search(envp, arr[*j], -1);
+	position = env_position_search(&(ms->env), arr[*j], -1);
 	if (position == -1)
 		return ;
 	else
-		execute_unset(envp, position, 0);
+		execute_unset(&(ms->env), position, 0);
 	return ;
 }
 
@@ -109,7 +110,7 @@ static void	iterate_through_args(char **arr, char ***envp, int *j)
  * @param	envp pointer to the environment array
  * @return	@c `SUCCESS`
  */
-int	run_unset(char **arr, char ***envp)
+void	run_unset(char **arr, t_minishell *ms)
 {
 	int	len;
 	int	j;
@@ -120,12 +121,11 @@ int	run_unset(char **arr, char ***envp)
 	{
 		arr[0][2] = NULL_TERM;
 		print_arg_err_msg("unset: `", arr[0], "': options are not supported\n");
-		return (SUCCESS);
+		ms->exit_status = CMD_ARG_ERROR;
 	}
 	else if (len > 0)
 	{
 		while (arr[++j])
-			iterate_through_args(arr, envp, &j);
+			iterate_through_args(arr, ms, &j);
 	}
-	return (SUCCESS);
 }

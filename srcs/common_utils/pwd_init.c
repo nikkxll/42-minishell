@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:18:37 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:40:40 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:30:18 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ static int	pwd_init_when_no_pwd_exists(char cwd[PATH_MAX], char ***envp, int i)
 	}
 	new_env[len + i] = ft_strjoin("PWD=", cwd);
 	if (!new_env[len + i])
-	{
-		perror("\033[0;31me-bash: \033[0;0m getcwd");
 		return (MALLOC_ERR);
-	}
 	*envp = new_env;
 	return (SUCCESS);
 }
@@ -82,10 +79,8 @@ int	pwd_init(char ***envp)
 {
 	int		position;
 	char	cwd[PATH_MAX];
-	int		i;
 	int		status;
 
-	i = 1;
 	status = 0;
 	position = env_var(*envp, "PWD=", -1, 4);
 	if (position == -1)

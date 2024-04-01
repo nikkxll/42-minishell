@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:41:13 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:31:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int	execute_export(char ***new_env, char **arr, char ***envp,
 		if (edit_env_list(envp, arr, operations) == MALLOC_ERR)
 			return (MALLOC_ERR);
 	}
-	execute_error(arr, operations);
+	if (execute_error(arr, operations))
+		return (GENERIC_ERROR);
 	return (SUCCESS);
 }
 
@@ -46,7 +47,7 @@ static int	execute_export(char ***new_env, char **arr, char ***envp,
  * @param	envp pointer to the environment array
  * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
  */
-static int	export_with_args(char **arr, char ***envp)
+static void	export_with_args(char **arr, t_minishell *ms)
 {
 	char	**new_env;
 	int		*operations;
@@ -54,17 +55,20 @@ static int	export_with_args(char **arr, char ***envp)
 	new_env = NULL;
 	operations = ft_calloc(ft_arrlen((void **)arr) + 1, sizeof(int));
 	if (!operations)
-		return (MALLOC_ERR);
-	create_operations_array(arr, *envp, operations);
-	if (execute_export(&new_env, arr, envp, operations) == MALLOC_ERR)
+	{
+		ms->exit_status = MALLOC_ERR;
+		return ;
+	}
+	create_operations_array(arr, ms->env, operations);
+	ms->exit_status = execute_export(&new_env, arr, &(ms->env), operations);
+	if (ms->exit_status == MALLOC_ERR)
 	{
 		free(operations);
-		return (MALLOC_ERR);
+		return ;
 	}
 	if (new_env)
-		*envp = new_env;
+		ms->env = new_env;
 	free(operations);
-	return (SUCCESS);
 }
 
 /**
@@ -74,13 +78,16 @@ static int	export_with_args(char **arr, char ***envp)
  * @param	j index
  * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
  */
-static int	export_without_args(char ***envp, int i, int j)
+static void	export_without_args(t_minishell *ms, int i, int j)
 {
 	char	**envp_sorted;
 
-	envp_sorted = sort_string_arr(*envp, ft_arrlen((void **)*envp));
+	envp_sorted = sort_string_arr(ms->env, ft_arrlen((void **)ms->env));
 	if (!envp_sorted)
-		return (MALLOC_ERR);
+	{
+		ms->exit_status = MALLOC_ERR;
+		return ;
+	}
 	while (envp_sorted[++i])
 	{
 		j = 0;
@@ -97,7 +104,6 @@ static int	export_without_args(char ***envp, int i, int j)
 		ft_putchar_fd(NL, STDOUT_FILENO);
 	}
 	free(envp_sorted);
-	return (SUCCESS);
 }
 
 /**
@@ -106,7 +112,7 @@ static int	export_without_args(char ***envp, int i, int j)
  * @param	envp pointer to the environment array
  * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
  */
-int	run_export(char **arr, char ***envp)
+void	run_export(char **arr, t_minishell *ms)
 {
 	int		arr_len;
 
@@ -115,17 +121,10 @@ int	run_export(char **arr, char ***envp)
 	{
 		arr[0][2] = NULL_TERM;
 		print_arg_err_msg("env: `", arr[0], "': options are not supported\n");
-		return (SUCCESS);
+		ms->exit_status = CMD_ARG_ERROR;
 	}
 	else if (arr_len > 0)
-	{
-		if (export_with_args(arr, envp) == MALLOC_ERR)
-			return (MALLOC_ERR);
-	}
+		export_with_args(arr, ms);
 	else
-	{
-		if (export_without_args(envp, -1, 0) == MALLOC_ERR)
-			return (MALLOC_ERR);
-	}
-	return (SUCCESS);
+		export_without_args(ms, -1, 0);
 }
