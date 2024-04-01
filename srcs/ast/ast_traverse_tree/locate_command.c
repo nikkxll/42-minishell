@@ -6,26 +6,28 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:57:59 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/01 01:59:43 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:28:48 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-int	get_path(char ***path, char **envp, char *cmd);
+static int	get_path(char ***path, char **envp, char *command);
 
-int	locate_command(char	**cmd, char	**envp)
+int	locate_command(char	**command, char	**envp)
 {
 	int		status;
 	char	**path;
 
-	status = get_path(&path, envp, *cmd);
-	(void)envp;
-	(void)cmd;
+	status = get_path(&path, envp, *command);
+	if (status != 0)
+		return (status);
+	status = find_executable(command, path);
+	ft_free_2d_array(path);
 	return (status);
 }
 
-int	get_path(char ***path, char **envp, char *cmd)
+static int	get_path(char ***path, char **envp, char *command)
 {
 	char	*str;
 
@@ -44,6 +46,9 @@ int	get_path(char ***path, char **envp, char *cmd)
 	else
 		*path = ft_split(str, COLON);
 	if (!*path)
+	{
+		print_err_msg(command, ": allocation error occured\n");
 		return (MALLOC_ERR);
+	}
 	return (0);
 }

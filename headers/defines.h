@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/01 01:58:20 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:52:33 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,14 @@ enum	e_exit_status
 {
 	SYSTEM_ERROR = -1,
 	SUCCESS,
+	CMD_PD_FAILURE = 126,
+	CMD_NF_FAILURE = 127,
 	MALLOC_ERR = 200,
+	EXECVE_FAILURE = 999,
 	FORK_FAILURE = 999,
 	PIPE_FAILURE = 999,
 	DUP_FAILURE = 999,
+	DUP_P_FAILURE = 999,
 };
 
 enum	e_export_types

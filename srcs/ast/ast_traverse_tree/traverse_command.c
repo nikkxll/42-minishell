@@ -6,14 +6,14 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/01 02:05:12 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:48:22 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
 int		execute_external(char **cmd, char *redir, char **envp);
-int		execute_builtin(char **cmd, char *redir, char **envp);
+int		execute_builtin(char **cmd, char *redir, char ***envp);
 
 
 int	traverse_command(char *cmd, char *redir, char ***envp)
@@ -27,10 +27,10 @@ int	traverse_command(char *cmd, char *redir, char ***envp)
 		if (is_builtin(cmd[0]) == true)
 			status = execute_builtin(command, redir, envp);
 		else
-			status = execute_external(command, redir, envp);
+			status = execute_external(command, redir, *envp);
 	}
+	ft_free_2d_array(command);
 	return (status);
-	return (0);
 }
 
 int	execute_external(char **command, char *redir, char **envp)
@@ -43,12 +43,13 @@ int	execute_external(char **command, char *redir, char **envp)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
-		//status = apply_redirect(node->left);
+		//status = apply_redirect(redir);
 		if (status == 0)
 			status = locate_command(&command[0], envp);
 		if (status == 0)
 			execve(command[0], command, envp);
-		exit (status);
+		print_err_msg(command[0], ": execve() error occured\n");
+		exit(EXECVE_FAILURE);
 	}
 	else
 	{
@@ -59,10 +60,31 @@ int	execute_external(char **command, char *redir, char **envp)
 	}
 }
 
-int	execute_builtin(char **command, char *redir, char **envp)
+int	execute_builtin(char **command, char *redir, char ***envp)
 {
-	(void)command;
-	(void)redir;
-	(void)envp;
-	return (0);
+	int	in_fd;
+	int	out_fd;
+	int	status;
+
+	in_fd = dup(STDIN_FILENO);
+	out_fd = dup(STDOUT_FILENO);
+	if (in_fd == -1 || out_fd == -1)
+	{
+		if (in_fd != -1)
+			close(in_fd);
+		if (out_fd != -1)
+			close(out_fd);
+		print_err_msg(command[0], ": dup() error occured\n");
+		return (DUP_FAILURE);
+	}
+	//status = apply_redirect(redir);
+	if (status == 0)
+		status = command_run(command, envp);
+	if (dup2(in_fd, STDIN_FILENO) != -1 && dup2(out_fd, STDOUT_FILENO) != -1)
+	{
+		print_err_msg(command[0], ": dup2() error occured. "
+			"Correct behavior is not guaranteed anymore\n");
+		return (DUP_P_FAILURE);
+	}
+	return (status);
 }

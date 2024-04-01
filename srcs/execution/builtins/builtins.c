@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/27 15:42:30 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 11:30:59 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,19 @@
 */
 int	command_run(char **arr, char ***envp)
 {
-	if (!ft_strncmp("echo", arr[0], ECHO_LEN))
+	if (ft_strncmp(arr[0], "echo", ECHO_LEN) == 0)
 		return (run_echo(arr + 1, 0, 0, 0));
-	else if (!ft_strncmp("cd", arr[0], CD_LEN))
+	if (ft_strncmp(arr[0], "cd", CD_LEN) == 0)
 		return (run_cd(arr + 1, *envp));
-	else if (!ft_strncmp("pwd", arr[0], PWD_LEN))
+	if (ft_strncmp(arr[0], "pwd", PWD_LEN) == 0)
 		return (run_pwd(arr + 1));
-	else if (!ft_strncmp("export", arr[0], EXPORT_LEN))
+	if (ft_strncmp(arr[0], "export", EXPORT_LEN) == 0)
 		return (run_export(arr + 1, envp));
-	else if (!ft_strncmp("unset", arr[0], UNSET_LEN))
+	if (ft_strncmp(arr[0], "unset", UNSET_LEN) == 0)
 		return (run_unset(arr + 1, envp));
-	else if (!ft_strncmp("env", arr[0], ENV_LEN))
+	if (ft_strncmp(arr[0], "env", ENV_LEN) == 0)
 		return (run_env(arr + 1, envp));
-	else if (!ft_strncmp("exit", arr[0], EXIT_LEN))
+	if (ft_strncmp(arr[0], "exit", ENV_LEN) == 0)
 		return (run_exit(arr + 1));
-	else
-	{
-		printf("EXECVE: |%s|\n", arr[0]);
-		return (1);
-	}
+	return (0);
 }
