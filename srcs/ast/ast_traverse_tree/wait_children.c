@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constructors_2.c                                   :+:      :+:    :+:   */
+/*   wait_children.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 13:21:27 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 16:07:16 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/03/01 10:58:08 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/03/25 12:24:58 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-t_command_br	*init_t_command_br(void)
+int	wait_children(int pids[2], int num)
 {
-	t_command_br	*node;
+	int	i;
+	int	status;
 
-	node = (t_command_br *)ft_calloc(1, sizeof(t_command_br));
-	if (!node)
-		return (0);
-	node->type = T_COMMAND_BR;
-	return (node);
-}
-
-t_redir	*init_t_redir(void)
-{
-	t_redir	*node;
-
-	node = (t_redir *)ft_calloc(1, sizeof(t_redir));
-	if (!node)
-		return (0);
-	node->type = T_REDIR;
-	return (node);
+	i = 0;
+	while (i < num)
+	{
+		if (pids[i] == -1)
+			return (FORK_FAILURE);
+		waitpid(pids[i], &status, 0);
+		i++;
+	}
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (EXIT_FAILURE);
 }

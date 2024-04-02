@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:40:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 13:53:23 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:06:03 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ t_bool	create_tree(char *str, t_node **root)
 		status = add_command(info, root);
 	else if (type == T_COMMAND_BR)
 		status = add_command_br(info, root);
-	else if (type == T_CMD_SIMPLE)
-		status = add_cmd_simple(info, root);
 	free(info);
 	if (status == false)
 		free_tree(root);
@@ -74,8 +72,6 @@ t_bool	get_type(char *str, t_node_info **info)
 // 		return ("command");
 // 	if (t == T_COMMAND_BR)
 // 		return ("command_br");
-// 	if (t == T_CMD_SIMPLE)
-// 		return ("cmd_s");
 // 	if (t == T_REDIR)
 // 		return ("redir");
 // 	return (NULL);
@@ -86,25 +82,27 @@ t_bool	get_type(char *str, t_node_info **info)
 // 	int	type;
 
 // 	type = tree->type;
-// 	if (type == T_AND || type == T_OR || type == T_PIPE
-// 		|| type == T_COMMAND || type == T_COMMAND_BR)
+// 	if (type == T_AND || type == T_OR || type == T_PIPE || type == T_COMMAND_BR)
 // 	{
 // 		printf("[t:%s, t_l:%d, t_r:%d] \n", return_type(tree->type),
-// 		tree->left->type, tree->right->type);
+// 			tree->left->type, tree->right->type);
 // 		preorder(tree->left);
 // 		preorder(tree->right);
+// 	}
+// 	else if (type == T_COMMAND)
+// 	{
+// 		printf("[t:%s, t_l:%d, cmd:%s]  \n", return_type(tree->type),
+// 			((t_command *)tree)->redir->type, ((t_command *)tree)->cmd);
+// 		preorder(tree->left);
 // 	}
 // 	else if (type == T_BRACKET)
 // 	{
 // 		printf("[t:%s, t_l:%d]  \n", return_type(tree->type), tree->left->type);
 // 		preorder(tree->left);
 // 	}
-// 	else if (type == T_CMD_SIMPLE)
-// 		printf("[t:%s, cmd:%s]  \n", return_type(tree->type),
-// 		((t_cmd_simple *)tree)->cmd);
 // 	else if (type == T_REDIR)
 // 		printf("[t:%s, redir:%s]  \n", return_type(tree->type),
-// 		((t_redir *)tree)->str);
+// 			((t_redir *)tree)->str);
 // }
 
 // int	main(int argc, char **argv)

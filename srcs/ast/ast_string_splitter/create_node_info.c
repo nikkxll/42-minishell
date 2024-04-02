@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_node_info.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:46:43 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:39:58 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:03:35 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,14 @@ int	set_node_info_bracket(t_node_info **info, char *str, int type)
 }
 
 /**
- * @brief	Function to initialize an intermediate node for T_COMMAND_BR type
- * @param	info intermediate node to embed into the Abstract Syntax Tree (AST)
- * structure
+ * @brief	Function to initialize an intermediate node for @c `T_COMMAND_BR`
+ * type
+ * @param	info intermediate node to embed into the Abstract Syntax
+ * Tree (AST) structure
  * @param	str string that coming from readline function
  * @param	type current meta character type
  * @return	@c `-1` if malloc error occurs, @c `1` if success
- */
+*/
 int	set_node_info_command_br(t_node_info **info, char *str, int type)
 {
 	t_node_info	*node_info;
@@ -143,14 +144,14 @@ int	set_node_info_command_br(t_node_info **info, char *str, int type)
 }
 
 /**
- * @brief	Function to initialize an intermediate node for @c `T_CMD_SIMPLE`
- * type
- * @param	info intermediate node to embed into the Abstract Syntax Tree (AST)
- * structure
- * @param	str string that coming from readline function
- * @param	type current meta character type
- * @return	@c `-1` if malloc error occurs, @c `1` if success
- */
+* @brief	Function to initialize an intermediate node for @c `T_COMMAND`
+* type without redirects
+* @param	info intermediate node to embed into the Abstract Syntax Tree (AST)
+* structure
+* @param	str string that coming from readline function
+* @param	type current meta character type
+* @return	@c `-1` if malloc error occurs, @c `1` if success
+*/
 int	set_node_cmd_simple(t_node_info **info, char *str, int type)
 {
 	t_node_info	*node_info;
@@ -161,8 +162,8 @@ int	set_node_cmd_simple(t_node_info **info, char *str, int type)
 		*info = node_info;
 		return (-1);
 	}
-	node_info->str_left = str;
-	node_info->str_right = NULL;
+	node_info->str_left = NULL;
+	node_info->str_right = str;
 	node_info->type = type;
 	*info = node_info;
 	return (1);

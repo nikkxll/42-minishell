@@ -97,6 +97,9 @@ echo a&&b'' |>>a|<a
 
 protestit povedenie wildcards when permissions denied dlya foldera
 
+-wild redirects
+=======
+
 ____
 bash-3.2$ unset HOME
 bash-3.2$ cd
