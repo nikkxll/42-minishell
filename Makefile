@@ -11,11 +11,11 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 ###############################
 
 #######AST_TRAVERSE_TREE#######
-AST_TRAVERSE_NAME	:=	traverse_tree.c traverse_bracket.c traverse_pipe.c wait_children.c \
-						traverse_command_br.c traverse_command.c parse_cmd.c is_builtin.c \
-						locate_command.c 
-AST_TRAVERSE_PATH	:=	ast/ast_traverse_tree/
-AST_TRAVERSE		:=	$(addprefix $(AST_TRAVERSE_PATH), $(AST_TRAVERSE_NAME))
+# AST_TRAVERSE_NAME	:=	traverse_tree.c traverse_bracket.c traverse_pipe.c wait_children.c \
+# 						traverse_command_br.c traverse_command.c parse_cmd.c is_builtin.c \
+# 						locate_command.c 
+# AST_TRAVERSE_PATH	:=	ast/ast_traverse_tree/
+# AST_TRAVERSE		:=	$(addprefix $(AST_TRAVERSE_PATH), $(AST_TRAVERSE_NAME))
 
 #########COMMON_UTILS##########
 COMMON_UTILS_NAME	:=	remove_quotes.c errors_print.c split_before_wildcards.c prompt_update.c \
@@ -56,7 +56,7 @@ D_SIGN_PATH			:=	dollar_sign_expansion/
 D_SIGN				:=	$(addprefix $(D_SIGN_PATH), $(D_SIGN_NAME))
 
 ########EXECUTION########
-BUILTINS_NAME		:=	builtins.c cd.c echo.c env.c pwd.c unset.c exit.c
+BUILTINS_NAME		:=	builtins.c cd.c cd_utils.c echo.c env.c pwd.c unset.c exit.c
 BUILTINS_UTILS_NAME	:=	utils.c utils_2.c
 BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_error.c export_utils.c export.c
 BUILTINS_PATH		:=	execution/builtins/

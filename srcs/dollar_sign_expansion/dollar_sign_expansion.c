@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:41:26 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 14:43:29 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:43:40 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	dollar_sign_expansion(char **str, char **envp, int last_exit_status)
 	int	last_ind;
 
 	last_ind = 0;
-	if (expand_dollar_sign_q_mark(str, last_ind, last_exit_status)
-		== MALLOC_ERR)
+	if (expand_dollar_sign_generic(str, envp, last_ind) == MALLOC_ERR)
 		return (MALLOC_ERR);
 	last_ind = 0;
-	if (expand_dollar_sign_generic(str, envp, last_ind) == MALLOC_ERR)
+	if (expand_dollar_sign_q_mark(str, last_ind, last_exit_status)
+		== MALLOC_ERR)
 		return (MALLOC_ERR);
 	return (SUCCESS);
 }

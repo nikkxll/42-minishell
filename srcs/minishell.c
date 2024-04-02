@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 14:50:59 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:41:49 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	main(void)
 
 	ms.env = cpy_env(environ);
 	ms.exit_status = SUCCESS;
-	ms.exit_status = pwd_init(&ms.env);
+	ms.exit_status = pwd_init(&(ms.env), &(ms.pwd));
 	if (ms.exit_status != SUCCESS)
 		return (ms.exit_status);
-	ms.exit_status = shlvl_init(&ms.env);
+	ms.exit_status = shlvl_init(&(ms.env));
 	if (ms.exit_status != SUCCESS)
 		return (ms.exit_status);
 	while (1)
@@ -88,7 +88,7 @@ int	main(void)
 // 	t_minishell	ms;
 
 // 	ms.env = cpy_env(environ);
-// 	command = ft_strdup("echo $?$?$?$?");
+// 	command = ft_strdup("echo $$$$$$$?");
 // 	// while (1)
 // 	// {
 // 	// 	command = readline("e-bash > ");

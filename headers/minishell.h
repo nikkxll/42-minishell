@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 14:45:31 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:48:01 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,11 @@ int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);
 void			print_err_msg(char *cmd, char *msg);
 void			print_arg_err_msg(char *cmd, char *arg, char *msg);
-void			run_cd(char **arr, t_minishell *ms);
+void			run_cd(char **arr, t_minishell *ms, int status);
+void			cd_precheck(char **arr, t_minishell *ms);
+void			struct_pwd_oldpwd_update(char *new_pwd, t_minishell *ms);
+void			update_env_oldpwd(char ***envp, t_minishell *ms);
+void			update_env_pwd(char ***envp, t_minishell *ms);
 void			run_echo(char **arr, int i, int j, int nl_flag);
 void			run_export(char **arr, t_minishell *ms);
 void			create_operations_array(char **arr, char **envp,
@@ -166,6 +170,6 @@ int				get_current_folder_name(char **folder_name);
 int				get_prompt(char *folder_name, char **command);
 
 int				shlvl_init(char ***envp);
-int				pwd_init(char ***envp);
+int				pwd_init(char ***envp, char **pwd);
 
 #endif

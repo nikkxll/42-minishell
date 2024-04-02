@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:30:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 14:43:19 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:23:30 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,25 @@ static void	process_dollar_sign_in_string(char *str, char **envp,
 }
 
 /**
+ * @brief	Function that initialize @c `t_dollar` structure
+ * @param	dollar pointer to structure which consist of used variables
+ * @param	env_part pointer to the env string that has been found
+ * @param	last_part_ind pointer to the last part of the new string
+ * @return	@c `void`
+ */
+static void	dollar_struct_init(t_dollar_exp *dollar, char **env_part,
+	int *last_part_ind)
+{
+	dollar->i = 0;
+	dollar->k = 0;
+	dollar->env_list_pos = 0;
+	dollar->single_q = 0;
+	dollar->double_q = 0;
+	dollar->last_part_ind = *last_part_ind;
+	dollar->env_part = *env_part;
+}
+
+/**
  * @brief	Function that runs while loop to search for dollar signs
  * @param	str string to search in
  * @param	envp environment array
@@ -53,23 +72,20 @@ static int	expansion(char *str, char **envp, char **env_part,
 {
 	t_dollar_exp	dollar;
 
-	dollar.i = 0;
-	dollar.k = 0;
-	dollar.env_list_pos = 0;
-	dollar.single_q = 0;
-	dollar.double_q = 0;
-	dollar.last_part_ind = *last_part_ind;
-	dollar.env_part = *env_part;
+	dollar_struct_init(&dollar, env_part, last_part_ind);
 	while (str[dollar.i] != NULL_TERM)
 	{
 		if ((dollar.double_q == 0 || dollar.double_q == 1)
-			&& dollar.single_q != 1 && str[dollar.i] == D_SIGN
-			&& ++(dollar.i) && ft_isenv(str[dollar.i], &(dollar.i)))
+			&& dollar.single_q != 1 && str[dollar.i] == D_SIGN)
 		{
-			process_dollar_sign_in_string(str, envp, &dollar);
-			*env_part = dollar.env_part;
-			*last_part_ind = dollar.last_part_ind;
-			return (dollar.env_list_pos);
+			if (++(dollar.i) && ft_isenv(str[dollar.i], &(dollar.i)))
+			{
+				process_dollar_sign_in_string(str, envp, &dollar);
+				*env_part = dollar.env_part;
+				*last_part_ind = dollar.last_part_ind;
+				return (dollar.env_list_pos);
+			}
+			continue ;
 		}
 		index_quotes(str, dollar.i, &(dollar.single_q), &(dollar.double_q));
 		(dollar.i)++;

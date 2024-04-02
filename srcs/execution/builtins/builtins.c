@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 15:05:52 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:19:16 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	command_run(char **arr, t_minishell *ms)
 	if (!ft_strncmp("echo", arr[0], ECHO_LEN))
 		run_echo(arr + 1, 0, 0, 0);
 	else if (!ft_strncmp("cd", arr[0], CD_LEN))
-		run_cd(arr + 1, ms);
+		run_cd(arr + 1, ms, 0);
 	else if (!ft_strncmp("pwd", arr[0], PWD_LEN))
 		run_pwd(arr + 1, ms);
 	else if (!ft_strncmp("export", arr[0], EXPORT_LEN))
