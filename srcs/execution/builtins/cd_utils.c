@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 19:20:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 19:51:58 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 23:26:01 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@
  * @param	ms pointer to the common project @c `t_minishell` structure
  * @return	@c `void`
  */
-void	struct_pwd_oldpwd_update(char *new_pwd, t_minishell *ms)
+void	struct_pwd_and_full_oldpwd_update(char *new_pwd, t_minishell *ms)
 {
 	ms->oldpwd = ms->pwd;
+	update_env_oldpwd(&(ms->env), ms);
+	if (ms->exit_status != SUCCESS)
+		return ;
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 	{
@@ -33,6 +36,7 @@ void	struct_pwd_oldpwd_update(char *new_pwd, t_minishell *ms)
 /**
  * @brief	A function that makes cd precheck for args amount
  * @param	arr array of arguments or options if allowed
+ * @param	ms pointer to the common project @c `t_minishell` structure
  * @return	@c `void`
  */
 void	cd_precheck(char **arr, t_minishell *ms)
@@ -67,6 +71,7 @@ void	update_env_pwd(char ***envp, t_minishell *ms)
 {
 	int		position;
 	char	*cwd;
+	char	*temp;
 
 	position = env_var(*envp, "PWD=", -1, 4);
 	if (position != -1)
@@ -74,17 +79,28 @@ void	update_env_pwd(char ***envp, t_minishell *ms)
 		cwd = getcwd(NULL, 0);
 		if (!cwd)
 			ms->exit_status = GETCWD_ERROR;
-		free((*envp)[position]);
-		(*envp)[position] = ft_strjoin("PWD=", cwd);
-		if (!(*envp)[position])
+		temp = ft_strjoin("PWD=", cwd);
+		if (!temp)
 		{
 			free(cwd);
 			ms->exit_status = MALLOC_ERR;
+			return ;
 		}
+		free((*envp)[position]);
+		(*envp)[position] = temp;
 		free(cwd);
 	}
 }
 
+/**
+ * @brief	A function that initialize oldpwd when oldpwd does not 
+ * exist
+ * @param	envp pointer to the environment array
+ * @param	i auxiliary index (equal to 0)
+ * @param	ms pointer to the common project @c `t_minishell` structure
+ * @return	@c `SUCCESS` if initialization succeed,
+ * @c `MALLOC_ERR` if memory allocation fails
+ */
 static int	oldpwd_init_when_no_oldpwd_exists(char ***envp, int i,
 	t_minishell *ms)
 {
@@ -111,15 +127,20 @@ static int	oldpwd_init_when_no_oldpwd_exists(char ***envp, int i,
 void	update_env_oldpwd(char ***envp, t_minishell *ms)
 {
 	int		position;
+	char	*temp;
 
 	position = env_var(*envp, "OLDPWD=", -1, 4);
 	if (position != -1)
 	{
-		free((*envp)[position]);
-		(*envp)[position] = ft_strjoin("OLDPWD=", ms->pwd);
-		if (!(*envp)[position])
+		temp = ft_strjoin("OLDPWD=", ms->pwd);
+		if (!temp)
+		{
 			ms->exit_status = MALLOC_ERR;
+			return ;
+		}
+		free((*envp)[position]);
+		(*envp)[position] = temp;
 	}
 	else
-		ms->exit_status = oldpwd_init_when_no_oldpwd_exists(envp, 1, ms);
+		ms->exit_status = oldpwd_init_when_no_oldpwd_exists(envp, 0, ms);
 }

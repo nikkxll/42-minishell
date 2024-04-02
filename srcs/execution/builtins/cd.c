@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:22:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 20:00:59 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 23:03:33 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ static void	handle_cd_oldpwd(t_minishell *ms)
 	}
 	else
 		ft_printf("%s\n", (ms->env)[env_variable] + 7);
-	update_env_oldpwd(&(ms->env), ms);
-	if (ms->exit_status != SUCCESS)
-		return ;
-	struct_pwd_oldpwd_update(NULL, ms);
-	if (ms->exit_status != SUCCESS)
-		return ;
 }
 
 /**
@@ -66,12 +60,6 @@ static void	handle_cd_home(t_minishell *ms)
 		ms->exit_status = CHDIR_ERROR;
 		return ;
 	}
-	update_env_oldpwd(&(ms->env), ms);
-	if (ms->exit_status != SUCCESS)
-		return ;
-	struct_pwd_oldpwd_update(NULL, ms);
-	if (ms->exit_status != SUCCESS)
-		return ;
 }
 
 /**
@@ -91,8 +79,6 @@ void	run_cd(char **arr, t_minishell *ms, int status)
 	else if (!ft_strncmp(arr[0], "-", ft_strlen(arr[0]))
 		&& ft_strlen(arr[0]) > 0)
 		handle_cd_oldpwd(ms);
-	if (ms->exit_status != SUCCESS)
-		return ;
 	else if (ft_strlen(arr[0]) == 0)
 		status = chdir(".");
 	else
@@ -103,10 +89,9 @@ void	run_cd(char **arr, t_minishell *ms, int status)
 		ms->exit_status = CHDIR_ERROR;
 		return ;
 	}
-	update_env_oldpwd(&(ms->env), ms);
-	if (ms->exit_status != SUCCESS)
+	else if (ms->exit_status != SUCCESS)
 		return ;
-	struct_pwd_oldpwd_update(NULL, ms);
+	struct_pwd_and_full_oldpwd_update(NULL, ms);
 	if (ms->exit_status != SUCCESS)
 		return ;
 	update_env_pwd(&(ms->env), ms);
