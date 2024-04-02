@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constructors_2.c                                   :+:      :+:    :+:   */
+/*   traverse_command_br.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 13:21:27 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 16:07:16 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/03/25 13:37:47 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/03/25 14:29:09 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-t_command_br	*init_t_command_br(void)
+int	traverse_command_br(t_node *node, char ***envp)
 {
-	t_command_br	*node;
+	int		status;
+	pid_t	pid;
 
-	node = (t_command_br *)ft_calloc(1, sizeof(t_command_br));
-	if (!node)
-		return (0);
-	node->type = T_COMMAND_BR;
-	return (node);
-}
-
-t_redir	*init_t_redir(void)
-{
-	t_redir	*node;
-
-	node = (t_redir *)ft_calloc(1, sizeof(t_redir));
-	if (!node)
-		return (0);
-	node->type = T_REDIR;
-	return (node);
+	pid = fork();
+	if (pid == -1)
+		return (FORK_FAILURE);
+	if (pid == CHILD)
+	{
+		// apply_redirect(node->left);
+		traverse_bracket(node->right, envp);
+		//Ensure that execution never reaches this line.
+		exit (0);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
+		return (EXIT_FAILURE);
+	}
+	return (0);
 }

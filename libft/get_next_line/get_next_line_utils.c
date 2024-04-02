@@ -6,27 +6,11 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:39:50 by dshatilo          #+#    #+#             */
-/*   Updated: 2023/11/15 17:04:33 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:49:33 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i;
-
-	i = 0;
-	while (*(s + i) != 0)
-	{
-		if (*(s + i) == (unsigned char) c)
-			return ((char *)s + i);
-		i++;
-	}
-	if ((unsigned char) c == 0)
-		return ((char *)s + i);
-	return (0);
-}
 
 char	*ft_strncpy(char *dest, char *src, size_t n)
 {
@@ -69,14 +53,17 @@ char	*add_to_string(char *s, char *buffer, size_t buf_len)
 	return (new_s);
 }
 
-char	*check_string(char *s)
+char	*check_string(char *s, int *status)
 {
 	if (!s)
 	{
 		s = (char *)malloc(sizeof(char) * 1);
 		if (!s)
-			return (0);
-		*s = 0;
+		{
+			*status = 1;
+			return (NULL);
+		}
+		*s = '\0';
 	}
 	return (s);
 }

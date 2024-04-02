@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 12:38:33 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:52:33 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ enum	e_types
 	T_BRACKET,
 	T_COMMAND_BR,
 	T_COMMAND,
-	T_CMD_SIMPLE,
 	T_REDIR
 };
 
@@ -41,6 +40,7 @@ enum	e_characters
 	DASH = 45,
 	DOT = 46,
 	SLASH = 47,
+	COLON = 58,
 	SEMICOLON = 59,
 	REDIR_L = 60,
 	EQUAL = 61,
@@ -53,24 +53,31 @@ enum	e_characters
 
 enum	e_builtins
 {
-	CD_LEN = 3,
-	ENV_LEN = 4,
-	PWD_LEN = 4,
-	ECHO_LEN = 5,
-	EXIT_LEN = 5,
-	UNSET_LEN = 6,
-	EXPORT_LEN = 7,
+	CD_LEN = 2,
+	ENV_LEN = 3,
+	PWD_LEN = 3,
+	ECHO_LEN = 4,
+	EXIT_LEN = 4,
+	UNSET_LEN = 5,
+	EXPORT_LEN = 6,
 };
 
 enum	e_exit_status
 {
 	SUCCESS,
-	GENERIC_ERROR,
+  GENERIC_ERROR,
 	CMD_ARG_ERROR,
+	CMD_PD_FAILURE = 126,
+	CMD_NF_FAILURE = 127,
 	MALLOC_ERR = 200,
 	SYSTEM_ERROR = 201,
 	CHDIR_ERROR,
 	GETCWD_ERROR,
+  EXECVE_FAILURE = 999,
+	FORK_FAILURE = 999,
+	PIPE_FAILURE = 999,
+	DUP_FAILURE = 999,
+	DUP_P_FAILURE = 999,
 };
 
 enum	e_export_types
@@ -94,6 +101,26 @@ enum	e_wc_paths
 
 # ifndef NOT_FOUND
 #  define NOT_FOUND -1
+# endif
+
+# ifndef READ
+#  define READ 0
+# endif
+
+# ifndef WRITE
+#  define WRITE 1
+# endif
+
+# ifndef CHILD
+#  define CHILD 0
+# endif
+
+# ifndef FIRST
+#  define FIRST 0
+# endif
+
+# ifndef SECOND
+#  define SECOND 1
 # endif
 
 #endif

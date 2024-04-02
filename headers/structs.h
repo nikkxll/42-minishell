@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/01 01:52:55 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/30 00:19:28 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ typedef struct s_bracket
 typedef struct s_command
 {
 	int		type;
-	t_node	*left;
-	t_node	*right;
+	t_node	*redir;
+	char	*cmd;
 }	t_command;
 
 typedef struct s_command_br
@@ -105,12 +105,6 @@ typedef struct s_command_br
 	t_node	*left;
 	t_node	*right;
 }	t_command_br;
-
-typedef struct s_cmd_simple
-{
-	int		type;
-	char	*cmd;
-}	t_cmd_simple;
 
 typedef struct s_redir
 {

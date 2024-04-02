@@ -6,70 +6,71 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:39:03 by dshatilo          #+#    #+#             */
-/*   Updated: 2023/11/15 16:58:24 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:51:28 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_string(char *s, char *buffer, int fd, ssize_t bytes);
+char	*get_string(char *s, int fd, ssize_t bytes, int	*status);
 
-char	*ft_get_line(char *str);
+char	*ft_get_line(char *str, int	*status);
 
 char	*dealloc(char *s, char *line);
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int *status, char **string)
 {
-	static char	*string;
-	char		*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= (size_t)(-2))
-		return (0);
-	buffer = 0;
-	string = get_string(string, buffer, fd, 1);
-	if (!string)
-		return (0);
-	line = ft_get_line(string);
+	*status = 0;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		*status = -1;
+		return (NULL);
+	}
+	*string = check_string(*string, status);
+	if (*string == NULL)
+		return (NULL);
+	*string = get_string(*string, fd, 1, status);
+	if (!(*string))
+		return (NULL);
+	line = ft_get_line(*string, status);
 	if (!line)
 	{
-		string = ft_free(string);
-		return (0);
+		*string = ft_free(*string);
+		return (NULL);
 	}
-	string = dealloc(string, line);
+	*string = dealloc(*string, line);
 	return (line);
 }
 
-char	*get_string(char *s, char *buffer, int fd, ssize_t bytes)
+char	*get_string(char *s, int fd, ssize_t bytes, int	*status)
 {
-	s = check_string(s);
-	if (!s)
-		return (0);
+	char	buffer[BUFFER_SIZE];
+
 	while ((s && !ft_strchr(s, '\n')) && bytes != 0)
 	{
-		buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE);
-		if (!buffer)
-			return (ft_free(s));
 		bytes = read(fd, buffer, BUFFER_SIZE);
 		if (bytes == -1)
 		{
+			*status = 2;
 			free(s);
-			return (ft_free(buffer));
+			return (NULL);
 		}
-		if (!bytes)
+		if (bytes == 0)
 		{
 			if (*s == 0)
 				s = ft_free(s);
-			free(buffer);
 			return (s);
 		}
 		s = add_to_string(s, buffer, bytes);
-		free (buffer);
+		if (s == NULL)
+			*status = 3;
 	}
 	return (s);
 }
 
-char	*ft_get_line(char *str)
+char	*ft_get_line(char *str, int	*status)
 {
 	char	*line;
 	size_t	line_len;
@@ -81,7 +82,10 @@ char	*ft_get_line(char *str)
 		line_len++;
 	line = (char *)malloc(sizeof(char) * (line_len + 1));
 	if (!line)
-		return (0);
+	{
+		*status = 1;
+		return (NULL);
+	}
 	line[line_len] = 0;
 	ft_strncpy(line, str, line_len);
 	return (line);

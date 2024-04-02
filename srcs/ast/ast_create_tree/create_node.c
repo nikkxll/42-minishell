@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:54:02 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 11:37:42 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:04:51 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ t_bool	create_node(t_node_info *info, t_node **root)
 		node = (t_node *)init_t_command();
 	else if (info->type == T_COMMAND_BR)
 		node = (t_node *)init_t_command_br();
-	else if (info->type == T_CMD_SIMPLE)
-		node = (t_node *)init_t_cmd_simple();
 	if (node == NULL)
 	{
 		free(info);

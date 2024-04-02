@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:01:13 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/05 11:27:35 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/30 00:20:18 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,23 @@
  */
 void	free_tree(t_node **root)
 {
-	int	type;
 
 	if (*root == NULL)
 		return ;
-	type = (*root)->type;
-	if (type == T_BRACKET)
+	if ((*root)->type == T_BRACKET)
 	{
 		if ((*root)->left)
 			free_tree(&((*root)->left));
 	}
-	else if (type == T_REDIR)
+	else if ((*root)->type == T_REDIR)
 	{
 		free(((t_redir *)(*root))->str);
 	}
-	else if (type == T_AND || type == T_OR || type == T_PIPE
-		|| type == T_COMMAND || type == T_COMMAND_BR)
+	else if ((*root)->type == T_COMMAND)
+	{
+		free_tree(&((t_command *)(*root))->redir);
+	}
+	else
 	{
 		if ((*root)->left)
 			free_tree(&((*root)->left));
