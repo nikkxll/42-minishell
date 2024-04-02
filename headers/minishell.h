@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 00:51:21 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:37:29 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 # define MINISHELL_H
 
 # include <dirent.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../libft/libft.h"
 # include "structs.h"
 # include "defines.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-
-#include <stdio.h>
 
 /*_____ Readline _____*/
 void			rl_clear_history(void);
@@ -85,13 +84,13 @@ int				brackets_search(char *str);
 int				redir_search(char *str);
 
 /*_____ Traverse-tree _____*/
-int				traverse_tree(t_node *node, char ***envp);
-int				traverse_and(t_node *node, char ***envp);
-int				traverse_or(t_node *node, char ***envp);
-int				traverse_pipe(t_node *node, char ***envp);
-int				traverse_bracket(t_node *node, char ***envp);
-int				traverse_command_br(t_node *node, char ***envp);
-int				traverse_command(char *cmd, char *redir, char ***envp);
+int				traverse_tree(t_node **node, t_minishell *ms);
+int				traverse_and(t_node **node, t_minishell *ms);
+int				traverse_or(t_node **node, t_minishell *ms);
+int				traverse_pipe(t_node **node, t_minishell *ms);
+int				traverse_bracket(t_node **node, t_minishell *ms);
+int				traverse_command_br(t_node **node, t_minishell *ms);
+int				traverse_command(char *cmd, char *redir, t_minishell *ms);
 int				parse_cmd(char *cmd, char ***res, char **envp);
 int				wait_children(int pids[2], int num);
 t_bool			is_builtin(char *cmd);
@@ -105,7 +104,7 @@ int				environment_search_exp_module(char **envp, char *var, int i,
 					int j);
 void			index_quotes(char *str, int i, int *single_q, int *double_q);
 
-void			command_run(char **arr, t_minishell *ms);
+int				command_run(char **arr, t_minishell *ms);
 char			**sort_string_arr(char **argv, int size);
 char			**cpy_env(char **envp);
 void			remove_quotes(char *str, int i, int j);

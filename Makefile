@@ -13,7 +13,7 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 #######AST_TRAVERSE_TREE#######
 AST_TRAVERSE_NAME	:=	traverse_tree.c traverse_bracket.c traverse_pipe.c wait_children.c \
 						traverse_command_br.c traverse_command.c parse_cmd.c is_builtin.c \
-						locate_command.c 
+						locate_command.c find_executable.c
 AST_TRAVERSE_PATH	:=	ast/ast_traverse_tree/
 AST_TRAVERSE		:=	$(addprefix $(AST_TRAVERSE_PATH), $(AST_TRAVERSE_NAME))
 
@@ -85,15 +85,15 @@ LIBFT_PATH			:=	$(LIBFT_PATH)
 LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
-RL					:=	/opt/homebrew/opt/readline/lib/
-RLH					:=	/opt/homebrew/opt/readline/lib/
-RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
-RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
+# RL					:=	/opt/homebrew/opt/readline/lib/
+# RLH					:=	/opt/homebrew/opt/readline/lib/
+# RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
+# RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
 
-# RL					:=	~/.brew/Cellar/readline/8.2.7/lib
-# RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
-# RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
-# RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
+RL					:=	~/.brew/Cellar/readline/8.2.7/lib
+RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
+RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
+RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
 
 HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)
 INCLUDES			:=	$(addprefix -I , $(HEADERS))

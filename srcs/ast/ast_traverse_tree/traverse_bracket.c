@@ -6,25 +6,26 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 15:46:26 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 15:08:09 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:22:07 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-int	traverse_bracket(t_node *node, char ***envp)
+int	traverse_bracket(t_node **root, t_minishell *ms)
 {
 	int		status;
 	pid_t	pid;
+	t_node	*node;
 
 	pid = fork();
 	if (pid == -1)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
-		traverse_tree(node->left, envp);
-		//Ensure that execution never reaches this line.
-		exit (0); // Remove it?
+		node = *root;
+		status = traverse_tree(&(node->left), ms);
+		exit (status);
 	}
 	else
 	{

@@ -6,32 +6,35 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:43:12 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 15:20:56 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:18:12 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-int	traverse_first(t_node *node, char ***envp, int pipefd[2], int pids[2]);
-int	traverse_second(t_node *node, char ***envp, int pipefd[2], int pids[2]);
+int	traverse_first(t_node **node, t_minishell *ms, int pipefd[2], int pids[2]);
+int	traverse_second(t_node **node, t_minishell *ms, int pipefd[2], int pids[2]);
 
-int	traverse_pipe(t_node *node, char ***envp)
+int	traverse_pipe(t_node **root, t_minishell *ms)
 {
 	int		status;
 	int		pipefd[2];
 	pid_t	pids[2];
+	t_node	*node;
 
+	node = *root;
 	if (pipe(pipefd) == -1)
 		return (PIPE_FAILURE);
-	status = traverse_first(node->left, envp, pipefd, pids);
+	status = traverse_first(&(node->left), ms, pipefd, pids);
 	if (status == 0)
-		status = traverse_second(node->right, envp, pipefd, pids);
+		status = traverse_second(&(node->right), ms, pipefd, pids);
 	status = wait_children(pids, 2);
 	return (status);
 }
 
-int	traverse_first(t_node *node, char ***envp, int pipefd[2], int pids[2])
+int	traverse_first(t_node **node, t_minishell *ms, int pipefd[2], int pids[2])
 {
+	int	status;
 
 	pids[FIRST] = fork();
 	if (pids[FIRST] == -1)
@@ -44,16 +47,18 @@ int	traverse_first(t_node *node, char ***envp, int pipefd[2], int pids[2])
 			close(pipefd[WRITE]);
 			exit(DUP_FAILURE);
 		}
-		traverse_tree(node, envp);
-		//Ensure that execution never reaches this line.
+		status = traverse_tree(node, ms);
+		exit(status);
 	}
 	else
 		close(pipefd[WRITE]);
 	return (0);
 }
 
-int	traverse_second(t_node *node, char ***envp, int pipefd[2], int pids[2])
+int	traverse_second(t_node **node, t_minishell *ms, int pipefd[2], int pids[2])
 {
+	int	status;
+
 	pids[SECOND] = fork();
 	if (pids[SECOND] == -1)
 		return (FORK_FAILURE);
@@ -64,8 +69,8 @@ int	traverse_second(t_node *node, char ***envp, int pipefd[2], int pids[2])
 			close(pipefd[READ]);
 			exit(DUP_FAILURE);
 		}
-		traverse_tree(node, envp);
-		//Ensure that execution never reaches this line.
+		status = traverse_tree(node, ms);
+		exit(status);
 	}
 	else
 		close(pipefd[READ]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 12:35:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:16:24 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ int	main(void)
 {
 	char		*command;
 	extern char	**environ;
-	char		**arr;
+	// char		**arr;
 	char		*folder_name;
 	char		*prompt;
+	t_node		*root;
 	t_minishell	ms;
 
 	ms.env = cpy_env(environ);
@@ -68,10 +69,13 @@ int	main(void)
 			add_history(command);
 		else
 			continue ;
-		validate_input(command);
-		arr = wrapper_ft_split_with_quotes(command);
+		ms.exit_status = validate_input(command);
+		root = NULL;
+		ms.exit_status = create_tree(command, &root);
+		ms.exit_status = traverse_tree(&root, &ms);
+		// arr = wrapper_ft_split_with_quotes(command);
 		free(command);
-		minishell(arr, &ms);
+		// minishell(arr, &ms);
 		free(prompt);
 	}
 	rl_clear_history();
@@ -83,11 +87,12 @@ int	main(void)
 // {
 // 	char		*command;
 // 	extern char	**environ;
-// 	char		**arr;
+// 	// char		**arr;
 // 	t_minishell	ms;
+// 	t_node		*root;
 
 // 	ms.env = cpy_env(environ);
-// 	command = ft_strdup("echo *");
+// 	command = ft_strdup("export a=123 && env");
 // 	// while (1)
 // 	// {
 // 	// 	command = readline("e-bash > ");
@@ -98,10 +103,19 @@ int	main(void)
 // 	// 	}
 // 	// 	if (command && *command)
 // 	// 		add_history(command);
-// 		arr = wrapper_ft_split_with_quotes(command);
-// 		minishell(arr, &ms);
+// 		ms.exit_status = validate_input(command);
+// 		root = NULL;
+// 		ms.exit_status = create_tree(command, &root);
+// 		ms.exit_status = traverse_tree(&root, &ms);
+// 		// arr = wrapper_ft_split_with_quotes(command);
+// 		// minishell(arr, &ms);
 // 	// }
 // 	// rl_clear_history();
 // 	ft_free_2d_array(ms.env);
+// 	free(command);
+// 	while (1)
+// 		;
 // 	return (0);
 // }
+
+
