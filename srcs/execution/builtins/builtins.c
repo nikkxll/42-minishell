@@ -13,27 +13,32 @@
 #include "../../../headers/minishell.h"
 
 /**
-* @brief	A function that runs either built-in command or calling execution
-* module to run execve
-* @param	arr array of arguments or options if allowed
-* @param	envp pointer to the environment array
-* @return	execution exit status
-*/
-int	command_run(char **arr, char ***envp)
+ * @brief	A function that runs either built-in command or calling execution
+ * module to run execve
+ * @param	arr array of arguments or options if allowed
+ * @param	envp pointer to the environment array
+ * @return	execution exit status
+ */
+int	command_run(char **arr, t_minishell *ms)
 {
-	if (ft_strncmp(arr[0], "echo", ECHO_LEN) == 0)
-		return (run_echo(arr + 1, 0, 0, 0));
-	if (ft_strncmp(arr[0], "cd", CD_LEN) == 0)
-		return (run_cd(arr + 1, *envp));
-	if (ft_strncmp(arr[0], "pwd", PWD_LEN) == 0)
-		return (run_pwd(arr + 1));
-	if (ft_strncmp(arr[0], "export", EXPORT_LEN) == 0)
-		return (run_export(arr + 1, envp));
-	if (ft_strncmp(arr[0], "unset", UNSET_LEN) == 0)
-		return (run_unset(arr + 1, envp));
-	if (ft_strncmp(arr[0], "env", ENV_LEN) == 0)
-		return (run_env(arr + 1, envp));
-	if (ft_strncmp(arr[0], "exit", ENV_LEN) == 0)
-		return (run_exit(arr + 1));
-	return (0);
+	if (!ft_strncmp("echo", arr[0], ECHO_LEN))
+	{
+		run_echo(arr + 1, 0, 0, 0);
+		ms->exit_status = SUCCESS;
+	}
+	else if (!ft_strncmp("cd", arr[0], CD_LEN))
+		run_cd(arr + 1, ms);
+	else if (!ft_strncmp("pwd", arr[0], PWD_LEN))
+		run_pwd(arr + 1, ms);
+	else if (!ft_strncmp("export", arr[0], EXPORT_LEN))
+		run_export(arr + 1, ms);
+	else if (!ft_strncmp("unset", arr[0], UNSET_LEN))
+		run_unset(arr + 1, ms);
+	else if (!ft_strncmp("env", arr[0], ENV_LEN))
+		run_env(arr + 1, ms);
+	else if (!ft_strncmp("exit", arr[0], EXIT_LEN))
+		run_exit(arr + 1, ms);
+	else
+		printf("EXECVE: |%s|\n", arr[0]);
+	return (ms->exit_status);
 }

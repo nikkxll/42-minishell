@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:06:39 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 15:03:52 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/31 21:06:59 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ void	ft_do_nothing(void *arg);
 long	ft_max(long num1, long num2);
 long	ft_min(long num1, long num2);
 t_bool	ft_open_close_file(char *filename, int *fd, int mode);
+t_bool	ft_isspace(char c);
 
 #endif

@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:45:50 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/29 13:50:39 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:42:05 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 /**
-* @brief	Function that allocates @c `len(arr)` 2d arrays
-* @param	arr pointer to the initial array
-* @param	wc pointer to the structure with local variables initiated in
-* @c `wildcards()`
-* @return	@c `SUCCESS` if no errors occured, @c `MALLOC_ERR` if one of the
-* mallocs failed, @c `SYSTEM_ERROR` if error occured in the functions from
-* imported libraries
-*/
+ * @brief	Function that allocates @c `len(arr)` 2d arrays
+ * @param	arr pointer to the initial array
+ * @param	wc pointer to the structure with local variables initiated in
+ * @c `wildcards()`
+ * @return	@c `SUCCESS` if no errors occured, @c `MALLOC_ERR` if one of the
+ * mallocs failed, @c `SYSTEM_ERROR` if error occured in the functions from
+ * imported libraries
+ */
 int	allocate_temp_array(char ***arr, t_w_cards *wc)
 {
 	int	i;
@@ -47,14 +47,14 @@ int	allocate_temp_array(char ***arr, t_w_cards *wc)
 }
 
 /**
-* @brief	Function that fills @c `len(arr)` 2d arrays
-* @param	arr pointer to the initial array
-* @param	wc pointer to the structure with local variables initiated in
-* @c `wildcards()`
-* @return	@c `SUCCESS` if no errors occured, @c `MALLOC_ERR` if one of the
-* mallocs failed, @c `SYSTEM_ERROR` if error occured in the functions from
-* imported libraries
-*/
+ * @brief	Function that fills @c `len(arr)` 2d arrays
+ * @param	arr pointer to the initial array
+ * @param	wc pointer to the structure with local variables initiated in
+ * @c `wildcards()`
+ * @return	@c `SUCCESS` if no errors occured, @c `MALLOC_ERR` if one of the
+ * mallocs failed, @c `SYSTEM_ERROR` if error occured in the functions from
+ * imported libraries
+ */
 int	fill_temp_array(char ***arr, t_w_cards *wc)
 {
 	int	i;

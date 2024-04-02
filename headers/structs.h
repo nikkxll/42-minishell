@@ -17,6 +17,14 @@
 
 typedef struct dirent	t_dirent;
 
+typedef struct s_minishell
+{
+	char			**env;
+	char			*pwd;
+	char			*oldpwd;
+	unsigned char	exit_status;
+}	t_minishell;
+
 typedef struct s_wildcards
 {
 	DIR			*dir;

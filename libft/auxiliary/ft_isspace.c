@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/04 15:11:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 00:39:57 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/03/31 21:06:03 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/03/31 21:06:10 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../libft.h"
 
-//need to change later
-void	run_exit(char **arr, t_minishell *ms)
+t_bool	ft_isspace(char c)
 {
-	ft_putstr_fd("exit\n", 1);
-	if (!*arr)
-	{
-		ms->exit_status = SUCCESS;
-		exit(ms->exit_status);
-	}
-	ms->exit_status = ft_atoi(arr[0]);
-	exit(ms->exit_status);
+	return ((c >= 9 && c <= 13) || c == 32);
 }

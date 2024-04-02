@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign_expansion.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:30:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/29 13:50:56 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:40:56 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 /**
-* @brief	Auxiliary function for @c `expansion()` function
-* @param	str string to search in
-* @param	envp environment array
-* @param	dollar pointer to structure which consist of used variables
-* @return	@c `void`
-*/
+ * @brief	Auxiliary function for @c `expansion()` function
+ * @param	str string to search in
+ * @param	envp environment array
+ * @param	dollar pointer to structure which consist of used variables
+ * @return	@c `void`
+ */
 static void	process_dollar_sign_in_string(char *str, char **envp,
 	t_dollar_exp *dollar)
 {
@@ -40,14 +40,14 @@ static void	process_dollar_sign_in_string(char *str, char **envp,
 }
 
 /**
-* @brief	Function that runs while loop to search for dollar signs
-* @param	str string to search in
-* @param	envp environment array
-* @param	env_part pointer to the env string that has been found
-* @param	last_part_ind pointer to the last part of the new string
-* @return	enviroment list position of expanding string if exist,
-* @c `NOTHING_TO_EXPAND` otherwise
-*/
+ * @brief	Function that runs while loop to search for dollar signs
+ * @param	str string to search in
+ * @param	envp environment array
+ * @param	env_part pointer to the env string that has been found
+ * @param	last_part_ind pointer to the last part of the new string
+ * @return	enviroment list position of expanding string if exist,
+ * @c `NOTHING_TO_EXPAND` otherwise
+ */
 static int	expansion(char *str, char **envp, char **env_part,
 	int *last_part_ind)
 {

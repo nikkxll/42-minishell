@@ -6,19 +6,19 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:54:18 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/29 12:36:53 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:42:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
 /**
-* @brief	A function that searches for @c `var` in the @c `envp`
-* @param	envp pointer to the environment array
-* @param	var variable to search for
-* @param	i index
-* @return	@c `-1` if position not found, @c `position` (>= 0) otherwise
-*/
+ * @brief	A function that searches for @c `var` in the @c `envp`
+ * @param	envp pointer to the environment array
+ * @param	var variable to search for
+ * @param	i index
+ * @return	@c `-1` if position not found, @c `position` (>= 0) otherwise
+ */
 static int	env_position_search(char ***envp, char *var, int i)
 {
 	char	**new_env;
@@ -42,12 +42,12 @@ static int	env_position_search(char ***envp, char *var, int i)
 }
 
 /**
-* @brief	A function that unsetting argument from the environment list
-* @param	envp pointer to the environment array
-* @param	position position of an argument in the environment list
-* @param	i index
-* @return	@c `SUCCESS`
-*/
+ * @brief	A function that unsetting argument from the environment list
+ * @param	envp pointer to the environment array
+ * @param	position position of an argument in the environment list
+ * @param	i index
+ * @return	@c `SUCCESS`
+ */
 static int	execute_unset(char ***envp, int position, int i)
 {
 	char	**new_env;
@@ -70,14 +70,14 @@ static int	execute_unset(char ***envp, int position, int i)
 }
 
 /**
-* @brief	A function that iterates through args and checks if they are
-* in the environment list
-* @param	arr array of arguments or options if allowed
-* @param	envp pointer to the environment array
-* @param	j pointer to the index
-* @return	@c `void`
-*/
-static void	iterate_through_args(char **arr, char ***envp, int *j)
+ * @brief	A function that iterates through args and checks if they are
+ * in the environment list
+ * @param	arr array of arguments or options if allowed
+ * @param	envp pointer to the environment array
+ * @param	j pointer to the index
+ * @return	@c `void`
+ */
+static void	iterate_through_args(char **arr, t_minishell *ms, int *j)
 {
 	int	position;
 	int	i;
@@ -89,27 +89,28 @@ static void	iterate_through_args(char **arr, char ***envp, int *j)
 		{
 			print_arg_err_msg("unset: `", arr[*j],
 				"': not a valid identifier\n");
+			ms->exit_status = GENERIC_ERROR;
 			return ;
 		}
 		i++;
 	}
 	if (arr[*j][0] == UNSCORE && arr[*j][1] == NULL_TERM)
 		return ;
-	position = env_position_search(envp, arr[*j], -1);
+	position = env_position_search(&(ms->env), arr[*j], -1);
 	if (position == -1)
 		return ;
 	else
-		execute_unset(envp, position, 0);
+		execute_unset(&(ms->env), position, 0);
 	return ;
 }
 
 /**
-* @brief	A function that runs unset built-in command
-* @param	arr array of arguments or options if allowed
-* @param	envp pointer to the environment array
-* @return	@c `SUCCESS`
-*/
-int	run_unset(char **arr, char ***envp)
+ * @brief	A function that runs unset built-in command
+ * @param	arr array of arguments or options if allowed
+ * @param	envp pointer to the environment array
+ * @return	@c `SUCCESS`
+ */
+void	run_unset(char **arr, t_minishell *ms)
 {
 	int	len;
 	int	j;
@@ -120,12 +121,11 @@ int	run_unset(char **arr, char ***envp)
 	{
 		arr[0][2] = NULL_TERM;
 		print_arg_err_msg("unset: `", arr[0], "': options are not supported\n");
-		return (SUCCESS);
+		ms->exit_status = CMD_ARG_ERROR;
 	}
 	else if (len > 0)
 	{
 		while (arr[++j])
-			iterate_through_args(arr, envp, &j);
+			iterate_through_args(arr, ms, &j);
 	}
-	return (SUCCESS);
 }

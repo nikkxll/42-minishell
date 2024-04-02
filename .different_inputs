@@ -96,4 +96,21 @@ echo a&''&b |>>a|<a
 echo a&&b'' |>>a|<a
 
 protestit povedenie wildcards when permissions denied dlya foldera
+
 -wild redirects
+=======
+
+____
+bash-3.2$ unset HOME
+bash-3.2$ cd
+bash-3.2$ cd ''
+____
+
+____
+bash-3.2$ export a="echo *"
+bash-3.2$ $a
+____
+
+____
+export SHLVL=-10
+____

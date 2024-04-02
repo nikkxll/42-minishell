@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:12:04 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/26 19:03:02 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/03/31 21:07:30 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_bool	is_blank_string(char *str)
 {
 	if (ft_strlen(str) == 0)
 		return (true);
-	while (*str == SPACE)
+	while (ft_isspace(*str))
 		str++;
 	return (*str == NULL_TERM);
 }

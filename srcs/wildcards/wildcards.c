@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 22:16:41 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/29 13:50:43 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/03/31 23:55:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	wildcards(char ***arr)
 	t_w_cards	wc;
 	int			status;
 
+	if (!if_asterisk_in_arr(*arr, 0, 0))
+		return (SUCCESS);
 	status = allocate_temp_array(arr, &wc);
 	if (status == MALLOC_ERR)
 		return (MALLOC_ERR);

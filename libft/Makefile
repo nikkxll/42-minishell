@@ -18,9 +18,12 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) fclean -C $(LFT_PATH)
+	@echo "$(RED)LIBFT removed!$(EC)"
 	@$(MAKE) fclean -C $(PRINTF_PATH)
+	@echo "$(RED)FT_PRINTF removed!$(EC)"
 	@$(MAKE) fclean -C $(GNL_PATH)
+	@echo "$(RED)GET_NEXT_LINE removed!$(EC)"
 	@$(MAKE) fclean -C $(AUX_PATH)
-	@echo "$(RED)LIBFT REMOVED!$(EC)"
+	@echo "$(RED)AUXILIARY_FUNCTIONS_SET removed!$(EC)"
 
 re: fclean all

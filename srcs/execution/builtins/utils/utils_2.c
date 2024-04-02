@@ -6,19 +6,19 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:35:29 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/26 17:05:39 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:41:16 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../headers/minishell.h"
 
 /**
-* @brief	A function that compare two strings (like original strcmp)
-* @param	s1 first string
-* @param	s2 second string
-* @return	an integer greater than, equal to, or less than 0, according as
-* the string s1 is greater than, equal to, or less than the string s2
-*/
+ * @brief	A function that compare two strings (like original strcmp)
+ * @param	s1 first string
+ * @param	s2 second string
+ * @return	an integer greater than, equal to, or less than 0, according as
+ * the string s1 is greater than, equal to, or less than the string s2
+ */
 static int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
@@ -37,11 +37,11 @@ static int	ft_strcmp(const char *s1, const char *s2)
 }
 
 /**
-* @brief	A function that sorts subarray
-* @param	argv input array
-* @param	size array size
-* @return	@c `void`
-*/
+ * @brief	A function that sorts subarray
+ * @param	argv input array
+ * @param	size array size
+ * @return	@c `void`
+ */
 static void	sort_subarray(char *argv[], int size)
 {
 	int		j;
@@ -67,11 +67,11 @@ static void	sort_subarray(char *argv[], int size)
 }
 
 /**
-* @brief	A function that sorts an array according to ASCII
-* @param	argv input array
-* @param	size array size
-* @return	sorted array
-*/
+ * @brief	A function that sorts an array according to ASCII
+ * @param	argv input array
+ * @param	size array size
+ * @return	sorted array
+ */
 char	**sort_string_arr(char **argv, int size)
 {
 	int		i;
@@ -91,10 +91,10 @@ char	**sort_string_arr(char **argv, int size)
 }
 
 /**
-* @brief	A function that allocates new array for the environment list
-* @param	envp an environment array
-* @return	new array
-*/
+ * @brief	A function that allocates new array for the environment list
+ * @param	envp an environment array
+ * @return	new array
+ */
 char	**cpy_env(char **envp)
 {
 	char	**env;
@@ -120,12 +120,12 @@ char	**cpy_env(char **envp)
 }
 
 /**
-* @brief	A function that checks if characters allowed to be in the name
-* of the env variable
-* @param	c character
-* @param	j pointer to the index
-* @return	@c `true` if allowed, @c `false` otherwise
-*/
+ * @brief	A function that checks if characters allowed to be in the name
+ * of the env variable
+ * @param	c character
+ * @param	j pointer to the index
+ * @return	@c `true` if allowed, @c `false` otherwise
+ */
 t_bool	ft_isenv(char c, int *j)
 {
 	if (*j == 0 && ft_isdigit(c))

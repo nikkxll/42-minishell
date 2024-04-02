@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:56:07 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/29 13:56:49 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:40:43 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 /**
-* @brief	Removes quotes from the string if allowable
-* @param	str string that coming from readline function
-* @param	i index
-* @param	j index
-* @return	@c `void`
-*/
+ * @brief	Removes quotes from the string if allowable
+ * @param	str string that coming from readline function
+ * @param	i index
+ * @param	j index
+ * @return	@c `void`
+ */
 void	remove_quotes(char *str, int i, int j)
 {
 	int	len;
@@ -46,11 +46,11 @@ void	remove_quotes(char *str, int i, int j)
 }
 
 /**
-* @brief	A function that runs @c `remove_quotes()` function in a loop
-* @param	arr array of arguments
-* @param	i an index
-* @return	@c `void`
-*/
+ * @brief	A function that runs @c `remove_quotes()` function in a loop
+ * @param	arr array of arguments
+ * @param	i an index
+ * @return	@c `void`
+ */
 void	processing(char **arr, int i)
 {
 	while (arr[i])
