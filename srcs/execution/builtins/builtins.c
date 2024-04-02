@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 00:50:49 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:49:25 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@
  * @param	envp pointer to the environment array
  * @return	execution exit status
  */
-void	command_run(char **arr, t_minishell *ms)
+int	command_run(char **arr, t_minishell *ms)
 {
-	ms->exit_status = SUCCESS;
 	if (!ft_strncmp("echo", arr[0], ECHO_LEN))
+	{
 		run_echo(arr + 1, 0, 0, 0);
+		ms->exit_status = SUCCESS;
+	}
 	else if (!ft_strncmp("cd", arr[0], CD_LEN))
 		run_cd(arr + 1, ms);
 	else if (!ft_strncmp("pwd", arr[0], PWD_LEN))
@@ -38,4 +40,5 @@ void	command_run(char **arr, t_minishell *ms)
 		run_exit(arr + 1, ms);
 	else
 		printf("EXECVE: |%s|\n", arr[0]);
+	return (ms->exit_status);
 }

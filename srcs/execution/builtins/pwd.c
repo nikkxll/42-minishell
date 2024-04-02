@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:21:06 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 00:33:18 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:41:42 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ void	run_pwd(char **arr, t_minishell *ms)
 	working_dir = getcwd(NULL, 0);
 	if (!working_dir)
 	{
-		print_err_msg("pwd: ", "allocation error occured\n");
-		ms->exit_status = MALLOC_ERR;
+		ms->exit_status = GETCWD_ERROR;
 		return ;
 	}
 	ft_printf("%s\n", working_dir);

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 00:11:17 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:38:33 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ enum	e_exit_status
 	CMD_ARG_ERROR,
 	MALLOC_ERR = 200,
 	SYSTEM_ERROR = 201,
+	CHDIR_ERROR,
+	GETCWD_ERROR,
 };
 
 enum	e_export_types

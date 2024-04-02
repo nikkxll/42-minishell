@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 00:50:11 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:35:42 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ int	main(void)
 	t_minishell	ms;
 
 	ms.env = cpy_env(environ);
+	ms.exit_status = SUCCESS;
 	ms.exit_status = pwd_init(&ms.env);
-	if (ms.exit_status != 0)
+	if (ms.exit_status != SUCCESS)
 		return (ms.exit_status);
 	ms.exit_status = shlvl_init(&ms.env);
-	if (ms.exit_status != 0)
+	if (ms.exit_status != SUCCESS)
 		return (ms.exit_status);
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:22:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 00:33:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:39:57 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	update_pwd(char ***envp, t_minishell *ms)
 	{
 		cwd = getcwd(NULL, 0);
 		if (!cwd)
-			ms->exit_status = MALLOC_ERR;
+			ms->exit_status = GETCWD_ERROR;
 		free((*envp)[position]);
 		(*envp)[position] = ft_strjoin("PWD=", cwd);
 		if (!(*envp)[position])
@@ -85,7 +85,7 @@ static void	handle_cd_oldpwd(char **envp, t_minishell *ms)
 	else if (chdir(envp[env_variable] + 7) != 0)
 	{
 		perror("\033[0;31me-bash: \033[0;0m cd");
-		ms->exit_status = SYSTEM_ERROR;
+		ms->exit_status = CHDIR_ERROR;
 	}
 	else
 		ft_printf("%s\n", envp[env_variable] + 7);
@@ -109,7 +109,7 @@ static void	handle_cd_home(char **envp, t_minishell *ms)
 	else if (chdir(envp[env_variable] + 5) != 0)
 	{
 		perror("\033[0;31me-bash: \033[0;0m cd");
-		ms->exit_status = SYSTEM_ERROR;
+		ms->exit_status = CHDIR_ERROR;
 	}
 }
 
@@ -122,7 +122,7 @@ static void	handle_cd_home(char **envp, t_minishell *ms)
 void	run_cd(char **arr, t_minishell *ms)
 {
 	int	status;
-	
+
 	status = cd_precheck(arr, ms);
 	if (status != 0)
 		return ;
@@ -138,7 +138,7 @@ void	run_cd(char **arr, t_minishell *ms)
 	if (status != 0)
 	{
 		perror("\033[0;31me-bash: \033[0;0m cd");
-		ms->exit_status = SYSTEM_ERROR;
+		ms->exit_status = CHDIR_ERROR;
 	}
 	update_pwd(&(ms->env), ms);
 }
