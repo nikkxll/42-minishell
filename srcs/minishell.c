@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 12:35:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:50:59 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	minishell(char **arr, t_minishell *ms)
 	i = 0;
 	while (arr[i])
 	{
-		if (expand_dollar_sign(&arr[i++], ms->env, 0) == MALLOC_ERR)
+		if (dollar_sign_expansion(&arr[i++], ms->env, ms->exit_status)
+			== MALLOC_ERR)
 			printf("%s\n", "malloc error");
 	}
 	if (array_build_before_wc(&arr, -1, -1, -1) == MALLOC_ERR)
@@ -87,7 +88,7 @@ int	main(void)
 // 	t_minishell	ms;
 
 // 	ms.env = cpy_env(environ);
-// 	command = ft_strdup("echo *");
+// 	command = ft_strdup("echo $?$?$?$?");
 // 	// while (1)
 // 	// {
 // 	// 	command = readline("e-bash > ");

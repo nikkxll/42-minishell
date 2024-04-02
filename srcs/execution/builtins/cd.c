@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:22:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 12:39:57 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:58:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @brief	A function that makes cd precheck for args amount
  * @param	arr array of arguments or options if allowed
- * @return	@c `-1` if input is not correct, @c `0` otherwise
+ * @return	@c `exit_status` if input is not correct, @c `0` otherwise
  */
 static int	cd_precheck(char **arr, t_minishell *ms)
 {
@@ -43,7 +43,8 @@ static int	cd_precheck(char **arr, t_minishell *ms)
 /**
  * @brief	A function that updates @c `PWD` enviroment variable
  * @param	envp pointer to the environment array
- * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ * @param	ms pointer to the common project @c `t_minishell` structure
+ * @return	@c `void`
  */
 void	update_pwd(char ***envp, t_minishell *ms)
 {
@@ -69,44 +70,44 @@ void	update_pwd(char ***envp, t_minishell *ms)
 
 /**
  * @brief	A function that handles change of directory to @c `OLDPWD`
- * @param	envp an environment array
+ * @param	ms pointer to the common project @c `t_minishell` structure
  * @return	@c `void`
  */
-static void	handle_cd_oldpwd(char **envp, t_minishell *ms)
+static void	handle_cd_oldpwd(t_minishell *ms)
 {
 	int	env_variable;
 
-	env_variable = env_var(envp, "OLDPWD=", -1, 7);
+	env_variable = env_var(ms->env, "OLDPWD=", -1, 7);
 	if (env_variable == -1)
 	{
 		print_err_msg("cd: ", "OLDPWD not set\n");
 		ms->exit_status = GENERIC_ERROR;
 	}
-	else if (chdir(envp[env_variable] + 7) != 0)
+	else if (chdir((ms->env)[env_variable] + 7) != 0)
 	{
 		perror("\033[0;31me-bash: \033[0;0m cd");
 		ms->exit_status = CHDIR_ERROR;
 	}
 	else
-		ft_printf("%s\n", envp[env_variable] + 7);
+		ft_printf("%s\n", (ms->env)[env_variable] + 7);
 }
 
 /**
  * @brief	A function that handles change of directory to @c `HOME`
- * @param	envp an environment array
+ * @param	ms pointer to the common project @c `t_minishell` structure
  * @return	@c `void`
  */
-static void	handle_cd_home(char **envp, t_minishell *ms)
+static void	handle_cd_home(t_minishell *ms)
 {
 	int	env_variable;
 
-	env_variable = env_var(envp, "HOME=", -1, 5);
+	env_variable = env_var(ms->env, "HOME=", -1, 5);
 	if (env_variable == -1)
 	{
 		print_err_msg("cd: ", "HOME not set\n");
 		ms->exit_status = GENERIC_ERROR;
 	}
-	else if (chdir(envp[env_variable] + 5) != 0)
+	else if (chdir((ms->env)[env_variable] + 5) != 0)
 	{
 		perror("\033[0;31me-bash: \033[0;0m cd");
 		ms->exit_status = CHDIR_ERROR;
@@ -116,8 +117,8 @@ static void	handle_cd_home(char **envp, t_minishell *ms)
 /**
  * @brief	A function that runs cd built-in command
  * @param	arr array of arguments or options if allowed
- * @param	envp an environment array
- * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ * @param	ms pointer to the common project @c `t_minishell` structure
+ * @return	@c `void`
  */
 void	run_cd(char **arr, t_minishell *ms)
 {
@@ -127,10 +128,10 @@ void	run_cd(char **arr, t_minishell *ms)
 	if (status != 0)
 		return ;
 	if (ft_arrlen((void **)arr) == 0 || !ft_strncmp(arr[0], "--", 2))
-		handle_cd_home(ms->env, ms);
+		handle_cd_home(ms);
 	else if (!ft_strncmp(arr[0], "-", ft_strlen(arr[0]))
 		&& ft_strlen(arr[0]) > 0)
-		handle_cd_oldpwd(ms->env, ms);
+		handle_cd_oldpwd(ms);
 	else if (ft_strlen(arr[0]) == 0)
 		status = chdir(".");
 	else

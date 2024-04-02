@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:04:34 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 00:37:26 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:00:48 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	print_env(char **env, int j)
 /**
  * @brief	A function that runs env built-in command
  * @param	arr array of arguments or options if allowed
- * @param	envp pointer to the environment array
- * @return	@c `SUCCESS`
+ * @param	ms pointer to the common project @c `t_minishell` structure
+ * @return	@c `void`
  */
 void	run_env(char **arr, t_minishell *ms)
 {

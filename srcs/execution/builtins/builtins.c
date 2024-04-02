@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 12:49:25 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:56:44 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@
  * @brief	A function that runs either built-in command or calling execution
  * module to run execve
  * @param	arr array of arguments or options if allowed
- * @param	envp pointer to the environment array
+ * @param	ms pointer to the common project @c `t_minishell` structure
  * @return	execution exit status
  */
 int	command_run(char **arr, t_minishell *ms)
 {
+	ms->exit_status = SUCCESS;
 	if (!ft_strncmp("echo", arr[0], ECHO_LEN))
-	{
 		run_echo(arr + 1, 0, 0, 0);
-		ms->exit_status = SUCCESS;
-	}
 	else if (!ft_strncmp("cd", arr[0], CD_LEN))
 		run_cd(arr + 1, ms);
 	else if (!ft_strncmp("pwd", arr[0], PWD_LEN))

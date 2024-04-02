@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 00:31:50 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:55:43 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
  * @param	envp pointer to the environment array
  * @param	operations auxiliary array to calculate the number of operations
  * of different type
- * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ * @return	@c `MALLOC_ERR` if malloc failure occured,
+ * @c `GENERIC_ERROR` if generic type of error occured
+ * @c `SUCCESS` otherwise
  */
 static int	execute_export(char ***new_env, char **arr, char ***envp,
 	int *operations)
@@ -44,8 +46,8 @@ static int	execute_export(char ***new_env, char **arr, char ***envp,
 /**
  * @brief	A function that runs export with arguments
  * @param	arr array of arguments or options if allowed
- * @param	envp pointer to the environment array
- * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ * @param	ms pointer to the common project @c `t_minishell` structure
+ * @return	@c `void`
  */
 static void	export_with_args(char **arr, t_minishell *ms)
 {
@@ -73,10 +75,10 @@ static void	export_with_args(char **arr, t_minishell *ms)
 
 /**
  * @brief	A function that runs export without arguments
- * @param	envp pointer to the environment array
+ * @param	ms pointer to the common project @c `t_minishell` structure
  * @param	i index
  * @param	j index
- * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ * @return	@c `void`
  */
 static void	export_without_args(t_minishell *ms, int i, int j)
 {
@@ -109,8 +111,8 @@ static void	export_without_args(t_minishell *ms, int i, int j)
 /**
  * @brief	A function that runs export built-in command
  * @param	arr array of arguments or options if allowed
- * @param	envp pointer to the environment array
- * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ * @param	ms pointer to the common project @c `t_minishell` structure
+ * @return	@c `void`
  */
 void	run_export(char **arr, t_minishell *ms)
 {
