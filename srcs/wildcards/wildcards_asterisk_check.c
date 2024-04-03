@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 23:45:58 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/31 23:55:17 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 01:14:40 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  * @param	arr array to check in
  * @param	i index
  * @param	j index
- * @param	quote_type initialization for quote check
  * @return	@c `true` if yes, @c `false` otherwise
  */
 t_bool	if_asterisk_in_arr(char **arr, int i, int j)
