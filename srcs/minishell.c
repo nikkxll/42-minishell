@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 18:41:49 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:37:08 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	main(void)
 	ms.exit_status = shlvl_init(&(ms.env));
 	if (ms.exit_status != SUCCESS)
 		return (ms.exit_status);
+	ms.is_parent = true;
 	while (1)
 	{
 		get_current_folder_name(&folder_name);
@@ -118,5 +119,3 @@ int	main(void)
 // 		;
 // 	return (0);
 // }
-
-

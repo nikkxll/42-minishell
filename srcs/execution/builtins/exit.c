@@ -6,35 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:11:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/03 00:45:15 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:01:18 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
-
-long	ft_atol(const char *str)
-{
-	unsigned long	result;
-	int				sign;
-
-	result = 0;
-	sign = 1;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if ((*str == '-' || *str == '+') && ft_isdigit(*(str + 1)))
-	{
-		sign = -1 * (*str == '-') + 1 * (*str == '+');
-		str++;
-	}
-	while (*str >= 48 && *str <= 57)
-	{
-		result = result * 10 + sign * (*str - 48);
-		if ((sign == -1 && result > (unsigned long)0 - LONG_MIN) || result > LONG_MAX)
-			return (0);
-		str++;
-	}
-	return (result);
-}
 
 void	run_exit(char **arr, t_minishell *ms)
 {
