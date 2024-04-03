@@ -6,11 +6,33 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:39:31 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/03 14:23:33 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:54:28 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
+/**
+ * @brief	Auxiliary function that checks if string is in an appropriate
+ * format
+ * @param	str string to check
+ * @return	@c `true` if the string is in a wrong format
+ * @c `false` if the string is in a right format
+ */
+int	check_str_before_atoi(char *str)
+{
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str >= '0' && *str <= '9')
+		str++;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str != NULL_TERM)
+		return (true);
+	return (false);
+}
 
 /**
  * @brief	Auxiliary function that changes PWD in the enviroment list if it
@@ -25,15 +47,16 @@ static int	shlvl_init_when_shlvl_exists(int position, char ***envp)
 	int		number;
 	char	*new_number;
 	char	*temp;
+	char	*shlvl;
 
-	number = ft_atoi(ft_strrchr((*envp)[position], EQUAL) + 1);
-	if (number <= 0)
-	{
+	shlvl = ft_strrchr((*envp)[position], EQUAL) + 1;
+	if (check_str_before_atoi(shlvl))
 		number = 0;
-		new_number = ft_itoa(number);
-	}
 	else
-		new_number = ft_itoa(number + 1);
+		number = ft_atoi(shlvl);
+	if (number < 0)
+		number = -1;
+	new_number = ft_itoa(number + 1);
 	temp = ft_strjoin("SHLVL=", new_number);
 	if (!temp)
 		return (MALLOC_ERR);

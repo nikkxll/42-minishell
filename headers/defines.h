@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 15:06:10 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:55:21 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,19 @@ enum	e_characters
 
 enum	e_builtins
 {
-	CD_LEN = 2,
-	ENV_LEN = 3,
-	PWD_LEN = 3,
-	ECHO_LEN = 4,
-	EXIT_LEN = 4,
-	UNSET_LEN = 5,
-	EXPORT_LEN = 6,
+	CD_LEN = 3,
+	ENV_LEN = 4,
+	PWD_LEN = 4,
+	ECHO_LEN = 5,
+	EXIT_LEN = 5,
+	UNSET_LEN = 6,
+	EXPORT_LEN = 7,
 };
 
 enum	e_exit_status
 {
 	SUCCESS,
-  GENERIC_ERROR,
+	GENERIC_ERROR,
 	CMD_ARG_ERROR,
 	CMD_PD_FAILURE = 126,
 	CMD_NF_FAILURE = 127,
@@ -74,7 +74,7 @@ enum	e_exit_status
 	SYSTEM_ERROR = 201,
 	CHDIR_ERROR,
 	GETCWD_ERROR,
-  EXECVE_FAILURE = 999,
+	EXECVE_FAILURE = 999,
 	FORK_FAILURE = 999,
 	PIPE_FAILURE = 999,
 	DUP_FAILURE = 999,
