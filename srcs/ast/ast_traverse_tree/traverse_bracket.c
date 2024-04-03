@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 15:46:26 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 11:22:07 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:43:42 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	traverse_bracket(t_node **root, t_minishell *ms)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
+		ms->is_parent = false;
 		node = *root;
 		status = traverse_tree(&(node->left), ms);
 		exit (status);

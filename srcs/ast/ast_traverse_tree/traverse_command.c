@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 12:48:22 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:02:31 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	traverse_command(char *cmd, char *redir, t_minishell *ms)
 	int		status;
 	char	**command;
 
-	status = parse_cmd(cmd, &command, ms->env);
+	status = parse_cmd(cmd, &command, ms);
 	if (status == 0)
 	{
 		if (is_builtin(command[0]) == true)
@@ -28,6 +28,7 @@ int	traverse_command(char *cmd, char *redir, t_minishell *ms)
 		else
 			status = execute_external(command, redir, ms->env);
 	}
+	ms->exit_status = status;
 	ft_free_2d_array(command);
 	return (status);
 }

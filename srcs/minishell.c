@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 16:37:08 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:41:07 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ int	main(void)
 			add_history(command);
 		else
 			continue ;
-		ms.exit_status = validate_input(command);
+		validate_input(command);
 		root = NULL;
-		ms.exit_status = create_tree(command, &root);
-		ms.exit_status = traverse_tree(&root, &ms);
+		create_tree(command, &root);
+		traverse_tree(&root, &ms);
 		// arr = wrapper_ft_split_with_quotes(command);
 		free(command);
 		// minishell(arr, &ms);

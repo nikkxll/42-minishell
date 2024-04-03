@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 13:37:47 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 11:23:09 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:43:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	traverse_command_br(t_node **root, t_minishell *ms)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
+		ms->is_parent = false;
 		node = *root;
 		status = 0;// apply_redirect(node->left);
 		if (status == 0)
