@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 12:31:44 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:06:10 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ enum	e_characters
 	REDIR_L = 60,
 	EQUAL = 61,
 	REDIR_R = 62,
+	Q_MARK = 63,
 	BACKSLASH = 92,
 	UNSCORE = 95,
 	N_LOWER = 110,
@@ -65,7 +66,7 @@ enum	e_builtins
 enum	e_exit_status
 {
 	SUCCESS,
-	GENERIC_ERROR,
+  GENERIC_ERROR,
 	CMD_ARG_ERROR,
 	CMD_PD_FAILURE = 126,
 	CMD_NF_FAILURE = 127,
@@ -73,7 +74,7 @@ enum	e_exit_status
 	SYSTEM_ERROR = 201,
 	CHDIR_ERROR,
 	GETCWD_ERROR,
-	EXECVE_FAILURE = -1,
+  EXECVE_FAILURE = 999,
 	FORK_FAILURE = 999,
 	PIPE_FAILURE = 999,
 	DUP_FAILURE = 999,

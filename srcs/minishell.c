@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 12:16:24 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:41:49 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	minishell(char **arr, t_minishell *ms)
 	i = 0;
 	while (arr[i])
 	{
-		if (expand_dollar_sign(&arr[i++], ms->env, 0) == MALLOC_ERR)
+		if (dollar_sign_expansion(&arr[i++], ms->env, ms->exit_status)
+			== MALLOC_ERR)
 			printf("%s\n", "malloc error");
 	}
 	if (array_build_before_wc(&arr, -1, -1, -1) == MALLOC_ERR)
@@ -47,10 +48,10 @@ int	main(void)
 
 	ms.env = cpy_env(environ);
 	ms.exit_status = SUCCESS;
-	ms.exit_status = pwd_init(&ms.env);
+	ms.exit_status = pwd_init(&(ms.env), &(ms.pwd));
 	if (ms.exit_status != SUCCESS)
 		return (ms.exit_status);
-	ms.exit_status = shlvl_init(&ms.env);
+	ms.exit_status = shlvl_init(&(ms.env));
 	if (ms.exit_status != SUCCESS)
 		return (ms.exit_status);
 	while (1)

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:54:18 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 00:42:50 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:02:22 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ static int	env_position_search(char ***envp, char *var, int i)
  * @param	envp pointer to the environment array
  * @param	position position of an argument in the environment list
  * @param	i index
- * @return	@c `SUCCESS`
+ * @return	@c `void`
  */
-static int	execute_unset(char ***envp, int position, int i)
+static void	execute_unset(char ***envp, int position, int i)
 {
 	char	**new_env;
 
 	new_env = *envp;
 	if (new_env[i + 1] == NULL)
-		return (SUCCESS);
+		return ;
 	while (new_env[i + 1])
 	{
 		while (i < position)
@@ -66,14 +66,13 @@ static int	execute_unset(char ***envp, int position, int i)
 	}
 	new_env[i] = NULL;
 	*envp = new_env;
-	return (SUCCESS);
 }
 
 /**
  * @brief	A function that iterates through args and checks if they are
  * in the environment list
  * @param	arr array of arguments or options if allowed
- * @param	envp pointer to the environment array
+ * @param	ms pointer to the common project @c `t_minishell` structure
  * @param	j pointer to the index
  * @return	@c `void`
  */
@@ -107,8 +106,8 @@ static void	iterate_through_args(char **arr, t_minishell *ms, int *j)
 /**
  * @brief	A function that runs unset built-in command
  * @param	arr array of arguments or options if allowed
- * @param	envp pointer to the environment array
- * @return	@c `SUCCESS`
+ * @param	ms pointer to the common project @c `t_minishell` structure
+ * @return	@c `void`
  */
 void	run_unset(char **arr, t_minishell *ms)
 {

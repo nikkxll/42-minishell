@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:21:06 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 12:41:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:01:06 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 /**
  * @brief	A function that runs pwd built-in command
  * @param	arr array of arguments or options if allowed
- * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ * @param	ms pointer to the common project @c `t_minishell` structure
+ * @return	@c `void`
  */
 void	run_pwd(char **arr, t_minishell *ms)
 {

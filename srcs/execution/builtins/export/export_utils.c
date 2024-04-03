@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:32:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:41:11 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:56:04 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param	arr array of arguments or options if allowed
  * @param	envp an environment array
  * @param	operations array to create
- * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ * @return	@c `void`
  */
 void	create_operations_array(char **arr, char **envp, int *operations)
 {

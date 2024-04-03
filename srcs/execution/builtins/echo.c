@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:26:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 00:52:33 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:59:06 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param	arr array of arguments or options if allowed
  * @param	flag new line flag
  * @param	i index
- * @return	@c `SUCCESS`
+ * @return	@c `void`
  */
 static void	echo_write(char **arr, int flag, int i)
 {
@@ -50,7 +50,7 @@ static void	echo_write(char **arr, int flag, int i)
  * @param	i index
  * @param	j index
  * @param	nl_flag new line flag
- * @return	@c `SUCCESS`
+ * @return	@c `void`
  */
 void	run_echo(char **arr, int i, int j, int nl_flag)
 {

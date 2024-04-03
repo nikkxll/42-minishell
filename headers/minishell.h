@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 12:37:29 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:54:21 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,12 @@ int				find_executable(char **command, char **paths);
 
 /*_____ Execution _____*/
 
-int				expand_dollar_sign(char **str, char **envp, int last_part_ind);
+int				dollar_sign_expansion(char **str, char **envp,
+					int last_exit_status);
+int				expand_dollar_sign_q_mark(char **str, int last_ind,
+					int last_exit_status);
+int				expand_dollar_sign_generic(char **str, char **envp,
+					int last_ind);
 int				environment_search_exp_module(char **envp, char *var, int i,
 					int j);
 void			index_quotes(char *str, int i, int *single_q, int *double_q);
@@ -115,7 +120,11 @@ int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);
 void			print_err_msg(char *cmd, char *msg);
 void			print_arg_err_msg(char *cmd, char *arg, char *msg);
-void			run_cd(char **arr, t_minishell *ms);
+void			run_cd(char **arr, t_minishell *ms, int status);
+void			cd_precheck(char **arr, t_minishell *ms);
+void			struct_pwd_and_full_oldpwd_update(char *new_pwd, t_minishell *ms);
+void			update_env_oldpwd(char ***envp, t_minishell *ms);
+void			update_env_pwd(char ***envp, t_minishell *ms);
 void			run_echo(char **arr, int i, int j, int nl_flag);
 void			run_export(char **arr, t_minishell *ms);
 void			create_operations_array(char **arr, char **envp,
@@ -161,6 +170,6 @@ int				get_current_folder_name(char **folder_name);
 int				get_prompt(char *folder_name, char **command);
 
 int				shlvl_init(char ***envp);
-int				pwd_init(char ***envp);
+int				pwd_init(char ***envp, char **pwd);
 
 #endif
