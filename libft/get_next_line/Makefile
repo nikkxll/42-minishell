@@ -19,7 +19,7 @@ $(NAME): $(OBJS)
 
 %.o: %.c
 	@$(CC_LFT) $(FLAGS_LFT) -c $< -o $@
-  @$(call progress,"get_next_line")
+	@$(call progress,"get_next_line")
 
 clean:
 	@rm -f $(OBJS)

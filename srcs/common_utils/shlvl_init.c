@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:39:31 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 22:19:05 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:23:33 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@ static int	shlvl_init_when_shlvl_exists(int position, char ***envp)
 
 	number = ft_atoi(ft_strrchr((*envp)[position], EQUAL) + 1);
 	if (number <= 0)
+	{
 		number = 0;
-	new_number = ft_itoa(number);
+		new_number = ft_itoa(number);
+	}
+	else
+		new_number = ft_itoa(number + 1);
 	temp = ft_strjoin("SHLVL=", new_number);
 	if (!temp)
 		return (MALLOC_ERR);
@@ -51,12 +55,11 @@ static int	shlvl_init_when_no_shlvl_exists(char ***envp, int i)
 	int		len;
 	char	**new_env;
 
-	len = ft_arrlen((void **)*envp);
 	if (add_to_env_list_new_env_creation(*envp, &new_env, &i,
 			&len) == MALLOC_ERR)
 		return (MALLOC_ERR);
-	new_env[len + i] = ft_strdup("SHLVL=1");
-	if (!new_env[len + i])
+	new_env[len] = ft_strdup("SHLVL=1");
+	if (!new_env[len])
 	{
 		ft_free_2d_array(new_env);
 		return (MALLOC_ERR);
@@ -79,7 +82,7 @@ int	shlvl_init(char ***envp)
 	position = env_var(*envp, "SHLVL=", -1, 6);
 	if (position == -1)
 	{
-		status = shlvl_init_when_no_shlvl_exists(envp, 0);
+		status = shlvl_init_when_no_shlvl_exists(envp, 1);
 		if (status != 0)
 			return (status);
 	}

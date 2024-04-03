@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 21:21:43 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 16:43:21 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:59:53 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parse_cmd(char *cmd, char ***res, char **envp)
 	i = 0;
 	status = 0;
 	while (arr[i] && status == 0)
-		status = expand_dollar_sign(&arr[i++], envp, 0);
+		status = dollar_sign_expansion(&arr[i++], envp, 0);
 	if (status == 0)
 		status = array_build_before_wc(&arr, -1, -1, -1);
 	if (status == 0)

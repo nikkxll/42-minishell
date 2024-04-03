@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:18:37 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 23:20:04 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:19:05 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static int	pwd_init_when_no_pwd_exists(char cwd[PATH_MAX], char ***envp, int i,
 	int		len;
 	char	**new_env;
 
-	len = ft_arrlen((void **)*envp);
 	if (add_to_env_list_new_env_creation(*envp, &new_env, &i, &len)
 		== MALLOC_ERR)
 		return (MALLOC_ERR);
@@ -78,8 +77,8 @@ static int	pwd_init_when_no_pwd_exists(char cwd[PATH_MAX], char ***envp, int i,
 	*pwd = ft_strdup(cwd);
 	if (!*pwd)
 		return (MALLOC_ERR);
-	new_env[len + i] = ft_strjoin("PWD=", cwd);
-	if (!new_env[len + i])
+	new_env[len] = ft_strjoin("PWD=", cwd);
+	if (!new_env[len])
 	{
 		free(*pwd);
 		return (MALLOC_ERR);
@@ -104,7 +103,7 @@ int	pwd_init(char ***envp, char **pwd)
 	position = env_var(*envp, "PWD=", -1, 4);
 	if (position == -1)
 	{
-		status = pwd_init_when_no_pwd_exists(cwd, envp, 0, pwd);
+		status = pwd_init_when_no_pwd_exists(cwd, envp, 1, pwd);
 		if (status != 0)
 			return (status);
 	}
