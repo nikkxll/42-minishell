@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 14:55:43 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:22:10 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	run_export(char **arr, t_minishell *ms)
 	int		arr_len;
 
 	arr_len = ft_arrlen((void **)arr);
-	if (arr_len >= 1 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
+	if (arr_len > 0 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
 	{
 		arr[0][2] = NULL_TERM;
 		print_arg_err_msg("env: `", arr[0], "': options are not supported\n");
