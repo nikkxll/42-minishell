@@ -13,21 +13,20 @@
 #include "../../../headers/minishell.h"
 
 int		execute_external(char **cmd, char *redir, char **envp);
-int		execute_builtin(char **cmd, char *redir, char ***envp);
+int		execute_builtin(char **cmd, char *redir, t_minishell *ms);
 
-
-int	traverse_command(char *cmd, char *redir, char ***envp)
+int	traverse_command(char *cmd, char *redir, t_minishell *ms)
 {
 	int		status;
 	char	**command;
 
-	status = parse_cmd(cmd, &command, *envp);
+	status = parse_cmd(cmd, &command, ms->env);
 	if (status == 0)
 	{
-		if (is_builtin(cmd[0]) == true)
-			status = execute_builtin(command, redir, envp);
+		if (is_builtin(command[0]) == true)
+			status = execute_builtin(command, redir, ms);
 		else
-			status = execute_external(command, redir, *envp);
+			status = execute_external(command, redir, ms->env);
 	}
 	ft_free_2d_array(command);
 	return (status);
@@ -43,11 +42,12 @@ int	execute_external(char **command, char *redir, char **envp)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
-		//status = apply_redirect(redir);
+		(void)redir; status = 0;//status = apply_redirect(redir);
 		if (status == 0)
 			status = locate_command(&command[0], envp);
-		if (status == 0)
-			execve(command[0], command, envp);
+		if (status != 0)
+			exit(status);
+		execve(command[0], command, envp);
 		print_err_msg(command[0], ": execve() error occured\n");
 		exit(EXECVE_FAILURE);
 	}
@@ -60,31 +60,31 @@ int	execute_external(char **command, char *redir, char **envp)
 	}
 }
 
-int	execute_builtin(char **command, char *redir, char ***envp)
+int	execute_builtin(char **command, char *redir, t_minishell *ms)
 {
-	int	in_fd;
-	int	out_fd;
+	// int	in_fd;
+	// int	out_fd;
 	int	status;
 
-	in_fd = dup(STDIN_FILENO);
-	out_fd = dup(STDOUT_FILENO);
-	if (in_fd == -1 || out_fd == -1)
-	{
-		if (in_fd != -1)
-			close(in_fd);
-		if (out_fd != -1)
-			close(out_fd);
-		print_err_msg(command[0], ": dup() error occured\n");
-		return (DUP_FAILURE);
-	}
-	//status = apply_redirect(redir);
+	// in_fd = dup(STDIN_FILENO);
+	// out_fd = dup(STDOUT_FILENO);
+	// if (in_fd == -1 || out_fd == -1)
+	// {
+	// 	if (in_fd != -1)
+	// 		close(in_fd);
+	// 	if (out_fd != -1)
+	// 		close(out_fd);
+	// 	print_err_msg(command[0], ": dup() error occured\n");
+	// 	return (DUP_FAILURE);
+	// }
+	(void)redir; status = 0;//status = apply_redirect(redir);
 	if (status == 0)
-		status = command_run(command, envp);
-	if (dup2(in_fd, STDIN_FILENO) != -1 && dup2(out_fd, STDOUT_FILENO) != -1)
-	{
-		print_err_msg(command[0], ": dup2() error occured. "
-			"Correct behavior is not guaranteed anymore\n");
-		return (DUP_P_FAILURE);
-	}
+		status = command_run(command, ms);
+	// if (dup2(in_fd, STDIN_FILENO) != -1 && dup2(out_fd, STDOUT_FILENO) != -1)
+	// {
+	// 	print_err_msg(command[0], ": dup2() error occured. "
+	// 		"Correct behavior is not guaranteed anymore\n");
+	// 	return (DUP_P_FAILURE);
+	// }
 	return (status);
 }

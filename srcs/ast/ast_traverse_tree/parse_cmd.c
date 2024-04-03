@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 21:21:43 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/31 23:52:57 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:43:21 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	parse_cmd(char *cmd, char ***res, char **envp)
 	status = 0;
 	while (arr[i] && status == 0)
 		status = expand_dollar_sign(&arr[i++], envp, 0);
-	// if (status == 0)
-	// 	status = array_build_before_wc(&arr, -1, -1, -1);
+	if (status == 0)
+		status = array_build_before_wc(&arr, -1, -1, -1);
 	if (status == 0)
 		status = wildcards(&arr);
 	if (status != 0 && arr != NULL)

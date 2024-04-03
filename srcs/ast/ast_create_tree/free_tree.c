@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:01:13 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/30 00:20:18 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:04:14 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
  */
 void	free_tree(t_node **root)
 {
-
 	if (*root == NULL)
 		return ;
 	if ((*root)->type == T_BRACKET)

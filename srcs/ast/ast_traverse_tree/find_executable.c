@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:02:40 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 00:24:30 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:26:13 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ int	find_executable(char **command, char **paths)
 	char	*cmd_in_path;
 
 	cmd_in_path = NULL;
-	if (strchr(*command, '/') == NULL)
+	if (ft_strchr(*command, '/') == NULL)
 		status = find_cmd_in_path(*command, paths, &cmd_in_path);
 	else
 		status = check_path_provided(*command, &cmd_in_path);
 	if (status == 0)
 	{
-		if (strchr(*command, '/') == NULL)
+		if (ft_strchr(*command, '/') == NULL)
 			free(*command);
 		*command = cmd_in_path;
 	}
 	else if (status == CMD_NF_FAILURE)
-		print_err_msg(command, ": command not found\n");
+		print_err_msg(command[0], ": command not found\n");
 	else if (status == CMD_PD_FAILURE)
-		print_err_msg(command, ": Permission denied\n");
+		print_err_msg(command[0], ": Permission denied\n");
 	return (status);
 }
 
