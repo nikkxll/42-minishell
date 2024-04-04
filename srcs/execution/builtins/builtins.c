@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/03 17:34:18 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:30:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	command_run(char **arr, t_minishell *ms)
 		else if (ft_strncmp(arr[0], "env", ENV_LEN) == 0)
 			run_env(arr + 1, ms);
 		else if (ft_strncmp(arr[0], "exit", EXIT_LEN) == 0)
-			run_exit(arr + 1, ms);
+			run_exit(arr + 1, ms, 0);
 	}
 	return (ms->exit_status);
 }

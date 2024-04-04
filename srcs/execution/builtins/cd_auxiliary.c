@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 19:20:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/04 12:32:41 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:43:16 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,6 @@ void	cd_precheck(char **arr, t_minishell *ms)
 		arr[0][2] = NULL_TERM;
 		print_arg_err_msg("cd: `", arr[0], "': options are not supported\n");
 		ms->exit_status = CMD_ARG_ERROR;
-		return ;
-	}
-	if (len > 1)
-	{
-		print_err_msg("cd: ", "too many arguments\n");
-		ms->exit_status = GENERIC_ERROR;
-		return ;
 	}
 }
 

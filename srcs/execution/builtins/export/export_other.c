@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_error.c                                     :+:      :+:    :+:   */
+/*   export_other.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 19:31:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 23:45:51 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/04/04 18:00:01 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/04/04 18:37:27 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,27 @@
 int	execute_error(char **arr, int *operations)
 {
 	int		j;
+	int		i;
 	int		flag;
 
 	j = -1;
-	flag = 0;
 	while (operations[++j])
 	{
+		flag = 0;
 		if (operations[j] == EXPORT_ERROR)
+		{
+			i = 0;
+			if (ft_isdigit(arr[j][i]))
+				flag = 1;
+			while (ft_isenv(arr[j][i], &i))
+				i++;
+			if (arr[j][i] != NULL_TERM)
+				flag = 1;
+		}
+		if (flag == 1)
 		{
 			print_arg_err_msg("export: `", arr[j],
 				"': not a valid identifier\n");
-			flag = 1;
 		}
 	}
 	return (flag);

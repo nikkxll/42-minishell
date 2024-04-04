@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:35:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:39:18 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:58:27 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,25 @@ void	print_err_msg(char *cmd, char *msg)
 		return ;
 	ft_putstr_fd(msg, STDERR_FILENO);
 	free(msg);
+}
+
+/**
+ * @brief	A function that prints an error without any arguments in it
+ * @param	cmd command
+ * @param	msg error message
+ * @return	@c `void`
+ */
+void	perror_err_msg(char *cmd, char *arg)
+{
+	cmd = ft_strjoin("\033[0;31me-bash: \033[0;0m", cmd);
+	if (!cmd)
+		return ;
+	arg = ft_strjoin(cmd, arg);
+	free(cmd);
+	if (!arg)
+		return ;
+	perror(arg);
+	free(arg);
 }
 
 /**

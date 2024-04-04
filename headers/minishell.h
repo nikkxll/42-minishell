@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/04 12:33:36 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:00:26 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,11 @@ int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);
 void			print_err_msg(char *cmd, char *msg);
 void			print_arg_err_msg(char *cmd, char *arg, char *msg);
+void			perror_err_msg(char *cmd, char *arg);
 void			run_cd(char **arr, t_minishell *ms, int status);
 void			cd_precheck(char **arr, t_minishell *ms);
-void			struct_pwd_and_full_oldpwd_update(char *new_pwd, t_minishell *ms);
+void			struct_pwd_and_full_oldpwd_update(char *new_pwd,
+					t_minishell *ms);
 void			update_env_oldpwd(char ***envp, t_minishell *ms);
 void			update_env_pwd(char ***envp, t_minishell *ms);
 void			run_echo(char **arr, int i, int j, int nl_flag);
@@ -139,7 +141,7 @@ int				add_to_env_list_new_env(char **envp, char ***result,
 void			run_pwd(char **arr, t_minishell *ms);
 void			run_unset(char **arr, t_minishell *ms);
 void			run_env(char **arr, t_minishell *ms);
-void			run_exit(char **arr, t_minishell *ms);
+void			run_exit(char **arr, t_minishell *ms, long num);
 
 char			**wrapper_ft_split_with_quotes(char *str);
 
@@ -171,5 +173,7 @@ int				get_prompt(char *folder_name, char **command);
 
 int				shlvl_init(char ***envp);
 int				pwd_init(char ***envp, char **pwd);
+
+int				check_for_non_digits(char *str);
 
 #endif

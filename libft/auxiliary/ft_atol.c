@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 15:58:54 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/03 15:59:02 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:23:32 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ long	ft_atol(const char *str)
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
 	if (ft_strncmp(str, "-9223372036854775808", ft_strlen(str)) == 0)
-		return (-9223372036854775808UL);
+		return (LONG_MIN);
 	if ((*str == '-' || *str == '+') && ft_isdigit(*(str + 1)))
 	{
 		sign = -1 * (*str == '-') + 1 * (*str == '+');

@@ -58,7 +58,7 @@ D_SIGN				:=	$(addprefix $(D_SIGN_PATH), $(D_SIGN_NAME))
 
 ########EXECUTION########
 BUILTINS_NAME		:=	builtins.c cd_core.c cd_auxiliary.c echo.c env.c pwd.c unset.c exit.c utils.c
-BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_error.c export_utils.c export.c
+BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_utils.c export.c export_other.c
 BUILTINS_PATH		:=	execution/builtins/
 BUILTINS_EXPORT_PATH:=	execution/builtins/export/
 EXECUTION_PATH		:=	execution/
