@@ -99,6 +99,10 @@ protestit povedenie wildcards when permissions denied dlya foldera
 
 -wild redirects
 <<"stop   "
+<"" cat
+< cat
+<//// cat
+</ cat
 =======
 
 ____
@@ -126,3 +130,4 @@ bash-3.2$ .
 ________
 bash-3.2$ ./.
 
+bash-3.2$ <Makefile/ cat

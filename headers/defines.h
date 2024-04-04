@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/04 14:13:42 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:49:40 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ enum	e_exit_status
 	SYSTEM_ERROR = 201,
 	CHDIR_ERROR,
 	GETCWD_ERROR,
+	STAT_FAILURE = 999,
 	RL_FAILURE = 999,
 	EXECVE_FAILURE = 999,
 	FORK_FAILURE = 999,

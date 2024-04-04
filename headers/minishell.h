@@ -6,17 +6,18 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/04 15:31:17 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 01:38:54 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <dirent.h>
-# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <stdio.h>
+# include <dirent.h>
+# include <sys/stat.h>
 # include "../libft/libft.h"
 # include "structs.h"
 # include "defines.h"
@@ -97,6 +98,12 @@ t_bool			is_builtin(char *cmd);
 int				locate_command(char	**cmd, char	**envp);
 int				find_executable(char **command, char **paths);
 
+/*_____ Redir _____*/
+int				apply_redirects(char *redir, t_minishell *ms);
+int				check_redir(char **redir, t_minishell *ms);
+void			remove_slashes(char **s);
+int				apply_heredoc(char *limiter, int *in);
+int				apply_redir_in(char *str, t_minishell *ms, int *in);
 /*_____ Execution _____*/
 
 int				dollar_sign_expansion(char **str, char **envp,

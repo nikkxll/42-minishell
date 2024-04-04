@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_redir.c                                      :+:      :+:    :+:   */
+/*   remove_slashes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 12:42:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 01:46:22 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/04/05 01:23:36 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/04/05 01:23:52 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	check_redir(char **redir, t_minishell *ms)
+void	remove_slashes(char **s)
 {
-	int		status;
-	char	**rdr;
+	int		i;
+	int		j;
+	int		len;
+	char	*str;
 
-	status = parse_cmd(*redir, &rdr, ms);
-	if (status != 0)
-		return (status);
-	if (ft_arrlen((void **)rdr) != 1)
+	str = *s;
+	i = 0;
+	len = ft_strlen(str);
+	while (i < len)
 	{
-		status = 1;
-		print_err_msg(*redir, ": ambiguous redirect\n");
-		ft_free_2d_array(rdr);
+		if (str[i] == SLASH && str[i + 1] == SLASH)
+		{
+			j = i;
+			while (j < len)
+			{
+				str[j] = str[j + 1];
+				j++;
+			}
+			len--;
+			continue ;
+		}
+		i++;
 	}
-	else
-	{
-		*redir = rdr[0];
-		free(rdr);
-	}
-	return (status);
 }

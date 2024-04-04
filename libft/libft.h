@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:06:39 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 16:00:39 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:22:00 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ long	ft_max(long num1, long num2);
 long	ft_min(long num1, long num2);
 t_bool	ft_open_close_file(char *filename, int *fd, int mode);
 t_bool	ft_isspace(char c);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

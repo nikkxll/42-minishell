@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:21:32 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/04 15:27:17 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 01:46:48 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	apply_heredoc(char *limiter, int *in)
 {
 	int		status;
 	int		hd[2];
-	char	*line;
 
 	close(*in);
 	while (*limiter == SPACE)

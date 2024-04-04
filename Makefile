@@ -11,12 +11,16 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 ###############################
 
 #######AST_TRAVERSE_TREE#######
-
 AST_TRAVERSE_NAME	:=	traverse_tree.c traverse_bracket.c traverse_pipe.c wait_children.c \
 						traverse_command_br.c traverse_command.c parse_cmd.c is_builtin.c \
 						locate_command.c find_executable.c
 AST_TRAVERSE_PATH	:=	ast/ast_traverse_tree/
 AST_TRAVERSE		:=	$(addprefix $(AST_TRAVERSE_PATH), $(AST_TRAVERSE_NAME))
+
+#############REDIR#############
+REDIR_NAME	:=	apply_redirects.c check_redir.c remove_slashes.c apply_heredoc.c apply_redir_in.c
+REDIR_PATH	:=	redir/
+REDIR		:=	$(addprefix $(REDIR_PATH), $(REDIR_NAME))
 
 #########COMMON_UTILS##########
 COMMON_UTILS_NAME	:=	remove_quotes.c errors_print.c split_before_wildcards.c prompt_update.c \
@@ -73,7 +77,7 @@ EXECUTION			:=	$(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME)) \
 						$(addprefix $(EXECUTION_UTILS_PATH), $(EXECUTION_UTILS_NAME))
 
 SRCS				:=	main.c minishell.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_TRAVERSE) $(AST_SPLITTER) \
-						$(BUILTINS) $(EXECUTION) $(D_SIGN) $(WILDCARDS) $(COMMON_UTILS)
+						$(BUILTINS) $(EXECUTION) $(D_SIGN) $(WILDCARDS) $(COMMON_UTILS) $(REDIR)
 SRCS_PATH			:=	srcs/
 
 ###############################
@@ -87,15 +91,15 @@ LIBFT_PATH			:=	$(LIBFT_PATH)
 LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
-# RL					:=	/opt/homebrew/opt/readline/lib/
-# RLH					:=	/opt/homebrew/opt/readline/lib/
-# RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
-# RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
+RL					:=	/opt/homebrew/opt/readline/lib/
+RLH					:=	/opt/homebrew/opt/readline/lib/
+RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
+RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
 
-RL					:=	~/.brew/Cellar/readline/8.2.7/lib
-RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
-RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
-RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
+# RL					:=	~/.brew/Cellar/readline/8.2.7/lib
+# RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
+# RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
+# RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
 
 HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)
 INCLUDES			:=	$(addprefix -I , $(HEADERS))
@@ -125,6 +129,7 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)$(WILDCARDS_PATH)
 	@mkdir -p $(OBJS_PATH)$(EXECUTION_UTILS_PATH)
 	@mkdir -p $(OBJS_PATH)$(COMMON_UTILS_PATH)
+	@mkdir -p $(OBJS_PATH)$(REDIR_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c $(HEADERS)
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
