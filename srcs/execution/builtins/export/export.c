@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/04 18:39:44 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:32:45 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	execute_export(char ***new_env, char **arr, t_minishell *ms,
 		if (edit_env_list(&(ms->env), arr, operations) == MALLOC_ERR)
 			return (MALLOC_ERR);
 	}
-	return (execute_error(arr, operations));
+	return (execute_other(arr, operations));
 }
 
 /**

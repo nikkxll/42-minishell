@@ -6,11 +6,26 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:00:01 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/04 18:37:27 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:38:44 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../headers/minishell.h"
+
+int	check_for_errors(char **arr, int *operations)
+{
+	int	j;
+
+	j = -1;
+	while (arr[++j])
+	{
+		if (operations[j] == 0)
+		{
+			return (GENERIC_ERROR);
+		}
+	}
+	return (SUCCESS);
+}
 
 /**
  * @brief	A function that prints an error if export pattern was not followed
@@ -19,31 +34,29 @@
  * of different type
  * @return	@c `flag` which indicates if any errors occured
  */
-int	execute_error(char **arr, int *operations)
+int	execute_other(char **arr, int *operations)
 {
 	int		j;
 	int		i;
-	int		flag;
 
 	j = -1;
-	while (operations[++j])
+	while (arr[++j])
 	{
-		flag = 0;
 		if (operations[j] == EXPORT_ERROR)
 		{
 			i = 0;
 			if (ft_isdigit(arr[j][i]))
-				flag = 1;
+				operations[j] = 0;
 			while (ft_isenv(arr[j][i], &i))
 				i++;
 			if (arr[j][i] != NULL_TERM)
-				flag = 1;
+				operations[j] = 0;
 		}
-		if (flag == 1)
+		if (operations[j] == 0)
 		{
 			print_arg_err_msg("export: `", arr[j],
 				"': not a valid identifier\n");
 		}
 	}
-	return (flag);
+	return (check_for_errors(arr, operations));
 }
