@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 17:36:13 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:33:36 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,9 @@ void			create_operations_array(char **arr, char **envp,
 int				check_operations(int *operations, int *i, int *j, int type);
 int				execute_error(char **arr, int *operations);
 int				edit_env_list(char ***new_env, char **arr, int *operations);
-int				add_to_env_list(char ***new_env, char **arr, char **envp,
+int				add_to_env_list(char ***new_env, char **arr, t_minishell *ms,
 					int *operations);
-int				add_to_env_list_new_env_creation(char **envp, char ***result,
+int				add_to_env_list_new_env(char **envp, char ***result,
 					int *i, int *len);
 void			run_pwd(char **arr, t_minishell *ms);
 void			run_unset(char **arr, t_minishell *ms);

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:54:18 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/03 20:22:03 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:21:21 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,10 @@ void	run_unset(char **arr, t_minishell *ms)
 	else if (len > 0)
 	{
 		while (arr[++j])
+		{
+			if (ft_strcmp(arr[j], "OLDPWD") == 0)
+				ms->is_oldpwd_unset = true;
 			iterate_through_args(arr, ms, &j);
+		}
 	}
 }

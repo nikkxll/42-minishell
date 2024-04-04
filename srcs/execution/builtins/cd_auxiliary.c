@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 19:20:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/03 20:22:22 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:32:41 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static int	oldpwd_init_when_no_oldpwd_exists(char ***envp, int i,
 	char	**new_env;
 
 	len = ft_arrlen((void **)*envp);
-	if (add_to_env_list_new_env_creation(*envp, &new_env, &i, &len)
+	if (add_to_env_list_new_env(*envp, &new_env, &i, &len)
 		== MALLOC_ERR)
 		return (MALLOC_ERR);
 	new_env[len] = ft_strjoin("OLDPWD=", ms->pwd);
@@ -142,5 +142,8 @@ void	update_env_oldpwd(char ***envp, t_minishell *ms)
 		(*envp)[position] = temp;
 	}
 	else
-		ms->exit_status = oldpwd_init_when_no_oldpwd_exists(envp, 1, ms);
+	{
+		if (ms->is_oldpwd_unset == false)
+			ms->exit_status = oldpwd_init_when_no_oldpwd_exists(envp, 1, ms);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 16:36:29 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:17:19 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_minishell
 	char			*oldpwd;
 	unsigned char	exit_status;
 	t_bool			is_parent;
+	t_bool			is_oldpwd_unset;
 }	t_minishell;
 
 typedef struct s_wildcards

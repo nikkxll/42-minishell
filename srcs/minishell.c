@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 17:41:07 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:18:35 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(void)
 	if (ms.exit_status != SUCCESS)
 		return (ms.exit_status);
 	ms.is_parent = true;
+	ms.is_oldpwd_unset = false;
 	while (1)
 	{
 		get_current_folder_name(&folder_name);

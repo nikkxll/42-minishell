@@ -119,3 +119,9 @@ bash-3.2$ (>)
 
 ----
 exit 20233720368547758048
+
+____
+bash
+unset OLDPWD
+bash
+env | grep PWD
