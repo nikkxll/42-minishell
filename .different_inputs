@@ -98,6 +98,7 @@ echo a&&b'' |>>a|<a
 protestit povedenie wildcards when permissions denied dlya foldera
 
 -wild redirects
+<<"stop   "
 =======
 
 ____
@@ -119,3 +120,9 @@ bash-3.2$ (>)
 
 ----
 exit 20233720368547758048
+
+-----
+bash-3.2$ .
+________
+bash-3.2$ ./.
+

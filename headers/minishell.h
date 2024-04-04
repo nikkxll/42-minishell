@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 17:36:13 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:31:17 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char			**sort_string_arr(char **argv, int size);
 char			**cpy_env(char **envp);
 void			remove_quotes(char *str, int i, int j);
 void			skip_characters(char *str, int *i, int symbol);
-void			processing(char **arr, int i);
+void			remove_quotes_arr(char **arr, int i);
 int				env_var(char **envp, char *var, int i, int j);
 int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);

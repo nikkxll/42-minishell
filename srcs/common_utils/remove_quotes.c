@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:56:07 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/01 01:40:43 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:30:54 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	remove_quotes(char *str, int i, int j)
  * @param	i an index
  * @return	@c `void`
  */
-void	processing(char **arr, int i)
+void	remove_quotes_arr(char **arr, int i)
 {
 	while (arr[i])
 		remove_quotes(arr[i++], 0, 0);

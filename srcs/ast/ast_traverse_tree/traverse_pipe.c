@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:43:12 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 16:43:19 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:10:35 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	traverse_first(t_node **node, t_minishell *ms, int pipefd[2], int pids[2])
 			close(pipefd[WRITE]);
 			exit(DUP_FAILURE);
 		}
+		close(pipefd[WRITE]);
 		status = traverse_tree(node, ms);
 		exit(status);
 	}
@@ -71,6 +72,7 @@ int	traverse_second(t_node **node, t_minishell *ms, int pipefd[2], int pids[2])
 			close(pipefd[READ]);
 			exit(DUP_FAILURE);
 		}
+		close(pipefd[READ]);
 		status = traverse_tree(node, ms);
 		exit(status);
 	}

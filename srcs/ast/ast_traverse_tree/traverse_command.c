@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 18:02:31 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:09:33 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	execute_builtin(char **command, char *redir, t_minishell *ms)
 	if (status == 0)
 		status = command_run(command, ms);
 	// if (dup2(in_fd, STDIN_FILENO) != -1 && dup2(out_fd, STDOUT_FILENO) != -1)
-	// {
+	// close fd after dup2()
 	// 	print_err_msg(command[0], ": dup2() error occured. "
 	// 		"Correct behavior is not guaranteed anymore\n");
 	// 	return (DUP_P_FAILURE);
