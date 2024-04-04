@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/04 19:33:12 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:40:02 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ int				array_build_before_wc(char ***arr, int i, int k, int j);
 int				minishell(char **arr, t_minishell *ms);
 
 int				get_current_folder_name(char **folder_name);
-int				get_prompt(char *folder_name, char **command);
+int				get_prompt(char *folder_name, char **prompt, char *exit_status);
 
 int				shlvl_init(char ***envp);
 int				pwd_init(char ***envp, char **pwd);

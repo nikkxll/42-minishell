@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 19:48:00 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:54:49 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,10 @@ enum	e_wc_paths
 	DOT_PATH,
 	ABS_PATH,
 };
+
+# ifndef PROMPT_STATIC_LEN
+#  define PROMPT_STATIC_LEN 47
+# endif
 
 # ifndef NOTHING_TO_EXPAND
 #  define NOTHING_TO_EXPAND -2

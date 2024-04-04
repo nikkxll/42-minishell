@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/04 12:18:35 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:39:05 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	main(void)
 	while (1)
 	{
 		get_current_folder_name(&folder_name);
-		get_prompt(folder_name, &prompt);
+		get_prompt(folder_name, &prompt, ft_itoa(ms.exit_status));
 		command = readline(prompt);
 		if (is_blank_string(command))
 			continue ;
