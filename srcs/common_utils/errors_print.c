@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:35:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/04 18:58:27 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/06 00:45:03 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,34 @@ void	print_err_msg(char *cmd, char *msg)
 		return ;
 	msg = ft_strjoin(cmd, msg);
 	free(cmd);
+	if (!msg)
+		return ;
+	ft_putstr_fd(msg, STDERR_FILENO);
+	free(msg);
+}
+
+/**
+ * @brief	A function that prints an warning for shlvl var change
+ * @param	number number corresponding to the shlvl
+ * @return	@c `void`
+ */
+void	shlvl_warning(int number)
+{
+	char	*first_part;
+	char	*num;
+	char	*first_num_part;
+	char	*msg;
+	
+	first_part = "\033[0;31me-bash: \033[0;0mwarning: minishell level (";
+	num = ft_itoa(number);
+	if (!num)
+		return ;
+	first_num_part = ft_strjoin(first_part, num);
+	free(num);
+	if (!first_num_part)
+		return ;
+	msg = ft_strjoin(first_num_part, ") too high, resetting to 1\n");
+	free(first_num_part);
 	if (!msg)
 		return ;
 	ft_putstr_fd(msg, STDERR_FILENO);

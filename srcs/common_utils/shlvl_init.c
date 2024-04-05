@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:39:31 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/05 19:33:02 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/06 00:53:53 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,17 @@ int	check_for_non_digits(char *str)
  * exists
  * @param	position position of PWD in the enviroment list
  * @param	envp enviroment list
+ * @param	number initialization for the shlvl env number (ft_atoi result)
+ * @param	shlvl initialization for the shlvl env number (char passing into 
+ * ft_atoi)
  * @return	@c `SUCCESS` if the operation completes successfully,
  * @c `MALLOC_ERR` if memory allocation fails during processing
  */
-static int	shlvl_init_when_shlvl_exists(int position, char ***envp)
+static int	shlvl_init_when_shlvl_exists(int position, char ***envp,
+	int number, char *shlvl)
 {
-	int		number;
 	char	*new_number;
 	char	*temp;
-	char	*shlvl;
 
 	shlvl = ft_strrchr((*envp)[position], EQUAL) + 1;
 	if (check_for_non_digits(shlvl))
@@ -56,6 +58,11 @@ static int	shlvl_init_when_shlvl_exists(int position, char ***envp)
 		number = ft_atoi(shlvl);
 	if (number < 0)
 		number = -1;
+	else if (number > 998)
+	{
+		shlvl_warning(number + 1);
+		number = 0;
+	}
 	new_number = ft_itoa(number + 1);
 	if (!new_number)
 		return (MALLOC_ERR);
@@ -114,7 +121,7 @@ int	shlvl_init(char ***envp)
 	}
 	else
 	{
-		status = shlvl_init_when_shlvl_exists(position, envp);
+		status = shlvl_init_when_shlvl_exists(position, envp, 0, NULL);
 		if (status != 0)
 			return (status);
 	}
