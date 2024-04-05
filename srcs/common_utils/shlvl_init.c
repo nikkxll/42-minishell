@@ -19,7 +19,7 @@
  * @return	@c `true` if the string is in a wrong format
  * @c `false` if the string is in a right format
  */
-int	check_str_before_atoi(char *str)
+int	check_for_non_digits(char *str)
 {
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
@@ -50,7 +50,7 @@ static int	shlvl_init_when_shlvl_exists(int position, char ***envp)
 	char	*shlvl;
 
 	shlvl = ft_strrchr((*envp)[position], EQUAL) + 1;
-	if (check_str_before_atoi(shlvl))
+	if (check_for_non_digits(shlvl))
 		number = 0;
 	else
 		number = ft_atoi(shlvl);
@@ -81,7 +81,7 @@ static int	shlvl_init_when_no_shlvl_exists(char ***envp, int i)
 	int		len;
 	char	**new_env;
 
-	if (add_to_env_list_new_env_creation(*envp, &new_env, &i,
+	if (add_to_env_list_new_env(*envp, &new_env, &i,
 			&len) == MALLOC_ERR)
 		return (MALLOC_ERR);
 	new_env[len] = ft_strdup("SHLVL=1");

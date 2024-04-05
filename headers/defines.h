@@ -75,6 +75,7 @@ enum	e_exit_status
 	SYSTEM_ERROR = 201,
 	CHDIR_ERROR,
 	GETCWD_ERROR,
+	UNEXPECTED_EXIT = 255,
 	EXECVE_FAILURE = 999,
 	FORK_FAILURE = 999,
 	PIPE_FAILURE = 999,
@@ -96,6 +97,10 @@ enum	e_wc_paths
 	DOT_PATH,
 	ABS_PATH,
 };
+
+# ifndef PROMPT_STATIC_LEN
+#  define PROMPT_STATIC_LEN 47
+# endif
 
 # ifndef NOTHING_TO_EXPAND
 #  define NOTHING_TO_EXPAND -2

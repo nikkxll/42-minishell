@@ -24,6 +24,7 @@ typedef struct s_minishell
 	char			*oldpwd;
 	unsigned char	exit_status;
 	t_bool			is_parent;
+	t_bool			is_oldpwd_unset;
 }	t_minishell;
 
 typedef struct s_wildcards

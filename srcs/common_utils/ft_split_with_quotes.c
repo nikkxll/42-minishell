@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:19:28 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/01 01:41:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:28:12 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../../headers/minishell.h"
 
 /**
  * @brief	Auxiliary function for @c `wrapper_ft_split_with_quotes()` function

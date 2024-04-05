@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:04:34 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 15:00:48 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:21:53 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	run_env(char **arr, t_minishell *ms)
 
 	len = ft_arrlen((void **)arr);
 	new_env = ms->env;
-	if (len >= 1 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
+	if (len > 0 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
 	{
 		arr[0][2] = NULL_TERM;
 		print_arg_err_msg("env: `", arr[0], "': options are not supported\n");
 		ms->exit_status = CMD_ARG_ERROR;
 	}
-	else if (len >= 1)
+	else if (len > 0)
 	{
 		print_arg_err_msg("env: `", arr[0], "': arguments are not supported\n");
 		ms->exit_status = CMD_ARG_ERROR;

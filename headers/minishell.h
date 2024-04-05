@@ -118,9 +118,11 @@ int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);
 void			print_err_msg(char *cmd, char *msg);
 void			print_arg_err_msg(char *cmd, char *arg, char *msg);
+void			perror_err_msg(char *cmd, char *arg);
 void			run_cd(char **arr, t_minishell *ms, int status);
 void			cd_precheck(char **arr, t_minishell *ms);
-void			struct_pwd_and_full_oldpwd_update(char *new_pwd, t_minishell *ms);
+void			struct_pwd_and_full_oldpwd_update(char *new_pwd,
+					t_minishell *ms);
 void			update_env_oldpwd(char ***envp, t_minishell *ms);
 void			update_env_pwd(char ***envp, t_minishell *ms);
 void			run_echo(char **arr, int i, int j, int nl_flag);
@@ -128,16 +130,16 @@ void			run_export(char **arr, t_minishell *ms);
 void			create_operations_array(char **arr, char **envp,
 					int *operations);
 int				check_operations(int *operations, int *i, int *j, int type);
-int				execute_error(char **arr, int *operations);
+int				execute_other(char **arr, int *operations);
 int				edit_env_list(char ***new_env, char **arr, int *operations);
-int				add_to_env_list(char ***new_env, char **arr, char **envp,
+int				add_to_env_list(char ***new_env, char **arr, t_minishell *ms,
 					int *operations);
-int				add_to_env_list_new_env_creation(char **envp, char ***result,
+int				add_to_env_list_new_env(char **envp, char ***result,
 					int *i, int *len);
 void			run_pwd(char **arr, t_minishell *ms);
 void			run_unset(char **arr, t_minishell *ms);
 void			run_env(char **arr, t_minishell *ms);
-void			run_exit(char **arr, t_minishell *ms);
+void			run_exit(char **arr, t_minishell *ms, long num);
 
 char			**wrapper_ft_split_with_quotes(char *str);
 
@@ -165,9 +167,11 @@ int				array_build_before_wc(char ***arr, int i, int k, int j);
 int				minishell(char **arr, t_minishell *ms);
 
 int				get_current_folder_name(char **folder_name);
-int				get_prompt(char *folder_name, char **command);
+int				get_prompt(char *folder_name, char **prompt, char *exit_status);
 
 int				shlvl_init(char ***envp);
 int				pwd_init(char ***envp, char **pwd);
+
+int				check_for_non_digits(char *str);
 
 #endif

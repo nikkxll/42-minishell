@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   cd_core.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:22:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 23:03:33 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:04:27 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	handle_cd_oldpwd(t_minishell *ms)
 	}
 	else if (chdir((ms->env)[env_variable] + 7) != 0)
 	{
-		perror("\033[0;31me-bash: \033[0;0m cd");
-		ms->exit_status = CHDIR_ERROR;
+		perror_err_msg("cd: ", (ms->env)[env_variable] + 7);
+		ms->exit_status = GENERIC_ERROR;
 		return ;
 	}
 	else
@@ -56,8 +56,8 @@ static void	handle_cd_home(t_minishell *ms)
 	}
 	else if (chdir((ms->env)[env_variable] + 5) != 0)
 	{
-		perror("\033[0;31me-bash: \033[0;0m cd");
-		ms->exit_status = CHDIR_ERROR;
+		perror_err_msg("cd: ", (ms->env)[env_variable] + 5);
+		ms->exit_status = GENERIC_ERROR;
 		return ;
 	}
 }
@@ -85,8 +85,8 @@ void	run_cd(char **arr, t_minishell *ms, int status)
 		status = chdir(arr[0]);
 	if (status != 0)
 	{
-		perror("\033[0;31me-bash: \033[0;0m cd");
-		ms->exit_status = CHDIR_ERROR;
+		perror_err_msg("cd: ", arr[0]);
+		ms->exit_status = GENERIC_ERROR;
 		return ;
 	}
 	else if (ms->exit_status != SUCCESS)
