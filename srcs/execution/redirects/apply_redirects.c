@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   apply_redirects.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:24:56 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 19:05:15 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:23:23 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 int	apply_redirect(char *redir, t_minishell *ms, int *in, int *out);
 int	replace_fd(int in, int out);

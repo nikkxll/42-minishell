@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:08:57 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/04 19:32:45 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:49:07 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,53 @@ static void	export_with_args(char **arr, t_minishell *ms)
 }
 
 /**
+ * @brief	A function that runs prints export run without any args
+ * @param	envp_sorted sorted enviroment array
+ * @param	i index to iterate through the array
+ * @param	j index to iterate through the string
+ * @return	@c `void`
+ */
+static void	export_without_args_print(char **envp_sorted, int i, int j)
+{
+	j = 0;
+	if (envp_sorted[i][0] == UNSCORE && envp_sorted[i][1] == EQUAL)
+		return ;
+	ft_putstr_fd("declare -x ", STDOUT_FILENO);
+	while (envp_sorted[i][j] != EQUAL && envp_sorted[i][j] != NULL_TERM)
+		ft_putchar_fd(envp_sorted[i][j++], STDOUT_FILENO);
+	if (ft_strcmp(envp_sorted[i], "OLDPWD=") == 0)
+	{
+		ft_putchar_fd(NL, STDOUT_FILENO);
+		return ;
+	}
+	ft_putchar_fd(EQUAL, STDOUT_FILENO);
+	ft_putchar_fd(D_QUOTE, STDOUT_FILENO);
+	j++;
+	ft_putstr_fd(envp_sorted[i] + j, STDOUT_FILENO);
+	ft_putchar_fd(D_QUOTE, STDOUT_FILENO);
+	ft_putchar_fd(NL, STDOUT_FILENO);
+}
+
+/**
  * @brief	A function that runs export without arguments
  * @param	ms pointer to the common project @c `t_minishell` structure
- * @param	i index
- * @param	j index
+ * @param	i index to iterate through the array
+ * @param	j index to iterate through the string
  * @return	@c `void`
  */
 static void	export_without_args(t_minishell *ms, int i, int j)
 {
 	char	**envp_sorted;
 
+	if (ms->is_oldpwd_unset == false
+		&& env_var(ms->env, "OLDPWD=", -1, 7) == -1)
+	{
+		if (var_init_when_no_var_exists(&ms->env, 1, "OLDPWD=") != 0)
+		{
+			ms->exit_status = MALLOC_ERR;
+			return ;
+		}
+	}
 	envp_sorted = sort_string_arr(ms->env, ft_arrlen((void **)ms->env));
 	if (!envp_sorted)
 	{
@@ -89,20 +126,8 @@ static void	export_without_args(t_minishell *ms, int i, int j)
 		return ;
 	}
 	while (envp_sorted[++i])
-	{
-		j = 0;
-		if (envp_sorted[i][0] == UNSCORE && envp_sorted[i][1] == EQUAL)
-			continue ;
-		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		while (envp_sorted[i][j] != EQUAL && envp_sorted[i][j] != NULL_TERM)
-			ft_putchar_fd(envp_sorted[i][j++], STDOUT_FILENO);
-		ft_putchar_fd(EQUAL, STDOUT_FILENO);
-		ft_putchar_fd(D_QUOTE, STDOUT_FILENO);
-		j++;
-		ft_putstr_fd(envp_sorted[i] + j, STDOUT_FILENO);
-		ft_putchar_fd(D_QUOTE, STDOUT_FILENO);
-		ft_putchar_fd(NL, STDOUT_FILENO);
-	}
+		export_without_args_print(envp_sorted, i, j);
+	execute_unset(&(ms->env), env_var(ms->env, "OLDPWD=", -1, 7), 0);
 	free(envp_sorted);
 }
 

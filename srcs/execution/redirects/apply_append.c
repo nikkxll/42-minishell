@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   apply_append.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:42:17 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 19:05:20 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:23:14 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 int	apply_append(char *redir, t_minishell *ms, int *out)
 {

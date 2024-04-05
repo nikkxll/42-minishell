@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:39:31 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/05 16:09:10 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:33:02 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ static int	shlvl_init_when_shlvl_exists(int position, char ***envp)
 }
 
 /**
- * @brief	Auxiliary function that changes SHLVL in the enviroment list if it
+ * @brief	Auxiliary function that changes var in the enviroment list if it
  * does not exists
  * @param	envp enviroment list
  * @param	i auxiliary index (equal to 0)
  * @return	@c `SUCCESS` if the operation completes successfully,
  * @c `MALLOC_ERR` if memory allocation fails during processing
  */
-static int	shlvl_init_when_no_shlvl_exists(char ***envp, int i)
+int	var_init_when_no_var_exists(char ***envp, int i, char *var)
 {
 	int		len;
 	char	**new_env;
@@ -84,7 +84,7 @@ static int	shlvl_init_when_no_shlvl_exists(char ***envp, int i)
 	if (add_to_env_list_new_env(*envp, &new_env, &i,
 			&len) == MALLOC_ERR)
 		return (MALLOC_ERR);
-	new_env[len] = ft_strdup("SHLVL=1");
+	new_env[len] = ft_strdup(var);
 	if (!new_env[len])
 	{
 		ft_free_2d_array(new_env);
@@ -108,7 +108,7 @@ int	shlvl_init(char ***envp)
 	position = env_var(*envp, "SHLVL=", -1, 6);
 	if (position == -1)
 	{
-		status = shlvl_init_when_no_shlvl_exists(envp, 1);
+		status = var_init_when_no_var_exists(envp, 1, "SHLVL=1");
 		if (status != 0)
 			return (status);
 	}

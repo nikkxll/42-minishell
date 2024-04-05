@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 18:35:24 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:46:20 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ int				expand_dollar_sign_generic(char **str, char **envp);
 int				environment_search_exp_module(char **envp, char *var, int i,
 					int j);
 void			index_quotes(char *str, int i, int *single_q, int *double_q);
-
 int				command_run(char **arr, t_minishell *ms);
 char			**sort_string_arr(char **argv, int size);
 char			**cpy_env(char **envp);
@@ -147,11 +146,10 @@ int				add_to_env_list_new_env(char **envp, char ***result,
 					int *i, int *len);
 void			run_pwd(char **arr, t_minishell *ms);
 void			run_unset(char **arr, t_minishell *ms);
+void			execute_unset(char ***envp, int position, int i);
 void			run_env(char **arr, t_minishell *ms);
 void			run_exit(char **arr, t_minishell *ms, long num);
-
 char			**wrapper_ft_split_with_quotes(char *str);
-
 int				allocate_temp_array(char ***arr, t_w_cards *wc);
 int				fill_temp_array(char ***arr, t_w_cards *wc);
 int				allocate_and_fill_expanded_array(t_w_cards *wc);
@@ -171,16 +169,12 @@ int				fill_temp_array_conditions_block(t_w_cards *wc,
 int				if_abs_path(t_w_cards *wc, char *str);
 t_bool			if_asterisk_in_arr(char **arr, int i, int j);
 int				wildcards(char ***arr);
-
 int				array_build_before_wc(char ***arr, int i, int k, int j);
-int				minishell(char **arr, t_minishell *ms);
-
 int				get_current_folder_name(char **folder_name);
 int				get_prompt(char *folder_name, char **prompt, char *exit_status);
-
 int				shlvl_init(char ***envp);
 int				pwd_init(char ***envp, char **pwd);
-
 int				check_for_non_digits(char *str);
+int				var_init_when_no_var_exists(char ***envp, int i, char *var);
 
 #endif

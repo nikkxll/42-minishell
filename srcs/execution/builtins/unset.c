@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:54:18 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/04 12:21:21 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:44:43 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	env_position_search(char ***envp, char *var, int i)
  * @param	i index
  * @return	@c `void`
  */
-static void	execute_unset(char ***envp, int position, int i)
+void	execute_unset(char ***envp, int position, int i)
 {
 	char	**new_env;
 

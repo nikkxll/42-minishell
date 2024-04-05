@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   apply_redir_in.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 23:03:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 17:16:30 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:23:19 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 int	apply_redir_in(char *redir, t_minishell *ms, int *in)
 {

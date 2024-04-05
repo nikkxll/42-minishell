@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   apply_redir_out.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:31:49 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 17:33:05 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:23:21 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 int	apply_redir_out(char *redir, t_minishell *ms, int *out)
 {
