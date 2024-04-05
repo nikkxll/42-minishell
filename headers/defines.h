@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 15:46:02 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:22:36 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ enum	e_exit_status
 	SYSTEM_ERROR = 201,
 	CHDIR_ERROR,
 	GETCWD_ERROR,
+	RL_FAILURE = 999,
 	UNEXPECTED_EXIT = 255,
 	EXECVE_FAILURE = 999,
 	FORK_FAILURE = 999,

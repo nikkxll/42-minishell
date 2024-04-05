@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 21:21:43 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 17:39:21 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:31:13 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	parse_cmd(char *cmd, char ***res, t_minishell *ms)
 		ft_free_2d_array(arr);
 	if (status == 0)
 	{
-		processing(arr, 0);
+		remove_quotes_arr(arr, 0);
 		*res = arr;
 	}
 	return (status);

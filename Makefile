@@ -11,12 +11,17 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 ###############################
 
 #######AST_TRAVERSE_TREE#######
-
 AST_TRAVERSE_NAME	:=	traverse_tree.c traverse_bracket.c traverse_pipe.c wait_children.c \
 						traverse_command_br.c traverse_command.c parse_cmd.c is_builtin.c \
-						locate_command.c find_executable.c
+						locate_command.c find_executable.c run_builtin.c
 AST_TRAVERSE_PATH	:=	ast/ast_traverse_tree/
 AST_TRAVERSE		:=	$(addprefix $(AST_TRAVERSE_PATH), $(AST_TRAVERSE_NAME))
+
+#############REDIR#############
+REDIR_NAME	:=	apply_redirects.c check_redir.c apply_heredoc.c apply_redir_in.c apply_redir_out.c \
+				apply_apend.c
+REDIR_PATH	:=	redir/
+REDIR		:=	$(addprefix $(REDIR_PATH), $(REDIR_NAME))
 
 #########COMMON_UTILS##########
 COMMON_UTILS_NAME	:=	remove_quotes.c errors_print.c split_before_wildcards.c prompt_update.c \
@@ -67,7 +72,7 @@ BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
 EXECUTION			:=	$(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME))
 
 SRCS				:=	main.c minishell.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_TRAVERSE) $(AST_SPLITTER) \
-						$(BUILTINS) $(EXECUTION) $(D_SIGN) $(WILDCARDS) $(COMMON_UTILS)
+						$(BUILTINS) $(EXECUTION) $(D_SIGN) $(WILDCARDS) $(COMMON_UTILS) $(REDIR)
 SRCS_PATH			:=	srcs/
 
 ###############################
@@ -119,6 +124,7 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)$(WILDCARDS_PATH)
 	@mkdir -p $(OBJS_PATH)$(EXECUTION_UTILS_PATH)
 	@mkdir -p $(OBJS_PATH)$(COMMON_UTILS_PATH)
+	@mkdir -p $(OBJS_PATH)$(REDIR_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c $(HEADERS)
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@

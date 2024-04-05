@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_children.c                                    :+:      :+:    :+:   */
+/*   check_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/01 10:58:08 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 14:35:12 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/04/04 12:42:19 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/04/05 01:46:22 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../../headers/minishell.h"
 
-int	wait_children(pid_t *pids, int num)
+int	check_redir(char **redir, t_minishell *ms)
 {
-	int	i;
-	int	status;
+	int		status;
+	char	**rdr;
 
-	i = 0;
-	while (i < num)
+	status = parse_cmd(*redir, &rdr, ms);
+	if (status != 0)
+		return (status);
+	if (ft_arrlen((void **)rdr) != 1)
 	{
-		if (pids[i] == -1)
-			return (FORK_FAILURE);
-		waitpid(pids[i], &status, 0);
-		i++;
+		status = 1;
+		print_err_msg(*redir, ": ambiguous redirect\n");
+		ft_free_2d_array(rdr);
 	}
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	return (EXIT_FAILURE);
+	else
+	{
+		*redir = rdr[0];
+		free(rdr);
+	}
+	return (status);
 }

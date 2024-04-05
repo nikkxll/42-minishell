@@ -6,17 +6,18 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 17:04:05 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:22:56 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <dirent.h>
-# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <stdio.h>
+# include <dirent.h>
+# include <sys/stat.h>
 # include "../libft/libft.h"
 # include "structs.h"
 # include "defines.h"
@@ -92,11 +93,19 @@ int				traverse_bracket(t_node **node, t_minishell *ms);
 int				traverse_command_br(t_node **node, t_minishell *ms);
 int				traverse_command(char *cmd, char *redir, t_minishell *ms);
 int				parse_cmd(char *cmd, char ***res, t_minishell *ms);
-int				wait_children(int pids[2], int num);
+int				wait_children(pid_t *pids, int num);
 t_bool			is_builtin(char *cmd);
 int				locate_command(char	**cmd, char	**envp);
 int				find_executable(char **command, char **paths);
+int				run_builtin(char **command, char *redir, t_minishell *ms);
 
+/*_____ Redir _____*/
+int				apply_redirects(char *redir, t_minishell *ms);
+int				check_redir(char **redir, t_minishell *ms);
+int				apply_heredoc(char *limiter, int *in);
+int				apply_redir_in(char *str, t_minishell *ms, int *in);
+int				apply_redir_out(char *redir, t_minishell *ms, int *out);
+int				apply_apend(char *redir, t_minishell *ms, int *out);
 /*_____ Execution _____*/
 
 int				dollar_sign_expansion(char **str, char **envp,
@@ -112,7 +121,7 @@ char			**sort_string_arr(char **argv, int size);
 char			**cpy_env(char **envp);
 void			remove_quotes(char *str, int i, int j);
 void			skip_characters(char *str, int *i, int symbol);
-void			processing(char **arr, int i);
+void			remove_quotes_arr(char **arr, int i);
 int				env_var(char **envp, char *var, int i, int j);
 int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);
