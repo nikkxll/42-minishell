@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 17:36:13 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:04:05 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,8 @@ int				find_executable(char **command, char **paths);
 
 int				dollar_sign_expansion(char **str, char **envp,
 					int last_exit_status);
-int				expand_dollar_sign_q_mark(char **str, int last_ind,
-					int last_exit_status);
-int				expand_dollar_sign_generic(char **str, char **envp,
-					int last_ind);
+int				expand_dollar_sign_q_mark(char **str, int last_exit_status);
+int				expand_dollar_sign_generic(char **str, char **envp);
 int				environment_search_exp_module(char **envp, char *var, int i,
 					int j);
 void			index_quotes(char *str, int i, int *single_q, int *double_q);

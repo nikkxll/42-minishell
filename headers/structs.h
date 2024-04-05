@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 16:36:29 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:42:29 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,16 @@ typedef struct s_dollar_exp
 	int		last_part_ind;
 	int		env_list_pos;
 }	t_dollar_exp;
+
+typedef struct s_ds
+{
+	char	*new_str;
+	char	*first;
+	char	*middle;
+	char	*last;
+	int		new_str_len;
+	int		last_ind;
+}	t_ds;
 
 typedef struct s_node
 {
