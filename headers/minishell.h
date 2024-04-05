@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 11:44:05 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:50:11 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,11 @@ int				traverse_bracket(t_node **node, t_minishell *ms);
 int				traverse_command_br(t_node **node, t_minishell *ms);
 int				traverse_command(char *cmd, char *redir, t_minishell *ms);
 int				parse_cmd(char *cmd, char ***res, t_minishell *ms);
-int				wait_children(int pids[2], int num);
+int				wait_children(pid_t *pids, int num);
 t_bool			is_builtin(char *cmd);
 int				locate_command(char	**cmd, char	**envp);
 int				find_executable(char **command, char **paths);
+int				run_builtin(char **command, char *redir, t_minishell *ms);
 
 /*_____ Redir _____*/
 int				apply_redirects(char *redir, t_minishell *ms);

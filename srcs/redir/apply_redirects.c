@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:24:56 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 11:42:39 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:35:02 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	apply_redirects(char *redir, t_minishell *ms)
 int	apply_redirect(char *redir, t_minishell *ms, int *in, int *out)
 {
 	int	status;
-	status = 0;
 
+	status = 0;
 	if (ft_strncmp(redir, "<<", 2) == 0)
 		status = apply_heredoc(redir + 2, in);
 	if (ft_strncmp(redir, ">>", 2) == 0)
@@ -64,12 +64,14 @@ int	replace_fd(int in, int out)
 	status = 0;
 	if (in != -1)
 	{
-		status = dup2(in, STDIN_FILENO);
+		if (dup2(in, STDIN_FILENO) == -1)
+			status = DUP_FAILURE;
 		close(in);
 	}
 	if (status == 0 && out != -1)
 	{
-		status = dup2(out, STDOUT_FILENO);
+		if (dup2(out, STDOUT_FILENO) == -1)
+			status = DUP_FAILURE;
 		close(out);
 	}
 	return (status);

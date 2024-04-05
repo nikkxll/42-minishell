@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:18:37 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/03 14:19:05 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 12:22:10 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,19 +99,10 @@ int	pwd_init(char ***envp, char **pwd)
 	char	cwd[PATH_MAX];
 	int		status;
 
-	status = 0;
 	position = env_var(*envp, "PWD=", -1, 4);
 	if (position == -1)
-	{
 		status = pwd_init_when_no_pwd_exists(cwd, envp, 1, pwd);
-		if (status != 0)
-			return (status);
-	}
 	else
-	{
 		status = pwd_init_when_pwd_exists(cwd, position, envp, pwd);
-		if (status != 0)
-			return (status);
-	}
 	return (status);
 }

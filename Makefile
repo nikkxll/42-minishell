@@ -13,7 +13,7 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 #######AST_TRAVERSE_TREE#######
 AST_TRAVERSE_NAME	:=	traverse_tree.c traverse_bracket.c traverse_pipe.c wait_children.c \
 						traverse_command_br.c traverse_command.c parse_cmd.c is_builtin.c \
-						locate_command.c find_executable.c
+						locate_command.c find_executable.c run_builtin.c
 AST_TRAVERSE_PATH	:=	ast/ast_traverse_tree/
 AST_TRAVERSE		:=	$(addprefix $(AST_TRAVERSE_PATH), $(AST_TRAVERSE_NAME))
 

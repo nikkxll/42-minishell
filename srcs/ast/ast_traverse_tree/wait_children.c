@@ -6,13 +6,13 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:58:08 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/25 12:24:58 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:35:12 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-int	wait_children(int pids[2], int num)
+int	wait_children(pid_t *pids, int num)
 {
 	int	i;
 	int	status;
