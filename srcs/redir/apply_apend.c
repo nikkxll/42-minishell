@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_redir_in.c                                   :+:      :+:    :+:   */
+/*   apply_apend.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/03 23:03:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 11:43:26 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/04/05 11:42:17 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/04/05 11:43:53 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	apply_redir_in(char *redir, t_minishell *ms, int *in)
+int	apply_apend(char *redir, t_minishell *ms, int *out)
 {
 	int		status;
 	int		fd;
 
-	close(*in);
+	close(*out);
 	status = check_redir(&redir, ms);
 	if (status != 0)
 		return (status);
-	fd = open(redir, O_RDONLY);
+	fd = open(redir, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (fd != -1)
-		*in = fd;
+		*out = fd;
 	else
 	{
 		status = GENERIC_ERROR;

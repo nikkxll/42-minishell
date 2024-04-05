@@ -6,13 +6,13 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/04 16:09:33 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 10:50:57 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-int		execute_external(char **cmd, char *redir, char **envp);
+int		execute_external(char **cmd, char *redir, t_minishell *ms);
 int		execute_builtin(char **cmd, char *redir, t_minishell *ms);
 
 int	traverse_command(char *cmd, char *redir, t_minishell *ms)
@@ -26,14 +26,14 @@ int	traverse_command(char *cmd, char *redir, t_minishell *ms)
 		if (is_builtin(command[0]) == true)
 			status = execute_builtin(command, redir, ms);
 		else
-			status = execute_external(command, redir, ms->env);
+			status = execute_external(command, redir, ms);
 	}
 	ms->exit_status = status;
 	ft_free_2d_array(command);
 	return (status);
 }
 
-int	execute_external(char **command, char *redir, char **envp)
+int	execute_external(char **command, char *redir, t_minishell *ms)
 {
 	int		status;
 	pid_t	pid;
@@ -43,12 +43,14 @@ int	execute_external(char **command, char *redir, char **envp)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
-		(void)redir; status = 0;//status = apply_redirect(redir);
+		status = 0;
+		if (redir != NULL)
+			status = apply_redirects(redir, ms);
 		if (status == 0)
-			status = locate_command(&command[0], envp);
+			status = locate_command(&command[0], ms->env);
 		if (status != 0)
 			exit(status);
-		execve(command[0], command, envp);
+		execve(command[0], command, ms->env);
 		print_err_msg(command[0], ": execve() error occured\n");
 		exit(EXECVE_FAILURE);
 	}

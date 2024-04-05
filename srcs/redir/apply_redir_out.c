@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_slashes.c                                   :+:      :+:    :+:   */
+/*   apply_redir_out.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 01:23:36 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 01:23:52 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/04/05 11:31:49 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/04/05 11:48:15 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	remove_slashes(char **s)
+int	apply_redir_out(char *redir, t_minishell *ms, int *out)
 {
-	int		i;
-	int		j;
-	int		len;
-	char	*str;
+	int		status;
+	int		fd;
 
-	str = *s;
-	i = 0;
-	len = ft_strlen(str);
-	while (i < len)
+	close(*out);
+	status = check_redir(&redir, ms);
+	if (status != 0)
+		return (status);
+	fd = open(redir, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (fd != -1)
+		*out = fd;
+	else
 	{
-		if (str[i] == SLASH && str[i + 1] == SLASH)
-		{
-			j = i;
-			while (j < len)
-			{
-				str[j] = str[j + 1];
-				j++;
-			}
-			len--;
-			continue ;
-		}
-		i++;
+		status = GENERIC_ERROR;
+		perror("\033[0;31me-bash\033[0;0m"); //edit error message!
 	}
+	free(redir);
+	return (status);
 }

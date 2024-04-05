@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 01:38:54 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 11:44:05 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,10 @@ int				find_executable(char **command, char **paths);
 /*_____ Redir _____*/
 int				apply_redirects(char *redir, t_minishell *ms);
 int				check_redir(char **redir, t_minishell *ms);
-void			remove_slashes(char **s);
 int				apply_heredoc(char *limiter, int *in);
 int				apply_redir_in(char *str, t_minishell *ms, int *in);
+int				apply_redir_out(char *redir, t_minishell *ms, int *out);
+int				apply_apend(char *redir, t_minishell *ms, int *out);
 /*_____ Execution _____*/
 
 int				dollar_sign_expansion(char **str, char **envp,
