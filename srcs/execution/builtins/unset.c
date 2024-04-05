@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:54:18 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 15:02:22 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:21:21 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	run_unset(char **arr, t_minishell *ms)
 
 	j = -1;
 	len = ft_arrlen((void **)arr);
-	if (len >= 1 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
+	if (len > 0 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
 	{
 		arr[0][2] = NULL_TERM;
 		print_arg_err_msg("unset: `", arr[0], "': options are not supported\n");
@@ -125,6 +125,10 @@ void	run_unset(char **arr, t_minishell *ms)
 	else if (len > 0)
 	{
 		while (arr[++j])
+		{
+			if (ft_strcmp(arr[j], "OLDPWD") == 0)
+				ms->is_oldpwd_unset = true;
 			iterate_through_args(arr, ms, &j);
+		}
 	}
 }

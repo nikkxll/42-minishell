@@ -137,3 +137,8 @@ bash-3.2$ ./.
 
 bash-3.2$ <Makefile/ cat
 
+____
+bash
+unset OLDPWD
+bash
+env | grep PWD

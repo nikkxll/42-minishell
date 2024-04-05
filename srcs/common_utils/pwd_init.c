@@ -6,7 +6,11 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:18:37 by dnikifor          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/04/05 12:22:10 by dshatilo         ###   ########.fr       */
+=======
+/*   Updated: 2024/04/04 12:32:48 by dnikifor         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +69,7 @@ static int	pwd_init_when_no_pwd_exists(char cwd[PATH_MAX], char ***envp, int i,
 	int		len;
 	char	**new_env;
 
-	if (add_to_env_list_new_env_creation(*envp, &new_env, &i, &len)
+	if (add_to_env_list_new_env(*envp, &new_env, &i, &len)
 		== MALLOC_ERR)
 		return (MALLOC_ERR);
 	getcwd(cwd, PATH_MAX);

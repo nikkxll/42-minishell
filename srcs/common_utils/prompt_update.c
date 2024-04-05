@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:45:53 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:44:29 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:54:54 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,28 @@ int	get_current_folder_name(char **folder_name)
  * @brief	Function that builds the full prompt
  * @param	folder_name current working directory
  * @param	prompt prompt to fill with info
+ * @param	exit_status string that represents exit status of the 
+ * previous command run
  * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
  */
-int	get_prompt(char *folder_name, char **prompt)
+int	get_prompt(char *folder_name, char **prompt, char *exit_status)
 {
-	char	*s1;
-	char	*s2;
+	int		len;
 
-	s1 = ft_strjoin("", "\033[1;36me-bash \033[0m\033[1;35m");
-	if (!s1)
+	len = ft_strlen(folder_name) + ft_strlen(exit_status) + PROMPT_STATIC_LEN;
+	*prompt = ft_calloc(len + 1, sizeof(char));
+	if (!*prompt)
 	{
 		free(folder_name);
 		return (MALLOC_ERR);
 	}
-	s2 = ft_strjoin(s1, folder_name);
-	free(folder_name);
-	free(s1);
-	if (!s2)
-		return (MALLOC_ERR);
-	*prompt = ft_strjoin(s2, "\033[0m $ ");
-	free(s2);
-	if (!(*prompt))
-		return (MALLOC_ERR);
+	ft_strlcat(*prompt, "\033[1;36me-bash \033[0m\033[1;35m", len);
+	ft_strlcat(*prompt, folder_name, len);
+	if (ft_strcmp(exit_status, "0") == 0)
+		ft_strlcat(*prompt, "\033[0m [\033[1;32m", len);
+	else
+		ft_strlcat(*prompt, "\033[0m [\033[1;31m", len);
+	ft_strlcat(*prompt, exit_status, len);
+	ft_strlcat(*prompt, "\033[0m] $ ", len);
 	return (SUCCESS);
 }

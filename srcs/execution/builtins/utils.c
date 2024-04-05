@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 12:00:54 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:41:19 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:12:57 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 /**
  * @brief	Skips all @c `symbol` characters in a string
@@ -60,4 +60,18 @@ int	arg_var(char **arr, char *var, int i, int j)
 			return (i);
 	}
 	return (NOT_FOUND);
+}
+
+/**
+ * @brief	A function that checks if characters allowed to be in the name
+ * of the env variable
+ * @param	c character
+ * @param	j pointer to the index
+ * @return	@c `true` if allowed, @c `false` otherwise
+ */
+t_bool	ft_isenv(char c, int *j)
+{
+	if (*j == 0 && ft_isdigit(c))
+		return (false);
+	return (ft_isalnum(c) || c == UNSCORE);
 }

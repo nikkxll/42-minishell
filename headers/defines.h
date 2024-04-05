@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/04 23:49:40 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:22:36 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ enum	e_types
 enum	e_characters
 {
 	NULL_TERM,
+	HT = 9,
 	NL = 10,
 	SEPARATOR = 31,
 	SPACE = 32,
@@ -74,8 +75,8 @@ enum	e_exit_status
 	SYSTEM_ERROR = 201,
 	CHDIR_ERROR,
 	GETCWD_ERROR,
-	STAT_FAILURE = 999,
 	RL_FAILURE = 999,
+	UNEXPECTED_EXIT = 255,
 	EXECVE_FAILURE = 999,
 	FORK_FAILURE = 999,
 	PIPE_FAILURE = 999,
@@ -97,6 +98,10 @@ enum	e_wc_paths
 	DOT_PATH,
 	ABS_PATH,
 };
+
+# ifndef PROMPT_STATIC_LEN
+#  define PROMPT_STATIC_LEN 47
+# endif
 
 # ifndef NOTHING_TO_EXPAND
 #  define NOTHING_TO_EXPAND -2

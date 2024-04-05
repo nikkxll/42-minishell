@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_error.c                                     :+:      :+:    :+:   */
+/*   export_other.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 19:31:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 23:45:51 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/04/04 18:00:01 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/04/04 19:38:44 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../headers/minishell.h"
+
+int	check_for_errors(char **arr, int *operations)
+{
+	int	j;
+
+	j = -1;
+	while (arr[++j])
+	{
+		if (operations[j] == 0)
+		{
+			return (GENERIC_ERROR);
+		}
+	}
+	return (SUCCESS);
+}
 
 /**
  * @brief	A function that prints an error if export pattern was not followed
@@ -19,21 +34,29 @@
  * of different type
  * @return	@c `flag` which indicates if any errors occured
  */
-int	execute_error(char **arr, int *operations)
+int	execute_other(char **arr, int *operations)
 {
 	int		j;
-	int		flag;
+	int		i;
 
 	j = -1;
-	flag = 0;
-	while (operations[++j])
+	while (arr[++j])
 	{
 		if (operations[j] == EXPORT_ERROR)
 		{
+			i = 0;
+			if (ft_isdigit(arr[j][i]))
+				operations[j] = 0;
+			while (ft_isenv(arr[j][i], &i))
+				i++;
+			if (arr[j][i] != NULL_TERM)
+				operations[j] = 0;
+		}
+		if (operations[j] == 0)
+		{
 			print_arg_err_msg("export: `", arr[j],
 				"': not a valid identifier\n");
-			flag = 1;
 		}
 	}
-	return (flag);
+	return (check_for_errors(arr, operations));
 }

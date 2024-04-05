@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_node_info.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:46:43 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/29 16:03:35 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:00:32 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,11 @@ int	set_node_info_command(t_node_info **info, char *str, int type)
 
 	node_info = ft_calloc(1, sizeof(t_node_info));
 	if (!node_info)
-	{
-		*info = node_info;
 		return (-1);
-	}
 	status = modificate_str_command_without_br(str, &redir, 0, 0);
 	if (status == -1)
 	{
-		*info = node_info;
+		free(node_info);
 		return (-1);
 	}
 	node_info->str_left = redir;
@@ -70,10 +67,7 @@ int	set_node_info_and_or_pipe(t_node_info **info, char *str,
 		str[point] = NULL_TERM;
 	node_info = ft_calloc(1, sizeof(t_node_info));
 	if (!node_info)
-	{
-		*info = node_info;
 		return (-1);
-	}
 	node_info->str_left = str;
 	node_info->str_right = str + point + 1;
 	node_info->type = type;
@@ -82,7 +76,8 @@ int	set_node_info_and_or_pipe(t_node_info **info, char *str,
 }
 
 /**
- * @brief	Function to initialize an intermediate node for T_BRACKET type
+ * @brief	Function to initialize an intermediate node for @c `T_BRACKET`
+ * type
  * @param	info intermediate node to embed into the Abstract Syntax Tree (AST)
  * structure
  * @param	str string that coming from readline function
@@ -97,10 +92,7 @@ int	set_node_info_bracket(t_node_info **info, char *str, int type)
 
 	node_info = ft_calloc(1, sizeof(t_node_info));
 	if (!node_info)
-	{
-		*info = node_info;
 		return (-1);
-	}
 	first = ft_strchr(str, O_ROUND);
 	last = ft_strrchr(str, C_ROUND);
 	*first = ' ';
@@ -125,18 +117,23 @@ int	set_node_info_command_br(t_node_info **info, char *str, int type)
 {
 	t_node_info	*node_info;
 	char		*first;
+	char		*redir;
+	char		*left;
 	int			i;
 
 	i = 0;
 	node_info = ft_calloc(1, sizeof(t_node_info));
 	if (!node_info)
+		return (-1);
+	left = command_part(str, &i, 0) + i;
+	if (modificate_str_command_without_br(left, &redir, 0, 0) == -1)
 	{
-		*info = node_info;
+		free(node_info);
 		return (-1);
 	}
-	node_info->str_left = command_part(str, &i, 0) + i;
 	first = ft_strchr(str, O_ROUND);
 	*first = ' ';
+	node_info->str_left = redir;
 	node_info->str_right = str;
 	node_info->type = type;
 	*info = node_info;
@@ -158,10 +155,7 @@ int	set_node_cmd_simple(t_node_info **info, char *str, int type)
 
 	node_info = ft_calloc(1, sizeof(t_node_info));
 	if (!node_info)
-	{
-		*info = node_info;
 		return (-1);
-	}
 	node_info->str_left = NULL;
 	node_info->str_right = str;
 	node_info->type = type;

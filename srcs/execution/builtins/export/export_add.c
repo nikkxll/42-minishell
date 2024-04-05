@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:35:13 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:41:03 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:32:12 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param	len pointer to the environment list length
  * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
  */
-int	add_to_env_list_new_env_creation(char **envp, char ***result,
+int	add_to_env_list_new_env(char **envp, char ***result,
 	int *i, int *len)
 {
 	*len = ft_arrlen((void **)envp);
@@ -37,12 +37,13 @@ int	add_to_env_list_new_env_creation(char **envp, char ***result,
  * @brief	A function that adds argument to the environment list
  * @param	new_env pointer to the new environment array
  * @param	arr array of arguments or options if allowed
- * @param	envp environment array
+ * @param	ms pointer to the common project @c `t_minishell` structure
  * @param	operations auxiliary array to calculate the number of operations
  * of different type
  * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
  */
-int	add_to_env_list(char ***new_env, char **arr, char **envp, int *operations)
+int	add_to_env_list(char ***new_env, char **arr, t_minishell *ms,
+	int *operations)
 {
 	int		i;
 	int		j;
@@ -51,12 +52,14 @@ int	add_to_env_list(char ***new_env, char **arr, char **envp, int *operations)
 
 	if (check_operations(operations, &i, &j, EXPORT_ADD))
 		return (SUCCESS);
-	if (add_to_env_list_new_env_creation(envp, new_env, &i, &len) == MALLOC_ERR)
+	if (add_to_env_list_new_env(ms->env, new_env, &i, &len) == MALLOC_ERR)
 		return (MALLOC_ERR);
 	while (operations[++j])
 	{
 		if (operations[j] == EXPORT_ADD)
 		{
+			if (ft_strncmp(arr[j], "OLDPWD=", 7) == 0)
+				ms->is_oldpwd_unset = false;
 			new_var = ft_strdup(arr[j]);
 			if (new_var == NULL)
 			{

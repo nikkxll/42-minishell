@@ -25,7 +25,7 @@ REDIR		:=	$(addprefix $(REDIR_PATH), $(REDIR_NAME))
 
 #########COMMON_UTILS##########
 COMMON_UTILS_NAME	:=	remove_quotes.c errors_print.c split_before_wildcards.c prompt_update.c \
-						pwd_init.c shlvl_init.c
+						pwd_init.c shlvl_init.c sort_string_array.c realloc_env.c ft_split_with_quotes.c
 COMMON_UTILS_PATH	:=	common_utils/
 COMMON_UTILS		:=	$(addprefix $(COMMON_UTILS_PATH), $(COMMON_UTILS_NAME))
 
@@ -62,20 +62,14 @@ D_SIGN_PATH			:=	dollar_sign_expansion/
 D_SIGN				:=	$(addprefix $(D_SIGN_PATH), $(D_SIGN_NAME))
 
 ########EXECUTION########
-BUILTINS_NAME		:=	builtins.c cd.c cd_utils.c echo.c env.c pwd.c unset.c exit.c
-BUILTINS_UTILS_NAME	:=	utils.c utils_2.c
-BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_error.c export_utils.c export.c
+BUILTINS_NAME		:=	builtins.c cd_core.c cd_auxiliary.c echo.c env.c pwd.c unset.c exit.c utils.c
+BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_utils.c export.c export_other.c
 BUILTINS_PATH		:=	execution/builtins/
-BUILTINS_UTILS_PATH	:=	execution/builtins/utils/
 BUILTINS_EXPORT_PATH:=	execution/builtins/export/
 EXECUTION_PATH		:=	execution/
-EXECUTION_UTILS_NAME:=	ft_split_with_quotes.c
-EXECUTION_UTILS_PATH:=	execution/utils/
 BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
-						$(addprefix $(BUILTINS_UTILS_PATH), $(BUILTINS_UTILS_NAME)) \
 						$(addprefix $(BUILTINS_EXPORT_PATH), $(BUILTINS_EXPORT_NAME))
-EXECUTION			:=	$(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME)) \
-						$(addprefix $(EXECUTION_UTILS_PATH), $(EXECUTION_UTILS_NAME))
+EXECUTION			:=	$(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME))
 
 SRCS				:=	main.c minishell.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_TRAVERSE) $(AST_SPLITTER) \
 						$(BUILTINS) $(EXECUTION) $(D_SIGN) $(WILDCARDS) $(COMMON_UTILS) $(REDIR)
@@ -92,15 +86,15 @@ LIBFT_PATH			:=	$(LIBFT_PATH)
 LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
-# RL					:=	/opt/homebrew/opt/readline/lib/
-# RLH					:=	/opt/homebrew/opt/readline/lib/
-# RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
-# RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
+RL					:=	/opt/homebrew/opt/readline/lib/
+RLH					:=	/opt/homebrew/opt/readline/lib/
+RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
+RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
 
-RL					:=	~/.brew/Cellar/readline/8.2.7/lib
-RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
-RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
-RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
+# RL					:=	~/.brew/Cellar/readline/8.2.7/lib
+# RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
+# RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
+# RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
 
 HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)
 INCLUDES			:=	$(addprefix -I , $(HEADERS))
