@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/04 23:54:49 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:46:02 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ enum	e_types
 enum	e_characters
 {
 	NULL_TERM,
+	HT = 9,
 	NL = 10,
 	SEPARATOR = 31,
 	SPACE = 32,

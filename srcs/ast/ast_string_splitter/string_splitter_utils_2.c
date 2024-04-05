@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:54:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/01 01:44:49 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:04:58 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ static void	modificate_str_utils(char *str, char *r, int *i, int *j)
 int	modificate_str_command_without_br(char *str, char **redir, int i,
 			int j)
 {
-	char	*r;
-
-	r = (char *)ft_calloc((int)ft_strlen(str), sizeof(char));
-	if (!r)
+	if (!str)
+		return (-1);
+	*redir = (char *)ft_calloc(ft_strlen(str) * 2, sizeof(char));
+	if (!*redir)
 		return (-1);
 	while (str[i] != NULL_TERM)
 	{
@@ -88,15 +88,16 @@ int	modificate_str_command_without_br(char *str, char **redir, int i,
 		if (str[i] == REDIR_L || str[i] == REDIR_R)
 		{
 			while ((str[i] == REDIR_L || str[i] == REDIR_R
-					|| str[i] == SPACE) && str[i] != NULL_TERM)
-				modificate_str_utils(str, r, &i, &j);
-			while (str[i] != SPACE && str[i] != NULL_TERM)
-				modificate_str_utils(str, r, &i, &j);
+					|| str[i] == SPACE || str[i] == HT) && str[i] != NULL_TERM)
+				modificate_str_utils(str, *redir, &i, &j);
+			while (str[i] != SPACE && str[i] != REDIR_L && str[i] != REDIR_R
+				&& str[i] != HT && str[i] != NULL_TERM)
+				modificate_str_utils(str, *redir, &i, &j);
+			(*redir)[j++] = SEPARATOR;
 			i--;
 		}
 		i++;
 	}
-	*redir = r;
 	return (1);
 }
 

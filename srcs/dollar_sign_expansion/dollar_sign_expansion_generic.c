@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:30:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/02 18:23:30 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:08:05 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,35 +102,31 @@ static int	expansion(char *str, char **envp, char **env_part,
  * value from the environment
  * @param	str Pointer to the string to be expanded
  * @param	envp Environment variables array
- * @param	last_ind The index of the last part of the string
  * @return	@c `SUCCESS` if the expansion is successful,
  * @c `MALLOC_ERR` if memory allocation fails during expansion
  */
-int	expand_dollar_sign_generic(char **str, char **envp, int last_ind)
+int	expand_dollar_sign_generic(char **str, char **envp)
 {
-	char	*new_str;
-	char	*first_part;
-	char	*env_part;
-	char	*last_part;
-	int		new_str_len;
+	t_ds	ds_q;
 
-	new_str = *str;
-	env_part = NULL;
-	while (expansion(new_str, envp, &env_part, &last_ind) != NOTHING_TO_EXPAND)
+	ds_q.new_str = *str;
+	ds_q.middle = NULL;
+	while (expansion(ds_q.new_str, envp, &(ds_q.middle), &(ds_q.last_ind))
+		!= NOTHING_TO_EXPAND)
 	{
-		first_part = new_str;
-		last_part = new_str + last_ind;
-		new_str_len = ft_strlen(first_part) + ft_strlen(env_part)
-			+ ft_strlen(last_part) + 1;
-		new_str = ft_calloc(new_str_len, sizeof(char));
-		if (!new_str)
+		ds_q.first = ds_q.new_str;
+		ds_q.last = ds_q.new_str + ds_q.last_ind;
+		ds_q.new_str_len = ft_strlen(ds_q.first) + ft_strlen(ds_q.middle)
+			+ ft_strlen(ds_q.last) + 1;
+		ds_q.new_str = ft_calloc(ds_q.new_str_len, sizeof(char));
+		if (!ds_q.new_str)
 			return (MALLOC_ERR);
-		ft_strlcat(new_str, first_part, new_str_len);
-		ft_strlcat(new_str, env_part, new_str_len);
-		ft_strlcat(new_str, last_part, new_str_len);
+		ft_strlcat(ds_q.new_str, ds_q.first, ds_q.new_str_len);
+		ft_strlcat(ds_q.new_str, ds_q.middle, ds_q.new_str_len);
+		ft_strlcat(ds_q.new_str, ds_q.last, ds_q.new_str_len);
 		free(*str);
-		*str = new_str;
+		*str = ds_q.new_str;
 	}
-	*str = new_str;
+	*str = ds_q.new_str;
 	return (SUCCESS);
 }

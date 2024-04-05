@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:39:31 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/04 17:41:02 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:09:10 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ static int	shlvl_init_when_shlvl_exists(int position, char ***envp)
 	if (number < 0)
 		number = -1;
 	new_number = ft_itoa(number + 1);
+	if (!new_number)
+		return (MALLOC_ERR);
 	temp = ft_strjoin("SHLVL=", new_number);
+	free(new_number);
 	if (!temp)
 		return (MALLOC_ERR);
 	free((*envp)[position]);
