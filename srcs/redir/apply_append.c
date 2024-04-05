@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_apend.c                                      :+:      :+:    :+:   */
+/*   apply_append.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:42:17 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 17:16:43 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:05:20 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	apply_apend(char *redir, t_minishell *ms, int *out)
+int	apply_append(char *redir, t_minishell *ms, int *out)
 {
 	int		status;
 	int		fd;

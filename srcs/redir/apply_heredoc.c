@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:21:32 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 13:11:27 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:06:57 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,18 @@ int	apply_heredoc(char *limiter, int *in)
 static int	heredoc(char *limiter, int fd)
 {
 	char	*line;
-	int		iseuqal;
+	int		isequal;
 
-	ft_printf("YOU ARE HERE, limiter is :->%s<-", limiter);
 	while (true)
 	{
 		line = readline("> ");
 		if (!line)
 			return (RL_FAILURE);
-		iseuqal = ft_strcmp(limiter, line);
-		if (iseuqal != 0)
+		isequal = ft_strcmp(limiter, line);
+		if (isequal != 0)
 			ft_putendl_fd(line, fd);
 		free(line);
-		if (iseuqal == 0)
+		if (isequal == 0)
 			return (0);
 	}
 }

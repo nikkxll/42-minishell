@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 18:22:56 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:35:24 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int				check_redir(char **redir, t_minishell *ms);
 int				apply_heredoc(char *limiter, int *in);
 int				apply_redir_in(char *str, t_minishell *ms, int *in);
 int				apply_redir_out(char *redir, t_minishell *ms, int *out);
-int				apply_apend(char *redir, t_minishell *ms, int *out);
+int				apply_append(char *redir, t_minishell *ms, int *out);
 /*_____ Execution _____*/
 
 int				dollar_sign_expansion(char **str, char **envp,
