@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:11:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/06 14:05:22 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/07 02:01:07 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,11 @@ void	run_exit(char **arr, t_minishell *ms, long num)
 {
 	if (ft_arrlen((void **)arr) > 1)
 	{
-		exit_amount_of_arg_error(ms);
+		num = ft_atol(arr[0]);
+		if ((zero_check(arr[0]) && num == 0) || check_for_non_digits(arr[0]))
+			exit_format_num_arg_error(ms, arr[0]);
+		else
+			exit_amount_of_arg_error(ms);
 		return ;
 	}
 	else if (!*arr)
