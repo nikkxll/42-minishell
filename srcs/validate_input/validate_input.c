@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:41:05 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/02 14:00:39 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:42:28 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,21 @@
 // <simple_cmd>		::=  {( <redirect> | <word> | "any" | 'any')}
 // <redirect>		::=  ( '<' | '>' | '<<' | '>>' ) <word>
 
-t_bool	validate_input(char *str)
+int	validate_input(char *str)
 {
 	char	*next_token;
 	t_bool	status;
 
-	if (is_blank_string(str) == true)
-		return (true);
 	status = true;
-	while (*str == SPACE)
+	while (ft_isspace(*str))
 		str++;
 	next_token = validate_and_or(str, &status);
 	if (*next_token != NULL_TERM || status == false)
 	{
 		print_syntax_error(next_token);
-		return (false);
+		return (SYNTAX_ERROR);
 	}
-	return (true);
+	return (SUCCESS);
 }
 
 // int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/10 18:01:10 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:23:27 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*validate_simple_command(char *str, t_bool *status)
 {
 	char	*next_token;
 
-	while (*str == SPACE)
+	while (ft_isspace(*str))
 		str++;
 	next_token = validate_redirect(str, status);
 	if (next_token == str)

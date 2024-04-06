@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/26 19:33:53 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:37:10 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,18 @@ static char	*validate_brackets(char *str, t_bool *status)
 {
 	char	*next_token;
 
-	while (*str == SPACE)
+	while (ft_isspace(*str))
 		str++;
 	next_token = validate_and_or(str, status);
 	if (next_token == str || *status == false)
-		return (str);
+		return (next_token);
 	if (*next_token != C_ROUND)
 	{
 		*status = false;
 		return (next_token);
 	}
 	next_token++;
-	while (*next_token == SPACE)
+	while (ft_isspace(*next_token))
 		next_token++;
 	next_token = validate_redirect(next_token, status);
 	return (next_token);

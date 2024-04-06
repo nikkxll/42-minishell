@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_and_or.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/26 19:33:48 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:22:59 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*validate_and_or(char *str, t_bool *status)
 	char	*next_token;
 	char	*next_and_or;
 
-	while (*str == SPACE)
+	while (ft_isspace(*str))
 		str++;
 	next_token = validate_pipeline(str, status);
 	if (next_token == str || *status == false)

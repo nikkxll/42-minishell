@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/06 14:14:00 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/06 23:44:48 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ void			run_minishell(t_minishell *ms);
 
 void			rl_clear_history(void);
 void			rl_replace_line(const char *text, int clear_undo);
+t_bool			is_space_string(char *str);
 
 /*_____ Validate-input _____*/
-t_bool			validate_input(char *str);
+int				validate_input(char *str);
 char			*validate_and_or(char *str, t_bool *status);
 char			*validate_pipeline(char *str, t_bool *status);
 char			*validate_command(char *str, t_bool *status);
@@ -177,8 +178,7 @@ int				if_abs_path(t_w_cards *wc, char *str);
 t_bool			if_asterisk_in_arr(char **arr, int i, int j);
 int				wildcards(char ***arr);
 int				array_build_before_wc(char ***arr, int i, int k, int j);
-int				get_current_folder_name(char **folder_name);
-int				get_prompt(char *folder_name, char **prompt, char *exit_status);
+int				get_prompt(char **prompt, int exit_status);
 int				shlvl_init(char ***envp);
 int				pwd_init(char ***envp, char **pwd);
 int				check_for_non_digits(char *str);

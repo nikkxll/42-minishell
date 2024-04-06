@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/10 19:08:22 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:31:29 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ char	*validate_redirect(char *str, t_bool *status)
 		str += 1;
 	else
 		return (str);
-	while (*str == SPACE)
+	while (ft_isspace(*str))
 		str++;
 	next_token = validate_word(str, status);
 	if (next_token == str)
 		*status = false;
 	if (*status == false || *next_token == C_ROUND)
 		return (next_token);
-	while (*next_token == SPACE)
+	while (ft_isspace(*next_token))
 		next_token++;
 	next_token = validate_redirect(next_token, status);
 	return (next_token);

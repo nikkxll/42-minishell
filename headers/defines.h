@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 18:22:36 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/06 23:24:18 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ enum	e_exit_status
 	CMD_NF_FAILURE = 127,
 	MALLOC_ERR = 200,
 	SYSTEM_ERROR = 201,
+	SYNTAX_ERROR = 258,
 	CHDIR_ERROR,
 	GETCWD_ERROR,
 	RL_FAILURE = 999,
