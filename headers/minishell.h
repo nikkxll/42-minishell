@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/06 23:44:48 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 02:28:33 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ t_bracket		*init_t_bracket(void);
 t_command		*init_t_command(void);
 t_command_br	*init_t_command_br(void);
 t_redir			*init_t_redir(void);
-t_bool			create_tree(char *str, t_node **root);
+int				create_tree(char *str, t_node **root);
 t_bool			create_node(t_node_info *data, t_node **base);
 void			free_tree(t_node **root);
-t_bool			add_and_or_pipe_trees(t_node_info *data, t_node **root);
-t_bool			add_bracket(t_node_info *data, t_node **root);
-t_bool			add_command(t_node_info *data, t_node **root);
-t_bool			add_command_br(t_node_info *data, t_node **root);
+int				add_and_or_pipe_trees(t_node_info *data, t_node **root);
+int				add_bracket(t_node_info *data, t_node **root);
+int				add_command(t_node_info *data, t_node **root);
+int				add_command_br(t_node_info *data, t_node **root);
 
 /*_____ String-splitter _____*/
 int				set_node_info_and_or_pipe(t_node_info **node, char *str,
