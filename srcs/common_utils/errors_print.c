@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:35:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/06 00:45:03 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/06 13:51:06 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	shlvl_warning(int number)
 	char	*num;
 	char	*first_num_part;
 	char	*msg;
-	
+
 	first_part = "\033[0;31me-bash: \033[0;0mwarning: minishell level (";
 	num = ft_itoa(number);
 	if (!num)

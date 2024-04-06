@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_redir_in.c                                   :+:      :+:    :+:   */
+/*   ft_free_minishell.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/03 23:03:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/06 13:39:18 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/04/06 14:01:52 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/04/06 14:03:03 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../../headers/minishell.h"
 
-int	apply_redir_in(char *redir, t_minishell *ms, int *in)
+void	ft_free_minishell(t_minishell *ms)
 {
-	int		status;
-	int		fd;
-
-	close(*in);
-	while (*redir == SPACE)
-		redir++;
-	status = check_redir(&redir, ms);
-	if (status != 0)
-		return (status);
-	fd = open(redir, O_RDONLY);
-	if (fd != -1)
-		*in = fd;
-	else
+	if (!ms)
+		return ;
+	if (ms->env)
+		ft_free_2d_array(ms->env);
+	if (ms->pwd)
+		free(ms->pwd);
+	if (ms->oldpwd)
 	{
-		status = GENERIC_ERROR;
-		perror_err_msg(redir, "");
+		free(ms->oldpwd);
 	}
-	free(redir);
-	return (status);
+	free(ms);
 }

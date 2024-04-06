@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   run_minishell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/05 18:31:16 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/04/06 14:13:09 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../headers/minishell.h"
 
-// int	main(void)
-// {
-// 	ft_printf("Hello world!\n");
-// 	return (0);
-// }
+void	run_minishell(t_minishell *ms)
+{
+	(void)ms;
+}

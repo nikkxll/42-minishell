@@ -10,6 +10,11 @@ FLAGS				:=	-Wall -Wextra -Werror -g
 #########START_SOURCES#########
 ###############################
 
+###########MINISHELL###########
+MINISHELL_NAME	:=	main.c minishell.c ft_free_minishell.c initialize_minishell.c run_minishell.c 
+MINISHELL_PATH	:=	minishell/
+MINISHELL		:=	$(addprefix $(MINISHELL_PATH), $(MINISHELL_NAME))
+
 #########COMMON_UTILS##########
 COMMON_UTILS_NAME	:=	remove_quotes.c errors_print.c split_before_wildcards.c prompt_update.c \
 						pwd_init.c shlvl_init.c sort_string_array.c realloc_env.c ft_split_with_quotes.c
@@ -67,7 +72,7 @@ BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
 						$(addprefix $(REDIR_PATH), $(REDIR_NAME))
 EXECUTION			:=	$(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME))
 
-SRCS				:=	main.c minishell.c $(VALIDATE_INPUT) $(AST_TREE) $(AST_TRAVERSE) $(AST_SPLITTER) \
+SRCS				:=	$(MINISHELL) $(VALIDATE_INPUT) $(AST_TREE) $(AST_TRAVERSE) $(AST_SPLITTER) \
 						$(BUILTINS) $(EXECUTION) $(D_SIGN) $(WILDCARDS) $(COMMON_UTILS) $(REDIR)
 SRCS_PATH			:=	srcs/
 
@@ -82,15 +87,15 @@ LIBFT_PATH			:=	$(LIBFT_PATH)
 LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
-RL					:=	/opt/homebrew/opt/readline/lib/
-RLH					:=	/opt/homebrew/opt/readline/lib/
-RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
-RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
+# RL					:=	/opt/homebrew/opt/readline/lib/
+# RLH					:=	/opt/homebrew/opt/readline/lib/
+# RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
+# RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
 
-# RL					:=	~/.brew/Cellar/readline/8.2.7/lib
-# RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
-# RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
-# RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
+RL					:=	~/.brew/Cellar/readline/8.2.7/lib
+RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
+RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
+RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
 
 HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)
 INCLUDES			:=	$(addprefix -I , $(HEADERS))
@@ -108,6 +113,7 @@ $(NAME): $(LIBFT) $(OBJS_PATH) $(OBJS) $(HEADERS)
 
 $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)
+	@mkdir -p $(OBJS_PATH)$(MINISHELL_PATH)
 	@mkdir -p $(OBJS_PATH)$(AST_TREE_PATH)
 	@mkdir -p $(OBJS_PATH)$(AST_SPLITTER_PATH)
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_PATH)

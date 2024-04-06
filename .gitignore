@@ -7,5 +7,5 @@ libft/libft.a
 .vscode
 objs/
 README.md
-minishell
+./minishell
 minishell_tester

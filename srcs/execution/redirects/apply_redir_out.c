@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_redir_out.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:31:49 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 19:23:21 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/06 13:39:40 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	apply_redir_out(char *redir, t_minishell *ms, int *out)
 	else
 	{
 		status = GENERIC_ERROR;
-		perror("\033[0;31me-bash\033[0;0m"); //edit error message!
+		perror_err_msg(redir, "");
 	}
 	free(redir);
 	return (status);

@@ -6,11 +6,11 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:09:34 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 19:06:13 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/06 14:16:08 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../headers/minishell.h"
 
 int	main(void)
 {
@@ -62,35 +62,35 @@ int	main(void)
 	return (0);
 }
 
-// int	main(void)
-// {
-// 	char		*command;
-// 	extern char	**environ;
-// 	// char		**arr;
-// 	t_minishell	ms;
-// 	t_node		*root;
+// // int	main(void)
+// // {
+// // 	char		*command;
+// // 	extern char	**environ;
+// // 	// char		**arr;
+// // 	t_minishell	ms;
+// // 	t_node		*root;
 
-// 	ms.env = cpy_env(environ);
-// 	command = ft_strdup("echo hi  >> file");
-// 	// while (1)
-// 	// {
-// 	// 	command = readline("e-bash > ");
-// 	// 	if (!command)
-// 	// 	{
-// 	// 		printf("\n");
-// 	// 		break ;
-// 	// 	}
-// 	// 	if (command && *command)
-// 	// 		add_history(command);
-// 		ms.exit_status = validate_input(command);
-// 		root = NULL;
-// 		ms.exit_status = create_tree(command, &root);
-// 		ms.exit_status = traverse_tree(&root, &ms);
-// 		// arr = wrapper_ft_split_with_quotes(command);
-// 		// minishell(arr, &ms);
-// 	// }
-// 	// rl_clear_history();
-// 	ft_free_2d_array(ms.env);
-// 	free(command);
-// 	return (0);
-// }
+// // 	ms.env = cpy_env(environ);
+// // 	command = ft_strdup("echo hi  >> file");
+// // 	// while (1)
+// // 	// {
+// // 	// 	command = readline("e-bash > ");
+// // 	// 	if (!command)
+// // 	// 	{
+// // 	// 		printf("\n");
+// // 	// 		break ;
+// // 	// 	}
+// // 	// 	if (command && *command)
+// // 	// 		add_history(command);
+// // 		ms.exit_status = validate_input(command);
+// // 		root = NULL;
+// // 		ms.exit_status = create_tree(command, &root);
+// // 		ms.exit_status = traverse_tree(&root, &ms);
+// // 		// arr = wrapper_ft_split_with_quotes(command);
+// // 		// minishell(arr, &ms);
+// // 	// }
+// // 	// rl_clear_history();
+// // 	ft_free_2d_array(ms.env);
+// // 	free(command);
+// // 	return (0);
+// // }

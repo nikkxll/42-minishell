@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/06 12:53:46 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/06 14:14:00 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@
 # include "structs.h"
 # include "defines.h"
 
+/*_____ Minishell _____*/
+void			ft_free_minishell(t_minishell *ms);
+void			initialize_minishell(t_minishell **ms);
+void			run_minishell(t_minishell *ms);
+
 /*_____ Readline _____*/
+
 void			rl_clear_history(void);
 void			rl_replace_line(const char *text, int clear_undo);
 
