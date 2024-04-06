@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/06 00:42:48 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/06 12:53:46 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,8 @@ void			run_cd(char **arr, t_minishell *ms, int status);
 void			cd_precheck(char **arr, t_minishell *ms);
 void			struct_pwd_and_full_oldpwd_update(char *new_pwd,
 					t_minishell *ms);
-void			update_env_oldpwd(char ***envp, t_minishell *ms);
-void			update_env_pwd(char ***envp, t_minishell *ms);
+void			update_env_oldpwd(t_minishell *ms);
+void			update_env_pwd(t_minishell *ms);
 void			run_echo(char **arr, int i, int j, int nl_flag);
 void			run_export(char **arr, t_minishell *ms);
 void			create_operations_array(char **arr, char **envp,
