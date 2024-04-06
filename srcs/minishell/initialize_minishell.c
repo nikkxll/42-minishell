@@ -6,11 +6,13 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/06 14:05:43 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/06 22:03:05 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
+void	teriminate_minishell(t_minishell **ms, int status);
 
 void	initialize_minishell(t_minishell **ms)
 {
@@ -32,11 +34,14 @@ void	initialize_minishell(t_minishell **ms)
 	if (status == 0)
 		status = shlvl_init(&((*ms)->env));
 	if (status != 0)
-	{
-		ft_free_minishell(*ms);
-		ft_putstr_fd("\033[0;31me-bash:\033[0;0m can't initialize "
-			"t_minishell structure\n", STDERR_FILENO);
-		exit (status);
-	}
+		teriminate_minishell(ms, status);
 	(*ms)->is_parent = true;
+}
+
+void	teriminate_minishell(t_minishell **ms, int status)
+{
+	ft_free_minishell(*ms);
+	ft_putstr_fd("\033[0;31me-bash:\033[0;0m can't initialize "
+		"t_minishell structure\n", STDERR_FILENO);
+	exit (status);
 }

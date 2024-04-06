@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:40:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 02:37:25 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 02:42:22 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,69 +61,69 @@ t_bool	get_type(char *str, t_node_info **info)
 	return (status);
 }
 
-char	*return_type(int t)
-{
-	if (t == T_AND)
-		return ("and");
-	if (t == T_OR)
-		return ("or");
-	if (t == T_PIPE)
-		return ("pipe");
-	if (t == T_BRACKET)
-		return ("bracket");
-	if (t == T_COMMAND)
-		return ("command");
-	if (t == T_COMMAND_BR)
-		return ("command_br");
-	if (t == T_REDIR)
-		return ("redir");
-	return (NULL);
-}
+// char	*return_type(int t)
+// {
+// 	if (t == T_AND)
+// 		return ("and");
+// 	if (t == T_OR)
+// 		return ("or");
+// 	if (t == T_PIPE)
+// 		return ("pipe");
+// 	if (t == T_BRACKET)
+// 		return ("bracket");
+// 	if (t == T_COMMAND)
+// 		return ("command");
+// 	if (t == T_COMMAND_BR)
+// 		return ("command_br");
+// 	if (t == T_REDIR)
+// 		return ("redir");
+// 	return (NULL);
+// }
 
-void	preorder(t_node	*tree)
-{
-	int	type;
+// void	preorder(t_node	*tree)
+// {
+// 	int	type;
 
-	type = tree->type;
-	if (type == T_AND || type == T_OR || type == T_PIPE || type == T_COMMAND_BR)
-	{
-		printf("[t:%s, t_l:%d, t_r:%d] \n", return_type(tree->type),
-			tree->left->type, tree->right->type);
-		preorder(tree->left);
-		preorder(tree->right);
-	}
-	else if (type == T_COMMAND)
-	{
-		printf("[t:%s, t_l:%d, cmd:%s]  \n", return_type(tree->type),
-			((t_command *)tree)->redir->type, ((t_command *)tree)->cmd);
-		preorder(tree->left);
-	}
-	else if (type == T_BRACKET)
-	{
-		printf("[t:%s, t_l:%d]  \n", return_type(tree->type), tree->left->type);
-		preorder(tree->left);
-	}
-	else if (type == T_REDIR)
-		printf("[t:%s, redir:%s]  \n", return_type(tree->type),
-			((t_redir *)tree)->str);
-}
+// 	type = tree->type;
+// 	if (type == T_AND || type == T_OR || type == T_PIPE || type == T_COMMAND_BR)
+// 	{
+// 		printf("[t:%s, t_l:%d, t_r:%d] \n", return_type(tree->type),
+// 			tree->left->type, tree->right->type);
+// 		preorder(tree->left);
+// 		preorder(tree->right);
+// 	}
+// 	else if (type == T_COMMAND)
+// 	{
+// 		printf("[t:%s, t_l:%d, cmd:%s]  \n", return_type(tree->type),
+// 			((t_command *)tree)->redir->type, ((t_command *)tree)->cmd);
+// 		preorder(tree->left);
+// 	}
+// 	else if (type == T_BRACKET)
+// 	{
+// 		printf("[t:%s, t_l:%d]  \n", return_type(tree->type), tree->left->type);
+// 		preorder(tree->left);
+// 	}
+// 	else if (type == T_REDIR)
+// 		printf("[t:%s, redir:%s]  \n", return_type(tree->type),
+// 			((t_redir *)tree)->str);
+// }
 
-int	main(int argc, char **argv)
-{
-	int				status;
-	t_node			*tree;
-	char			*str;
+// int	main(int argc, char **argv)
+// {
+// 	int				status;
+// 	t_node			*tree;
+// 	char			*str;
 
-	str = argv[1];
+// 	str = argv[1];
 
-	tree = NULL;
-	status = create_tree(str, &tree);
-	printf("->%d\n", status);
-	if (status != 0)
-		printf("Can't create tree!\n");
-	preorder(tree);
-	printf("\n");
-	free_tree(&tree);
-	(void)argc;
-	return (0);
-}
+// 	tree = NULL;
+// 	status = create_tree(str, &tree);
+// 	printf("->%d\n", status);
+// 	if (status != 0)
+// 		printf("Can't create tree!\n");
+// 	preorder(tree);
+// 	printf("\n");
+// 	free_tree(&tree);
+// 	(void)argc;
+// 	return (0);
+// }

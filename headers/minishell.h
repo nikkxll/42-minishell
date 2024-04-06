@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 02:28:33 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 02:44:06 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void			run_minishell(t_minishell *ms);
 
 void			rl_clear_history(void);
 void			rl_replace_line(const char *text, int clear_undo);
-t_bool			is_space_string(char *str);
 
 /*_____ Validate-input _____*/
 int				validate_input(char *str);
