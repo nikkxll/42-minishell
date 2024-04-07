@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 05:11:19 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:19:08 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ enum	e_characters
 	NULL_TERM,
 	HT = 9,
 	NL = 10,
+	L_REDIR_SEPARATOR = 29,
+	R_REDIR_SEPARATOR = 30,
 	SEPARATOR = 31,
 	SPACE = 32,
 	D_QUOTE = 34,
@@ -75,14 +77,14 @@ enum	e_exit_status
 	SYSTEM_ERROR = 201,
 	CHDIR_ERROR,
 	GETCWD_ERROR,
-	SYNTAX_ERROR = 258,
-	ISDIR_FAILURE = 510,
-	RL_FAILURE = 999,
 	UNEXPECTED_EXIT = 255,
-	EXECVE_FAILURE = 999,
-	FORK_FAILURE = 999,
-	PIPE_FAILURE = 999,
-	DUP_FAILURE = 999,
+	SYNTAX_ERROR = 258,
+	RL_FAILURE = 999,
+	EXECVE_FAILURE = 2000,
+	FORK_FAILURE = 3000,
+	PIPE_FAILURE = 4000,
+	DUP_FAILURE = 5000,
+	ISDIR_FAILURE,
 };
 
 enum	e_export_types

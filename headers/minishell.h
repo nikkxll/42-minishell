@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 02:44:06 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 04:53:35 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int				command_without_bracket_block(t_node_info **node, char *str,
 					int type);
 int				brackets_search(char *str);
 int				redir_search(char *str);
+void			change_all_redirs_within_quotes(char *str, int mode, int i,
+					int quote_type);
 
 /*_____ Traverse-tree _____*/
 int				traverse_tree(t_node **node, t_minishell *ms);

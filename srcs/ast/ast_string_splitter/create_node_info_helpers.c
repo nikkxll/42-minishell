@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:54:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/07 02:57:40 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/07 05:06:12 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief	Function that divides str with type @c `T_COMMAND_BR` in two parts
- * @param	str string that coming from readline function
+ * @param	str command line string
  * @param	i index to iterate through the string
  * @param	quote_type initialization for the variable in
  * @c `check_if_inside_quotes()`
@@ -48,7 +48,7 @@ char	*command_part(char *str, int *i, int quote_type)
 
 /**
  * @brief	Auxiliary function for @c `modificate_str_command_without_br()`
- * @param	str string that coming from readline function
+ * @param	str command line string
  * @param	r new string for redirects
  * @param	i pointer to the first index for iteration
  * @param	j pointer to the second index for iteration
@@ -65,9 +65,47 @@ static void	modificate_str_utils(char *str, char *r, int *i, int *j)
 }
 
 /**
+ * @brief	Function that changes redirects within the quotes for
+ * protection and then back to redirect symbols depend on the mode
+ * @param	str command line string
+ * @param	mode replacement mode
+ * @param	i first index for iteration
+ * @param	quote_type initialization for quote_type
+ * @return	@c `-1` if malloc error occurs, @c `1` if success
+ */
+void	change_all_redirs_within_quotes(char *str, int mode, int i,
+	int quote_type)
+{
+	while (str[i] != NULL_TERM)
+	{
+		check_if_inside_quotes(str, &i, &quote_type);
+		if (quote_type)
+		{
+			if (mode == 1)
+			{
+				if (str[i] == REDIR_L)
+					str[i] = L_REDIR_SEPARATOR;
+				else if (str[i] == REDIR_R)
+					str[i] = R_REDIR_SEPARATOR;
+			}
+			else if (mode == -1)
+			{
+				if (str[i] == L_REDIR_SEPARATOR)
+					str[i] = REDIR_L;
+				else if (str[i] == R_REDIR_SEPARATOR)
+					str[i] = REDIR_R;
+			}
+			i++;
+		}
+		else
+			i++;
+	}
+}
+
+/**
  * @brief	Function that allocates string for redirects and modifies
  * current one
- * @param	str string that coming from readline function
+ * @param	str command line string
  * @param	redir new string allocated to store redirects
  * @param	i first index for iteration
  * @param	j second index for iteration
@@ -101,62 +139,4 @@ int	modificate_str_command_without_br(char *str, char **redir, int i,
 		i++;
 	}
 	return (1);
-}
-
-/**
- * @brief	Function that checks for brackets which are out of the quotes
- * @param	str string that coming from readline function
- * @return	@c `> 0` if exist, @c `0` otherwise
- */
-int	brackets_search(char *str)
-{
-	int	i;
-	int	quote_type;
-	int	key;
-
-	i = 0;
-	quote_type = 0;
-	key = 0;
-	while (str[i] != NULL_TERM)
-	{
-		check_if_inside_quotes(str, &i, &quote_type);
-		if (!quote_type)
-		{
-			if (str[i] == O_ROUND)
-				key++;
-			i++;
-		}
-		else
-			i++;
-	}
-	return (key > 0);
-}
-
-/**
- * @brief	Function that checks for redirects which are out of the quotes
- * @param	@c `str` - string that coming from readline function
- * @return	@c `> 0` if exist, @c `0` otherwise
- */
-int	redir_search(char *str)
-{
-	int	i;
-	int	quote_type;
-	int	key;
-
-	i = 0;
-	quote_type = 0;
-	key = 0;
-	while (str[i] != NULL_TERM)
-	{
-		check_if_inside_quotes(str, &i, &quote_type);
-		if (!quote_type)
-		{
-			if (str[i] == REDIR_L || str[i] == REDIR_R)
-				key++;
-			i++;
-		}
-		else
-			i++;
-	}
-	return (key > 0);
 }
