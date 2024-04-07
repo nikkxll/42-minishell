@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/04 17:30:50 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/07 05:40:33 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
  */
 int	command_run(char **arr, t_minishell *ms)
 {
+	if (arr[0] == NULL)
+		return (0);
 	if (ft_strncmp(arr[0], "echo", ECHO_LEN) == 0)
 	{
 		run_echo(arr + 1, 0, 0, 0);

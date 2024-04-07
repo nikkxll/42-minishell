@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 21:21:43 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/04 15:31:13 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 05:38:01 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	parse_cmd(char *cmd, char ***res, t_minishell *ms)
 	int		i;
 	int		status;
 
+	if (is_blank_string(cmd))
+		cmd = "";
 	arr = wrapper_ft_split_with_quotes(cmd);
 	if (!arr)
 		return (MALLOC_ERR);

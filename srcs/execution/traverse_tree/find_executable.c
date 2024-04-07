@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:02:40 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/03 12:26:13 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 05:18:18 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,37 @@ int	find_executable(char **command, char **paths)
 	char	*cmd_in_path;
 
 	cmd_in_path = NULL;
-	if (ft_strchr(*command, '/') == NULL)
-		status = find_cmd_in_path(*command, paths, &cmd_in_path);
+	if (ft_strchr(command[0], '/') == NULL)
+		status = find_cmd_in_path(command[0], paths, &cmd_in_path);
 	else
-		status = check_path_provided(*command, &cmd_in_path);
+		status = check_path_provided(command[0], &cmd_in_path);
 	if (status == 0)
 	{
-		if (ft_strchr(*command, '/') == NULL)
-			free(*command);
-		*command = cmd_in_path;
+		if (ft_strchr(command[0], '/') == NULL)
+			free(command[0]);
+		command[0] = cmd_in_path;
 	}
 	else if (status == CMD_NF_FAILURE)
 		print_err_msg(command[0], ": command not found\n");
 	else if (status == CMD_PD_FAILURE)
 		print_err_msg(command[0], ": Permission denied\n");
+	else if (status == ISDIR_FAILURE)
+	{
+		print_err_msg(command[0], ": is a directory\n");
+		status = CMD_PD_FAILURE;
+	}
 	return (status);
 }
 
 static int	check_path_provided(char *cmd_name, char **cmd_in_path)
 {
+	struct stat	st;
+
 	if (access(cmd_name, F_OK) != 0)
 		return (CMD_NF_FAILURE);
+	stat(cmd_name, &st);
+	if (S_ISDIR(st.st_mode))
+		return (ISDIR_FAILURE);
 	if (access(cmd_name, X_OK) != 0)
 		return (CMD_PD_FAILURE);
 	*cmd_in_path = cmd_name;
@@ -110,7 +120,8 @@ static char	*cmd_to_search(char *cmd_name, int *length, char **paths)
 static int	check_cmd_in_path(char **candidate, int len,
 	char *cmd_name, char *path)
 {
-	char	*temp;
+	char		*temp;
+	struct stat	st;
 
 	temp = *candidate;
 	ft_memset(temp, 0, len);
@@ -119,6 +130,9 @@ static int	check_cmd_in_path(char **candidate, int len,
 	ft_strlcat(temp, cmd_name, len);
 	if (access(temp, F_OK) == 0)
 	{
+		stat(cmd_name, &st);
+		if (S_ISDIR(st.st_mode))
+			return (ISDIR_FAILURE);
 		if (access(temp, X_OK) == 0)
 			return (0);
 		else

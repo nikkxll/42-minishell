@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:30:04 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/31 22:32:22 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 05:41:31 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_bool	is_builtin(char *cmd)
 {
+	if (cmd == NULL)
+		return (true);
 	if (ft_strncmp(cmd, "echo", ECHO_LEN) == 0)
 		return (true);
 	if (ft_strncmp(cmd, "cd", CD_LEN) == 0)

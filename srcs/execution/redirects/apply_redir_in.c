@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 23:03:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/06 13:39:18 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 04:50:52 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	apply_redir_in(char *redir, t_minishell *ms, int *in)
 	int		fd;
 
 	close(*in);
-	while (*redir == SPACE)
+	while (ft_isspace(*redir))
 		redir++;
 	status = check_redir(&redir, ms);
 	if (status != 0)

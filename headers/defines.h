@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 00:50:58 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/07 05:11:19 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ enum	e_exit_status
 	CHDIR_ERROR,
 	GETCWD_ERROR,
 	SYNTAX_ERROR = 258,
+	ISDIR_FAILURE = 510,
 	RL_FAILURE = 999,
 	UNEXPECTED_EXIT = 255,
 	EXECVE_FAILURE = 999,
