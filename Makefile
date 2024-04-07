@@ -28,9 +28,9 @@ AST_TREE_PATH		:=	ast/ast_create_tree/
 AST_TREE			:=	$(addprefix $(AST_TREE_PATH), $(AST_TREE_NAME))
 
 ######AST_STRING_SPLITTER######
-AST_SPLITTER_NAME	:=	create_node_info.c string_splitter_blocks_command.c string_splitter_blocks.c \
-						string_splitter_utils_2.c string_splitter_utils.c string_splitter.c \
-						check_if_inside_quotes.c
+AST_SPLITTER_NAME	:=	create_node_info.c create_node_info_helpers.c string_splitter_blocks_command.c \
+						string_splitter_blocks.c string_splitter_utils.c string_splitter.c \
+						string_splitter_searchers.c check_if_inside_quotes.c
 AST_SPLITTER_PATH	:=	ast/ast_string_splitter/
 AST_SPLITTER		:=	$(addprefix $(AST_SPLITTER_PATH), $(AST_SPLITTER_NAME))
 
