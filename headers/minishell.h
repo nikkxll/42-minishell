@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 04:53:35 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/07 22:34:40 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int				set_node_info_bracket(t_node_info **node, char *str, int type);
 int				set_node_cmd_simple(t_node_info **node, char *str, int type);
 int				and_if_condition_block(t_node_info **node, char *str, int type,
 					int i);
-int				string_splitter(t_node_info **node, char *str, int type,
+int				lexer(t_node_info **node, char *str, int type,
 					int i);
 t_bool			is_odd(int number);
 void			check_if_inside_quotes(char *str, int *i, int *quote_type);

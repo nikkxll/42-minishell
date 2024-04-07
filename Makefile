@@ -1,110 +1,115 @@
-#MINISHELL_PROJECT_MAKEFILE
+# MINISHELL_PROJECT_MAKEFILE
 include libft/.make
 
 NAME				:=	minishell
 
 CC					:=	cc
-FLAGS				:=	-Wall -Wextra -Werror -g
+FLAGS				:=	-g -Wall -Wextra -Werror
 
-###############################
-#########START_SOURCES#########
-###############################
+# MINISHELL
+MINISHELL_NAME		:=	main.c minishell.c ft_free_minishell.c initialize_minishell.c \
+						run_minishell.c 
+MINISHELL_PATH		:=	minishell/
+MINISHELL			:=	$(addprefix $(MINISHELL_PATH), $(MINISHELL_NAME))
 
-###########MINISHELL###########
-MINISHELL_NAME	:=	main.c minishell.c ft_free_minishell.c initialize_minishell.c run_minishell.c 
-MINISHELL_PATH	:=	minishell/
-MINISHELL		:=	$(addprefix $(MINISHELL_PATH), $(MINISHELL_NAME))
+# UTILS
+UTILS_NAME			:=	remove_quotes.c errors_print.c split_before_wildcards.c \
+						prompt_update.c pwd_init.c shlvl_init.c sort_string_array.c \
+						realloc_env.c ft_split_with_quotes.c
+UTILS_PATH			:=	utils/
+UTILS				:=	$(addprefix $(UTILS_PATH), $(UTILS_NAME))
 
-#########COMMON_UTILS##########
-COMMON_UTILS_NAME	:=	remove_quotes.c errors_print.c split_before_wildcards.c prompt_update.c \
-						pwd_init.c shlvl_init.c sort_string_array.c realloc_env.c ft_split_with_quotes.c
-COMMON_UTILS_PATH	:=	common_utils/
-COMMON_UTILS		:=	$(addprefix $(COMMON_UTILS_PATH), $(COMMON_UTILS_NAME))
+# AST_PARSER
+AST_PARSER_NAME		:=	create_tree.c add_nodes.c constructors.c constructors_2.c \
+						create_node.c free_tree.c
+AST_PARSER_PATH		:=	ast_parser/
+AST_PARSER			:=	$(addprefix $(AST_PARSER_PATH), $(AST_PARSER_NAME))
 
-#######AST_TREE_CREATION#######
-AST_TREE_NAME		:=	create_tree.c add_nodes.c constructors.c constructors_2.c create_node.c \
-						free_tree.c
-AST_TREE_PATH		:=	ast/ast_create_tree/
-AST_TREE			:=	$(addprefix $(AST_TREE_PATH), $(AST_TREE_NAME))
+# LEXER
+LEXER_NAME			:=	lexer_cmd_blocks.c lexer_common_utils.c lexer_quotes_check.c \
+						lexer_searchers.c lexer_tokenization_utils.c lexer_tokenization.c \
+						lexer_tokens_blocks.c lexer.c
+LEXER_PATH			:=	lexer/
+LEXER				:=	$(addprefix $(LEXER_PATH), $(LEXER_NAME))
 
-######AST_STRING_SPLITTER######
-AST_SPLITTER_NAME	:=	create_node_info.c create_node_info_helpers.c string_splitter_blocks_command.c \
-						string_splitter_blocks.c string_splitter_utils.c string_splitter.c \
-						string_splitter_searchers.c check_if_inside_quotes.c
-AST_SPLITTER_PATH	:=	ast/ast_string_splitter/
-AST_SPLITTER		:=	$(addprefix $(AST_SPLITTER_PATH), $(AST_SPLITTER_NAME))
+# VALIDATE_STRING
+VALIDATOR_NAME		:=	validate_input.c validate_word.c validate_redirect.c \
+						validate_simple_command.c validate_command.c validate_pipeline.c \
+						is_blank_string.c validate_and_or.c 
+VALIDATOR_PATH		:=	validator/
+VALIDATOR			:=	$(addprefix $(VALIDATOR_PATH), $(VALIDATOR_NAME))
 
-########VALIDATE_STRING########
-VALIDATE_INPUT_NAME	:=	validate_input.c validate_word.c validate_redirect.c validate_simple_command.c \
-						validate_command.c validate_pipeline.c is_blank_string.c validate_and_or.c 
-VALIDATE_INPUT_PATH	:=	validate_input/
-VALIDATE_INPUT		:=	$(addprefix $(VALIDATE_INPUT_PATH), $(VALIDATE_INPUT_NAME))
-
-###########WILDCARDS###########
-WILDCARDS_NAME		:=	wildcards.c wildcards_core.c wildcards_core_utils.c wildcards_entities_expand.c \
-						wildcards_utils.c wildcards_sort.c wildcards_fill_array_with_entities.c \
-						wildcards_asterisk_check.c
+# WILDCARDS
+WILDCARDS_NAME		:=	wildcards.c wildcards_core.c wildcards_core_utils.c \
+						wildcards_entities_expand.c wildcards_utils.c wildcards_sort.c \
+						wildcards_fill_array_with_entities.c wildcards_asterisk_check.c
 WILDCARDS_PATH		:=	wildcards/
 WILDCARDS			:=	$(addprefix $(WILDCARDS_PATH), $(WILDCARDS_NAME))
 
-#############D_SIGN############
-D_SIGN_NAME			:=	dollar_sign_expansion_utils.c dollar_sign_expansion.c dollar_sign_expansion_q_mark.c \
-						dollar_sign_expansion_generic.c 
+# D_SIGN
+D_SIGN_NAME			:=	dollar_sign_expansion_utils.c dollar_sign_expansion.c \
+						dollar_sign_expansion_q_mark.c dollar_sign_expansion_generic.c 
 D_SIGN_PATH			:=	dollar_sign_expansion/
 D_SIGN				:=	$(addprefix $(D_SIGN_PATH), $(D_SIGN_NAME))
 
-########EXECUTION########
+# BUILTINS
+BUILTINS_NAME		:=	builtins.c cd_core.c cd_auxiliary.c echo.c env.c pwd.c unset.c \
+						exit.c utils.c
+BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_utils.c export.c export_other.c
+BUILTINS_PATH		:=	builtins/
+BUILTINS_EXPORT_PATH:=	builtins/export/
+BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
+						$(addprefix $(BUILTINS_EXPORT_PATH), $(BUILTINS_EXPORT_NAME))
+
+# REDIRECTS
+REDIR_NAME			:=	apply_redirects.c check_redir.c apply_heredoc.c apply_redir_in.c \
+						apply_redir_out.c apply_append.c
+REDIR_PATH			:=	redirects/
+REDIR				:=	$(addprefix $(REDIR_PATH), $(REDIR_NAME))
+
+# TRAVERSE
 TRAVERSE_NAME		:=	traverse_tree.c traverse_bracket.c traverse_pipe.c wait_children.c \
 						traverse_command_br.c traverse_command.c parse_cmd.c is_builtin.c \
 						locate_command.c find_executable.c run_builtin.c
-REDIR_NAME			:=	apply_redirects.c check_redir.c apply_heredoc.c apply_redir_in.c apply_redir_out.c \
-						apply_append.c
-BUILTINS_NAME		:=	builtins.c cd_core.c cd_auxiliary.c echo.c env.c pwd.c unset.c exit.c utils.c
-BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_utils.c export.c export_other.c
-BUILTINS_PATH		:=	execution/builtins/
-BUILTINS_EXPORT_PATH:=	execution/builtins/export/
-TRAVERSE_PATH		:=	execution/traverse_tree/
-REDIR_PATH			:=	execution/redirects/
-EXECUTION_PATH		:=	execution/
-BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
-						$(addprefix $(BUILTINS_EXPORT_PATH), $(BUILTINS_EXPORT_NAME)) \
-						$(addprefix $(TRAVERSE_PATH), $(TRAVERSE_NAME)) \
-						$(addprefix $(REDIR_PATH), $(REDIR_NAME))
-EXECUTION			:=	$(addprefix $(EXECUTION_PATH), $(EXECUTION_NAME))
+TRAVERSE_PATH		:=	traverse_tree/
+TRAVERSE			:=	$(addprefix $(TRAVERSE_PATH), $(TRAVERSE_NAME))
 
-SRCS				:=	$(MINISHELL) $(VALIDATE_INPUT) $(AST_TREE) $(AST_TRAVERSE) $(AST_SPLITTER) \
-						$(BUILTINS) $(EXECUTION) $(D_SIGN) $(WILDCARDS) $(COMMON_UTILS) $(REDIR)
+# SOURCE_FILES
+SRCS				:=	$(MINISHELL) $(UTILS) $(AST_PARSER) $(LEXER) $(VALIDATOR) \
+						$(WILDCARDS) $(D_SIGN) $(BUILTINS) $(REDIR) $(TRAVERSE)
 SRCS_PATH			:=	srcs/
 
-###############################
-##########END_SOURCES##########
-###############################
-
+# OBJECT_FILES
 OBJS_PATH			:=	objs/
 OBJS				:=	$(addprefix $(OBJS_PATH), $(SRCS:.c=.o))
 
+# LIBFT_LIBRARY
 LIBFT_PATH			:=	$(LIBFT_PATH)
 LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
-# RL					:=	/opt/homebrew/opt/readline/lib/
-# RLH					:=	/opt/homebrew/opt/readline/lib/
-# RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
-# RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
+# READLINE
+RL					:=	/opt/homebrew/opt/readline/lib/
+RLH					:=	/opt/homebrew/opt/readline/lib/
+RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
+RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
 
-RL					:=	~/.brew/Cellar/readline/8.2.7/lib
-RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
-RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
-RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
+# RL					:=	~/.brew/Cellar/readline/8.2.7/lib
+# RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
+# RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
+# RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
 
+# HEADERS AND EXTERNAL LIBRARIES
 HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)
 INCLUDES			:=	$(addprefix -I , $(HEADERS))
 LIBS				:=	-lft -L $(LIBFT_PATH) -lreadline -L $(RL) -lhistory -L $(RL)
 
+# LOADING PROGRESS BAR INIT
 TOTAL_OBJS			:= $(words $(OBJS))
 COMPILED_OBJS		:= 0
 MSG_PRINTED 		:= false
 
+# RULES
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS_PATH) $(OBJS) $(HEADERS)
@@ -114,19 +119,17 @@ $(NAME): $(LIBFT) $(OBJS_PATH) $(OBJS) $(HEADERS)
 $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)
 	@mkdir -p $(OBJS_PATH)$(MINISHELL_PATH)
-	@mkdir -p $(OBJS_PATH)$(AST_TREE_PATH)
-	@mkdir -p $(OBJS_PATH)$(AST_SPLITTER_PATH)
-	@mkdir -p $(OBJS_PATH)$(BUILTINS_PATH)
-	@mkdir -p $(OBJS_PATH)$(BUILTINS_UTILS_PATH)
-	@mkdir -p $(OBJS_PATH)$(BUILTINS_EXPORT_PATH)
-	@mkdir -p $(OBJS_PATH)$(VALIDATE_INPUT_PATH)
-	@mkdir -p $(OBJS_PATH)$(EXECUTION_PATH)
-	@mkdir -p $(OBJS_PATH)$(D_SIGN_PATH)
+	@mkdir -p $(OBJS_PATH)$(UTILS_PATH)
+	@mkdir -p $(OBJS_PATH)$(AST_PARSER_PATH)
+	@mkdir -p $(OBJS_PATH)$(LEXER_PATH)
+	@mkdir -p $(OBJS_PATH)$(VALIDATOR_PATH)
 	@mkdir -p $(OBJS_PATH)$(WILDCARDS_PATH)
-	@mkdir -p $(OBJS_PATH)$(EXECUTION_UTILS_PATH)
-	@mkdir -p $(OBJS_PATH)$(COMMON_UTILS_PATH)
-	@mkdir -p $(OBJS_PATH)$(TRAVERSE_PATH)
+	@mkdir -p $(OBJS_PATH)$(VALIDATOR_PATH)
+	@mkdir -p $(OBJS_PATH)$(D_SIGN_PATH)
+	@mkdir -p $(OBJS_PATH)$(BUILTINS_PATH)
+	@mkdir -p $(OBJS_PATH)$(BUILTINS_EXPORT_PATH)
 	@mkdir -p $(OBJS_PATH)$(REDIR_PATH)
+	@mkdir -p $(OBJS_PATH)$(TRAVERSE_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c $(HEADERS)
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
