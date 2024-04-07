@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:54:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/05 16:04:58 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/07 02:57:40 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int	modificate_str_command_without_br(char *str, char **redir, int i,
 			(*redir)[j++] = SEPARATOR;
 			i--;
 		}
+		if (str[i] == NULL_TERM)
+			break ;
 		i++;
 	}
 	return (1);
