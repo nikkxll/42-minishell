@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 16:19:08 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:18:27 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,19 @@ enum	e_characters
 };
 
 enum	e_builtins
+{
+	NOT_BUILTIN,
+	EMPTY_CMD,
+	ECHO,
+	CD,
+	PWD,
+	EXPORT,
+	UNSET,
+	ENV,
+	EXIT,
+};
+
+enum	e_builtins_len
 {
 	CD_LEN = 3,
 	ENV_LEN = 4,

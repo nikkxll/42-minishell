@@ -6,37 +6,39 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 15:49:24 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 23:25:47 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:21:23 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int		run_builtin_without_redir(char **command, t_minishell *ms);
-int		run_builtin_with_redir(char **command, char *redir, t_minishell *ms);
+int		run_builtin_without_redir(char **command, t_minishell *ms, int cmd_type);
+int		run_builtin_with_redir(char **command, char *redir, t_minishell *ms,
+			int cmd_type);
 int		copy_std_fd(int *in_fd, int *out_fd, char *commmand);
 void	return_std_fd(int	*in_fd, int *out_fd, int *status, char *command);
 
-int	run_builtin(char **command, char *redir, t_minishell *ms)
+int	run_builtin(char **command, char *redir, t_minishell *ms, int cmd_type)
 {
 	int	status;
 
 	if (!redir)
-		status = run_builtin_without_redir(command, ms);
+		status = run_builtin_without_redir(command, ms, cmd_type);
 	else
-		status = run_builtin_with_redir(command, redir, ms);
+		status = run_builtin_with_redir(command, redir, ms, cmd_type);
 	return (status);
 }
 
-int	run_builtin_without_redir(char **command, t_minishell *ms)
+int	run_builtin_without_redir(char **command, t_minishell *ms, int cmd_type)
 {
 	int	status;
 
-	status = command_run(command, ms);
+	status = command_run(command, ms, cmd_type);
 	return (status);
 }
 
-int	run_builtin_with_redir(char **command, char *redir, t_minishell *ms)
+int	run_builtin_with_redir(char **command, char *redir, t_minishell *ms,
+	int cmd_type)
 {
 	int	status;
 	int	in_fd;
@@ -46,7 +48,7 @@ int	run_builtin_with_redir(char **command, char *redir, t_minishell *ms)
 	if (status == 0)
 		status = apply_redirects(redir, ms);
 	if (status == 0)
-		status = command_run(command, ms);
+		status = command_run(command, ms, cmd_type);
 	return_std_fd(&in_fd, &out_fd, &status, command[0]);
 	return (status);
 }

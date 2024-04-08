@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:39:31 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/06 00:53:53 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:46:47 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static int	shlvl_init_when_shlvl_exists(int position, char ***envp,
  * does not exists
  * @param	envp enviroment list
  * @param	i auxiliary index (equal to 0)
+ * @param	var variable to add into an enviroment list
  * @return	@c `SUCCESS` if the operation completes successfully,
  * @c `MALLOC_ERR` if memory allocation fails during processing
  */

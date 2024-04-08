@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:30:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/05 17:08:05 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:31:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,26 +107,26 @@ static int	expansion(char *str, char **envp, char **env_part,
  */
 int	expand_dollar_sign_generic(char **str, char **envp)
 {
-	t_ds	ds_q;
+	t_ds	ds_g;
 
-	ds_q.new_str = *str;
-	ds_q.middle = NULL;
-	while (expansion(ds_q.new_str, envp, &(ds_q.middle), &(ds_q.last_ind))
+	ds_g.new_str = *str;
+	ds_g.middle = NULL;
+	while (expansion(ds_g.new_str, envp, &(ds_g.middle), &(ds_g.last_ind))
 		!= NOTHING_TO_EXPAND)
 	{
-		ds_q.first = ds_q.new_str;
-		ds_q.last = ds_q.new_str + ds_q.last_ind;
-		ds_q.new_str_len = ft_strlen(ds_q.first) + ft_strlen(ds_q.middle)
-			+ ft_strlen(ds_q.last) + 1;
-		ds_q.new_str = ft_calloc(ds_q.new_str_len, sizeof(char));
-		if (!ds_q.new_str)
+		ds_g.first = ds_g.new_str;
+		ds_g.last = ds_g.new_str + ds_g.last_ind;
+		ds_g.new_str_len = ft_strlen(ds_g.first) + ft_strlen(ds_g.middle)
+			+ ft_strlen(ds_g.last) + 1;
+		ds_g.new_str = ft_calloc(ds_g.new_str_len, sizeof(char));
+		if (!ds_g.new_str)
 			return (MALLOC_ERR);
-		ft_strlcat(ds_q.new_str, ds_q.first, ds_q.new_str_len);
-		ft_strlcat(ds_q.new_str, ds_q.middle, ds_q.new_str_len);
-		ft_strlcat(ds_q.new_str, ds_q.last, ds_q.new_str_len);
+		ft_strlcat(ds_g.new_str, ds_g.first, ds_g.new_str_len);
+		ft_strlcat(ds_g.new_str, ds_g.middle, ds_g.new_str_len);
+		ft_strlcat(ds_g.new_str, ds_g.last, ds_g.new_str_len);
 		free(*str);
-		*str = ds_q.new_str;
+		*str = ds_g.new_str;
 	}
-	*str = ds_q.new_str;
+	*str = ds_g.new_str;
 	return (SUCCESS);
 }
