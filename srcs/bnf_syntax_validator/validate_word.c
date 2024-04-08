@@ -6,18 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:19:51 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/26 19:08:44 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:45:55 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-
-// <v_input> 		::=  <and_or> <newline>
-// <and_or>			::=  <pipeline> { ('&&' | '||') <pipeline> }
-// <pipeline>		::=  <command> { '|' <command> }
-// <command>		::=  <simple_cmd> | '(' <and_or> ')' {<redirect>}
-// <simple_cmd>		::=  {( <redirect> | <word> | "any" | 'any')}
-// <redirect>		::=  ( '<' | '>' | '<<' | '>>' ) <word>
 
 static char	*validate_quotes(char *str, t_bool *status);
 

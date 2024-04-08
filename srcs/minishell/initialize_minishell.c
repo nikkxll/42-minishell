@@ -3,17 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_minishell.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/06 22:03:05 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:21:14 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	teriminate_minishell(t_minishell **ms, int status);
+void	terminate_minishell(t_minishell **ms, int status);
 
+/**
+ * @brief	Initializing a minishell environment
+ * @note	This function initializes a minishell environment by allocating
+ * memory for a minishell structure @c `t_minishell`, populating it with
+ * environment variables, and initializing the present working directory
+ * @c `pwd` and the shell level @c `shlvl`. If any memory allocation fails
+ * during initialization, the function terminates the minishell and exits with
+ * an appropriate error status code
+ * @param	ms Pointer to a pointer to a minishell structure @c `t_minishell`.
+ *	This pointer will be updated to point to the newly initialized minishell
+ * @return	@c `void`
+ */
 void	initialize_minishell(t_minishell **ms)
 {
 	extern char	**environ;
@@ -34,11 +46,22 @@ void	initialize_minishell(t_minishell **ms)
 	if (status == 0)
 		status = shlvl_init(&((*ms)->env));
 	if (status != 0)
-		teriminate_minishell(ms, status);
+		terminate_minishell(ms, status);
 	(*ms)->is_parent = true;
 }
 
-void	teriminate_minishell(t_minishell **ms, int status)
+/**
+ * @brief	Terminating the minishell environment and exit with an error status
+ * @note	This function terminates the minishell environment by
+ * freeing allocated memory for the minishell structure @c `t_minishell` and
+ * its components. It also prints an error message indicating the failure to
+ * initialize the minishell structure before exiting with the specified error
+ * status code.
+ * @param	ms Pointer to a pointer to a minishell structure @c `t_minishell`
+ * @param	status Error status code indicating the reason for termination
+ * @return	@c `void`
+ */
+void	terminate_minishell(t_minishell **ms, int status)
 {
 	ft_free_minishell(*ms);
 	ft_putstr_fd("\033[0;31me-bash:\033[0;0m can't initialize "

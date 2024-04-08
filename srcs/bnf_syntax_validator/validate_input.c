@@ -3,22 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   validate_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:41:05 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 00:42:28 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:01:56 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-// <v_input> 		::=  <and_or> <newline>
-// <and_or>			::=  <pipeline> { ('&&' | '||') <pipeline> }
-// <pipeline>		::=  <command> { '|' <command> }
-// <command>		::=  <simple_cmd> | '(' <and_or> ')' {<redirect>}
-// <simple_cmd>		::=  {( <redirect> | <word> | "any" | 'any')}
-// <redirect>		::=  ( '<' | '>' | '<<' | '>>' ) <word>
-
+/**
+ * @brief	Validates the syntax of an input string according to the BNF
+ * syntax format logic. This function is responsible for ensuring the syntactic
+ * correctness of the input string according to the specified Backus-Naur
+ * Form (BNF) syntax format. Function calls for the blocks listed below in
+ * accordance with its tier.
+ * BNF form looks as follows:
+ * @brief	- `<v_input>	::= <and_or> <newline>`
+ * @brief	- `<and_or>		::= <pipeline> { ('&&' | '||') <pipeline> }`
+ * @brief	- `<pipeline>	::= <command> { '|' <command> }`
+ * @brief	- `<command>	::= <simple_cmd> | '(' <and_or> ')' {<redirect>}`
+ * @brief	- `<simple_cmd>	::= {( <redirect> | <word> | "any" | 'any')}`
+ * @brief	- `<redirect>	::= ( '<' | '>' | '<<' | '>>' ) <word>`
+ * @param	str String obtained from the readline function
+ * @return	@c `-1` if a memory allocation error occurs during processing,
+ * @c `1` if the input string passes syntax validation, @c `0` if the input
+ * string fails to meet the required conditions
+ */
 int	validate_input(char *str)
 {
 	char	*next_token;
@@ -35,16 +46,3 @@ int	validate_input(char *str)
 	}
 	return (SUCCESS);
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	if (argc != 2)
-// 	{
-// 		ft_printf("INCORRECT NUMBER OF ARGUMENTS!\n");
-// 		return (1);
-// 	}
-// 	if (validate_input(argv[1]) == true)
-// 		ft_printf("Input is correct!\n");
-// 	(void)argc;
-// 	return (0);
-// }
