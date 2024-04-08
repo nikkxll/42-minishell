@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 22:34:40 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:34:34 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@
 # include <stdio.h>
 # include <dirent.h>
 # include <sys/stat.h>
+# include <signal.h>
+# include <sys/ioctl.h>
+# include <termios.h>
 # include "../libft/libft.h"
 # include "structs.h"
 # include "defines.h"
 
 /*_____ Minishell _____*/
-void			ft_free_minishell(t_minishell *ms);
 void			initialize_minishell(t_minishell **ms);
 void			run_minishell(t_minishell *ms);
+void			ft_free_minishell(t_minishell *ms);
 
 /*_____ Readline _____*/
-
 void			rl_clear_history(void);
 void			rl_replace_line(const char *text, int clear_undo);
 
@@ -40,10 +42,15 @@ char			*validate_command(char *str, t_bool *status);
 char			*validate_simple_command(char *str, t_bool *status);
 char			*validate_redirect(char *str, t_bool *status);
 char			*validate_word(char *str, t_bool *status);
-t_bool			is_blank_string(char *str);
-void			print_syntax_error(char *str);
 
 /*_____ Create-tree _____*/
+int				create_tree(char *str, t_node **root);
+t_bool			create_node(t_node_info *data, t_node **base);
+int				add_and_or_pipe_trees(t_node_info *data, t_node **root);
+int				add_bracket(t_node_info *data, t_node **root);
+int				add_command_br(t_node_info *data, t_node **root);
+int				add_command(t_node_info *data, t_node **root);
+void			free_tree(t_node **root);
 t_and			*init_t_and(void);
 t_or			*init_t_or(void);
 t_pipe			*init_t_pipe(void);
@@ -51,13 +58,6 @@ t_bracket		*init_t_bracket(void);
 t_command		*init_t_command(void);
 t_command_br	*init_t_command_br(void);
 t_redir			*init_t_redir(void);
-int				create_tree(char *str, t_node **root);
-t_bool			create_node(t_node_info *data, t_node **base);
-void			free_tree(t_node **root);
-int				add_and_or_pipe_trees(t_node_info *data, t_node **root);
-int				add_bracket(t_node_info *data, t_node **root);
-int				add_command(t_node_info *data, t_node **root);
-int				add_command_br(t_node_info *data, t_node **root);
 
 /*_____ String-splitter _____*/
 int				set_node_info_and_or_pipe(t_node_info **node, char *str,
@@ -103,19 +103,19 @@ int				traverse_command(char *cmd, char *redir, t_minishell *ms);
 int				parse_cmd(char *cmd, char ***res, t_minishell *ms);
 int				wait_children(pid_t *pids, int num);
 t_bool			is_builtin(char *cmd);
+int				run_builtin(char **command, char *redir, t_minishell *ms);
 int				locate_command(char	**cmd, char	**envp);
 int				find_executable(char **command, char **paths);
-int				run_builtin(char **command, char *redir, t_minishell *ms);
 
 /*_____ Redir _____*/
 int				apply_redirects(char *redir, t_minishell *ms);
 int				check_redir(char **redir, t_minishell *ms);
 int				apply_heredoc(char *limiter, int *in);
 int				apply_redir_in(char *str, t_minishell *ms, int *in);
-int				apply_redir_out(char *redir, t_minishell *ms, int *out);
 int				apply_append(char *redir, t_minishell *ms, int *out);
-/*_____ Execution _____*/
+int				apply_redir_out(char *redir, t_minishell *ms, int *out);
 
+/*_____ Execution _____*/
 int				dollar_sign_expansion(char **str, char **envp,
 					int last_exit_status);
 int				expand_dollar_sign_q_mark(char **str, int last_exit_status);
@@ -132,9 +132,6 @@ void			remove_quotes_arr(char **arr, int i);
 int				env_var(char **envp, char *var, int i, int j);
 int				arg_var(char **arr, char *var, int i, int j);
 t_bool			ft_isenv(char c, int *j);
-void			print_err_msg(char *cmd, char *msg);
-void			print_arg_err_msg(char *cmd, char *arg, char *msg);
-void			perror_err_msg(char *cmd, char *arg);
 void			shlvl_warning(int number);
 void			run_cd(char **arr, t_minishell *ms, int status);
 void			cd_precheck(char **arr, t_minishell *ms);
@@ -179,10 +176,19 @@ int				if_abs_path(t_w_cards *wc, char *str);
 t_bool			if_asterisk_in_arr(char **arr, int i, int j);
 int				wildcards(char ***arr);
 int				array_build_before_wc(char ***arr, int i, int k, int j);
-int				get_prompt(char **prompt, int exit_status);
 int				shlvl_init(char ***envp);
 int				pwd_init(char ***envp, char **pwd);
 int				check_for_non_digits(char *str);
 int				var_init_when_no_var_exists(char ***envp, int i, char *var);
+
+/*_____ Utils _____*/
+int				get_prompt(char **prompt, int exit_status);
+t_bool			is_blank_string(char *str);
+
+/*_____ Errors _____*/
+void			print_syntax_error(char *str);
+void			print_err_msg(char *cmd, char *msg);
+void			print_arg_err_msg(char *cmd, char *arg, char *msg);
+void			perror_err_msg(char *cmd, char *arg);
 
 #endif

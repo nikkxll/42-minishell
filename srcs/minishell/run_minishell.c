@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 02:43:37 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:18:44 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	run_minishell(t_minishell *ms)
 	while (true)
 	{
 		status = get_cmdline(&cmdline, ms);
+		if (status == EOF)
+			break ;
 		if (status != 0)
 		{
 			ms->exit_status = status;
@@ -50,7 +52,7 @@ int	get_cmdline(char **cmdline, t_minishell *ms)
 	*cmdline = readline(prompt);
 	free(prompt);
 	if (*cmdline == NULL)
-		return (RL_FAILURE);
+		return (EOF);
 	if (ft_strlen(*cmdline) == 0)
 	{
 		free(*cmdline);

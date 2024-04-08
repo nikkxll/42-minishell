@@ -142,3 +142,6 @@ bash
 unset OLDPWD
 bash
 env | grep PWD
+
+bash - empty input doesn't change last status
+bash - blank empty changes status to zero
