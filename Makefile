@@ -91,7 +91,7 @@ LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 # READLINE
 # RL					:=	/opt/homebrew/opt/readline/lib/
 # RLH					:=	/opt/homebrew/opt/readline/lib/
-# RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
+# RL_HEADER			:=	/opt/homebrew/opt/readline/include/readline/readline.h
 # RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
 
 RL					:=	~/.brew/Cellar/readline/8.2.7/lib

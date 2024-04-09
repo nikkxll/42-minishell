@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 12:18:27 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:15:43 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ enum	e_exit_status
 	EXECVE_FAILURE = 2000,
 	FORK_FAILURE = 3000,
 	PIPE_FAILURE = 4000,
-	DUP_FAILURE = 5000,
-	ISDIR_FAILURE,
+	DUP_FAILURE = 5000
 };
 
 enum	e_export_types

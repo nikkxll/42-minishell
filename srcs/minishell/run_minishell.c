@@ -36,6 +36,8 @@ void	run_minishell(t_minishell *ms)
 	while (true)
 	{
 		status = get_cmdline(&cmdline, ms);
+		if (status == EOF)
+			break ;
 		if (status != 0)
 		{
 			ms->exit_status = status;
@@ -77,7 +79,7 @@ int	get_cmdline(char **cmdline, t_minishell *ms)
 	*cmdline = readline(prompt);
 	free(prompt);
 	if (*cmdline == NULL)
-		return (RL_FAILURE);
+		return (EOF);
 	if (ft_strlen(*cmdline) == 0)
 	{
 		free(*cmdline);

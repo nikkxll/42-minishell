@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   apply_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:21:32 by dshatilo          #+#    #+#             */
 /*   Updated: 2024/04/08 20:06:13 by dnikifor         ###   ########.fr       */
@@ -73,7 +73,7 @@ static int	heredoc(char *limiter, int fd)
 	{
 		line = readline("> ");
 		if (!line)
-			return (RL_FAILURE);
+			return (0);
 		isequal = ft_strcmp(limiter, line);
 		if (isequal != 0)
 			ft_putendl_fd(line, fd);

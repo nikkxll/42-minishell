@@ -15,10 +15,12 @@
 int	main(void)
 {
 	t_minishell	*ms;
+	int			last_status;
 
 	initialize_minishell(&ms);
 	run_minishell(ms);
+	last_status = ms->exit_status;
 	rl_clear_history();
 	ft_free_minishell(ms);
-	return (0);
+	return (last_status);
 }
