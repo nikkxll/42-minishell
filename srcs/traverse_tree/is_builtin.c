@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:30:04 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 12:18:31 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:00:57 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 int	is_builtin(char *cmd)
 {
 	if (cmd == NULL)
-		return (EMPTY_CMD);
+		return (C_EMPTY);
 	if (ft_strncmp(cmd, "echo", ECHO_LEN) == 0)
-		return (ECHO);
+		return (C_ECHO);
 	if (ft_strncmp(cmd, "cd", CD_LEN) == 0)
-		return (CD);
+		return (C_CD);
 	if (ft_strncmp(cmd, "pwd", PWD_LEN) == 0)
-		return (PWD);
+		return (C_PWD);
 	if (ft_strncmp(cmd, "export", EXPORT_LEN) == 0)
-		return (EXPORT);
+		return (C_EXPORT);
 	if (ft_strncmp(cmd, "unset", UNSET_LEN) == 0)
-		return (UNSET);
+		return (C_UNSET);
 	if (ft_strncmp(cmd, "env", ENV_LEN) == 0)
-		return (ENV);
+		return (C_ENV);
 	if (ft_strncmp(cmd, "exit", EXIT_LEN) == 0)
-		return (EXIT);
+		return (C_EXIT);
 	return (NOT_BUILTIN);
 }

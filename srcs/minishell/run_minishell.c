@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_minishell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/09 12:51:25 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:53:43 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ void	run_minishell(t_minishell *ms)
 	while (true)
 	{
 		status = get_cmdline(&cmdline, ms);
-		if (status == EOF)
-			break ;
-		if (status != 0)
-		{
+		if (status != EOF)
 			ms->exit_status = status;
+		if (status == SYNTAX_ERROR)
 			continue ;
-		}
+		if (status != 0)
+			break ;
 		root = NULL;
 		status = create_tree(cmdline, &root);
 		if (status != 0)
@@ -79,7 +78,10 @@ int	get_cmdline(char **cmdline, t_minishell *ms)
 	*cmdline = readline(prompt);
 	free(prompt);
 	if (*cmdline == NULL)
+	{
+		ft_putstr_fd("exit\n", STDERR_FILENO);
 		return (EOF);
+	}
 	if (ft_strlen(*cmdline) == 0)
 	{
 		free(*cmdline);

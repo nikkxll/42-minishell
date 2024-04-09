@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:45:53 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/09 12:51:14 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:34:35 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_prompt(char **prompt, int exit_status)
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		return (MALLOC_ERR);
+		return (GETCWD_ERROR);
 	folder_name = ft_strdup(ft_strrchr(cwd, SLASH));
 	free(cwd);
 	if (!(*folder_name))

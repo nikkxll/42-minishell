@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/08 12:37:19 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:00:17 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	command_run(char **arr, t_minishell *ms, int cmd_type)
 {
 	if (arr[0] == NULL)
 		return (0);
-	if (cmd_type == ECHO)
+	if (cmd_type == C_ECHO)
 	{
 		run_echo(arr + 1, 0, 0, 0);
 		ms->exit_status = SUCCESS;
@@ -32,17 +32,17 @@ int	command_run(char **arr, t_minishell *ms, int cmd_type)
 	else
 	{
 		ms->exit_status = SUCCESS;
-		if (cmd_type == CD)
+		if (cmd_type == C_CD)
 			run_cd(arr + 1, ms, 0);
-		else if (cmd_type == PWD)
+		else if (cmd_type == C_PWD)
 			run_pwd(arr + 1, ms);
-		else if (cmd_type == EXPORT)
+		else if (cmd_type == C_EXPORT)
 			run_export(arr + 1, ms);
-		else if (cmd_type == UNSET)
+		else if (cmd_type == C_UNSET)
 			run_unset(arr + 1, ms);
-		else if (cmd_type == ENV)
+		else if (cmd_type == C_ENV)
 			run_env(arr + 1, ms);
-		else if (cmd_type == EXIT)
+		else if (cmd_type == C_EXIT)
 			run_exit(arr + 1, ms, 0);
 	}
 	return (ms->exit_status);

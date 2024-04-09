@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:02:40 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/09 14:17:15 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:57:55 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,7 @@ int	find_executable(char **command, char **paths)
 			print_err_msg(command[0], ": Permission denied\n");
 	}
 	else
-	{
 		status = check_path_provided(command[0], &cmd_in_path);
-		if (status == CMD_PD_FAILURE)
-			print_err_msg(command[0], ": is a directory\n");
-	}
 	if (status == 0)
 	{
 		if (ft_strchr(command[0], '/') == NULL)
@@ -80,10 +76,16 @@ static int	check_path_provided(char *cmd_name, char **cmd_in_path)
 		return (CMD_NF_FAILURE);
 	}
 	stat(cmd_name, &st);
-	if (S_ISDIR(st.st_mode))
-		return (CMD_PD_FAILURE);
 	if (access(cmd_name, X_OK) != 0)
+	{
+		print_err_msg(cmd_name, ": Permission denied\n");
 		return (CMD_PD_FAILURE);
+	}
+	if (S_ISDIR(st.st_mode))
+	{
+		print_err_msg(cmd_name, ": is a directory\n");
+		return (CMD_PD_FAILURE);
+	}
 	*cmd_in_path = cmd_name;
 	return (0);
 }
@@ -132,16 +134,17 @@ static int	find_cmd_in_path(char *cmd_name, char **paths, char **cmd_in_path)
 }
 
 /**
- *@brief Allocate memory for constructing command strings.
- *@note Function allocates memory for constructing command strings
- *based on the provided command name and paths. It calculates the maximum
- *length required for the command string by considering the length of each
- *path and the command name. It then allocates memory accordingly and returns
- *a pointer to the allocated memory.
- *@param cmd_name The name of the command.
- *@param len Pointer to an integer to store the length of the allocated memory.
- *@param paths Pointer to an array of strings representing the search paths.
- *@return Returns a pointer to the allocated memory for constructing command strings.
+ * @brief	Allocate memory for constructing command strings
+ * @note	Function allocates memory for constructing command strings
+ * based on the provided command name and paths. It calculates the maximum
+ * length required for the command string by considering the length of each
+ * path and the command name. It then allocates memory accordingly and returns
+ * a pointer to the allocated memory.
+ * @param	cmd_name The name of the command
+ * @param	len Pointer to an integer to store the length of the allocated memory
+ * @param	paths Pointer to an array of strings representing the search paths
+ * @return	Returns a pointer to the allocated memory for constructing command
+ * strings
  */
 static char	*allocate_cmd_string(char *cmd_name, int *len, char **paths)
 {

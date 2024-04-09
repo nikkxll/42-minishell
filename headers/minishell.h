@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 12:28:30 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:33:03 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ int				wait_children(pid_t *pids, int num);
 int				is_builtin(char *cmd);
 int				locate_command(char	**cmd, char	**envp);
 int				find_executable(char **command, char **paths);
-int				run_builtin(char **command, char *redir, t_minishell *ms, int cmd_type);
+int				run_builtin(char **command, char *redir, t_minishell *ms,
+					int cmd_type);
 
 /*_____ Redir _____*/
 int				apply_redirects(char *redir, t_minishell *ms);
