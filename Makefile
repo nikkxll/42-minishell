@@ -7,7 +7,7 @@ CC					:=	cc
 FLAGS				:=	-g -Wall -Wextra -Werror
 
 # MINISHELL
-MINISHELL_NAME		:=	main.c minishell.c ft_free_minishell.c initialize_minishell.c \
+MINISHELL_NAME		:=	main.c ft_free_minishell.c initialize_minishell.c \
 						run_minishell.c 
 MINISHELL_PATH		:=	minishell/
 MINISHELL			:=	$(addprefix $(MINISHELL_PATH), $(MINISHELL_NAME))
@@ -89,15 +89,15 @@ LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
 # READLINE
-RL					:=	/opt/homebrew/opt/readline/lib/
-RLH					:=	/opt/homebrew/opt/readline/lib/
-RL_HEADER				:=	/opt/homebrew/opt/readline/include/readline/readline.h
-RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
+# RL					:=	/opt/homebrew/opt/readline/lib/
+# RLH					:=	/opt/homebrew/opt/readline/lib/
+# RL_HEADER			:=	/opt/homebrew/opt/readline/include/readline/readline.h
+# RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
 
-# RL					:=	~/.brew/Cellar/readline/8.2.7/lib
-# RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
-# RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
-# RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
+RL					:=	~/.brew/Cellar/readline/8.2.7/lib
+RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
+RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
+RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
 
 # HEADERS AND EXTERNAL LIBRARIES
 HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)

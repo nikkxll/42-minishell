@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_executable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:02:40 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 23:25:34 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:17:15 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	check_path_provided(char *cmd_name, char **cmd_in_path);
 static int	find_cmd_in_path(char *cmd_name, char **paths, char **cmd_in_path);
-static char	*cmd_to_search(char *cmd_name, int *length, char **paths);
+static char	*allocate_cmd_string(char *cmd_name, int *length, char **paths);
 static int	check_cmd_in_path(char **candidate, int len,
 				char *cmd_name, char *path);
 
@@ -25,23 +25,22 @@ int	find_executable(char **command, char **paths)
 
 	cmd_in_path = NULL;
 	if (ft_strchr(command[0], '/') == NULL)
+	{
 		status = find_cmd_in_path(command[0], paths, &cmd_in_path);
+		if (status == CMD_PD_FAILURE)
+			print_err_msg(command[0], ": Permission denied\n");
+	}
 	else
+	{
 		status = check_path_provided(command[0], &cmd_in_path);
+		if (status == CMD_PD_FAILURE)
+			print_err_msg(command[0], ": is a directory\n");
+	}
 	if (status == 0)
 	{
 		if (ft_strchr(command[0], '/') == NULL)
 			free(command[0]);
 		command[0] = cmd_in_path;
-	}
-	else if (status == CMD_NF_FAILURE)
-		print_err_msg(command[0], ": command not found\n");
-	else if (status == CMD_PD_FAILURE)
-		print_err_msg(command[0], ": Permission denied\n");
-	else if (status == ISDIR_FAILURE)
-	{
-		print_err_msg(command[0], ": is a directory\n");
-		status = CMD_PD_FAILURE;
 	}
 	return (status);
 }
@@ -51,10 +50,13 @@ static int	check_path_provided(char *cmd_name, char **cmd_in_path)
 	struct stat	st;
 
 	if (access(cmd_name, F_OK) != 0)
+	{
+		print_err_msg(cmd_name, ": No such file or directory\n");
 		return (CMD_NF_FAILURE);
+	}
 	stat(cmd_name, &st);
 	if (S_ISDIR(st.st_mode))
-		return (ISDIR_FAILURE);
+		return (CMD_PD_FAILURE);
 	if (access(cmd_name, X_OK) != 0)
 		return (CMD_PD_FAILURE);
 	*cmd_in_path = cmd_name;
@@ -68,8 +70,7 @@ static int	find_cmd_in_path(char *cmd_name, char **paths, char **cmd_in_path)
 	int		len;
 	int		i;
 
-	len = 0;
-	candidate = cmd_to_search(cmd_name, &len, paths);
+	candidate = allocate_cmd_string(cmd_name, &len, paths);
 	if (!candidate)
 		return (MALLOC_ERR);
 	i = 0;
@@ -87,33 +88,32 @@ static int	find_cmd_in_path(char *cmd_name, char **paths, char **cmd_in_path)
 		i++;
 	}
 	free(candidate);
+	print_err_msg(cmd_name, ": command not found\n");
 	return (CMD_NF_FAILURE);
 }
 
-static char	*cmd_to_search(char *cmd_name, int *length, char **paths)
+static char	*allocate_cmd_string(char *cmd_name, int *len, char **paths)
 {
 	char	*cmd;
-	int		len;
 	int		curr_len;
 	int		i;
 
 	i = 0;
-	len = 0;
+	*len = 0;
 	while (paths[i])
 	{
 		curr_len = ft_strlen(paths[i]);
-		if (curr_len > len)
-			len = curr_len;
+		if (curr_len > *len)
+			*len = curr_len;
 		i++;
 	}
-	len += ft_strlen(cmd_name) + 1 + 1;
-	cmd = (char *)ft_calloc(len, sizeof(char));
+	*len += ft_strlen(cmd_name) + 1 + 1;
+	cmd = (char *)ft_calloc(*len, sizeof(char));
 	if (!cmd)
 	{
 		print_err_msg(cmd_name, ": allocation error occured\n");
 		return (NULL);
 	}
-	*length = len;
 	return (cmd);
 }
 
@@ -132,7 +132,7 @@ static int	check_cmd_in_path(char **candidate, int len,
 	{
 		stat(cmd_name, &st);
 		if (S_ISDIR(st.st_mode))
-			return (ISDIR_FAILURE);
+			return (CMD_PD_FAILURE);
 		if (access(temp, X_OK) == 0)
 			return (0);
 		else
