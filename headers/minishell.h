@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 15:34:34 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:28:30 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ int				traverse_command_br(t_node **node, t_minishell *ms);
 int				traverse_command(char *cmd, char *redir, t_minishell *ms);
 int				parse_cmd(char *cmd, char ***res, t_minishell *ms);
 int				wait_children(pid_t *pids, int num);
-t_bool			is_builtin(char *cmd);
-int				run_builtin(char **command, char *redir, t_minishell *ms);
+int				is_builtin(char *cmd);
 int				locate_command(char	**cmd, char	**envp);
 int				find_executable(char **command, char **paths);
+int				run_builtin(char **command, char *redir, t_minishell *ms, int cmd_type);
 
 /*_____ Redir _____*/
 int				apply_redirects(char *redir, t_minishell *ms);
@@ -123,7 +123,7 @@ int				expand_dollar_sign_generic(char **str, char **envp);
 int				environment_search_exp_module(char **envp, char *var, int i,
 					int j);
 void			index_quotes(char *str, int i, int *single_q, int *double_q);
-int				command_run(char **arr, t_minishell *ms);
+int				command_run(char **arr, t_minishell *ms, int cmd_type);
 char			**sort_string_arr(char **argv, int size);
 char			**cpy_env(char **envp);
 void			remove_quotes(char *str, int i, int j);

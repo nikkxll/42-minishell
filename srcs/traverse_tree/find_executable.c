@@ -18,6 +18,19 @@ static char	*allocate_cmd_string(char *cmd_name, int *length, char **paths);
 static int	check_cmd_in_path(char **candidate, int len,
 				char *cmd_name, char *path);
 
+/**
+ * @brief	Find executable in specified paths
+ * @note	Function searches for an executable command in the specified
+ * paths. If the command includes a path, it directly checks whether the path
+ * is valid. Otherwise, it searches the paths provided to find the executable.
+ * If found, the command is updated with the full path of the executable
+ * @param	command The command to find, possibly with a path
+ * @param	paths An array of paths to search for the command
+ * @return	Returns @c `0` if the executable is found and updated successfully,
+ * @c `CMD_NF_FAILURE` if the command is not found,
+ * @c `CMD_PD_FAILURE` if permission is denied,
+ * @c `ISDIR_FAILURE` if the command is a directory
+ */
 int	find_executable(char **command, char **paths)
 {
 	int		status;
@@ -45,6 +58,18 @@ int	find_executable(char **command, char **paths)
 	return (status);
 }
 
+/**
+ * @brief	Check if the provided path to the command is valid
+ * @note	Function checks if the provided path to the command
+ * exists and is executable.
+ * If the path is valid, it updates the pointer to the command in path.
+ * @param	cmd_name The provided path to the command
+ * @param	cmd_in_path Pointer to store the valid path to the command
+ * @return	Returns @c `0` if the path is valid and executable,
+ * @c `CMD_NF_FAILURE` if the command is not found,
+ * @c `ISDIR_FAILURE` if the command is a directory,
+ * @c `CMD_PD_FAILURE` if permission is denied
+ */
 static int	check_path_provided(char *cmd_name, char **cmd_in_path)
 {
 	struct stat	st;
@@ -63,6 +88,20 @@ static int	check_path_provided(char *cmd_name, char **cmd_in_path)
 	return (0);
 }
 
+/**
+ * @brief	Find command in the specified paths
+ * @note	This function searches for a command in the specified paths.
+ * It constructs a full path by combining each path with the command name,
+ * then checks if the constructed path is valid. If found, the valid path
+ * to the command is stored in @c `cmd_in_path`
+ * @param	cmd_name The name of the command to find
+ * @param	paths An array of paths to search for the command
+ * @param	cmd_in_path Pointer to store the valid path to the command
+ * @return	Returns @c `0` if the command is found and its path is updated,
+ * @c `MALLOC_ERR` if memory allocation fails,
+ * @c `CMD_NF_FAILURE` if the command is not found,
+ * @c `CMD_PD_FAILURE` if permission is denied
+ */
 static int	find_cmd_in_path(char *cmd_name, char **paths, char **cmd_in_path)
 {
 	int		status;
@@ -92,6 +131,18 @@ static int	find_cmd_in_path(char *cmd_name, char **paths, char **cmd_in_path)
 	return (CMD_NF_FAILURE);
 }
 
+/**
+ *@brief Allocate memory for constructing command strings.
+ *@note Function allocates memory for constructing command strings
+ *based on the provided command name and paths. It calculates the maximum
+ *length required for the command string by considering the length of each
+ *path and the command name. It then allocates memory accordingly and returns
+ *a pointer to the allocated memory.
+ *@param cmd_name The name of the command.
+ *@param len Pointer to an integer to store the length of the allocated memory.
+ *@param paths Pointer to an array of strings representing the search paths.
+ *@return Returns a pointer to the allocated memory for constructing command strings.
+ */
 static char	*allocate_cmd_string(char *cmd_name, int *len, char **paths)
 {
 	char	*cmd;
@@ -117,6 +168,21 @@ static char	*allocate_cmd_string(char *cmd_name, int *len, char **paths)
 	return (cmd);
 }
 
+/**
+ * @brief	Check if the command exists and is executable in the given path.
+ * @note	This function checks if the command exists and is executable
+ * in the specified path. It constructs the full path to the command by
+ * concatenating the path with the command name and then checks if the
+ * constructed path is valid.
+ * @param	candidate Pointer to the constructed command path
+ * @param	len Length of the constructed command path
+ * @param	cmd_name The name of the command
+ * @param	path The path to search for the command
+ * @return	Returns @c `0` if the command exists and is executable,
+ * @c `ISDIR_FAILURE` if the command is a directory,
+ * @c `CMD_PD_FAILURE` if permission is denied,
+ * @c `1` if the command does not exist
+ */
 static int	check_cmd_in_path(char **candidate, int len,
 	char *cmd_name, char *path)
 {

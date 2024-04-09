@@ -36,7 +36,7 @@ LEXER				:=	$(addprefix $(LEXER_PATH), $(LEXER_NAME))
 VALIDATOR_NAME		:=	validate_input.c validate_word.c validate_redirect.c \
 						validate_simple_command.c validate_command.c validate_pipeline.c \
 						is_blank_string.c validate_and_or.c 
-VALIDATOR_PATH		:=	validator/
+VALIDATOR_PATH		:=	bnf_syntax_validator/
 VALIDATOR			:=	$(addprefix $(VALIDATOR_PATH), $(VALIDATOR_NAME))
 
 # WILDCARDS

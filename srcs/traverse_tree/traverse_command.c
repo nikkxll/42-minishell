@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 23:25:56 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:27:43 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ int		run_external(char **cmd, char *redir, t_minishell *ms);
 
 int	traverse_command(char *cmd, char *redir, t_minishell *ms)
 {
+	int		cmd_type;
 	int		status;
 	char	**command;
 
 	status = parse_cmd(cmd, &command, ms);
 	if (status == 0)
 	{
-		if (is_builtin(command[0]) == true)
-			status = run_builtin(command, redir, ms);
+		cmd_type = is_builtin(command[0]);
+		if (cmd_type > 0)
+			status = run_builtin(command, redir, ms, cmd_type);
 		else
 			status = run_external(command, redir, ms);
 	}

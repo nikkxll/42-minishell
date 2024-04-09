@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:54:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/07 22:32:04 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:41:43 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,41 +65,37 @@ static void	modificate_str_utils(char *str, char *r, int *i, int *j)
 }
 
 /**
- * @brief	Function that changes redirects within the quotes for
- * protection and then back to redirect symbols depend on the mode
+ * @brief	Function that fills redir string with redirects info
  * @param	str command line string
- * @param	mode replacement mode
- * @param	i first index for iteration
- * @param	quote_type initialization for quote_type
- * @return	@c `-1` if malloc error occurs, @c `1` if success
+ * @param	redir new string allocated to store redirects
+ * @param	i pointer to the index for iteration
+ * @param	j pointer to the index for iteration
+ * @return	@c `void`
  */
-void	change_all_redirs_within_quotes(char *str, int mode, int i,
-	int quote_type)
+static void	fill_redir(char *str, char **redir, int *i, int *j)
 {
-	while (str[i] != NULL_TERM)
+	int	q_flag;
+
+	q_flag = 0;
+	while ((str[*i] == REDIR_L || str[*i] == REDIR_R
+			|| str[*i] == SPACE || str[*i] == HT) && str[*i] != NULL_TERM)
+		modificate_str_utils(str, *redir, i, j);
+	while (str[*i] != NULL_TERM)
 	{
-		check_if_inside_quotes(str, &i, &quote_type);
-		if (quote_type)
-		{
-			if (mode == 1)
-			{
-				if (str[i] == REDIR_L)
-					str[i] = L_REDIR_SEPARATOR;
-				else if (str[i] == REDIR_R)
-					str[i] = R_REDIR_SEPARATOR;
-			}
-			else if (mode == -1)
-			{
-				if (str[i] == L_REDIR_SEPARATOR)
-					str[i] = REDIR_L;
-				else if (str[i] == R_REDIR_SEPARATOR)
-					str[i] = REDIR_R;
-			}
-			i++;
-		}
+		if ((str[*i] == S_QUOTE || str[*i] == D_QUOTE) && q_flag == 0)
+			q_flag = str[*i];
+		else if (str[*i] == S_QUOTE && q_flag == S_QUOTE)
+			q_flag = 0;
+		else if (str[*i] == D_QUOTE && q_flag == D_QUOTE)
+			q_flag = 0;
+		if (q_flag == 0 && (str[*i] == SPACE || str[*i] == REDIR_L
+				|| str[*i] == REDIR_R || str[*i] == HT || str[*i] == NULL_TERM))
+			break ;
 		else
-			i++;
+			modificate_str_utils(str, *redir, i, j);
 	}
+	(*redir)[(*j)++] = SEPARATOR;
+	(*i)--;
 }
 
 /**
@@ -112,8 +108,11 @@ void	change_all_redirs_within_quotes(char *str, int mode, int i,
  * @return	@c `-1` if malloc error occurs, @c `1` if success
  */
 int	modificate_str_command_without_br(char *str, char **redir, int i,
-			int j)
+	int j)
 {
+	int	q_flag;
+
+	q_flag = 0;
 	if (!str)
 		return (-1);
 	*redir = (char *)ft_calloc(ft_strlen(str) * 2, sizeof(char));
@@ -121,19 +120,14 @@ int	modificate_str_command_without_br(char *str, char **redir, int i,
 		return (-1);
 	while (str[i] != NULL_TERM)
 	{
-		while (str[i] != REDIR_L && str[i] != REDIR_R && str[i] != NULL_TERM)
-			i++;
-		if (str[i] == REDIR_L || str[i] == REDIR_R)
-		{
-			while ((str[i] == REDIR_L || str[i] == REDIR_R
-					|| str[i] == SPACE || str[i] == HT) && str[i] != NULL_TERM)
-				modificate_str_utils(str, *redir, &i, &j);
-			while (str[i] != SPACE && str[i] != REDIR_L && str[i] != REDIR_R
-				&& str[i] != HT && str[i] != NULL_TERM)
-				modificate_str_utils(str, *redir, &i, &j);
-			(*redir)[j++] = SEPARATOR;
-			i--;
-		}
+		if ((str[i] == S_QUOTE || str[i] == D_QUOTE) && q_flag == 0)
+			q_flag = str[i];
+		else if (str[i] == S_QUOTE && q_flag == S_QUOTE)
+			q_flag = 0;
+		else if (str[i] == D_QUOTE && q_flag == D_QUOTE)
+			q_flag = 0;
+		if (q_flag == 0 && (str[i] == REDIR_L || str[i] == REDIR_R))
+			fill_redir(str, redir, &i, &j);
 		if (str[i] == NULL_TERM)
 			break ;
 		i++;

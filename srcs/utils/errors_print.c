@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:35:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/06 13:51:06 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:44:04 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	shlvl_warning(int number)
 }
 
 /**
- * @brief	A function that prints an error without any arguments in it
+ * @brief	A function that prints a message with an arg using perror
  * @param	cmd command
- * @param	msg error message
+ * @param	arg argument
  * @return	@c `void`
  */
 void	perror_err_msg(char *cmd, char *arg)

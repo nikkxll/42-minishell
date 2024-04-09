@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:46:43 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/07 22:32:08 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:52:55 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ int	set_node_info_command(t_node_info **info, char *str, int type)
 	node_info = ft_calloc(1, sizeof(t_node_info));
 	if (!node_info)
 		return (-1);
-	change_all_redirs_within_quotes(str, 1, 0, 0);
 	status = modificate_str_command_without_br(str, &redir, 0, 0);
 	if (status == -1)
 	{
 		free(node_info);
 		return (-1);
 	}
-	change_all_redirs_within_quotes(str, -1, 0, 0);
 	node_info->str_left = redir;
 	node_info->str_right = str;
 	node_info->type = type;
@@ -128,13 +126,11 @@ int	set_node_info_command_br(t_node_info **info, char *str, int type)
 	if (!node_info)
 		return (-1);
 	left = command_part(str, &i, 0) + i;
-	change_all_redirs_within_quotes(left, 1, 0, 0);
 	if (modificate_str_command_without_br(left, &redir, 0, 0) == -1)
 	{
 		free(node_info);
 		return (-1);
 	}
-	change_all_redirs_within_quotes(left, -1, 0, 0);
 	first = ft_strchr(str, O_ROUND);
 	*first = ' ';
 	node_info->str_left = redir;

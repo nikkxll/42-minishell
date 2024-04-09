@@ -57,6 +57,19 @@ enum	e_characters
 
 enum	e_builtins
 {
+	NOT_BUILTIN,
+	EMPTY_CMD,
+	ECHO,
+	CD,
+	PWD,
+	EXPORT,
+	UNSET,
+	ENV,
+	EXIT,
+};
+
+enum	e_builtins_len
+{
 	CD_LEN = 3,
 	ENV_LEN = 4,
 	PWD_LEN = 4,
