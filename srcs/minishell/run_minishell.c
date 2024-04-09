@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 20:02:00 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:51:25 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	get_cmdline(char **cmdline, t_minishell *ms);
  * creation, or tree traversal, it updates the minishell's exit status
  * accordingly. The loop continues until termination is initiated by
  * an external event or command.
- *
  * @param	ms Pointer to the minishell structure (`t_minishell`).
  *	Contains the environment and other necessary data for execution.
  */
@@ -62,7 +61,6 @@ void	run_minishell(t_minishell *ms)
  * If any errors occur during prompt generation, input reading, or syntax
  * validation, appropriate error handling is performed, and the function
  * returns a status code indicating the failure.
- *
  * @param	cmdline Pointer to a pointer to store the command line input
  * @param	ms Pointer to the minishell structure (`t_minishell`)
  * @return	Integer status code indicating the success or failure of the

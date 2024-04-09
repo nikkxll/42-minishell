@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:54:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/08 19:52:35 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:41:43 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ static void	fill_redir(char *str, char **redir, int *i, int *j)
 int	modificate_str_command_without_br(char *str, char **redir, int i,
 	int j)
 {
+	int	q_flag;
+
+	q_flag = 0;
 	if (!str)
 		return (-1);
 	*redir = (char *)ft_calloc(ft_strlen(str) * 2, sizeof(char));
@@ -117,9 +120,13 @@ int	modificate_str_command_without_br(char *str, char **redir, int i,
 		return (-1);
 	while (str[i] != NULL_TERM)
 	{
-		while (str[i] != REDIR_L && str[i] != REDIR_R && str[i] != NULL_TERM)
-			i++;
-		if (str[i] == REDIR_L || str[i] == REDIR_R)
+		if ((str[i] == S_QUOTE || str[i] == D_QUOTE) && q_flag == 0)
+			q_flag = str[i];
+		else if (str[i] == S_QUOTE && q_flag == S_QUOTE)
+			q_flag = 0;
+		else if (str[i] == D_QUOTE && q_flag == D_QUOTE)
+			q_flag = 0;
+		if (q_flag == 0 && (str[i] == REDIR_L || str[i] == REDIR_R))
 			fill_redir(str, redir, &i, &j);
 		if (str[i] == NULL_TERM)
 			break ;
