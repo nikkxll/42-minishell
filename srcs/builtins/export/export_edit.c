@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:28:14 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/07 22:58:01 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/10 01:45:40 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,31 @@
  * @brief	A function that substitute edited string with previous version
  * @param	arr array of arguments or options if allowed
  * @param	result the new environment array
- * @param	i pointer to the index
  * @param	j pointer to the index
+ * @param	ms pointer to the common project @c `t_minishell` structure
  * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
  */
-static int	edit_env_list_substitution(char **arr, char **result, int *i,
-	int *j)
+static int	edit_env_list_substitution(char **arr, char **result, int *j,
+	t_minishell *ms)
 {
 	int		position;
 	char	*new_var;
+	int		i;
 
-	while (arr[*j][*i] != EQUAL)
-		(*i)++;
-	position = env_var(result, arr[*j], -1, *i);
+	i = 0;
+	while (arr[*j][i] != EQUAL)
+		i++;
+	position = env_var(result, arr[*j], -1, i);
+	if (ft_strncmp(result[position], "PWD=", 4) == 0)
+	{
+		free(ms->pwd);
+		ms->pwd = ft_strdup(arr[*j] + 4);
+		if (!ms->pwd)
+			return (MALLOC_ERR);
+	}
 	new_var = ft_strdup(arr[*j]);
 	if (new_var == NULL)
-	{
-		ft_free_2d_array(result);
 		return (MALLOC_ERR);
-	}
 	free(result[position]);
 	result[position] = new_var;
 	return (SUCCESS);
@@ -46,9 +52,11 @@ static int	edit_env_list_substitution(char **arr, char **result, int *i,
  * @param	arr array of arguments or options if allowed
  * @param	operations auxiliary array to calculate the number of operations
  * of different type
+ * @param	ms pointer to the common project @c `t_minishell` structure
  * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
  */
-int	edit_env_list(char ***new_env, char **arr, int *operations)
+int	edit_env_list(char ***new_env, char **arr, int *operations,
+	t_minishell *ms)
 {
 	int		i;
 	int		j;
@@ -57,12 +65,11 @@ int	edit_env_list(char ***new_env, char **arr, int *operations)
 	result = *new_env;
 	if (check_operations(operations, &i, &j, EXPORT_EDIT))
 		return (SUCCESS);
-	i = 0;
 	while (operations[++j])
 	{
 		if (operations[j] == EXPORT_EDIT)
 		{
-			if (edit_env_list_substitution(arr, result, &i, &j) == MALLOC_ERR)
+			if (edit_env_list_substitution(arr, result, &j, ms) == MALLOC_ERR)
 				return (MALLOC_ERR);
 		}
 	}
