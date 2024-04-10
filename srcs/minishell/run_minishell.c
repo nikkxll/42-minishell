@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/09 17:53:43 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:01:06 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,20 @@ void	run_minishell(t_minishell *ms)
 	while (true)
 	{
 		status = get_cmdline(&cmdline, ms);
-		if (status != EOF)
-			ms->exit_status = status;
-		if (status == SYNTAX_ERROR)
-			continue ;
-		if (status != 0)
-			break ;
-		root = NULL;
-		status = create_tree(cmdline, &root);
-		if (status != 0)
-			ms->exit_status = status;
 		if (status == 0)
-			ms->exit_status = traverse_tree(&root, ms);
-		free(cmdline);
+		{
+			root = NULL;
+			status = create_tree(cmdline, &root);
+			if (status != 0)
+				ms->exit_status = status;
+			if (status == 0)
+				ms->exit_status = traverse_tree(&root, ms);
+			free(cmdline);
+		}
+		else if (status == EOF)
+			break ;
+		else if (status == SYNTAX_ERROR)
+			ms->exit_status = status;
 	}
 }
 
@@ -79,7 +80,7 @@ int	get_cmdline(char **cmdline, t_minishell *ms)
 	free(prompt);
 	if (*cmdline == NULL)
 	{
-		ft_putstr_fd("exit\n", STDERR_FILENO);
+		// ft_putstr_fd("exit\n", STDERR_FILENO);
 		return (EOF);
 	}
 	if (ft_strlen(*cmdline) == 0)
