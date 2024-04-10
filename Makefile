@@ -53,13 +53,15 @@ D_SIGN_PATH			:=	dollar_sign_expansion/
 D_SIGN				:=	$(addprefix $(D_SIGN_PATH), $(D_SIGN_NAME))
 
 # BUILTINS
-BUILTINS_NAME		:=	builtins.c cd_core.c cd_auxiliary.c echo.c env.c pwd.c unset.c \
-						exit.c utils.c
+BUILTINS_NAME		:=	builtins.c echo.c env.c pwd.c unset.c exit.c utils.c
 BUILTINS_EXPORT_NAME:=	export_add.c export_edit.c export_utils.c export.c export_other.c
+BUILTINS_CD_NAME	:=	cd_core.c cd_auxiliary.c
 BUILTINS_PATH		:=	builtins/
 BUILTINS_EXPORT_PATH:=	builtins/export/
+BUILTINS_CD_PATH	:=	builtins/cd/
 BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
-						$(addprefix $(BUILTINS_EXPORT_PATH), $(BUILTINS_EXPORT_NAME))
+						$(addprefix $(BUILTINS_EXPORT_PATH), $(BUILTINS_EXPORT_NAME)) \
+						$(addprefix $(BUILTINS_CD_PATH), $(BUILTINS_CD_NAME))
 
 # REDIRECTS
 REDIR_NAME			:=	apply_redirects.c check_redir.c apply_heredoc.c apply_redir_in.c \
@@ -128,6 +130,7 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)$(D_SIGN_PATH)
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_PATH)
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_EXPORT_PATH)
+	@mkdir -p $(OBJS_PATH)$(BUILTINS_CD_PATH)
 	@mkdir -p $(OBJS_PATH)$(REDIR_PATH)
 	@mkdir -p $(OBJS_PATH)$(TRAVERSE_PATH)
 

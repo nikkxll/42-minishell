@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 19:20:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/10 18:03:12 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:58:33 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 /**
  * @brief	A function that makes updates pwd and oldpwd in the ms structure
