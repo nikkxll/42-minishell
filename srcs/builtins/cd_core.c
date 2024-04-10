@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:22:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/07 22:58:22 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:00:57 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ void	run_cd(char **arr, t_minishell *ms, int status)
 	struct_pwd_and_full_oldpwd_update(NULL, ms);
 	if (ms->exit_status != SUCCESS)
 		return ;
-	update_env_pwd(ms);
+	update_env_pwd(ms, 0, NULL, NULL);
 }

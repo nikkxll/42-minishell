@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:45:53 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/09 17:34:35 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:32:53 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
