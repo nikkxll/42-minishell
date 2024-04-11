@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:35:51 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/11 15:33:56 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:05:09 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,37 +50,43 @@ void	signal_chars_toggler(int toggle)
 	tcsetattr(STDIN_FILENO, TCSANOW, &terminal);
 }
 
-static void	sigint_catch(int sig)
+static void	sigint_im(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ioctl(0, TIOCSTI, "\n");
+		ioctl(0, TIOCSTI, "");
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		ft_printf("\033[1A");
+		ft_printf("\033[1B");
 	}
 }
 
-void	catch_signal(int mode)
+void	signal_catcher(void (*first_handler)(int),
+	void (*second_handler)(int))
+{
+	struct sigaction	sa;
+	struct sigaction	sq;
+
+	ft_memset(&sa, 0, sizeof(sa));
+	ft_memset(&sq, 0, sizeof(sq));
+	sa.sa_handler = first_handler;
+	sq.sa_handler = second_handler;
+	sigemptyset(&sa.sa_mask);
+	sigemptyset(&sq.sa_mask);
+	sa.sa_flags = SA_RESTART;
+	sq.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sq, NULL);
+}
+
+void	signal_mode_switch(int mode)
 {
 	if (mode == DEFAULT)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-	}
+		signal_catcher(SIG_DFL, SIG_DFL);
 	else if (mode == INTERACTIVE)
-	{
-		signal(SIGINT, sigint_catch);
-		signal(SIGQUIT, SIG_IGN);
-	}
+		signal_catcher(sigint_im, SIG_IGN);
 	else if (mode == HEREDOC)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_IGN);
-	}
+		signal_catcher(SIG_IGN, SIG_IGN);
 	else if (mode == IGNORE)
-	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
-	}
+		signal_catcher(SIG_IGN, SIG_IGN);
 }

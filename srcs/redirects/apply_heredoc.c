@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:21:32 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 15:30:11 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 19:31:06 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static int	heredoc(char *limiter, int fd)
 
 	while (true)
 	{
+		signal_mode_switch(HEREDOC);
 		line = readline("> ");
 		if (!line)
 		{

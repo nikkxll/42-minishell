@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 15:31:59 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 19:41:49 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	run_minishell(t_minishell *ms)
 
 	while (true)
 	{
+		signal_mode_switch(INTERACTIVE);
+		signal_chars_toggler(0);
 		status = get_cmdline(&cmdline, ms);
 		if (status == 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/10 19:36:40 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:05:55 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,14 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 	int		status;
 	pid_t	pid;
 
+	signal_mode_switch(IGNORE);
 	pid = fork();
 	if (pid == -1)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
+		signal_mode_switch(DEFAULT);
+		signal_chars_toggler(1);
 		status = 0;
 		if (redir != NULL)
 			status = apply_redirects(redir, ms);
@@ -85,6 +88,7 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 	}
 	else
 	{
+		signal_mode_switch(INTERACTIVE);
 		status = wait_children(&pid, 1);
 		return (status);
 	}
