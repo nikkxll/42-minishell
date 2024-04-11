@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   run_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 15:49:24 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 12:21:23 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:26:33 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int		run_builtin_without_redir(char **command, t_minishell *ms, int cmd_type);
+int		run_builtin_without_redir(char **command, t_minishell *ms,
+			int cmd_type);
 int		run_builtin_with_redir(char **command, char *redir, t_minishell *ms,
 			int cmd_type);
 int		copy_std_fd(int *in_fd, int *out_fd, char *commmand);

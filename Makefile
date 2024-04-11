@@ -15,7 +15,8 @@ MINISHELL			:=	$(addprefix $(MINISHELL_PATH), $(MINISHELL_NAME))
 # UTILS
 UTILS_NAME			:=	remove_quotes.c errors_print.c split_before_wildcards.c \
 						prompt_update.c pwd_init.c shlvl_init.c sort_string_array.c \
-						realloc_env.c ft_split_with_quotes.c
+						realloc_env.c ft_split_with_quotes.c init_history.c add_ebash_history.c \
+						save_history_to_file.c 
 UTILS_PATH			:=	utils/
 UTILS				:=	$(addprefix $(UTILS_PATH), $(UTILS_NAME))
 

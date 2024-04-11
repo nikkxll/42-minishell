@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/09 15:00:48 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:48:50 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,10 @@ enum	e_wc_paths
 
 # ifndef SECOND
 #  define SECOND 1
+# endif
+
+# ifndef HIST_SIZE
+#  define HIST_SIZE 500
 # endif
 
 #endif

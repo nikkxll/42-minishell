@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:06:39 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/05 18:24:27 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:45:28 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,8 @@ int		ft_strcmp(const char *s1, const char *s2);
 t_bool	ft_open_close_file(char *filename, int *fd, int mode);
 t_bool	ft_isspace(char c);
 int		ft_strcmp(const char *s1, const char *s2);
+void	ft_lstdel_back(t_list **lst, void (*del)(void*));
+void	ft_lstdel_front(t_list **lst, void (*del)(void*));
+void	ft_remove_nl(char *str);
 
 #endif

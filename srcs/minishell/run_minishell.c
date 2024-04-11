@@ -6,13 +6,13 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/10 16:01:06 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:13:48 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	get_cmdline(char **cmdline, t_minishell *ms);
+int	get_cmdline(char **cmdline, t_minishell **ms);
 
 /**
  * @brief	Runs the minishell main loop
@@ -27,7 +27,7 @@ int	get_cmdline(char **cmdline, t_minishell *ms);
  * @param	ms Pointer to the minishell structure (`t_minishell`).
  *	Contains the environment and other necessary data for execution.
  */
-void	run_minishell(t_minishell *ms)
+void	run_minishell(t_minishell **ms)
 {
 	int		status;
 	char	*cmdline;
@@ -41,15 +41,15 @@ void	run_minishell(t_minishell *ms)
 			root = NULL;
 			status = create_tree(cmdline, &root);
 			if (status != 0)
-				ms->exit_status = status;
+				(*ms)->exit_status = status;
 			if (status == 0)
-				ms->exit_status = traverse_tree(&root, ms);
+				(*ms)->exit_status = traverse_tree(&root, *ms);
 			free(cmdline);
 		}
 		else if (status == EOF)
 			break ;
 		else if (status == SYNTAX_ERROR)
-			ms->exit_status = status;
+			(*ms)->exit_status = status;
 	}
 }
 
@@ -68,12 +68,12 @@ void	run_minishell(t_minishell *ms)
  * @return	Integer status code indicating the success or failure of the
  * operation
  */
-int	get_cmdline(char **cmdline, t_minishell *ms)
+int	get_cmdline(char **cmdline, t_minishell **ms)
 {
 	int		status;
 	char	*prompt;
 
-	status = get_prompt(&prompt, ms->exit_status);
+	status = get_prompt(&prompt, (*ms)->exit_status);
 	if (status != 0)
 		return (status);
 	*cmdline = readline(prompt);
@@ -88,7 +88,7 @@ int	get_cmdline(char **cmdline, t_minishell *ms)
 		free(*cmdline);
 		return (get_cmdline(cmdline, ms));
 	}
-	add_history(*cmdline);
+	add_ebash_history(*cmdline, ms);
 	status = validate_input(*cmdline);
 	if (status != 0)
 		free(*cmdline);

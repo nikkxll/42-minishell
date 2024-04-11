@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdel_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/11 13:31:49 by dshatilo         ###   ########.fr       */
+/*   Created: 2023/11/01 15:05:09 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/04/11 12:40:55 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../libft.h"
 
-int	main(void)
+void	ft_lstdel_front(t_list **lst, void (*del)(void*))
 {
-	t_minishell	*ms;
-	int			last_status;
+	t_list	*new_top;
 
-	initialize_minishell(&ms);
-	run_minishell(&ms);
-	last_status = ms->exit_status;
-	rl_clear_history();
-	save_history_to_file(ms);
-	ft_free_minishell(ms);
-	ms = NULL;
-	return (last_status);
+	if (!lst || !*lst)
+		return ;
+	new_top = (*lst)->next;
+	del((*lst)->content);
+	free(*lst);
+	*lst = new_top;
 }

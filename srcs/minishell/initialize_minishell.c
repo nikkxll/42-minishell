@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_minishell.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/08 18:21:14 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:12:38 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	initialize_minishell(t_minishell **ms)
 		status = pwd_init(&((*ms)->env), &((*ms)->pwd));
 	if (status == 0)
 		status = shlvl_init(&((*ms)->env));
+	if (status == 0)
+		init_history(ms);
 	if (status != 0)
 		terminate_minishell(ms, status);
 	(*ms)->is_parent = true;
