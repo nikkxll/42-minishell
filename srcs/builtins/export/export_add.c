@@ -6,11 +6,39 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:35:13 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/07 22:57:58 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:31:13 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
+
+/**
+ * @brief	A function that checks for PWD and OLDPWD and then updates struct
+ * variables accordingly
+ * @param	str string from an array to check for pwd cases
+ * @param	ms pointer to the common project @c `t_minishell` structure
+ * @return	@c `MALLOC_ERR` if malloc failure occured, @c `SUCCESS` otherwise
+ */
+static int	add_to_env_list_pwd_cases(char *str, t_minishell *ms)
+{
+	char	*temp_pwd;
+
+	if (ft_strncmp(str, "OLDPWD=", 7) == 0)
+		ms->is_oldpwd_unset = false;
+	if (ft_strncmp(str, "PWD=", 4) == 0)
+	{
+		temp_pwd = ft_strdup(str + 4);
+		if (!temp_pwd)
+		{
+			print_err_msg("PWD", ": malloc error occured. "
+				"Correct behavior is not guaranteed anymore\n");
+			return (MALLOC_ERR);
+		}
+		free(ms->pwd);
+		ms->pwd = temp_pwd;
+	}
+	return (SUCCESS);
+}
 
 /**
  * @brief	A function that allocates new array for addition
@@ -58,8 +86,8 @@ int	add_to_env_list(char ***new_env, char **arr, t_minishell *ms,
 	{
 		if (operations[j] == EXPORT_ADD)
 		{
-			if (ft_strncmp(arr[j], "OLDPWD=", 7) == 0)
-				ms->is_oldpwd_unset = false;
+			if (add_to_env_list_pwd_cases(arr[j], ms) == MALLOC_ERR)
+				return (MALLOC_ERR);
 			new_var = ft_strdup(arr[j]);
 			if (new_var == NULL)
 			{

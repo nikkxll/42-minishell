@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:57:59 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 23:25:40 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:49:25 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 
 static int	get_path(char ***path, char **envp, char *command);
 
+/**
+ * @brief	Locate the command in the system
+ * @note	This function locates the executable command in the system by
+ * searching the directories specified in the PATH environment variable. It
+ * first retrieves the PATH variable from the environment, then attempts to
+ * find the executable command in each directory listed in the PATH. If the 
+ * command is found, its path is updated accordingly
+ * @param	command Pointer to the command to locate
+ * @param	envp The array of environment variables
+ * @return	Returns one of the following:
+ * - @c `0` if the command is located successfully
+ * - An error code indicating failure during the search process
+ */
 int	locate_command(char	**command, char	**envp)
 {
 	int		status;
@@ -27,6 +40,20 @@ int	locate_command(char	**command, char	**envp)
 	return (status);
 }
 
+/**
+ * @brief	Get the directories specified in the PATH environment variable
+ * @note	This function retrieves the directories specified in the PATH
+ * environment variable from the array of environment variables. It parses the
+ * PATH variable to extract individual directory paths. If the PATH variable
+ * is not found or empty, an empty array is allocated for the path. Memory
+ * is allocated dynamically for the array of directory paths
+ * @param	path Pointer to store the array of directory paths
+ * @param	envp The array of environment variables
+ * @param	command The command for which the PATH is being retrieved
+ * @return	Returns one of the following:
+ * - @c `0` if the PATH is retrieved successfully
+ * - MALLOC_ERR if memory allocation fails
+ */
 static int	get_path(char ***path, char **envp, char *command)
 {
 	char	*str;

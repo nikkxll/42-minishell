@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:00:01 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/08 12:40:10 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:46:52 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int	check_for_errors(char **arr, int *operations)
 	while (arr[++j])
 	{
 		if (operations[j] == 0)
-		{
 			return (GENERIC_ERROR);
-		}
 	}
 	return (SUCCESS);
 }

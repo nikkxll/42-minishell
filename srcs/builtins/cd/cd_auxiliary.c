@@ -6,11 +6,11 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 19:20:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/07 22:58:19 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:58:33 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 /**
  * @brief	A function that makes updates pwd and oldpwd in the ms structure
@@ -27,6 +27,8 @@ void	struct_pwd_and_full_oldpwd_update(char *new_pwd, t_minishell *ms)
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 	{
+		print_err_msg("cd", ": getcwd error occured. "
+			"Correct behavior is not guaranteed anymore\n");
 		ms->exit_status = GETCWD_ERROR;
 		return ;
 	}
@@ -57,23 +59,29 @@ void	cd_precheck(char **arr, t_minishell *ms)
 /**
  * @brief	A function that updates @c `PWD` enviroment variable
  * @param	ms pointer to the common project @c `t_minishell` structure
+ * @param	position initialization for PWD position in env list (=0)
+ * @param	cwd initialization for the cwd string
+ * @param	temp initialization for the temp string
  * @return	@c `void`
  */
-void	update_env_pwd(t_minishell *ms)
+void	update_env_pwd(t_minishell *ms, int position, char *cwd, char *temp)
 {
-	int		position;
-	char	*cwd;
-	char	*temp;
-
 	position = env_var(ms->env, "PWD=", -1, 4);
 	if (position != -1)
 	{
 		cwd = getcwd(NULL, 0);
 		if (!cwd)
+		{
+			print_err_msg("cd", ": getcwd error occured. "
+				"Correct behavior is not guaranteed anymore\n");
 			ms->exit_status = GETCWD_ERROR;
+			return ;
+		}
 		temp = ft_strjoin("PWD=", cwd);
 		if (!temp)
 		{
+			print_err_msg("cd", ": malloc error occured. "
+				"Correct behavior is not guaranteed anymore\n");
 			free(cwd);
 			ms->exit_status = MALLOC_ERR;
 			return ;
@@ -115,11 +123,13 @@ static int	oldpwd_init_when_no_oldpwd_exists(int i, t_minishell *ms)
  */
 void	update_env_oldpwd(t_minishell *ms)
 {
-	int		position;
+	int		position_pwd;
+	int		position_oldpwd;
 	char	*temp;
 
-	position = env_var(ms->env, "OLDPWD=", -1, 4);
-	if (position != -1)
+	position_oldpwd = env_var(ms->env, "OLDPWD=", -1, 7);
+	position_pwd = env_var(ms->env, "PWD=", -1, 4);
+	if (position_oldpwd != -1)
 	{
 		temp = ft_strjoin("OLDPWD=", ms->pwd);
 		if (!temp)
@@ -127,12 +137,10 @@ void	update_env_oldpwd(t_minishell *ms)
 			ms->exit_status = MALLOC_ERR;
 			return ;
 		}
-		free((ms->env)[position]);
-		(ms->env)[position] = temp;
+		free((ms->env)[position_oldpwd]);
+		(ms->env)[position_oldpwd] = temp;
 	}
-	else
-	{
-		if (ms->is_oldpwd_unset == false)
-			ms->exit_status = oldpwd_init_when_no_oldpwd_exists(1, ms);
-	}
+	else if (position_oldpwd == -1 && position_pwd != -1
+		&& ms->is_oldpwd_unset == false)
+		ms->exit_status = oldpwd_init_when_no_oldpwd_exists(1, ms);
 }

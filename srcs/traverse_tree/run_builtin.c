@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 15:49:24 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 13:26:33 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:34:08 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,18 @@ int		run_builtin_with_redir(char **command, char *redir, t_minishell *ms,
 int		copy_std_fd(int *in_fd, int *out_fd, char *commmand);
 void	return_std_fd(int	*in_fd, int *out_fd, int *status, char *command);
 
+/**
+ * @brief	Run the built-in command with or without redirection
+ * @note	This function runs the built-in command specified by the command
+ * array. If redirection is required, it calls the function to run the
+ * built-in command with redirection; otherwise, it runs the built-in command
+ * without redirection
+ * @param	command The array of arguments representing the built-in command
+ * @param	redir The redirection string, if redirection is required
+ * @param	ms Pointer to the minishell structure
+ * @param	cmd_type The type of built-in command
+ * @return	Returns the status of running the built-in command
+ */
 int	run_builtin(char **command, char *redir, t_minishell *ms, int cmd_type)
 {
 	int	status;
@@ -30,6 +42,15 @@ int	run_builtin(char **command, char *redir, t_minishell *ms, int cmd_type)
 	return (status);
 }
 
+/**
+ * @brief	Run the built-in command without redirection.
+ * @note	This function runs the built-in command specified by the command
+ * array without redirection
+ * @param	command The array of arguments representing the built-in command
+ * @param	ms Pointer to the minishell structure
+ * @param	cmd_type The type of built-in command
+ * @return	Returns the status of running the built-in command
+ */
 int	run_builtin_without_redir(char **command, t_minishell *ms, int cmd_type)
 {
 	int	status;
@@ -38,6 +59,16 @@ int	run_builtin_without_redir(char **command, t_minishell *ms, int cmd_type)
 	return (status);
 }
 
+/**
+ * @brief	Run the built-in command with redirection
+ * @note	This function runs the built-in command specified by the command
+ * array with redirection.
+ * @param	command The array of arguments representing the built-in command
+ * @param	redir The redirection string
+ * @param	ms Pointer to the minishell structure
+ * @param	cmd_type The type of built-in command
+ * @return	Returns the status of running the built-in command with redirection
+ */
 int	run_builtin_with_redir(char **command, char *redir, t_minishell *ms,
 	int cmd_type)
 {
@@ -54,6 +85,17 @@ int	run_builtin_with_redir(char **command, char *redir, t_minishell *ms,
 	return (status);
 }
 
+/**
+ * @brief	Copy standard file descriptors for input and output
+ * @note	This function duplicates the standard input and output file
+ * descriptors @c `STDIN_FILENO` and @c `STDOUT_FILENO` and stores the
+ * duplicated file descriptors in the provided pointers.
+ * @param	in_fd Pointer to store the duplicated file descriptor for input
+ * @param	out_fd Pointer to store the duplicated file descriptor for output
+ * @param	command The name of the command for error messages
+ * @return	Returns @c `0` if the file descriptors are duplicated successfully,
+ * @c `DUP_FAILURE` if an error occurs during duplication
+ */
 int	copy_std_fd(int *in_fd, int *out_fd, char *command)
 {
 	*in_fd = dup(STDIN_FILENO);
@@ -70,7 +112,19 @@ int	copy_std_fd(int *in_fd, int *out_fd, char *command)
 	return (0);
 }
 
-void	return_std_fd(int	*in_fd, int *out_fd, int *status, char *command)
+/**
+ * @brief	Restore standard file descriptors for input and output
+ * @note	This function restores the standard input and output file descriptors
+ * @c `STDIN_FILENO` and @c `STDOUT_FILENO` to their original values using the
+ * provided duplicated file descriptors. It also checks if there was any error
+ * during the redirection process and updates the status accordingly.
+ * @param	in_fd Pointer to the duplicated file descriptor for input
+ * @param	out_fd Pointer to the duplicated file descriptor for output
+ * @param	status Pointer to the status of the command execution
+ * @param	command The name of the command for error messages
+ * @return	@c `void`
+ */
+void	return_std_fd(int *in_fd, int *out_fd, int *status, char *command)
 {
 	int	redir_status;
 
