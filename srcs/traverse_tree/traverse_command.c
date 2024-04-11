@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 20:05:55 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:44:25 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 	pid_t	pid;
 
 	signal_mode_switch(IGNORE);
+	signal_mode_switch(ADD_NL);
 	pid = fork();
 	if (pid == -1)
 		return (FORK_FAILURE);
@@ -88,7 +89,6 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 	}
 	else
 	{
-		signal_mode_switch(INTERACTIVE);
 		status = wait_children(&pid, 1);
 		return (status);
 	}

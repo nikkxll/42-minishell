@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 19:41:49 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 22:29:32 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ int	get_cmdline(char **cmdline, t_minishell *ms)
 	if (status != 0)
 		return (status);
 	*cmdline = readline(prompt);
-	free(prompt);
 	if (*cmdline == NULL)
 	{
 		if (handle_ctrl_d(prompt) == MALLOC_ERR)
 			ctrl_d_error_handler("Ctrl+d error occured.\n");
 		return (EOF);
 	}
+	free(prompt);
 	if (ft_strlen(*cmdline) == 0)
 	{
 		free(*cmdline);

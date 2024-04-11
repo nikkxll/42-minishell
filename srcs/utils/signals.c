@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:35:51 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/11 20:05:09 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:48:11 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,17 @@ static void	sigint_im(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ioctl(0, TIOCSTI, "");
+		ft_printf("\n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
-		ft_printf("\033[1B");
+		rl_replace_line("", 1);
+		rl_redisplay();
 	}
+}
+
+static void	print_new_line(int sig)
+{
+	(void)sig;
+	ft_printf("\n");
 }
 
 void	signal_catcher(void (*first_handler)(int),
@@ -86,7 +92,9 @@ void	signal_mode_switch(int mode)
 	else if (mode == INTERACTIVE)
 		signal_catcher(sigint_im, SIG_IGN);
 	else if (mode == HEREDOC)
-		signal_catcher(SIG_IGN, SIG_IGN);
+		signal_catcher(SIG_DFL, SIG_IGN);
 	else if (mode == IGNORE)
 		signal_catcher(SIG_IGN, SIG_IGN);
+	else if (mode == ADD_NL)
+		signal_catcher(print_new_line, print_new_line);
 }
