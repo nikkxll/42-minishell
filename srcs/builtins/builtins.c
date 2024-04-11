@@ -6,12 +6,13 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/09 15:00:17 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:45:31 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+void	run_nothing(char **arr, t_minishell *ms);
 /**
  * @brief	A function that runs either built-in command or calling execution
  * module to run execve
@@ -22,8 +23,6 @@
  */
 int	command_run(char **arr, t_minishell *ms, int cmd_type)
 {
-	if (arr[0] == NULL)
-		return (0);
 	if (cmd_type == C_ECHO)
 	{
 		run_echo(arr + 1, 0, 0, 0);
@@ -32,7 +31,9 @@ int	command_run(char **arr, t_minishell *ms, int cmd_type)
 	else
 	{
 		ms->exit_status = SUCCESS;
-		if (cmd_type == C_CD)
+		if (cmd_type == C_EMPTY || cmd_type == C_BLANK)
+			run_nothing(arr, ms);
+		else if (cmd_type == C_CD)
 			run_cd(arr + 1, ms, 0);
 		else if (cmd_type == C_PWD)
 			run_pwd(arr + 1, ms);
@@ -46,4 +47,12 @@ int	command_run(char **arr, t_minishell *ms, int cmd_type)
 			run_exit(arr + 1, ms, 0);
 	}
 	return (ms->exit_status);
+}
+
+void	run_nothing(char **arr, t_minishell *ms)
+{
+	if (*arr == NULL)
+		return ;
+	ms->exit_status = CMD_NF_FAILURE;
+	print_err_msg(*arr, ": command not found\n");
 }

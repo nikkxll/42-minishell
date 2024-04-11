@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 12:48:50 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:37:12 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ enum	e_builtins
 {
 	NOT_BUILTIN,
 	C_EMPTY,
+	C_BLANK,
 	C_ECHO,
 	C_CD,
 	C_PWD,
