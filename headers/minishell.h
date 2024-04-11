@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/10 18:03:40 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:13:35 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,5 +193,11 @@ void			print_syntax_error(char *str);
 void			print_err_msg(char *cmd, char *msg);
 void			print_arg_err_msg(char *cmd, char *arg, char *msg);
 void			perror_err_msg(char *cmd, char *arg);
+void			ctrl_d_error_handler(char *msg);
+
+/*_____ Signals _____*/
+int				handle_ctrl_d(char *prompt);
+void			catch_signal(int mode);
+void			signal_chars_toggler(int toggle);
 
 #endif

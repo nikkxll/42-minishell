@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:21:32 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 20:06:13 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:30:11 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,11 @@ static int	heredoc(char *limiter, int fd)
 	{
 		line = readline("> ");
 		if (!line)
+		{
+			ft_printf("\033[1A");
+			ft_printf("\033[2C");
 			return (0);
+		}
 		isequal = ft_strcmp(limiter, line);
 		if (isequal != 0)
 			ft_putendl_fd(line, fd);

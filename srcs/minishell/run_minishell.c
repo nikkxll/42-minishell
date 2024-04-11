@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_minishell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/10 16:01:06 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:31:59 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	get_cmdline(char **cmdline, t_minishell *ms)
 	free(prompt);
 	if (*cmdline == NULL)
 	{
-		// ft_putstr_fd("exit\n", STDERR_FILENO);
+		if (handle_ctrl_d(prompt) == MALLOC_ERR)
+			ctrl_d_error_handler("Ctrl+d error occured.\n");
 		return (EOF);
 	}
 	if (ft_strlen(*cmdline) == 0)

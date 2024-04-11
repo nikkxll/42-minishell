@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/09 15:00:48 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:28:16 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,18 @@ enum	e_wc_paths
 	DOT_PATH,
 	ABS_PATH,
 };
+
+enum	e_signals
+{
+	DEFAULT,
+	INTERACTIVE,
+	HEREDOC,
+	IGNORE,
+};
+
+# ifndef PROMPT_COLORS_LEN
+#  define PROMPT_COLORS_LEN 33
+# endif
 
 # ifndef PROMPT_STATIC_LEN
 #  define PROMPT_STATIC_LEN 47

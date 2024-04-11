@@ -1,41 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ctrl_d_error_handler.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/11 15:28:11 by dnikifor         ###   ########.fr       */
+/*   Created: 2024/04/11 13:09:48 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/04/11 13:14:27 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	main(void)
+void	ctrl_d_error_handler(char *msg)
 {
-	t_minishell	*ms;
-	int			last_status;
-
-	signal_chars_toggler(0);
-	catch_signal(INTERACTIVE);
-	initialize_minishell(&ms);
-	run_minishell(ms);
-	last_status = ms->exit_status;
-	rl_clear_history();
-	ft_free_minishell(ms);
-	return (last_status);
+	ft_putstr_fd(msg, STDERR_FILENO);
+	ft_putstr_fd("exit\n", STDERR_FILENO);
 }
-// int	main(void)
-// {
-
-
-// 	signal_chars_toggler(0);
-// 	catch_signal(INTERACTIVE);
-// 	while(1)
-// 	{
-// 		getchar();
-// 		ft_printf(">");
-// 	}
-// 	return (0);
-// }
