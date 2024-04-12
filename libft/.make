@@ -24,7 +24,8 @@ GNL_HEADERS		:=	get_next_line.h
 AUX_PATH		:=	auxiliary/
 
 AUX_SRCS		:=	ft_abs.c ft_do_nothing.c ft_free_2d_array.c ft_free_3d_array.c ft_max.c ft_min.c \
-					ft_arrlen.c ft_isspace.c ft_atol.c ft_strcmp.c
+					ft_arrlen.c ft_isspace.c ft_atol.c ft_strcmp.c ft_lstdel_back.c ft_lstdel_front.c \
+					ft_remove_nl.c 
 
 #MAIN_LIBFT
 LIBFT			:=	libft.a

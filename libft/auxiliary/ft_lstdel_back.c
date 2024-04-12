@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdel_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/12 17:25:39 by dshatilo         ###   ########.fr       */
+/*   Created: 2023/11/01 15:05:09 by dshatilo          #+#    #+#             */
+/*   Updated: 2024/04/11 10:04:42 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../libft.h"
 
-int	main(void)
+void	ft_lstdel_back(t_list **lst, void (*del)(void*))
 {
-	t_minishell	*ms;
-	int			last_status;
+	t_list	*curr;
 
-	ft_printf("\033[2J\033[H");
-	initialize_minishell(&ms);
-	run_minishell(&ms);
-	last_status = ms->exit_status;
-	rl_clear_history();
-	save_history_to_file(ms);
-	ft_free_minishell(ms);
-	ms = NULL;
-	return (last_status);
+	if (!lst || !*lst)
+		return ;
+	curr = *lst;
+	if (curr->next == NULL)
+	{
+		del(curr->content);
+		free(curr);
+		*lst = NULL;
+	}
+	while ((curr->next)->next != NULL)
+		curr = curr->next;
+	del((curr->next)->content);
+	free(curr->next);
+	curr->next = NULL;
 }

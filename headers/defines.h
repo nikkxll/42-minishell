@@ -59,6 +59,7 @@ enum	e_builtins
 {
 	NOT_BUILTIN,
 	C_EMPTY,
+	C_BLANK,
 	C_ECHO,
 	C_CD,
 	C_PWD,
@@ -156,6 +157,10 @@ enum	e_signals
 
 # ifndef SECOND
 #  define SECOND 1
+# endif
+
+# ifndef HIST_SIZE
+#  define HIST_SIZE 500
 # endif
 
 #endif

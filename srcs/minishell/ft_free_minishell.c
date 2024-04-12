@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_minishell.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:01:52 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 18:21:42 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:20:12 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ void	ft_free_minishell(t_minishell *ms)
 	if (ms->pwd)
 		free(ms->pwd);
 	if (ms->oldpwd)
-	{
 		free(ms->oldpwd);
-	}
+	if (ms->history_path)
+		free(ms->history_path);
+	if (ms->history)
+		ft_lstclear(&(ms->history), free);
 	free(ms);
 }

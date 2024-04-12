@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:30:04 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/10 18:55:04 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:36:59 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	is_builtin(char *cmd)
 {
 	if (cmd == NULL)
 		return (C_EMPTY);
+	if (is_blank_string(cmd))
+		return (C_BLANK);
 	if (ft_strncmp(cmd, "echo", ECHO_LEN) == 0)
 		return (C_ECHO);
 	if (ft_strncmp(cmd, "cd", CD_LEN) == 0)
