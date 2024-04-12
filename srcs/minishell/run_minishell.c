@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_minishell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 20:22:48 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:30:50 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	run_minishell(t_minishell **ms)
 
 	while (true)
 	{
-		signal_mode_switch(INTERACTIVE);
-		signal_chars_toggler(0);
+		signal_interceptor(INTERACTIVE);
+		toggler(IMPLICIT);
 		status = get_cmdline(&cmdline, ms);
 		if (status == 0)
 		{
@@ -91,7 +91,7 @@ int	get_cmdline(char **cmdline, t_minishell **ms)
 		free(*cmdline);
 		return (get_cmdline(cmdline, ms));
 	}
-	add_ebash_history(*cmdline, ms, 1);
+	add_e_bash_history(*cmdline, ms, 1);
 	status = validate_input(*cmdline);
 	if (status != 0)
 		free(*cmdline);

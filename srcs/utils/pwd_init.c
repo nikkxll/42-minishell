@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:18:37 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/10 16:00:31 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:33:19 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /**
  * @brief	Auxiliary function that changes PWD in the enviroment list if it
  * exists
- * @param	cdw current working directory
  * @param	position position of PWD in the enviroment list
  * @param	envp enviroment list
  * @param	pwd pointer to the pwd in minishell structure
@@ -52,9 +51,7 @@ static int	pwd_init_when_pwd_exists(int position, char ***envp, char **pwd)
 /**
  * @brief	Auxiliary function that changes PWD in the enviroment list if it
  * does not exists
- * @param	cwd current working directory
  * @param	envp enviroment list
- * @param	i auxiliary index (equal to 0)
  * @param	pwd pointer to the pwd in minishell structure
  * @return	@c `SUCCESS` if the operation completes successfully,
  * @c `MALLOC_ERR` if memory allocation fails during processing,

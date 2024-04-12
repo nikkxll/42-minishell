@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_tree.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:17:46 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 10:21:18 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:21:45 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	traverse_tree(t_node **root, t_minishell *ms)
 	int		type;
 	int		status;
 
-	signal_mode_switch(IGNORE);
+	signal_interceptor(IGNORE);
 	status = true;
 	type = (*root)->type;
 	if (type == T_AND)

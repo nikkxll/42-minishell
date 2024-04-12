@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:45:53 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/10 18:32:53 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:32:30 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	build_prompt(char *folder_name, char **prompt, char *exit_status);
 
 /**
  * @brief	Getting current working directory
- * @param	folder_name pointer to string to fill with cwd
+ * @param	prompt pointer to the prompt string
  * @param	exit_status exit_status of previous run
  * @return	@c `MALLOC_ERR` if malloc failure occured, @c `status` otherwise
  */

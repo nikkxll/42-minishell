@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 20:30:36 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:28:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ void			run_unset(char **arr, t_minishell *ms);
 void			execute_unset(char ***envp, int position, int i);
 void			run_env(char **arr, t_minishell *ms);
 void			run_exit(char **arr, t_minishell *ms, long num);
+void			end_process(t_minishell *ms);
 char			**wrapper_ft_split_with_quotes(char *str);
 int				allocate_temp_array(char ***arr, t_w_cards *wc);
 int				fill_temp_array(char ***arr, t_w_cards *wc);
@@ -200,7 +201,7 @@ int				var_init_when_no_var_exists(char ***envp, int i, char *var);
 
 /*_____ Utils _____*/
 void			init_history(t_minishell **minishell);
-void			add_ebash_history(char *cmdline, t_minishell **minishell,
+void			add_e_bash_history(char *cmdline, t_minishell **minishell,
 					int mode);
 void			save_history_to_file(t_minishell *ms);
 int				get_prompt(char **prompt, int exit_status);
@@ -213,10 +214,7 @@ int				handle_ctrl_d(char *prompt);
 void			ctrl_d_error_handler(char *msg);
 
 /*_____ Signals _____*/
-void			signal_mode_switch(int mode);
-void			signal_chars_toggler(int toggle);
-
-/*_____ Clearing _____*/
-void			end_process(t_minishell *ms);
+void			signal_interceptor(int mode);
+void			toggler(int mode);
 
 #endif
