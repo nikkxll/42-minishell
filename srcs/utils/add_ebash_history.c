@@ -6,18 +6,18 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 11:08:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 12:57:58 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:33:43 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+void	add_to_history_list(char *cmd, char *cmdline, t_minishell **minishell);
 void	print_err_history(char *cmd);
 
-void	add_ebash_history(char *cmdline, t_minishell **minishell)
+void	add_ebash_history(char *cmdline, t_minishell **minishell, int mode)
 {
 	t_minishell	*ms;
-	t_list		*curr;
 	char		*cmd;
 
 	ms = *minishell;
@@ -31,6 +31,17 @@ void	add_ebash_history(char *cmdline, t_minishell **minishell)
 		print_err_history(cmdline);
 		return ;
 	}
+	if (mode == 0)
+		free(cmdline);
+	add_to_history_list(cmd, cmdline, minishell);
+}
+
+void	add_to_history_list(char *cmd, char *cmdline, t_minishell **minishell)
+{
+	t_list		*curr;
+	t_minishell	*ms;
+
+	ms = *minishell;
 	curr = ft_lstnew((void *)cmd);
 	if (!curr)
 	{

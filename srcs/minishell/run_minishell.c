@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 11:06:19 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:22:48 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	run_minishell(t_minishell **ms)
 {
 	int		status;
 	char	*cmdline;
-	t_node	*root;
 
 	while (true)
 	{
@@ -40,12 +39,12 @@ void	run_minishell(t_minishell **ms)
 		status = get_cmdline(&cmdline, ms);
 		if (status == 0)
 		{
-			root = NULL;
-			status = create_tree(cmdline, &root);
+			(*ms)->root = NULL;
+			status = create_tree(cmdline, &((*ms)->root));
 			if (status != 0)
 				(*ms)->exit_status = status;
 			if (status == 0)
-				(*ms)->exit_status = traverse_tree(&root, *ms);
+				(*ms)->exit_status = traverse_tree(&((*ms)->root), *ms);
 			free(cmdline);
 		}
 		else if (status == EOF)
@@ -92,7 +91,7 @@ int	get_cmdline(char **cmdline, t_minishell **ms)
 		free(*cmdline);
 		return (get_cmdline(cmdline, ms));
 	}
-	add_ebash_history(*cmdline, ms);
+	add_ebash_history(*cmdline, ms, 1);
 	status = validate_input(*cmdline);
 	if (status != 0)
 		free(*cmdline);

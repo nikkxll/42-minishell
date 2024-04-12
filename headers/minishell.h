@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 20:05:31 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:59:49 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@
 # include "../libft/libft.h"
 # include "structs.h"
 # include "defines.h"
+
+typedef struct s_minishell
+{
+	char			**env;
+	char			*pwd;
+	char			*oldpwd;
+	t_list			*history;
+	char			*history_path;
+	int				exit_status;
+	t_node			*root;
+	t_bool			is_parent;
+	t_bool			is_oldpwd_unset;
+}	t_minishell;
+
 
 /*_____ Minishell _____*/
 void			initialize_minishell(t_minishell **ms);
@@ -186,7 +200,7 @@ int				var_init_when_no_var_exists(char ***envp, int i, char *var);
 
 /*_____ Utils _____*/
 void			init_history(t_minishell **minishell);
-void			add_ebash_history(char *cmd, t_minishell **minishell);
+void			add_ebash_history(char *cmdline, t_minishell **minishell, int mode);
 void			save_history_to_file(t_minishell *ms);
 int				get_prompt(char **prompt, int exit_status);
 t_bool			is_blank_string(char *str);

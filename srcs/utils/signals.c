@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:35:51 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/12 18:04:04 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:27:43 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,4 @@ void	signal_mode_switch(int mode)
 		signal_catcher(SIG_DFL, SIG_IGN);
 	else if (mode == IGNORE)
 		signal_catcher(SIG_IGN, SIG_IGN);
-
 }

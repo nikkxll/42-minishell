@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:11:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/07 22:58:31 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:07:23 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	exit_format_num_arg_error(t_minishell *ms, char *str)
 	ms->exit_status = UNEXPECTED_EXIT;
 	exit(ms->exit_status);
 }
-
+void	end_process(t_minishell *ms);
 /**
  * @brief	A function that runs exit built-in command
  * @param	arr array of arguments or options if allowed
@@ -95,5 +95,14 @@ void	run_exit(char **arr, t_minishell *ms, long num)
 	}
 	if (ms->is_parent == true)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
+	if (ms->is_parent == true)
+		end_process(ms);
 	exit(ms->exit_status);
+}
+
+void	end_process(t_minishell *ms)
+{
+	rl_clear_history();
+	save_history_to_file(ms);
+	ft_free_minishell(ms);
 }

@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/10 13:49:29 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:59:37 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,6 @@
 # include "minishell.h"
 
 typedef struct dirent	t_dirent;
-
-typedef struct s_minishell
-{
-	char			**env;
-	char			*pwd;
-	char			*oldpwd;
-	t_list			*history;
-	char			*history_path;
-	int				exit_status;
-	t_bool			is_parent;
-	t_bool			is_oldpwd_unset;
-}	t_minishell;
 
 typedef struct s_wildcards
 {

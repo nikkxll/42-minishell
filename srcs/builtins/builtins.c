@@ -6,13 +6,14 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/11 13:45:31 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:27:20 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 void	run_nothing(char **arr, t_minishell *ms);
+
 /**
  * @brief	A function that runs either built-in command or calling execution
  * module to run execve

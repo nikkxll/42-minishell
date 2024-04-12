@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:01:52 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 13:20:12 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:58:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ void	ft_free_minishell(t_minishell *ms)
 		free(ms->history_path);
 	if (ms->history)
 		ft_lstclear(&(ms->history), free);
+	if (ms->root)
+		free_tree(&(ms->root));
 	free(ms);
 }

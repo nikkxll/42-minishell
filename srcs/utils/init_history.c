@@ -6,14 +6,13 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:02:33 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 12:47:53 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:23:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 void	read_history_file(t_minishell **ms);
-void	add_ebash_history(char *cmd, t_minishell **minishell);
 
 void	init_history(t_minishell **minishell)
 {
@@ -49,7 +48,7 @@ void	read_history_file(t_minishell **ms)
 	{
 		curr = get_next_line(fd, &status, &buffer);
 		if (curr != NULL)
-			add_ebash_history(curr, ms);
+			add_ebash_history(curr, ms, 0);
 	}
 	if (status != 0 && buffer != NULL)
 		free(buffer);
