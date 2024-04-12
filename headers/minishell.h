@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 19:59:49 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:30:36 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,8 @@ int				var_init_when_no_var_exists(char ***envp, int i, char *var);
 
 /*_____ Utils _____*/
 void			init_history(t_minishell **minishell);
-void			add_ebash_history(char *cmdline, t_minishell **minishell, int mode);
+void			add_ebash_history(char *cmdline, t_minishell **minishell,
+					int mode);
 void			save_history_to_file(t_minishell *ms);
 int				get_prompt(char **prompt, int exit_status);
 t_bool			is_blank_string(char *str);
@@ -214,5 +215,8 @@ void			ctrl_d_error_handler(char *msg);
 /*_____ Signals _____*/
 void			signal_mode_switch(int mode);
 void			signal_chars_toggler(int toggle);
+
+/*_____ Clearing _____*/
+void			end_process(t_minishell *ms);
 
 #endif

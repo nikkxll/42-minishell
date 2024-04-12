@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:11:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/12 20:07:23 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:30:05 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ static void	exit_format_num_arg_error(t_minishell *ms, char *str)
 	print_arg_err_msg("exit: ", str,
 		": numeric argument required\n");
 	ms->exit_status = UNEXPECTED_EXIT;
+	if (ms->is_parent == true)
+		end_process(ms);
 	exit(ms->exit_status);
 }
-void	end_process(t_minishell *ms);
+
 /**
  * @brief	A function that runs exit built-in command
  * @param	arr array of arguments or options if allowed
