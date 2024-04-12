@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   wait_children.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:58:08 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/10 19:55:39 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:02:05 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
+void	print_msg(int status);
 
 /**
  * @brief	Wait for the termination of child processes
@@ -38,5 +40,31 @@ int	wait_children(pid_t *pids, int num)
 	}
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
+	if (WIFSIGNALED(status))
+	{
+		print_msg(status);
+		return (status + 128);
+	}
 	return (EXIT_FAILURE);
+}
+
+void	print_msg(int status)
+{
+	int	sigcode;
+
+	sigcode = WTERMSIG(status);
+	if (sigcode == SIGINT)
+		ft_putstr_fd("\n", STDERR_FILENO);
+	else if (sigcode == SIGQUIT)
+		ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
+	else if (sigcode == SIGABRT)
+		ft_putstr_fd("Abort trap: 6\n", STDERR_FILENO);
+	else if (sigcode == SIGKILL)
+		ft_putstr_fd("Killed: 9\n", STDERR_FILENO);
+	else if (sigcode == SIGBUS)
+		ft_putstr_fd("Bus error: 10\n", STDERR_FILENO);
+	else if (sigcode == SIGSEGV)
+		ft_putstr_fd("Segmentation fault: 11\n", STDERR_FILENO);
+	else
+		ft_putstr_fd("Unknown signal\n", STDERR_FILENO);
 }

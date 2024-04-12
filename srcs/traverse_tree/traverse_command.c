@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 23:44:25 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:12:50 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,16 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 	int		status;
 	pid_t	pid;
 
-	signal_mode_switch(IGNORE);
-	signal_mode_switch(ADD_NL);
 	pid = fork();
 	if (pid == -1)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
-		signal_mode_switch(DEFAULT);
-		signal_chars_toggler(1);
 		status = 0;
 		if (redir != NULL)
 			status = apply_redirects(redir, ms);
+		signal_mode_switch(DEFAULT);
+		signal_chars_toggler(1);
 		if (status == 0)
 			status = locate_command(&command[0], ms->env);
 		if (status != 0)
@@ -87,9 +85,6 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 		print_err_msg(command[0], ": execve() error occured\n");
 		exit(EXECVE_FAILURE);
 	}
-	else
-	{
-		status = wait_children(&pid, 1);
-		return (status);
-	}
+	status = wait_children(&pid, 1);
+	return (status);
 }

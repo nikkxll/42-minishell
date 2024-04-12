@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:35:51 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/11 23:48:11 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:04:04 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,11 @@ static void	sigint_im(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_printf("\n");
+		ft_putstr_fd("\n", STDERR_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 1);
 		rl_redisplay();
 	}
-}
-
-static void	print_new_line(int sig)
-{
-	(void)sig;
-	ft_printf("\n");
 }
 
 void	signal_catcher(void (*first_handler)(int),
@@ -95,6 +89,5 @@ void	signal_mode_switch(int mode)
 		signal_catcher(SIG_DFL, SIG_IGN);
 	else if (mode == IGNORE)
 		signal_catcher(SIG_IGN, SIG_IGN);
-	else if (mode == ADD_NL)
-		signal_catcher(print_new_line, print_new_line);
+
 }
