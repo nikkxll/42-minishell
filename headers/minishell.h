@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 13:33:24 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:05:31 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,14 +185,20 @@ int				check_for_non_digits(char *str);
 int				var_init_when_no_var_exists(char ***envp, int i, char *var);
 
 /*_____ Utils _____*/
+void			init_history(t_minishell **minishell);
+void			add_ebash_history(char *cmd, t_minishell **minishell);
+void			save_history_to_file(t_minishell *ms);
 int				get_prompt(char **prompt, int exit_status);
 t_bool			is_blank_string(char *str);
 void			print_syntax_error(char *str);
 void			print_err_msg(char *cmd, char *msg);
 void			print_arg_err_msg(char *cmd, char *arg, char *msg);
 void			perror_err_msg(char *cmd, char *arg);
-void			init_history(t_minishell **minishell);
-void			add_ebash_history(char *cmd, t_minishell **minishell);
-void			save_history_to_file(t_minishell *ms);
+int				handle_ctrl_d(char *prompt);
+void			ctrl_d_error_handler(char *msg);
+
+/*_____ Signals _____*/
+void			signal_mode_switch(int mode);
+void			signal_chars_toggler(int toggle);
 
 #endif

@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ctrl_d_error_handler.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/12 17:25:39 by dshatilo         ###   ########.fr       */
+/*   Created: 2024/04/11 13:09:48 by dnikifor          #+#    #+#             */
+/*   Updated: 2024/04/11 13:14:27 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	main(void)
+void	ctrl_d_error_handler(char *msg)
 {
-	t_minishell	*ms;
-	int			last_status;
-
-	ft_printf("\033[2J\033[H");
-	initialize_minishell(&ms);
-	run_minishell(&ms);
-	last_status = ms->exit_status;
-	rl_clear_history();
-	save_history_to_file(ms);
-	ft_free_minishell(ms);
-	ms = NULL;
-	return (last_status);
+	ft_putstr_fd(msg, STDERR_FILENO);
+	ft_putstr_fd("exit\n", STDERR_FILENO);
 }

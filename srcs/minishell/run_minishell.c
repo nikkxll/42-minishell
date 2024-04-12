@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 13:13:48 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/12 11:06:19 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	run_minishell(t_minishell **ms)
 
 	while (true)
 	{
+		signal_mode_switch(INTERACTIVE);
+		signal_chars_toggler(0);
 		status = get_cmdline(&cmdline, ms);
 		if (status == 0)
 		{
@@ -77,12 +79,14 @@ int	get_cmdline(char **cmdline, t_minishell **ms)
 	if (status != 0)
 		return (status);
 	*cmdline = readline(prompt);
-	free(prompt);
 	if (*cmdline == NULL)
 	{
-		// ft_putstr_fd("exit\n", STDERR_FILENO);
+		if (handle_ctrl_d(prompt) == MALLOC_ERR)
+			ctrl_d_error_handler("Ctrl+d error occured.\n");
+		free(prompt);
 		return (EOF);
 	}
+	free(prompt);
 	if (ft_strlen(*cmdline) == 0)
 	{
 		free(*cmdline);

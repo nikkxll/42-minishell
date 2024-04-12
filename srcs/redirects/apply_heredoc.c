@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:21:32 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 20:06:13 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:06:47 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,27 @@ int	apply_heredoc(char *limiter, int *in)
 {
 	int		status;
 	int		hd[2];
+	pid_t	pid;
 
 	close(*in);
 	while (*limiter == SPACE)
 		limiter++;
 	if (pipe(hd) == -1)
 		return (PIPE_FAILURE);
-	status = heredoc(limiter, hd[WRITE]);
-	close(hd[WRITE]);
-	if (status != 0)
+	pid = fork();
+	if (pid == -1)
+		return (FORK_FAILURE);
+	if (pid == CHILD)
+	{
+		signal_mode_switch(HEREDOC);
+		signal_chars_toggler(0);
 		close(hd[READ]);
-	else
-		*in = hd[READ];
-	return (status);
+		heredoc(limiter, hd[WRITE]);
+	}
+	close(hd[WRITE]);
+	status = wait_children(&pid, 1);
+	*in = hd[READ];
+	return (status != 0);
 }
 
 /**
@@ -73,12 +81,20 @@ static int	heredoc(char *limiter, int fd)
 	{
 		line = readline("> ");
 		if (!line)
-			return (0);
+		{
+			close(fd);
+			ft_printf("\033[1A");
+			ft_printf("\033[2C");
+			exit(0);
+		}
 		isequal = ft_strcmp(limiter, line);
 		if (isequal != 0)
 			ft_putendl_fd(line, fd);
 		free(line);
 		if (isequal == 0)
-			return (0);
+		{
+			close(fd);
+			exit(0);
+		}
 	}
 }

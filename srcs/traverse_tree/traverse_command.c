@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/10 19:36:40 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:12:50 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 		status = 0;
 		if (redir != NULL)
 			status = apply_redirects(redir, ms);
+		signal_mode_switch(DEFAULT);
+		signal_chars_toggler(1);
 		if (status == 0)
 			status = locate_command(&command[0], ms->env);
 		if (status != 0)
@@ -83,9 +85,6 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 		print_err_msg(command[0], ": execve() error occured\n");
 		exit(EXECVE_FAILURE);
 	}
-	else
-	{
-		status = wait_children(&pid, 1);
-		return (status);
-	}
+	status = wait_children(&pid, 1);
+	return (status);
 }

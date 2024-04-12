@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/11 13:37:12 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:03:37 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,18 @@ enum	e_wc_paths
 	DOT_PATH,
 	ABS_PATH,
 };
+
+enum	e_signals
+{
+	DEFAULT,
+	INTERACTIVE,
+	HEREDOC,
+	IGNORE,
+};
+
+# ifndef PROMPT_COLORS_LEN
+#  define PROMPT_COLORS_LEN 33
+# endif
 
 # ifndef PROMPT_STATIC_LEN
 #  define PROMPT_STATIC_LEN 47
