@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 18:12:50 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 23:24:39 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 	int		status;
 	pid_t	pid;
 
+	if (ms->is_parent == false)
+		signal_mode_switch(DEFAULT);
 	pid = fork();
 	if (pid == -1)
 		return (FORK_FAILURE);

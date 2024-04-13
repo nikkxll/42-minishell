@@ -6,11 +6,13 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/12 17:25:39 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 22:59:40 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
+volatile sig_atomic_t	g_sgnl;
 
 int	main(void)
 {

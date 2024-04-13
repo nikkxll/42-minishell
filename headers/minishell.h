@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 20:30:36 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/13 23:18:55 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include "structs.h"
 # include "defines.h"
 
+volatile sig_atomic_t	g_sgnl;
+
 typedef struct s_minishell
 {
 	char			**env;
@@ -37,7 +39,6 @@ typedef struct s_minishell
 	t_bool			is_parent;
 	t_bool			is_oldpwd_unset;
 }	t_minishell;
-
 
 /*_____ Minishell _____*/
 void			initialize_minishell(t_minishell **ms);
@@ -103,8 +104,6 @@ int				command_without_bracket_block(t_node_info **node, char *str,
 					int type);
 int				brackets_search(char *str);
 int				redir_search(char *str);
-void			change_all_redirs_within_quotes(char *str, int mode, int i,
-					int quote_type);
 
 /*_____ Traverse-tree _____*/
 int				traverse_tree(t_node **node, t_minishell *ms);

@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:35:51 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/12 18:27:43 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:10:00 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	handle_ctrl_d(char *prompt)
 	char	*shift_len;
 
 	len = ft_strlen(prompt) - PROMPT_COLORS_LEN;
+	free(prompt);
 	shift_len = ft_itoa(len);
 	if (!shift_len)
 		return (MALLOC_ERR);
@@ -54,10 +55,11 @@ static void	sigint_im(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_putstr_fd("\n", STDERR_FILENO);
+		ioctl(0, TIOCSTI, "\n");
 		rl_on_new_line();
-		rl_replace_line("", 1);
-		rl_redisplay();
+		rl_replace_line("", 0);
+		ft_printf("\033[1A");
+		g_sgnl = sig;
 	}
 }
 

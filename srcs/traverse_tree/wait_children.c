@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:58:08 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 20:12:50 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 18:34:44 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	wait_children(pid_t *pids, int num)
 		waitpid(pids[i], &status, 0);
 		i++;
 	}
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	else if (WIFSIGNALED(status))
+	if (WIFSIGNALED(status))
 	{
 		print_msg(status);
 		return (status + 128);
 	}
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
 	return (EXIT_FAILURE);
 }
 
@@ -65,6 +65,8 @@ void	print_msg(int status)
 		ft_putstr_fd("Bus error: 10\n", STDERR_FILENO);
 	else if (sigcode == SIGSEGV)
 		ft_putstr_fd("Segmentation fault: 11\n", STDERR_FILENO);
+	else if (sigcode == SIGPIPE)
+		;
 	else
-		;// ft_putstr_fd("Unknown signal\n", STDERR_FILENO);
+		ft_putstr_fd("Unknown signal\n", STDERR_FILENO);
 }

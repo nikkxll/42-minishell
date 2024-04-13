@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:43:12 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 14:58:27 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 17:52:41 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	traverse_pipe(t_node **root, t_minishell *ms)
 	pid_t	pids[2];
 	t_node	*node;
 
+	if (ms->is_parent == false)
+		signal_mode_switch(DEFAULT);
 	node = *root;
 	if (pipe(pipefd) == -1)
 		return (PIPE_FAILURE);
@@ -68,6 +70,7 @@ int	traverse_first(t_node **node, t_minishell *ms, int pipefd[2], int pids[2])
 		return (FORK_FAILURE);
 	if (pids[FIRST] == CHILD)
 	{
+		signal_mode_switch(DEFAULT);
 		ms->is_parent = false;
 		close(pipefd[READ]);
 		if (dup2(pipefd[WRITE], STDOUT_FILENO) == -1)
@@ -106,6 +109,7 @@ int	traverse_second(t_node **node, t_minishell *ms, int pipefd[2], int pids[2])
 		return (FORK_FAILURE);
 	if (pids[SECOND] == CHILD)
 	{
+		signal_mode_switch(DEFAULT);
 		ms->is_parent = false;
 		if (dup2(pipefd[READ], STDIN_FILENO) == -1)
 		{

@@ -6,13 +6,14 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 20:22:48 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:11:27 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	get_cmdline(char **cmdline, t_minishell **ms);
+int		get_cmdline(char **cmdline, t_minishell **ms);
+void	check_signal(t_minishell **ms);
 
 /**
  * @brief	Runs the minishell main loop
@@ -82,13 +83,13 @@ int	get_cmdline(char **cmdline, t_minishell **ms)
 	{
 		if (handle_ctrl_d(prompt) == MALLOC_ERR)
 			ctrl_d_error_handler("Ctrl+d error occured.\n");
-		free(prompt);
 		return (EOF);
 	}
 	free(prompt);
 	if (ft_strlen(*cmdline) == 0)
 	{
 		free(*cmdline);
+		check_signal(ms);
 		return (get_cmdline(cmdline, ms));
 	}
 	add_ebash_history(*cmdline, ms, 1);
@@ -96,4 +97,13 @@ int	get_cmdline(char **cmdline, t_minishell **ms)
 	if (status != 0)
 		free(*cmdline);
 	return (status);
+}
+
+void	check_signal(t_minishell **ms)
+{
+	if (g_sgnl == SIGINT)
+	{
+		(*ms)->exit_status = 1;
+		g_sgnl = 0;
+	}
 }
