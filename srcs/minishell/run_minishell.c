@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/14 16:11:27 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:45:15 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ void	run_minishell(t_minishell **ms)
 		signal_mode_switch(INTERACTIVE);
 		signal_chars_toggler(0);
 		status = get_cmdline(&cmdline, ms);
+		if (status != 0 || status != EOF)
+			(*ms)->exit_status = status;
+		if (status == EOF || status == MALLOC_ERR)
+			break ;
 		if (status == 0)
 		{
 			(*ms)->root = NULL;
@@ -48,10 +52,6 @@ void	run_minishell(t_minishell **ms)
 				(*ms)->exit_status = traverse_tree(&((*ms)->root), *ms);
 			free(cmdline);
 		}
-		else if (status == EOF)
-			break ;
-		else if (status == SYNTAX_ERROR)
-			(*ms)->exit_status = status;
 	}
 }
 
