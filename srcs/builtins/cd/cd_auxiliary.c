@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 19:20:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/10 19:58:33 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/14 23:00:29 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,18 @@
  * @param	ms pointer to the common project @c `t_minishell` structure
  * @return	@c `void`
  */
-void	struct_pwd_and_full_oldpwd_update(char *new_pwd, t_minishell *ms)
+void struct_pwd_and_full_oldpwd_update(char *new_pwd, t_minishell *ms)
 {
-	ms->oldpwd = ms->pwd;
+	if (ms->oldpwd)
+		free(ms->oldpwd);
+	ms->oldpwd = ft_strdup(ms->pwd);
+	if (!(ms->oldpwd))
+	{
+		print_err_msg("cd", ": malloc error occured. "
+			"Correct behavior is not guaranteed anymore\n");
+		ms->exit_status = MALLOC_ERR;
+		return ;
+	}
 	update_env_oldpwd(ms);
 	if (ms->exit_status != SUCCESS)
 		return ;
@@ -32,6 +41,7 @@ void	struct_pwd_and_full_oldpwd_update(char *new_pwd, t_minishell *ms)
 		ms->exit_status = GETCWD_ERROR;
 		return ;
 	}
+	free(ms->pwd);
 	ms->pwd = new_pwd;
 }
 
