@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/11 11:12:38 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 23:00:42 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ void	initialize_minishell(t_minishell **ms)
 		status = shlvl_init(&((*ms)->env));
 	if (status == 0)
 		init_history(ms);
+	(*ms)->is_parent = true;
+	g_sgnl = 0;
 	if (status != 0)
 		terminate_minishell(ms, status);
-	(*ms)->is_parent = true;
 }
 
 /**

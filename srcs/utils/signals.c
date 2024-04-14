@@ -46,10 +46,11 @@ static void	sigint_interactive(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_putstr_fd("\n", STDERR_FILENO);
+		ioctl(0, TIOCSTI, "\n");
 		rl_on_new_line();
-		rl_replace_line("", 1);
-		rl_redisplay();
+		rl_replace_line("", 0);
+		ft_printf("\033[1A");
+		g_sgnl = sig;
 	}
 }
 

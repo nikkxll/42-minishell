@@ -150,6 +150,7 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_PATH)
+	@rm -rf .e-bash_history
 	@echo "$(RED)\nFull clean up completed successfully!$(EC)"
 
 re: fclean all

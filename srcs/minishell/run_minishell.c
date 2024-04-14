@@ -6,13 +6,14 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 00:30:50 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:45:15 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	get_cmdline(char **cmdline, t_minishell **ms);
+int		get_cmdline(char **cmdline, t_minishell **ms);
+void	check_signal(t_minishell **ms);
 
 /**
  * @brief	Runs the minishell main loop
@@ -37,6 +38,10 @@ void	run_minishell(t_minishell **ms)
 		signal_interceptor(INTERACTIVE);
 		toggler(IMPLICIT);
 		status = get_cmdline(&cmdline, ms);
+		if (status != 0 || status != EOF)
+			(*ms)->exit_status = status;
+		if (status == EOF || status == MALLOC_ERR)
+			break ;
 		if (status == 0)
 		{
 			(*ms)->root = NULL;
@@ -47,10 +52,6 @@ void	run_minishell(t_minishell **ms)
 				(*ms)->exit_status = traverse_tree(&((*ms)->root), *ms);
 			free(cmdline);
 		}
-		else if (status == EOF)
-			break ;
-		else if (status == SYNTAX_ERROR)
-			(*ms)->exit_status = status;
 	}
 }
 
@@ -82,13 +83,13 @@ int	get_cmdline(char **cmdline, t_minishell **ms)
 	{
 		if (handle_ctrl_d(prompt) == MALLOC_ERR)
 			ctrl_d_error_handler("Ctrl+d error occured.\n");
-		free(prompt);
 		return (EOF);
 	}
 	free(prompt);
 	if (ft_strlen(*cmdline) == 0)
 	{
 		free(*cmdline);
+		check_signal(ms);
 		return (get_cmdline(cmdline, ms));
 	}
 	add_e_bash_history(*cmdline, ms, 1);
@@ -96,4 +97,13 @@ int	get_cmdline(char **cmdline, t_minishell **ms)
 	if (status != 0)
 		free(*cmdline);
 	return (status);
+}
+
+void	check_signal(t_minishell **ms)
+{
+	if (g_sgnl == SIGINT)
+	{
+		(*ms)->exit_status = 1;
+		g_sgnl = 0;
+	}
 }

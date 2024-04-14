@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 17:47:36 by dshatilo          #+#    #+#             */
-/*   Updated: 2023/11/28 11:50:56 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 15:42:27 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	if (!s || !fd)
 		return ;
-	while (*s)
-		ft_putchar_fd(*s++, fd);
+	write(fd, s, ft_strlen(s));
 }

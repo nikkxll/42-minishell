@@ -67,6 +67,8 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 	int		status;
 	pid_t	pid;
 
+	if (ms->is_parent == false)
+		signal_mode_switch(DEFAULT);
 	pid = fork();
 	if (pid == -1)
 		return (FORK_FAILURE);

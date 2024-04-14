@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 13:37:47 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 14:58:32 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 17:35:41 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ int	traverse_command_br(t_node **root, t_minishell *ms)
 	pid_t	pid;
 	t_node	*node;
 
+	if (ms->is_parent == false)
+		signal_mode_switch(DEFAULT);
 	pid = fork();
 	if (pid == -1)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
+		signal_mode_switch(DEFAULT);
 		ms->is_parent = false;
 		node = *root;
 		status = apply_redirects(((t_redir *)(node->left))->str, ms);
@@ -44,11 +47,6 @@ int	traverse_command_br(t_node **root, t_minishell *ms)
 		exit (status);
 	}
 	else
-	{
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
-		return (EXIT_FAILURE);
-	}
-	return (0);
+		status = wait_children(&pid, 1);
+	return (status);
 }
