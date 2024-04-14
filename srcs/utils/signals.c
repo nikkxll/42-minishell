@@ -3,55 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:35:51 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/14 16:10:00 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:46:41 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	handle_ctrl_d(char *prompt)
-{
-	int		len;
-	char	*shift;
-	char	*shift_len;
-
-	len = ft_strlen(prompt) - PROMPT_COLORS_LEN;
-	free(prompt);
-	shift_len = ft_itoa(len);
-	if (!shift_len)
-		return (MALLOC_ERR);
-	len = ft_strlen(shift_len) + 4;
-	shift = ft_calloc(len, sizeof(char));
-	if (!shift)
-	{
-		free(shift_len);
-		return (MALLOC_ERR);
-	}
-	ft_strlcat(shift, "\033[", len);
-	ft_strlcat(shift, shift_len, len);
-	ft_strlcat(shift, "C", len);
-	ft_printf("\033[1A");
-	ft_printf("%s", shift);
-	ft_printf("exit\n");
-	return (SUCCESS);
-}
-
-void	signal_chars_toggler(int toggle)
+/**
+ * @brief	Toggle echoing of control characters in the terminal
+ * @note	This function toggles the echoing of control characters in the
+ * terminal. When the @c `mode` parameter is non-zero, it enables the echoing
+ * of control characters. When @c `mode` is zero, it disables the echoing of
+ * control characters.
+ * @param	mode An integer indicating whether to enable (non-zero) or disable
+ * (zero) the echoing of control characters
+ * @return	@c `void`
+ */
+void	toggler(int mode)
 {
 	struct termios	terminal;
 
 	tcgetattr(STDIN_FILENO, &terminal);
-	if (toggle)
+	if (mode)
 		terminal.c_lflag |= ECHOCTL;
-	else if (!toggle)
+	else if (!mode)
 		terminal.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &terminal);
 }
 
-static void	sigint_im(int sig)
+/**
+ * @brief	Signal handler for interactive mode of SIGINT signal
+ * @note	This function is called when a SIGINT signal is received in
+ * interactive mode. It prints a newline character to standard error and
+ * performs readline library cleanup to reset the input line.
+ * @param	sig The signal number
+ * @return	@c `void`
+ */
+static void	sigint_interactive(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -63,7 +54,18 @@ static void	sigint_im(int sig)
 	}
 }
 
-void	signal_catcher(void (*first_handler)(int),
+/**
+ * @brief	Initialize signal handlers for SIGINT and SIGQUIT
+ * @note	This function initializes signal handlers for SIGINT and SIGQUIT
+ * signals with the provided handler functions. It sets up signal actions for
+ * the first and second handler functions specified.
+ * @param	first_handler  Pointer to the function to handle the first signal
+ * (@c `SIGINT`)
+ * @param	second_handler Pointer to the function to handle the second signal
+ * (@c `SIGQUIT`)
+ * @return	@c `void`
+ */
+static void	interceptor_init(void (*first_handler)(int),
 	void (*second_handler)(int))
 {
 	struct sigaction	sa;
@@ -81,14 +83,28 @@ void	signal_catcher(void (*first_handler)(int),
 	sigaction(SIGQUIT, &sq, NULL);
 }
 
-void	signal_mode_switch(int mode)
+/**
+ * @brief	Set signal handlers based on the mode
+ * @note	This function sets signal handlers based on the mode provided.
+ * Depending on the mode, different signal handlers are set for the SIGINT
+ * signal. Modes:
+ * @param	mode An integer representing the mode
+ * @note	@c `DEFAULT` Set signal handlers to their default behavior
+ * @note	@c `INTERACTIVE` Set signal handler for SIGINT to
+ * @c `sigint_interactive()` and ignore SIGQUIT
+ * @note	@c `HEREDOC` Set signal handler for SIGINT to its default behavior
+ * and ignore SIGQUIT
+ * @note	@c `IGNORE` Ignore both SIGINT and SIGQUIT signals
+ * @return	@c `void`
+ */
+void	signal_interceptor(int mode)
 {
 	if (mode == DEFAULT)
-		signal_catcher(SIG_DFL, SIG_DFL);
+		interceptor_init(SIG_DFL, SIG_DFL);
 	else if (mode == INTERACTIVE)
-		signal_catcher(sigint_im, SIG_IGN);
+		interceptor_init(sigint_interactive, SIG_IGN);
 	else if (mode == HEREDOC)
-		signal_catcher(SIG_DFL, SIG_IGN);
+		interceptor_init(SIG_DFL, SIG_IGN);
 	else if (mode == IGNORE)
-		signal_catcher(SIG_IGN, SIG_IGN);
+		interceptor_init(SIG_IGN, SIG_IGN);
 }

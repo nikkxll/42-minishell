@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   run_minishell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
 /*   Updated: 2024/04/14 17:45:15 by dshatilo         ###   ########.fr       */
@@ -35,8 +35,8 @@ void	run_minishell(t_minishell **ms)
 
 	while (true)
 	{
-		signal_mode_switch(INTERACTIVE);
-		signal_chars_toggler(0);
+		signal_interceptor(INTERACTIVE);
+		toggler(IMPLICIT);
 		status = get_cmdline(&cmdline, ms);
 		if (status != 0 || status != EOF)
 			(*ms)->exit_status = status;
@@ -92,7 +92,7 @@ int	get_cmdline(char **cmdline, t_minishell **ms)
 		check_signal(ms);
 		return (get_cmdline(cmdline, ms));
 	}
-	add_ebash_history(*cmdline, ms, 1);
+	add_e_bash_history(*cmdline, ms, 1);
 	status = validate_input(*cmdline);
 	if (status != 0)
 		free(*cmdline);

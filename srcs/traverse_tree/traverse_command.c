@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 23:24:39 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:31:03 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 		status = 0;
 		if (redir != NULL)
 			status = apply_redirects(redir, ms);
-		signal_mode_switch(DEFAULT);
-		signal_chars_toggler(1);
+		signal_interceptor(DEFAULT);
+		toggler(EXPLICIT);
 		if (status == 0)
 			status = locate_command(&command[0], ms->env);
 		if (status != 0)

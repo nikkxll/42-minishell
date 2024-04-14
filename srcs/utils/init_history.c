@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_history.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:02:33 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 19:23:56 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:05:11 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 void	read_history_file(t_minishell **ms);
 
+/**
+ * @brief	Initialize the minishell history
+ * @note	This function initializes the minishell history by setting the
+ * path to the history file. If the history file exists, it reads the history
+ * from the file.
+ * @param	minishell Pointer to the minishell structure
+ * @return	@c `void`
+ */
 void	init_history(t_minishell **minishell)
 {
 	t_minishell	*ms;
@@ -29,6 +37,18 @@ void	init_history(t_minishell **minishell)
 		read_history_file(minishell);
 }
 
+/**
+ * @brief	Read the minishell history from a file
+ *
+ * @note	This function reads the minishell history from the history file.
+ * It opens the history file for reading, reads each line from the file using
+ * the @c `get_next_line()` function, and adds each line to the minishell history.
+ * If an error occurs while reading the file or using @c `get_next_line()`,
+ * appropriate error messages are printed.
+ *
+ * @param	ms Pointer to the minishell structure
+ * @return	@c `void`
+ */
 void	read_history_file(t_minishell **ms)
 {
 	int			fd;
@@ -48,7 +68,7 @@ void	read_history_file(t_minishell **ms)
 	{
 		curr = get_next_line(fd, &status, &buffer);
 		if (curr != NULL)
-			add_ebash_history(curr, ms, 0);
+			add_e_bash_history(curr, ms, 0);
 	}
 	if (status != 0 && buffer != NULL)
 		free(buffer);

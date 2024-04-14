@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:21:32 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 18:06:47 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:30:56 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	apply_heredoc(char *limiter, int *in)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
-		signal_mode_switch(HEREDOC);
-		signal_chars_toggler(0);
+		signal_interceptor(HEREDOC);
+		toggler(IMPLICIT);
 		close(hd[READ]);
 		heredoc(limiter, hd[WRITE]);
 	}

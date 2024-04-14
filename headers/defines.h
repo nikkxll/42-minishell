@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 18:03:37 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:30:29 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ enum	e_types
 	T_BRACKET,
 	T_COMMAND_BR,
 	T_COMMAND,
-	T_REDIR
+	T_REDIR,
 };
 
 enum	e_characters
@@ -97,7 +97,7 @@ enum	e_exit_status
 	EXECVE_FAILURE = 2000,
 	FORK_FAILURE = 3000,
 	PIPE_FAILURE = 4000,
-	DUP_FAILURE = 5000
+	DUP_FAILURE = 5000,
 };
 
 enum	e_export_types
@@ -105,7 +105,7 @@ enum	e_export_types
 	EXPORT_ERROR = 1,
 	EXPORT_EDIT,
 	EXPORT_ADD,
-	EXPORT_SKIP
+	EXPORT_SKIP,
 };
 
 enum	e_wc_paths
@@ -121,6 +121,12 @@ enum	e_signals
 	INTERACTIVE,
 	HEREDOC,
 	IGNORE,
+};
+
+enum	e_signals_echo
+{
+	IMPLICIT,
+	EXPLICIT,
 };
 
 # ifndef PROMPT_COLORS_LEN
