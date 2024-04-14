@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/14 17:45:15 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/15 00:20:22 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,16 @@ int	get_cmdline(char **cmdline, t_minishell **ms)
 	return (status);
 }
 
+/**
+ * @brief	Check if a SIGINT signal was received and update the exit status
+ * accordingly
+ * @note	This function checks if the global variable g_sgnl holds the
+ * value @c `SIGINT`, indicating that a @c `SIGINT` signal was received. If
+ * so, it updates the exit status of the minishell pointed to by @c `ms` to
+ * @c `1` and resets the value of g_sgnl to @c `0`
+ * @param	ms A pointer to the minishell structure
+ * @return	@c `void`
+ */
 void	check_signal(t_minishell **ms)
 {
 	if (g_sgnl == SIGINT)

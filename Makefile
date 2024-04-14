@@ -16,7 +16,7 @@ MINISHELL			:=	$(addprefix $(MINISHELL_PATH), $(MINISHELL_NAME))
 UTILS_NAME			:=	remove_quotes.c errors_print.c split_before_wildcards.c \
 						prompt_update.c pwd_init.c shlvl_init.c sort_string_array.c \
 						realloc_env.c ft_split_with_quotes.c init_history.c add_e_bash_history.c \
-						save_history_to_file.c ctrl_d_error_handler.c signals.c
+						save_history_to_file.c ctrl_d_error_handler.c
 UTILS_PATH			:=	utils/
 UTILS				:=	$(addprefix $(UTILS_PATH), $(UTILS_NAME))
 
@@ -77,9 +77,14 @@ TRAVERSE_NAME		:=	traverse_tree.c traverse_bracket.c traverse_pipe.c wait_childr
 TRAVERSE_PATH		:=	traverse_tree/
 TRAVERSE			:=	$(addprefix $(TRAVERSE_PATH), $(TRAVERSE_NAME))
 
+# SIGNALS
+SIGNALS_NAME		:=	interceptor.c toggler.c
+SIGNALS_PATH		:=	signals/
+SIGNALS				:=	$(addprefix $(SIGNALS_PATH), $(SIGNALS_NAME))
+
 # SOURCE_FILES
 SRCS				:=	$(MINISHELL) $(UTILS) $(AST_PARSER) $(LEXER) $(VALIDATOR) \
-						$(WILDCARDS) $(D_SIGN) $(BUILTINS) $(REDIR) $(TRAVERSE)
+						$(WILDCARDS) $(D_SIGN) $(BUILTINS) $(REDIR) $(TRAVERSE) $(SIGNALS)
 SRCS_PATH			:=	srcs/
 
 # OBJECT_FILES
@@ -92,15 +97,15 @@ LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
 # READLINE
-RL					:=	/opt/homebrew/opt/readline/lib/
-RLH					:=	/opt/homebrew/opt/readline/lib/
-RL_HEADER			:=	/opt/homebrew/opt/readline/include/readline/readline.h
-RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
+# RL					:=	/opt/homebrew/opt/readline/lib/
+# RLH					:=	/opt/homebrew/opt/readline/lib/
+# RL_HEADER			:=	/opt/homebrew/opt/readline/include/readline/readline.h
+# RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
 
-# RL					:=	~/.brew/Cellar/readline/8.2.7/lib
-# RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
-# RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
-# RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
+RL					:=	~/.brew/Cellar/readline/8.2.7/lib
+RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
+RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
+RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
 
 # HEADERS AND EXTERNAL LIBRARIES
 HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)
@@ -134,6 +139,7 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)$(BUILTINS_CD_PATH)
 	@mkdir -p $(OBJS_PATH)$(REDIR_PATH)
 	@mkdir -p $(OBJS_PATH)$(TRAVERSE_PATH)
+	@mkdir -p $(OBJS_PATH)$(SIGNALS_PATH)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c $(HEADERS)
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@

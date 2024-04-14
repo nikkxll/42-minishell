@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_children.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:58:08 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 18:34:44 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/15 00:17:40 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@ int	wait_children(pid_t *pids, int num)
 	return (EXIT_FAILURE);
 }
 
+/**
+ * @brief	Print a message corresponding to the given status
+ * @note	This function prints a message based on the signal code extracted
+ * from the given status. It prints different messages for common signals such
+ * as @c `SIGINT`, @c `SIGQUIT`, @c `SIGABRT`, @c `SIGKILL`, @c `SIGBUS`,
+ * @c `SIGSEGV`, and handles @c `SIGPIPE` silently. If the signal code is not
+ * recognized, it prints "Unknown signal".
+ * @param	status The status code indicating the termination status of a child
+ * process
+ * @return	@c `void`
+ */
 void	print_msg(int status)
 {
 	int	sigcode;

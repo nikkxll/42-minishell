@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 00:30:29 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 00:24:34 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ enum	e_exit_status
 	GETCWD_ERROR,
 	UNEXPECTED_EXIT = 255,
 	SYNTAX_ERROR = 258,
-	RL_FAILURE = 999,
-	EXECVE_FAILURE = 2000,
-	FORK_FAILURE = 3000,
-	PIPE_FAILURE = 4000,
-	DUP_FAILURE = 5000,
+	RL_FAILURE = 300,
+	EXECVE_FAILURE = 400,
+	FORK_FAILURE = 500,
+	PIPE_FAILURE = 600,
+	DUP_FAILURE = 700,
 };
 
 enum	e_export_types

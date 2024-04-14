@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_command_br.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 13:37:47 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 17:35:41 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/15 00:12:05 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int	traverse_command_br(t_node **root, t_minishell *ms)
 	t_node	*node;
 
 	if (ms->is_parent == false)
-		signal_mode_switch(DEFAULT);
+		signal_interceptor(DEFAULT);
 	pid = fork();
 	if (pid == -1)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
-		signal_mode_switch(DEFAULT);
+		signal_interceptor(DEFAULT);
 		ms->is_parent = false;
 		node = *root;
 		status = apply_redirects(((t_redir *)(node->left))->str, ms);

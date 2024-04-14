@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 00:31:03 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 00:12:08 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	run_external(char **command, char *redir, t_minishell *ms)
 	pid_t	pid;
 
 	if (ms->is_parent == false)
-		signal_mode_switch(DEFAULT);
+		signal_interceptor(DEFAULT);
 	pid = fork();
 	if (pid == -1)
 		return (FORK_FAILURE);

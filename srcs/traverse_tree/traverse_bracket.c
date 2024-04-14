@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_bracket.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 15:46:26 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 17:35:55 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/15 00:12:00 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	traverse_bracket(t_node **root, t_minishell *ms)
 	t_node	*node;
 
 	if (ms->is_parent == false)
-		signal_mode_switch(DEFAULT);
+		signal_interceptor(DEFAULT);
 	pid = fork();
 	if (pid == -1)
 		return (FORK_FAILURE);
 	if (pid == CHILD)
 	{
-		signal_mode_switch(DEFAULT);
+		signal_interceptor(DEFAULT);
 		ms->is_parent = false;
 		node = *root;
 		status = traverse_tree(&(node->left), ms);
