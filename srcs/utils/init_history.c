@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:02:33 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:02:52 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:29:52 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	init_history(t_minishell **minishell)
  *
  * @note	This function reads the minishell history from the history file.
  * It opens the history file for reading, reads each line from the file using
- * the @c `get_next_line()` function, and adds each line to the minishell history.
+ * the @c `get_next_line()` function and adds each line to the 
+ * minishell history.
  * If an error occurs while reading the file or using @c `get_next_line()`,
  * appropriate error messages are printed.
  *

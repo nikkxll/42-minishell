@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_auxiliary.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 19:20:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/14 23:00:29 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:29:06 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param	ms pointer to the common project @c `t_minishell` structure
  * @return	@c `void`
  */
-void struct_pwd_and_full_oldpwd_update(char *new_pwd, t_minishell *ms)
+void	struct_pwd_and_full_oldpwd_update(char *new_pwd, t_minishell *ms)
 {
 	if (ms->oldpwd)
 		free(ms->oldpwd);
