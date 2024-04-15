@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:41:05 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 10:54:18 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:06:34 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	validate_input(char *str)
 	status = true;
 	while (ft_isspace(*str))
 		str++;
+	if (*str == NULL_TERM)
+		return (SUCCESS);
 	next_token = validate_and_or(str, &status);
 	if (*next_token != NULL_TERM || status == false)
 	{
