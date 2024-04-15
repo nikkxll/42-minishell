@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 00:24:34 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:07:47 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,14 @@ enum	e_exit_status
 	CMD_NF_FAILURE = 127,
 	MALLOC_ERR = 200,
 	SYSTEM_ERROR = 201,
-	CHDIR_ERROR,
-	GETCWD_ERROR,
+	CHDIR_ERROR = 202,
+	GETCWD_ERROR = 203,
 	UNEXPECTED_EXIT = 255,
 	SYNTAX_ERROR = 258,
-	RL_FAILURE = 300,
-	EXECVE_FAILURE = 400,
-	FORK_FAILURE = 500,
-	PIPE_FAILURE = 600,
-	DUP_FAILURE = 700,
+	EXECVE_FAILURE = 300,
+	FORK_FAILURE = 400,
+	PIPE_FAILURE = 500,
+	DUP_FAILURE = 600,
 };
 
 enum	e_export_types
