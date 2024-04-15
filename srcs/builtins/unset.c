@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:54:18 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/07 22:58:39 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:22:53 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	execute_unset(char ***envp, int position, int i)
 	new_env = *envp;
 	if (new_env[i + 1] == NULL)
 		return ;
-	while (new_env[i + 1])
+	while (i < position)
+		i++;
+	if (i == position)
+		free(new_env[i]);
+	while (new_env[i])
 	{
-		while (i < position)
-			i++;
-		if (i == position)
-			free(new_env[i]);
 		new_env[i] = new_env[i + 1];
 		i++;
 	}

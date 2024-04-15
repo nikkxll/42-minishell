@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:11:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/12 20:30:05 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:29:12 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,11 @@ void	run_exit(char **arr, t_minishell *ms, long num)
 
 void	end_process(t_minishell *ms)
 {
+	int	status;
+
 	rl_clear_history();
 	save_history_to_file(ms);
+	status = ms->exit_status;
 	ft_free_minishell(ms);
+	exit(status);
 }
