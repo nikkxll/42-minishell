@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:41:05 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 18:01:56 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 09:57:13 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,19 @@ int	validate_input(char *str)
 	}
 	return (SUCCESS);
 }
+
+// int	main(int argc, char **argv)
+// {
+// 	int	is_valid;
+
+// 	if (argc != 2)
+// 	{
+// 		ft_printf("INCORRECT NUMBER OF ARGUMENTS!\n");
+// 		return (1);
+// 	}
+// 	is_valid = validate_input(argv[1]);
+// 	if (is_valid == 0)
+// 		ft_printf("Input is correct!\n");
+// 	(void)argc;
+// 	return (0);
+// }

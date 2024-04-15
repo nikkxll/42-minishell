@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 17:45:41 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 10:25:39 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*validate_brackets(char *str, t_bool *status)
 	while (ft_isspace(*str))
 		str++;
 	next_token = validate_and_or(str, status);
-	if (next_token == str || *status == false)
+	if (*status == false)
 		return (next_token);
 	if (*next_token != C_ROUND)
 	{
