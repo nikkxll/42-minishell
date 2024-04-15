@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_blank_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:12:04 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/03/31 21:07:30 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 10:59:13 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

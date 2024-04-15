@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:21:32 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 00:30:56 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:00:43 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

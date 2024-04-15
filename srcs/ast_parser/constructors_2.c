@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constructors_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:21:27 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 22:42:37 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 10:58:17 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

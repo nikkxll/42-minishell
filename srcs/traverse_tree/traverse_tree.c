@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_tree.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:17:46 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 00:21:45 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:01:04 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_bracket.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 15:46:26 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 00:12:00 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:01:17 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

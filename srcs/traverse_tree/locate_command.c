@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   locate_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:57:59 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/10 18:49:25 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:01:58 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

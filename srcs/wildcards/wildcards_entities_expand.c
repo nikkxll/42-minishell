@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_entities_expand.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:44:11 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/29 13:50:30 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:07:33 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

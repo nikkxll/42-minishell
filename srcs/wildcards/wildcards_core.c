@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_core.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 01:01:56 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/29 13:50:27 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:07:17 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

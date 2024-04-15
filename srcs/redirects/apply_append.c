@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_append.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:42:17 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 18:23:38 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:00:44 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_e_bash_history.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 11:08:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 00:05:47 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:02:26 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

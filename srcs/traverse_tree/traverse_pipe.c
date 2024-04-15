@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:43:12 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 00:12:16 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:01:11 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_simple_command.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 16:08:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 17:45:52 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 10:59:25 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

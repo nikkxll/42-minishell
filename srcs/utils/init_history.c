@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_history.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:02:33 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 00:05:11 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:02:52 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

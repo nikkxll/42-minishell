@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_redir_out.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:31:49 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/08 20:10:22 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:00:38 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

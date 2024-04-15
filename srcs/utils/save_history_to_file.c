@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_history_to_file.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:16:21 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 00:11:40 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:04:10 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ void	save_history_to_file(t_minishell *ms)
 
 /**
  * @brief	Write a string to the standard output
- * @note	This function prints a string to the standard output followed by a newline character.
- * It is used as a callback function to write each command from the minishell history
+ * @note	This function prints a string to the standard output followed 
+ * by a newline character. * It is used as a callback function to write 
+ * each command from the minishell history
  * list to the history file.
  * @param	str Pointer to the string to be written
  * @return	@c `void`

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 00:12:08 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:01:24 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
