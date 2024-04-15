@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:00:21 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:53:29 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	run_minishell(t_minishell **ms)
 		signal_interceptor(INTERACTIVE);
 		toggler(IMPLICIT);
 		status = get_cmdline(&cmdline, ms);
-		if (status != 0 || status != EOF)
+		if (status != 0 && status != EOF)
 			(*ms)->exit_status = status;
 		if (status == EOF || status == MALLOC_ERR)
 			break ;
