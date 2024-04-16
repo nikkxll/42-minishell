@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:21:32 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:00:43 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:55:07 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	apply_heredoc(char *limiter, int *in)
 	int		hd[2];
 	pid_t	pid;
 
-	close(*in);
+	if (*in != -1)
+		close(*in);
 	while (*limiter == SPACE)
 		limiter++;
 	if (pipe(hd) == -1)

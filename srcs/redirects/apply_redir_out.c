@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_redir_out.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:31:49 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:00:38 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:54:48 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	apply_redir_out(char *redir, t_minishell *ms, int *out)
 	int		status;
 	int		fd;
 
-	close(*out);
+	if (*out != -1)
+		close(*out);
 	while (ft_isspace(*redir))
 		redir++;
 	status = check_redir(&redir, ms);

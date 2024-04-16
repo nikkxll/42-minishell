@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:32:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/07 22:58:08 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/16 21:32:17 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	create_operations_array(char **arr, char **envp, int *operations)
 			operations[i] = EXPORT_ERROR;
 		else if (arr[i][j] == EQUAL && j > 0 && arr[i][j - 1] != UNSCORE)
 		{
-			if (env_var(envp, arr[i], -1, j) != -1
-				|| arg_var(arr, arr[i], i, j) != -1)
+			if (env_var(envp, arr[i], -1, j + 1) != -1
+				|| arg_var(arr, arr[i], i, j + 1) != -1)
 				operations[i] = EXPORT_EDIT;
 			else
 				operations[i] = EXPORT_ADD;

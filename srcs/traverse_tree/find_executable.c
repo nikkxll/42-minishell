@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_executable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:02:40 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:02:18 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:52:01 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,9 +199,9 @@ static int	check_cmd_in_path(char **candidate, int len,
 	ft_strlcat(temp, cmd_name, len);
 	if (access(temp, F_OK) == 0)
 	{
-		stat(cmd_name, &st);
+		stat(temp, &st);
 		if (S_ISDIR(st.st_mode))
-			return (CMD_PD_FAILURE);
+			return (1);
 		if (access(temp, X_OK) == 0)
 			return (0);
 		else

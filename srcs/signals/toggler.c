@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 01:02:26 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/15 01:02:48 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:36:06 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	toggler(int mode)
 {
 	struct termios	terminal;
 
+	ft_bzero(&terminal, sizeof(terminal));
 	tcgetattr(STDIN_FILENO, &terminal);
 	if (mode)
 		terminal.c_lflag |= ECHOCTL;
