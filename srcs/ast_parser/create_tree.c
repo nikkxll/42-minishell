@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:40:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/17 15:23:16 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:13:39 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	create_tree(char *str, t_node **root, int *hd_num)
 	else if (type == T_COMMAND_BR)
 		status = add_command_br(info, root, hd_num);
 	free(info);
-	if (status == MALLOC_ERR)
+	if (status != SUCCESS)
 	{
 		free_tree(root);
-		return (MALLOC_ERR);
+		return (status);
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 t_bool	get_type(char *str, t_node_info **info)

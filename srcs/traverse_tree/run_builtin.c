@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 15:49:24 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:01:50 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:39:32 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		run_builtin_without_redir(char **command, t_minishell *ms,
 			int cmd_type);
-int		run_builtin_with_redir(char **command, char *redir, t_minishell *ms,
+int		run_builtin_with_redir(char **command, char **redir, t_minishell *ms,
 			int cmd_type);
 int		copy_std_fd(int *in_fd, int *out_fd, char *commmand);
 void	return_std_fd(int	*in_fd, int *out_fd, int *status, char *command);
@@ -31,7 +31,7 @@ void	return_std_fd(int	*in_fd, int *out_fd, int *status, char *command);
  * @param	cmd_type The type of built-in command
  * @return	Returns the status of running the built-in command
  */
-int	run_builtin(char **command, char *redir, t_minishell *ms, int cmd_type)
+int	run_builtin(char **command, char **redir, t_minishell *ms, int cmd_type)
 {
 	int	status;
 
@@ -69,7 +69,7 @@ int	run_builtin_without_redir(char **command, t_minishell *ms, int cmd_type)
  * @param	cmd_type The type of built-in command
  * @return	Returns the status of running the built-in command with redirection
  */
-int	run_builtin_with_redir(char **command, char *redir, t_minishell *ms,
+int	run_builtin_with_redir(char **command, char **redir, t_minishell *ms,
 	int cmd_type)
 {
 	int	status;

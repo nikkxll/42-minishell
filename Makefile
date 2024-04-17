@@ -16,7 +16,7 @@ MINISHELL			:=	$(addprefix $(MINISHELL_PATH), $(MINISHELL_NAME))
 UTILS_NAME			:=	remove_quotes.c errors_print.c split_before_wildcards.c \
 						prompt_update.c pwd_init.c shlvl_init.c sort_string_array.c \
 						realloc_env.c ft_split_with_quotes.c init_history.c add_e_bash_history.c \
-						save_history_to_file.c ctrl_d_error_handler.c
+						save_history_to_file.c handle_ctrl_d.c
 UTILS_PATH			:=	utils/
 UTILS				:=	$(addprefix $(UTILS_PATH), $(UTILS_NAME))
 
@@ -66,7 +66,7 @@ BUILTINS			:=	$(addprefix $(BUILTINS_PATH), $(BUILTINS_NAME)) \
 
 # REDIRECTS
 REDIR_NAME			:=	apply_redirects.c check_redir.c apply_heredoc.c apply_redir_in.c \
-						apply_redir_out.c apply_append.c
+						apply_redir_out.c apply_append.c prepare_redirects.c prepare_heredocs.c 
 REDIR_PATH			:=	redirects/
 REDIR				:=	$(addprefix $(REDIR_PATH), $(REDIR_NAME))
 

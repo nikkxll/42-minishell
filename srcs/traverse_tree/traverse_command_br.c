@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 13:37:47 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:01:21 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:01:24 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	traverse_command_br(t_node **root, t_minishell *ms)
 		signal_interceptor(DEFAULT);
 		ms->is_parent = false;
 		node = *root;
-		status = apply_redirects(((t_redir *)(node->left))->str, ms);
+		status = apply_redirects(((t_redir *)(node->left))->redirs, ms);
 		if (status == 0)
 			status = traverse_tree(&(node->right), ms);
 		exit (status);

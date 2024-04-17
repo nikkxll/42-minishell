@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:17:46 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:01:04 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:29:45 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	traverse_tree(t_node **root, t_minishell *ms)
 	int		type;
 	int		status;
 
-	signal_interceptor(IGNORE);
 	status = true;
 	type = (*root)->type;
 	if (type == T_AND)
@@ -42,7 +41,7 @@ int	traverse_tree(t_node **root, t_minishell *ms)
 		status = traverse_command_br(root, ms);
 	else if (type == T_COMMAND)
 		status = traverse_command(((t_command *)*root)->cmd,
-				((t_redir *)((t_command *)*root)->redir)->str, ms);
+				((t_redir *)((t_command *)*root)->redir)->redirs, ms);
 	free_tree(root);
 	return (status);
 }

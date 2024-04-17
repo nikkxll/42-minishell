@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:58:41 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/12 19:59:37 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:48:14 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_command_br
 typedef struct s_redir
 {
 	int		type;
-	char	*str;
+	char	**redirs;
 }	t_redir;
 
 #endif

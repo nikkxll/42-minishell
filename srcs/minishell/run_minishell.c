@@ -6,13 +6,14 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/17 15:34:04 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:17:26 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 int		get_cmdline(char **cmdline, t_minishell **ms);
+void	ft_readline(char **cmdline, char *prompt);
 void	check_signal(t_minishell **ms);
 
 /**
@@ -36,8 +37,6 @@ void	run_minishell(t_minishell **ms)
 
 	while (true)
 	{
-		signal_interceptor(INTERACTIVE);
-		toggler(IMPLICIT);
 		status = get_cmdline(&cmdline, ms);
 		if (status != 0 && status != EOF)
 			(*ms)->exit_status = status;
@@ -80,7 +79,7 @@ int	get_cmdline(char **cmdline, t_minishell **ms)
 	status = get_prompt(&prompt, (*ms)->exit_status);
 	if (status != 0)
 		return (status);
-	*cmdline = readline(prompt);
+	ft_readline(cmdline, prompt);
 	if (*cmdline == NULL)
 	{
 		if (handle_ctrl_d(prompt) == MALLOC_ERR)
@@ -118,4 +117,12 @@ void	check_signal(t_minishell **ms)
 		(*ms)->exit_status = 1;
 		g_sgnl = 0;
 	}
+}
+
+void	ft_readline(char **cmdline, char *prompt)
+{
+	signal_interceptor(INTERACTIVE);
+	toggler(IMPLICIT);
+	*cmdline = readline(prompt);
+	signal_interceptor(IGNORE);
 }

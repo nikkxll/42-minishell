@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:44:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/17 15:25:44 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:04:18 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,22 @@ int	add_bracket(t_node_info *info, t_node **root, int *hd_num)
 
 int	add_command(t_node_info *info, t_node **root, int *hd_num)
 {
-	t_redir	*redir;
+	int		status;
+	t_redir	*redir_node;
+	char	**redirs;
 
-	(void)hd_num;
-	redir = init_t_redir();
-	if (redir == NULL)
+	status = prepare_redirects(info->str_left, hd_num, &redirs);
+	if (status != SUCCESS)
+		return (status);
+	redir_node = init_t_redir();
+	if (redir_node == NULL)
+	{
+		if (redirs)
+			ft_free_2d_array(redirs);
 		return (MALLOC_ERR);
-	redir->str = info->str_left;
-	((t_command *)(*root))->redir = (t_node *)redir;
+	}
+	redir_node->redirs = redirs;
+	((t_command *)(*root))->redir = (t_node *)redir_node;
 	((t_command *)(*root))->cmd = info->str_right;
 	return (0);
 }
@@ -57,19 +65,21 @@ int	add_command(t_node_info *info, t_node **root, int *hd_num)
 int	add_command_br(t_node_info *info, t_node **root, int *hd_num)
 {
 	int		status;
-	t_redir	*redir;
+	t_redir	*redir_node;
+	char	**redirs;
 
-	(void)hd_num;
-	redir = init_t_redir();
-	if (redir == NULL)
-		return (MALLOC_ERR);
-	redir->str = ft_strdup(info->str_left);
-	if (redir->str == NULL)
+	status = prepare_redirects(info->str_left, hd_num, &redirs);
+	if (status != SUCCESS)
+		return (status);
+	redir_node = init_t_redir();
+	if (redir_node == NULL)
 	{
-		free(redir);
+		if (redirs)
+			ft_free_2d_array(redirs);
 		return (MALLOC_ERR);
 	}
-	(*root)->left = (t_node *)redir;
+	redir_node->redirs = redirs;
+	(*root)->left = (t_node *)redir_node;
 	status = create_tree(info->str_right, &((*root)->right), hd_num);
 	return (status);
 }

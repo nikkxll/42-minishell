@@ -6,13 +6,13 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:17:19 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:01:24 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:39:05 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	run_external(char **cmd, char *redir, t_minishell *ms);
+int	run_external(char **command, char **redir, t_minishell *ms);
 
 /**
  * @brief	Traverse a command node in the shell command tree
@@ -29,7 +29,7 @@ int	run_external(char **cmd, char *redir, t_minishell *ms);
  * @param	ms Pointer to the minishell structure
  * @return	Returns the status of executing the command
  */
-int	traverse_command(char *cmd, char *redir, t_minishell *ms)
+int	traverse_command(char *cmd, char **redir, t_minishell *ms)
 {
 	int		cmd_type;
 	int		status;
@@ -62,7 +62,7 @@ int	traverse_command(char *cmd, char *redir, t_minishell *ms)
  * @param	ms Pointer to the minishell structure
  * @return	Returns the status of executing the external command
  */
-int	run_external(char **command, char *redir, t_minishell *ms)
+int	run_external(char **command, char **redir, t_minishell *ms)
 {
 	int		status;
 	pid_t	pid;

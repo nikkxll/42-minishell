@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:24:56 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:00:30 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:11:34 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ int	replace_fd(int in, int out);
  * @return	Integer status code indicating the success or failure of the
  * operation
  */
-int	apply_redirects(char *redir, t_minishell *ms)
+int	apply_redirects(char **redirs, t_minishell *ms)
 {
-	char	**redirs;
 	int		i;
 	int		status;
 	int		in;
@@ -40,9 +39,6 @@ int	apply_redirects(char *redir, t_minishell *ms)
 
 	in = -1;
 	out = -1;
-	redirs = ft_split(redir, SEPARATOR);
-	if (!redirs)
-		return (MALLOC_ERR);
 	status = 0;
 	i = 0;
 	while (redirs[i] && status == 0)
@@ -50,7 +46,6 @@ int	apply_redirects(char *redir, t_minishell *ms)
 		status = apply_redirect(redirs[i], ms, &in, &out);
 		i++;
 	}
-	ft_free_2d_array(redirs);
 	if (status == 0)
 		status = replace_fd(in, out);
 	return (status);
