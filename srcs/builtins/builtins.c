@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/15 11:05:45 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:54:51 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	run_nothing(char **arr, t_minishell *ms);
  */
 int	command_run(char **arr, t_minishell *ms, int cmd_type)
 {
-	if (cmd_type == C_ECHO)
+	if (cmd_type == C_EMPTY || cmd_type == C_BLANK)
+		run_nothing(arr, ms);
+	else if (cmd_type == C_ECHO)
 	{
 		run_echo(arr + 1, 0, 0, 0);
 		ms->exit_status = SUCCESS;
@@ -32,9 +34,7 @@ int	command_run(char **arr, t_minishell *ms, int cmd_type)
 	else
 	{
 		ms->exit_status = SUCCESS;
-		if (cmd_type == C_EMPTY || cmd_type == C_BLANK)
-			run_nothing(arr, ms);
-		else if (cmd_type == C_CD)
+		if (cmd_type == C_CD)
 			run_cd(arr + 1, ms, 0);
 		else if (cmd_type == C_PWD)
 			run_pwd(arr + 1, ms);

@@ -6,43 +6,17 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:23:59 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/17 18:22:13 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:43:28 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int	prepare_heredoc(char **limiter, char *hd_name);
 static void	remove_spaces_and_quotes_hd(char *hd);
 static int	heredoc(char *limiter, int fd);
-static void	remove_hd_duplicates(char	***redirs, char *hd_name,
-				char hd_counter);
 
-int	prepare_heredocs(char ***redirs, char *hd_name, int	*hd_num)
-{
-	int		i;
-	int		hd_counter;
-	int		status;
 
-	i = 0;
-	hd_counter = 0;
-	status = 0;
-	while ((*redirs)[i] && status == 0)
-	{
-		if (ft_strncmp("<<", (*redirs)[i], 2) == 0)
-		{
-			hd_counter++;
-			status = prepare_heredoc(*redirs + i, hd_name);
-		}
-		i++;
-	}
-	if (hd_counter > 0)
-		(*hd_num)++;
-	remove_hd_duplicates(redirs, hd_name, hd_counter);
-	return (status);
-}
-
-static int	prepare_heredoc(char **limiter, char *hd_name)
+int	prepare_heredoc(char **limiter, char *hd_name)
 {
 	int		status;
 	pid_t	pid;
@@ -132,6 +106,7 @@ void	remove_hd_duplicates(char	***redirs, char *hd_name, char hd_counter)
 				j++;
 			}
 			hd_counter--;
+			continue ;
 		}
 		i++;
 	}

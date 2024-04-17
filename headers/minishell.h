@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/17 20:09:45 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:32:07 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,8 @@ int				apply_append(char *redir, t_minishell *ms, int *out);
 int				apply_redir_out(char *redir, t_minishell *ms, int *out);
 int				prepare_redirects(char *redirects_line, int *hd_num,
 					char ***redirs);
-int				prepare_heredocs(char ***redirs, char *hd_name, int	*hd_num);
+int				prepare_heredoc(char **limiter, char *hd_name);
+void			remove_hd_duplicates(char	***redirs, char *hd_name, char hd_counter);
 
 /*_____ Execution _____*/
 int				dollar_sign_expansion(char **str, char **envp,
