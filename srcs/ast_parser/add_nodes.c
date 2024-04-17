@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:44:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 10:58:15 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:25:44 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,29 @@
  * @return	@c `true` if successful, @c `false` if an error occurs.
  */
 
-int	add_and_or_pipe_trees(t_node_info *info, t_node **root)
+int	add_and_or_pipe_trees(t_node_info *info, t_node **root, int *hd_num)
 {
 	int	status;
 
-	status = create_tree(info->str_left, &((*root)->left));
+	status = create_tree(info->str_left, &((*root)->left), hd_num);
 	if (status == 0)
-		status = create_tree(info->str_right, &((*root)->right));
+		status = create_tree(info->str_right, &((*root)->right), hd_num);
 	return (status);
 }
 
-int	add_bracket(t_node_info *info, t_node **root)
+int	add_bracket(t_node_info *info, t_node **root, int *hd_num)
 {
 	int	status;
 
-	status = create_tree(info->str_left, &((*root)->left));
+	status = create_tree(info->str_left, &((*root)->left), hd_num);
 	return (status);
 }
 
-int	add_command(t_node_info *info, t_node **root)
+int	add_command(t_node_info *info, t_node **root, int *hd_num)
 {
 	t_redir	*redir;
 
+	(void)hd_num;
 	redir = init_t_redir();
 	if (redir == NULL)
 		return (MALLOC_ERR);
@@ -53,11 +54,12 @@ int	add_command(t_node_info *info, t_node **root)
 	return (0);
 }
 
-int	add_command_br(t_node_info *info, t_node **root)
+int	add_command_br(t_node_info *info, t_node **root, int *hd_num)
 {
 	int		status;
 	t_redir	*redir;
 
+	(void)hd_num;
 	redir = init_t_redir();
 	if (redir == NULL)
 		return (MALLOC_ERR);
@@ -68,6 +70,6 @@ int	add_command_br(t_node_info *info, t_node **root)
 		return (MALLOC_ERR);
 	}
 	(*root)->left = (t_node *)redir;
-	status = create_tree(info->str_right, &((*root)->right));
+	status = create_tree(info->str_right, &((*root)->right), hd_num);
 	return (status);
 }

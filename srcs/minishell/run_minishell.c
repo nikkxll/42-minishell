@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:53:29 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:34:04 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	run_minishell(t_minishell **ms)
 {
 	int		status;
 	char	*cmdline;
+	int		hd_num;
 
 	while (true)
 	{
@@ -44,8 +45,9 @@ void	run_minishell(t_minishell **ms)
 			break ;
 		if (status == 0)
 		{
+			hd_num = 0;
 			(*ms)->root = NULL;
-			status = create_tree(cmdline, &((*ms)->root));
+			status = create_tree(cmdline, &((*ms)->root), &hd_num);
 			if (status != 0)
 				(*ms)->exit_status = status;
 			if (status == 0)

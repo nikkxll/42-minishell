@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ctrl_d_error_handler.c                             :+:      :+:    :+:   */
+/*   handle_ctrl_d.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:09:48 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/16 18:12:04 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:09:44 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	handle_ctrl_d(char *prompt)
 	char	*shift_len;
 
 	len = ft_strlen(prompt);
+	free(prompt);
 	shift_len = ft_itoa(len);
 	if (!shift_len)
 		return (MALLOC_ERR);
@@ -52,9 +53,11 @@ int	handle_ctrl_d(char *prompt)
 	}
 	ft_strlcat(shift, "\033[", len);
 	ft_strlcat(shift, shift_len, len);
+	free(shift_len);
 	ft_strlcat(shift, "C", len);
 	ft_printf("\033[1A");
 	ft_printf("%s", shift);
+	free(shift);
 	ft_printf("exit\n");
 	return (SUCCESS);
 }

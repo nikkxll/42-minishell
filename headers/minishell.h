@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/13 00:28:15 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:00:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <dirent.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <signal.h>
 # include <sys/ioctl.h>
 # include <termios.h>
@@ -59,12 +60,13 @@ char			*validate_redirect(char *str, t_bool *status);
 char			*validate_word(char *str, t_bool *status);
 
 /*_____ Create-tree _____*/
-int				create_tree(char *str, t_node **root);
+int				create_tree(char *str, t_node **root, int *hd_num);
 t_bool			create_node(t_node_info *data, t_node **base);
-int				add_and_or_pipe_trees(t_node_info *data, t_node **root);
-int				add_bracket(t_node_info *data, t_node **root);
-int				add_command_br(t_node_info *data, t_node **root);
-int				add_command(t_node_info *data, t_node **root);
+int				add_and_or_pipe_trees(t_node_info *data, t_node **root,
+					int *hd_num);
+int				add_bracket(t_node_info *data, t_node **root, int *hd_num);
+int				add_command_br(t_node_info *data, t_node **root, int *hd_num);
+int				add_command(t_node_info *data, t_node **root, int *hd_num);
 void			free_tree(t_node **root);
 t_and			*init_t_and(void);
 t_or			*init_t_or(void);
@@ -112,22 +114,25 @@ int				traverse_or(t_node **node, t_minishell *ms);
 int				traverse_pipe(t_node **node, t_minishell *ms);
 int				traverse_bracket(t_node **node, t_minishell *ms);
 int				traverse_command_br(t_node **node, t_minishell *ms);
-int				traverse_command(char *cmd, char *redir, t_minishell *ms);
+int				traverse_command(char *cmd, char **redir, t_minishell *ms);
 int				parse_cmd(char *cmd, char ***res, t_minishell *ms);
 int				wait_children(pid_t *pids, int num);
 int				is_builtin(char *cmd);
 int				locate_command(char	**cmd, char	**envp);
 int				find_executable(char **command, char **paths);
-int				run_builtin(char **command, char *redir, t_minishell *ms,
-					int cmd_type);
+int				run_builtin(char **command, char **redir, t_minishell *ms
+					, int cmd_type);
 
 /*_____ Redir _____*/
-int				apply_redirects(char *redir, t_minishell *ms);
+int				apply_redirects(char **redirs, t_minishell *ms);
 int				check_redir(char **redir, t_minishell *ms);
 int				apply_heredoc(char *limiter, int *in);
 int				apply_redir_in(char *str, t_minishell *ms, int *in);
 int				apply_append(char *redir, t_minishell *ms, int *out);
 int				apply_redir_out(char *redir, t_minishell *ms, int *out);
+int				prepare_redirects(char *redirects_line, int *hd_num,
+					char ***redirs);
+int				prepare_heredocs(char ***redirs, char *hd_name, int	*hd_num);
 
 /*_____ Execution _____*/
 int				dollar_sign_expansion(char **str, char **envp,
