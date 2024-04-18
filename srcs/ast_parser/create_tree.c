@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:40:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/17 18:13:39 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:30:04 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_bool	get_type(char *str, t_node_info **info);
  * @param	root A double pointer indicating where to save the current node.
  * @return	@c `0` if successful, @c `MALLOC_ERR` if an error occurs.
  */
-int	create_tree(char *str, t_node **root, int *hd_num)
+int	create_tree(char *str, t_node **root, int *hd_num, t_minishell *ms)
 {
 	t_node_info	*info;
 	t_bool		status;
@@ -37,13 +37,13 @@ int	create_tree(char *str, t_node **root, int *hd_num)
 		return (MALLOC_ERR);
 	type = info->type;
 	if (type == T_AND || type == T_OR || type == T_PIPE)
-		status = add_and_or_pipe_trees(info, root, hd_num);
+		status = add_and_or_pipe_trees(info, root, hd_num, ms);
 	else if (type == T_BRACKET)
-		status = add_bracket(info, root, hd_num);
+		status = add_bracket(info, root, hd_num, ms);
 	else if (type == T_COMMAND)
-		status = add_command(info, root, hd_num);
+		status = add_command(info, root, hd_num, ms);
 	else if (type == T_COMMAND_BR)
-		status = add_command_br(info, root, hd_num);
+		status = add_command_br(info, root, hd_num, ms);
 	free(info);
 	if (status != SUCCESS)
 	{

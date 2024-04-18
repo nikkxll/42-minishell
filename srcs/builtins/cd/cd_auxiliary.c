@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 19:20:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/18 00:02:04 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:28:40 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,6 @@ void	cd_precheck(char **arr, t_minishell *ms)
 	int	len;
 
 	len = ft_arrlen((void **)arr);
-	if (len > 1)
-	{
-		print_err_msg("cd", ": too many arguments\n");
-		ms->exit_status = GENERIC_ERROR;
-		return ;
-	}
 	if (len > 0 && ft_strlen(arr[0]) > 1 && arr[0][0] == DASH)
 	{
 		if (arr[0][1] == DASH && arr[0][2] == NULL_TERM)

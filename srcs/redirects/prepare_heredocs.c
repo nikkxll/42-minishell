@@ -6,21 +6,24 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:23:59 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/18 11:43:28 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:54:13 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static void	remove_spaces_and_quotes_hd(char *hd);
-static int	heredoc(char *limiter, int fd);
+static int	heredoc(char *limiter, int fd, t_minishell *ms);
+static void	handle_herdoc_line(int fd, char *line, t_minishell *ms,
+				char *limiter);
 
 
-int	prepare_heredoc(char **limiter, char *hd_name)
+int	prepare_heredoc(char **limiter, char *hd_name, t_minishell *ms)
 {
 	int		status;
 	pid_t	pid;
 	int		fd;
+
 
 	remove_spaces_and_quotes_hd(*limiter + 2);
 	pid = fork();
@@ -32,7 +35,7 @@ int	prepare_heredoc(char **limiter, char *hd_name)
 		toggler(IMPLICIT);
 		fd = open(hd_name + 2, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd != -1)
-			heredoc(*limiter + 2, fd);
+			heredoc(*limiter + 2, fd, ms);
 		exit(GENERIC_ERROR);
 	}
 	free(*limiter);
@@ -57,7 +60,7 @@ void	remove_spaces_and_quotes_hd(char *hd)
 	remove_quotes(hd, 0, 0);
 }
 
-static int	heredoc(char *limiter, int fd)
+static int	heredoc(char *limiter, int fd, t_minishell *ms)
 {
 	char	*line;
 	int		isequal;
@@ -74,8 +77,7 @@ static int	heredoc(char *limiter, int fd)
 		}
 		isequal = ft_strcmp(limiter, line);
 		if (isequal != 0)
-			ft_putendl_fd(line, fd);
-		free(line);
+			handle_herdoc_line(fd, line, ms, limiter);
 		if (isequal == 0)
 		{
 			close(fd);
@@ -84,7 +86,7 @@ static int	heredoc(char *limiter, int fd)
 	}
 }
 
-void	remove_hd_duplicates(char	***redirs, char *hd_name, char hd_counter)
+void	remove_hd_duplicates(char ***redirs, char *hd_name, char hd_counter)
 {
 	int		i;
 	int		j;
@@ -110,4 +112,26 @@ void	remove_hd_duplicates(char	***redirs, char *hd_name, char hd_counter)
 		}
 		i++;
 	}
+}
+
+static void	handle_herdoc_line(int fd, char *line, t_minishell *ms,
+				char *limiter)
+{
+	int	status;
+
+	status = dollar_sign_expansion(&line, ms->env, ms->exit_status);
+	if (status == SUCCESS)
+	{
+		ft_putendl_fd(line, fd);
+		free(line);
+	}
+	else
+	{
+		ft_putstr_fd("\033[0;31me-bash: \033[0;0m", STDERR_FILENO);
+		ft_putstr_fd(limiter, STDERR_FILENO);
+		ft_putendl_fd(": malloc() error occured", STDERR_FILENO);
+		close(fd);
+		exit(status);
+	}
+
 }

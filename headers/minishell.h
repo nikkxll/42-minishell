@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/17 20:32:07 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:35:31 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,17 @@ char			*validate_redirect(char *str, t_bool *status);
 char			*validate_word(char *str, t_bool *status);
 
 /*_____ Create-tree _____*/
-int				create_tree(char *str, t_node **root, int *hd_num);
+int				create_tree(char *str, t_node **root, int *hd_num,
+					t_minishell *ms);
 t_bool			create_node(t_node_info *data, t_node **base);
 int				add_and_or_pipe_trees(t_node_info *data, t_node **root,
-					int *hd_num);
-int				add_bracket(t_node_info *data, t_node **root, int *hd_num);
-int				add_command_br(t_node_info *data, t_node **root, int *hd_num);
-int				add_command(t_node_info *data, t_node **root, int *hd_num);
+					int *hd_num, t_minishell *ms);
+int				add_bracket(t_node_info *data, t_node **root, int *hd_num,
+					t_minishell *ms);
+int				add_command_br(t_node_info *data, t_node **root, int *hd_num,
+					t_minishell *ms);
+int				add_command(t_node_info *data, t_node **root, int *hd_num,
+					t_minishell *ms);
 void			free_tree(t_node **root);
 t_and			*init_t_and(void);
 t_or			*init_t_or(void);
@@ -131,9 +135,10 @@ int				apply_redir_in(char *str, t_minishell *ms, int *in);
 int				apply_append(char *redir, t_minishell *ms, int *out);
 int				apply_redir_out(char *redir, t_minishell *ms, int *out);
 int				prepare_redirects(char *redirects_line, int *hd_num,
-					char ***redirs);
-int				prepare_heredoc(char **limiter, char *hd_name);
-void			remove_hd_duplicates(char	***redirs, char *hd_name, char hd_counter);
+					char ***redirs, t_minishell *ms);
+int				prepare_heredoc(char **limiter, char *hd_name, t_minishell *ms);
+void			remove_hd_duplicates(char	***redirs, char *hd_name,
+					char hd_counter);
 
 /*_____ Execution _____*/
 int				dollar_sign_expansion(char **str, char **envp,

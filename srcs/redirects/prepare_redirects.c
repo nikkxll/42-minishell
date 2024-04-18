@@ -6,19 +6,20 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 13:32:25 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/17 20:30:52 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:15:17 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static char	*get_hd_name(int *hd_num);
-static int	prepare_heredocs(char ***redirs, int *hd_num);
+static int	prepare_heredocs(char ***redirs, int *hd_num, t_minishell *ms);
 static void	remove_hd_files(int *hd_num);
 
-int	prepare_redirects(char *redirects_line, int *hd_num, char ***redirs)
+int	prepare_redirects(char *redirects_line, int *hd_num, char ***redirs,
+		t_minishell *ms)
 {
-	int		status;
+	int	status;
 
 	if (redirects_line == NULL)
 	{
@@ -29,7 +30,7 @@ int	prepare_redirects(char *redirects_line, int *hd_num, char ***redirs)
 	free(redirects_line);
 	if (!*redirs)
 		return (MALLOC_ERR);
-	status = prepare_heredocs(redirs, hd_num);
+	status = prepare_heredocs(redirs, hd_num, ms);
 	if (status != SUCCESS)
 	{
 		ft_free_2d_array(*redirs);
@@ -40,7 +41,7 @@ int	prepare_redirects(char *redirects_line, int *hd_num, char ***redirs)
 	return (status);
 }
 
-static int	prepare_heredocs(char ***redirs, int *hd_num)
+static int	prepare_heredocs(char ***redirs, int *hd_num, t_minishell *ms)
 {
 	int		i;
 	int		hd_counter;
@@ -58,7 +59,7 @@ static int	prepare_heredocs(char ***redirs, int *hd_num)
 		if (ft_strncmp("<<", (*redirs)[i], 2) == 0)
 		{
 			hd_counter++;
-			status = prepare_heredoc(*redirs + i, hd_name);
+			status = prepare_heredoc(*redirs + i, hd_name, ms);
 		}
 		i++;
 	}
@@ -76,12 +77,35 @@ static char	*get_hd_name(int *hd_num)
 	num = ft_itoa(*hd_num);
 	if (!num)
 		return (NULL);
-	filename = ft_strjoin("<<.heredoc_", num);
+	filename = ft_strjoin(HEREDOC_NAME, num);
 	free(num);
 	return (filename);
 }
 
 static void	remove_hd_files(int *hd_num)
 {
-	(void)hd_num;
+	char	*file_name;
+	char	*num;
+	int		i;
+
+	i = -1;
+	while (++i < *hd_num)
+	{
+		num = ft_itoa(i);
+		if (!num)
+		{
+			print_err_msg("unlink", ": malloc error occured");
+			continue ;
+		}
+		file_name = ft_strjoin(HEREDOC_NAME + 2, num);
+		free(num);
+		if (!file_name)
+		{
+			print_err_msg("unlink", ": malloc error occured");
+			continue ;
+		}
+		if (unlink(file_name) != 0)
+			perror_err_msg("unlink: ", file_name);
+		free(file_name);
+	}
 }

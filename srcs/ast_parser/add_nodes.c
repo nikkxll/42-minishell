@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:44:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/17 19:04:18 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:29:38 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,33 @@
  * @return	@c `true` if successful, @c `false` if an error occurs.
  */
 
-int	add_and_or_pipe_trees(t_node_info *info, t_node **root, int *hd_num)
+int	add_and_or_pipe_trees(t_node_info *info, t_node **root, int *hd_num,
+		t_minishell *ms)
 {
 	int	status;
 
-	status = create_tree(info->str_left, &((*root)->left), hd_num);
+	status = create_tree(info->str_left, &((*root)->left), hd_num, ms);
 	if (status == 0)
-		status = create_tree(info->str_right, &((*root)->right), hd_num);
+		status = create_tree(info->str_right, &((*root)->right), hd_num, ms);
 	return (status);
 }
 
-int	add_bracket(t_node_info *info, t_node **root, int *hd_num)
+int	add_bracket(t_node_info *info, t_node **root, int *hd_num, t_minishell *ms)
 {
 	int	status;
 
-	status = create_tree(info->str_left, &((*root)->left), hd_num);
+	status = create_tree(info->str_left, &((*root)->left), hd_num, ms);
 	return (status);
 }
 
-int	add_command(t_node_info *info, t_node **root, int *hd_num)
+int	add_command(t_node_info *info, t_node **root, int *hd_num, t_minishell *ms)
 {
 	int		status;
 	t_redir	*redir_node;
 	char	**redirs;
 
-	status = prepare_redirects(info->str_left, hd_num, &redirs);
+
+	status = prepare_redirects(info->str_left, hd_num, &redirs, ms);
 	if (status != SUCCESS)
 		return (status);
 	redir_node = init_t_redir();
@@ -62,13 +64,14 @@ int	add_command(t_node_info *info, t_node **root, int *hd_num)
 	return (0);
 }
 
-int	add_command_br(t_node_info *info, t_node **root, int *hd_num)
+int	add_command_br(t_node_info *info, t_node **root, int *hd_num,
+		t_minishell *ms)
 {
 	int		status;
 	t_redir	*redir_node;
 	char	**redirs;
 
-	status = prepare_redirects(info->str_left, hd_num, &redirs);
+	status = prepare_redirects(info->str_left, hd_num, &redirs, ms);
 	if (status != SUCCESS)
 		return (status);
 	redir_node = init_t_redir();
@@ -80,6 +83,6 @@ int	add_command_br(t_node_info *info, t_node **root, int *hd_num)
 	}
 	redir_node->redirs = redirs;
 	(*root)->left = (t_node *)redir_node;
-	status = create_tree(info->str_right, &((*root)->right), hd_num);
+	status = create_tree(info->str_right, &((*root)->right), hd_num, ms);
 	return (status);
 }

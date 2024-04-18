@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/16 18:11:48 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:00:51 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,10 @@ enum	e_signals_echo
 
 # ifndef HIST_SIZE
 #  define HIST_SIZE 500
+# endif
+
+# ifndef HEREDOC_NAME
+#  define HEREDOC_NAME "<<.heredoc_"
 # endif
 
 #endif
