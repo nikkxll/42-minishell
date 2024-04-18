@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:50:24 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/18 11:54:51 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/19 00:05:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	run_nothing(char **arr, t_minishell *ms);
+static void	run_nothing(char **arr, t_minishell *ms);
 
 /**
  * @brief	A function that runs either built-in command or calling execution
@@ -50,7 +50,16 @@ int	command_run(char **arr, t_minishell *ms, int cmd_type)
 	return (ms->exit_status);
 }
 
-void	run_nothing(char **arr, t_minishell *ms)
+/**
+ * @brief	Execute a no-operation command
+ * @note	This function serves as a placeholder for executing a command
+ * that does nothing. It sets the exit status to @c `CMD_NF_FAILURE` and
+ * prints an error message indicating that the command was not found.
+ * @param	arr An array of strings representing the command and its arguments
+ * @param	ms  A pointer to the minishell structure
+ * @return	@c `void`
+ */
+static void	run_nothing(char **arr, t_minishell *ms)
 {
 	if (*arr == NULL)
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_nodes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:44:20 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/18 12:29:38 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:26:29 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 /**
  * @brief	Functions to add nodes to a binary tree based on the type 
- * 			of the current node.
- * 
+ * of the current node.
  * @param	info A pointer to the structure containing information about
- * 			the type of current node.
+ * the type of current node.
  * @param	root A double pointer indicating where to save the current node.
+ * @param	hd_num pointer to the heredoc number
+ * @param	ms pointer to the common project @c `t_minishell` structure
  * @return	@c `true` if successful, @c `false` if an error occurs.
  */
-
 int	add_and_or_pipe_trees(t_node_info *info, t_node **root, int *hd_num,
 		t_minishell *ms)
 {
@@ -46,7 +46,6 @@ int	add_command(t_node_info *info, t_node **root, int *hd_num, t_minishell *ms)
 	int		status;
 	t_redir	*redir_node;
 	char	**redirs;
-
 
 	status = prepare_redirects(info->str_left, hd_num, &redirs, ms);
 	if (status != SUCCESS)

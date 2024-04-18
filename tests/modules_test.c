@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   mains.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 10:52:51 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 10:55:16 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/18 23:36:10 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-
 //BNF_SYNTAX_VALIDATOR - VALIDATE INPUT
+
 /*
 int	main(int argc, char **argv)
 {
@@ -32,11 +30,9 @@ int	main(int argc, char **argv)
 }
 */
 
-
-
-
 //AST_PARSER - CREATE TREE
 /*
+
 char	*return_type(int t)
 {
 	if (t == T_AND)

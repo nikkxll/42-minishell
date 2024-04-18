@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_minishell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:12:15 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/18 12:30:22 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/18 23:49:56 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void	check_signal(t_minishell **ms);
  * creation, or tree traversal, it updates the minishell's exit status
  * accordingly. The loop continues until termination is initiated by
  * an external event or command.
- * @param	ms Pointer to the minishell structure (`t_minishell`).
- *	Contains the environment and other necessary data for execution.
+ * @param	ms Pointer to the minishell structure (`t_minishell`)
+ * Contains the environment and other necessary data for execution
+ * @return	@c `void`
  */
 void	run_minishell(t_minishell **ms)
 {
@@ -103,7 +104,7 @@ int	get_cmdline(char **cmdline, t_minishell **ms)
 /**
  * @brief	Check if a SIGINT signal was received and update the exit status
  * accordingly
- * @note	This function checks if the global variable g_sgnl holds the
+ * @note	This function checks if the global variable @c `g_sgnl` holds the
  * value @c `SIGINT`, indicating that a @c `SIGINT` signal was received. If
  * so, it updates the exit status of the minishell pointed to by @c `ms` to
  * @c `1` and resets the value of g_sgnl to @c `0`
@@ -119,6 +120,17 @@ void	check_signal(t_minishell **ms)
 	}
 }
 
+/**
+ * @brief	Read a line of input from the user using readline
+ * @note	This function reads a line of input from the user using the
+ * readline library. It sets up signal handlers to handle interactive mode,
+ * toggles terminal echo to handle implicit newline, and then reads the input
+ * line using readline. After reading, it restores the signal handlers to
+ * ignore signals.
+ * @param	cmdline Pointer to store the input line read from the user
+ * @param	prompt  The prompt string to display before reading input
+ * @return	@c `void`
+ */
 void	ft_readline(char **cmdline, char *prompt)
 {
 	signal_interceptor(INTERACTIVE);

@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:11:23 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/15 15:29:12 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/04/18 23:43:37 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,16 @@ void	run_exit(char **arr, t_minishell *ms, long num)
 	exit(ms->exit_status);
 }
 
+/**
+ * @brief	End the minishell process
+ * @note	This function performs cleanup tasks and terminates the minishell
+ * process with the exit status stored in the minishell structure. It clears
+ * the readline history, saves the history to the history file, frees memory
+ * allocated for the minishell structure, and exits the process with the
+ * appropriate exit status.
+ * @param	ms A pointer to the minishell structure
+ * @return	@c `void`
+ */
 void	end_process(t_minishell *ms)
 {
 	int	status;

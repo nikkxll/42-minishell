@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:40:06 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/18 12:30:04 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/18 23:52:06 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ t_bool	get_type(char *str, t_node_info **info);
 
 /**
  * @brief	Recursively creates binary tree. The function calls @c `get_type`
- * 			functions to determine the type of the current node and creates node
- * 			accordingly. If error occurs, it calls `free_tree` function and frees
- * 			allocated memory.
- * 
+ * functions to determine the type of the current node and creates node
+ * accordingly. If error occurs, it calls `free_tree` function and frees
+ * allocated memory.
  * @param	str String with command pipeline.
  * @param	root A double pointer indicating where to save the current node.
+ * @param	hd_num pointer to the heredoc number.
+ * @param	ms pointer to the common project @c `t_minishell` structure.
  * @return	@c `0` if successful, @c `MALLOC_ERR` if an error occurs.
  */
 int	create_tree(char *str, t_node **root, int *hd_num, t_minishell *ms)

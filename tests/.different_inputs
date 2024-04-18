@@ -77,9 +77,6 @@ bash: syntax error near unexpected token `'''
 a('''''')
 bash: syntax error near unexpected token `'''''''
 
-
-
-
 echo '('|')'&&('')
 echo |
 echo |||
@@ -95,9 +92,8 @@ echo a&|&b |>>a|<a
 echo a&''&b |>>a|<a
 echo a&&b'' |>>a|<a
 
-protestit povedenie wildcards when permissions denied dlya foldera
+`ls *` in a folder with chmod 000
 
--wild redirects
 <<"stop   "
 <"" cat
 < cat
@@ -105,10 +101,13 @@ protestit povedenie wildcards when permissions denied dlya foldera
 </ cat
 <""
 
-<<abc <Makefile <<a <<\"\" <README.md <srcs/main.c  cat
+____
+<<abc <Makefile <<a <<\"\" <README.md <srcs/main.c cat
+____
 
+____
 ls >out1 >out2 >out3 <Makefile >>out2
-=======
+____
 
 ____
 bash-3.2$ unset HOME
@@ -125,23 +124,32 @@ ____
 export SHLVL=-10
 ____
 
+____
 bash-3.2$ (>)
+____
 
-----
+____
 exit 20233720368547758048
+____
 
------
+____
 bash-3.2$ .
-________
-bash-3.2$ ./.
+____
 
+____
+bash-3.2$ ./.
+____
+
+____
 bash-3.2$ <Makefile/ cat
+____
 
 ____
 bash
 unset OLDPWD
 bash
 env | grep PWD
+____
 
 bash - empty input doesn't change last status
 bash - blank empty changes status to zero

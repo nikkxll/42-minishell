@@ -3,27 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_heredocs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:23:59 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/18 12:54:13 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/19 00:18:09 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static void	remove_spaces_and_quotes_hd(char *hd);
-static int	heredoc(char *limiter, int fd, t_minishell *ms);
-static void	handle_herdoc_line(int fd, char *line, t_minishell *ms,
+static void	heredoc(char *limiter, int fd, t_minishell *ms);
+static void	handle_heredoc_line(int fd, char *line, t_minishell *ms,
 				char *limiter);
 
-
+/**
+ * @brief	Prepare a here document for redirection
+ * @note	This function prepares a here document for redirection. It removes
+ * spaces and quotes from the limiter string, forks a child process to handle
+ * the creation of the here document file, and waits for the child process to
+ * complete. In the child process, it sets up signal handlers for heredoc mode,
+ * toggles terminal echo for implicit newline, and creates the here document
+ * file with the specified name. It then writes the content of the here document
+ * until an EOF signal is received from the user.
+ * @param	limiter The limiter string containing the delimiter for the here
+ * document
+ * @param	hd_name The name of the here document file
+ * @param	ms A pointer to the minishell structure
+ * @return	child exit code
+ */
 int	prepare_heredoc(char **limiter, char *hd_name, t_minishell *ms)
 {
 	int		status;
 	pid_t	pid;
 	int		fd;
-
 
 	remove_spaces_and_quotes_hd(*limiter + 2);
 	pid = fork();
@@ -44,6 +57,16 @@ int	prepare_heredoc(char **limiter, char *hd_name, t_minishell *ms)
 	return (status);
 }
 
+/**
+ * @brief	Remove spaces and quotes from the here document limiter
+ * @note	This function removes leading and trailing spaces from the
+ * here document limiter string and removes any surrounding quotes. It
+ * iterates through the string and shifts characters to the left until
+ * all leading spaces are removed. Then, it removes any surrounding
+ * quotes using the remove_quotes function.
+ * @param	hd The here document limiter string
+ * @return	@c `void`
+ */
 void	remove_spaces_and_quotes_hd(char *hd)
 {
 	int	i;
@@ -60,7 +83,19 @@ void	remove_spaces_and_quotes_hd(char *hd)
 	remove_quotes(hd, 0, 0);
 }
 
-static int	heredoc(char *limiter, int fd, t_minishell *ms)
+/**
+ * @brief	Handle the creation of a here document
+ * @note	This function reads input lines from the user until the limiter
+ * string is encountered. For each input line, it checks if the line is equal
+ * to the limiter string. If not, it writes the line to the here document
+ * file. If the limiter string is encountered, the function closes the here
+ * document file and exits the process.
+ * @param	limiter The limiter string indicating the end of the here document
+ * @param	fd The file descriptor of the here document file
+ * @param	ms A pointer to the minishell structure
+ * @return	@c `void`
+ */
+static void	heredoc(char *limiter, int fd, t_minishell *ms)
 {
 	char	*line;
 	int		isequal;
@@ -77,7 +112,7 @@ static int	heredoc(char *limiter, int fd, t_minishell *ms)
 		}
 		isequal = ft_strcmp(limiter, line);
 		if (isequal != 0)
-			handle_herdoc_line(fd, line, ms, limiter);
+			handle_heredoc_line(fd, line, ms, limiter);
 		if (isequal == 0)
 		{
 			close(fd);
@@ -86,6 +121,18 @@ static int	heredoc(char *limiter, int fd, t_minishell *ms)
 	}
 }
 
+/**
+ * @brief	Removes duplicate entries of the here document filename from
+ * an array of redirections
+ * @note	This function iterates through the array of redirections and
+ * removes any occurrence of the here document filename (hd_name) except
+ * for one. The number of occurrences to be kept is determined by hd_counter.
+ * @param	redirs A pointer to the array of redirections
+ * @param	hd_name The here document filename to be removed
+ * @param	hd_counter The number of occurrences of the here document
+ * filename
+ * @return	@c `void`
+ */
 void	remove_hd_duplicates(char ***redirs, char *hd_name, char hd_counter)
 {
 	int		i;
@@ -114,7 +161,22 @@ void	remove_hd_duplicates(char ***redirs, char *hd_name, char hd_counter)
 	}
 }
 
-static void	handle_herdoc_line(int fd, char *line, t_minishell *ms,
+/**
+ * @brief	Handles each line of the heredoc input during the heredoc process
+ * @note	This function performs dollar sign expansion on the input line,
+ * writes the expanded line to the specified file descriptor (fd), and then
+ * frees the allocated memory for the line. If a malloc error occurs during
+ * dollar sign expansion, it prints an error message to stderr, closes the file
+ * descriptor, and exits with the appropriate status.
+ * @param	fd The file descriptor to write the line to
+ * @param	line The input line to be handled
+ * @param	ms The minishell structure containing environment variables
+ * and exit status
+ * @param	limiter The limiter string used to determine the end of the
+ * heredoc input
+ * @return	@c `void`
+ */
+static void	handle_heredoc_line(int fd, char *line, t_minishell *ms,
 				char *limiter)
 {
 	int	status;
@@ -133,5 +195,4 @@ static void	handle_herdoc_line(int fd, char *line, t_minishell *ms,
 		close(fd);
 		exit(status);
 	}
-
 }

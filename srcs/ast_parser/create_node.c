@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:54:02 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 10:58:22 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/18 23:37:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 /**
  * @brief	 Creates a node based on the @c `type` in the @c `info` structure.
- * 
  * @param	info A pointer to the structure containing information about
- * 			the type of current node.
+ * the type of current node.
  * @param	root A double pointer indicating where to save the current node.
  * @return	@c `true` if successful, @c `false` if an error occurs.
  */
