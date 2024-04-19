@@ -8,7 +8,6 @@ As beautiful as a shell
 - [Results](#results)
 - [Usage](#usage)
 
-
 ## Project Description
 
 ### Mandatory part
@@ -93,4 +92,5 @@ The program has to implement:
 
 ### Minishell project diagram
 
-![minishell](https://github.com/nikkxll/minishell/assets/125829393/ec5db64a-3c32-4fac-8a61-3f92efe2222b)
+![minishell_18_04](https://github.com/nikkxll/42-minishell/assets/125829393/f4d181ee-3213-4573-a91a-959f1277ef32)
+
