@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/18 13:00:51 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/04/20 22:12:06 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ enum	e_signals_echo
 };
 
 # ifndef PROMPT_STATIC_LEN
-#  define PROMPT_STATIC_LEN 14
+#  define PROMPT_STATIC_LEN 19
 # endif
 
 # ifndef NOTHING_TO_EXPAND
