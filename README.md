@@ -94,3 +94,23 @@ The program has to implement:
 
 ![minishell_18_04](https://github.com/nikkxll/42-minishell/assets/125829393/f4d181ee-3213-4573-a91a-959f1277ef32)
 
+Description in progress...
+
+## Results
+
+✅ Passed with 125/100 ✅
+
+## Usage
+
+To run the program enter
+```
+make && ./minishell
+```
+**❗ Make sure you have ```readline``` library installed**
+```
+brew install readline
+```
+or use homebrew to install it. After that, edit the ```Makefile``` READLINE section with the readline lib path.
+
+---
+Made by dnikifor: dnikifor@student.hive.fi | LinkedIn: [dnikifor](https://www.linkedin.com/in/dmitriinikiforov/) | Tableau: [dmitriinikiforov](https://public.tableau.com/app/profile/nikiforov.dmitrii/vizzes)
