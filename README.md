@@ -1,6 +1,6 @@
 # minishell
 
-As beautiful as a shell
+Minishell created by [@nikkxll](https://github.com/nikkxll) and [@shatilovdr](https://github.com/shatilovdr)
 
 ## Table of Contents
 - [Project Description](#project-description)
