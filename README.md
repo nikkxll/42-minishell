@@ -5,7 +5,6 @@ As beautiful as a shell
 ## Table of Contents
 - [Project Description](#project-description)
 - [Implementation](#implementation)
-- [Results](#results)
 - [Usage](#usage)
 
 ## Project Description
@@ -95,10 +94,6 @@ The program has to implement:
 ![minishell_18_04](https://github.com/nikkxll/42-minishell/assets/125829393/f4d181ee-3213-4573-a91a-959f1277ef32)
 
 Description in progress...
-
-## Results
-
-✅ Passed with 125/100 ✅
 
 ## Usage
 
