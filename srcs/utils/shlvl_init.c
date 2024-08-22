@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:39:31 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/08/22 13:13:16 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:27:04 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  */
 int	check_for_non_digits(char *str)
 {
-	t_bool sign;
+	t_bool	sign;
 
 	sign = false;
 	while ((*str >= 9 && *str <= 13) || *str == 32)
