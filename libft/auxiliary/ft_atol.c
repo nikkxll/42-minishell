@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 15:58:54 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/04 17:23:32 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:02:57 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ long	ft_atol(const char *str)
 	}
 	while (*str >= 48 && *str <= 57)
 	{
-		if ((SIZE_T_MAX / 10) < result
-			|| ((SIZE_T_MAX / 10) == result && *str >= 54 && *str <= 57))
+		if ((SIZE_MAX / 10) < result
+			|| ((SIZE_MAX / 10) == result && *str >= 54 && *str <= 57))
 			return (0);
 		result = result * 10 + (*str - 48);
 		if ((sign == -1 && result > 0UL - LONG_MIN) || result > LONG_MAX)

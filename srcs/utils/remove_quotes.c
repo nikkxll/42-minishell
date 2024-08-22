@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:56:07 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/04 15:30:54 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:03:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	remove_quotes(char *str, int i, int j)
 			inside_quotes = 0;
 		else if (str[i] == D_QUOTE && inside_quotes == D_QUOTE)
 			inside_quotes = 0;
-		else if (str[i] == SPACE && !inside_quotes)
+		else if (str[i] == SPCE && !inside_quotes)
 			break ;
 		else
 			str[j++] = str[i];

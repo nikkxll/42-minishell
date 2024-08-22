@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:43:34 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/07 22:31:34 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:03:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	first_nonspace_char_is_bracket(char *str)
 	i = 0;
 	while (str[i] != NULL_TERM)
 	{
-		while (str[i] == SPACE)
+		while (str[i] == SPCE)
 			i++;
 		if (str[i] == O_ROUND)
 			return (1);
@@ -118,7 +118,7 @@ int	last_nonspace_char_is_bracket(char *str)
 	i = (int)ft_strlen(str) - 1;
 	while (i >= 0)
 	{
-		while (str[i] == SPACE)
+		while (str[i] == SPCE)
 			i--;
 		if (str[i] == C_ROUND)
 			return (1);

@@ -96,21 +96,24 @@ LIBFT_PATH			:=	$(LIBFT_PATH)
 LIBFT_SOURSES		:=	$(addprefix $(LIBFT_PATH), $(LIBFT_SOURSES))
 LIBFT				:=	$(addprefix $(LIBFT_PATH), $(LIBFT))
 
-# READLINE
+# READLINE SCHOOL_MACS
 # RL					:=	/opt/homebrew/opt/readline/lib/
 # RLH					:=	/opt/homebrew/opt/readline/lib/
 # RL_HEADER			:=	/opt/homebrew/opt/readline/include/readline/readline.h
 # RLH_HEADER			:=	/opt/homebrew/opt/readline/include/readline/history.h
 
-RL					:=	~/.brew/Cellar/readline/8.2.7/lib
-RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
-RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
-RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
+# READLINE M1_M2
+# RL					:=	~/.brew/Cellar/readline/8.2.7/lib
+# RLH					:=	~/.brew/Cellar/readline/8.2.7/lib
+# RL_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/readline.h
+# RLH_HEADER			:=	~/.brew/Cellar/readline/8.2.7/include/readline/history.h
 
 # HEADERS AND EXTERNAL LIBRARIES
-HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)
+# HEADERS				:=	$(LIBFT_PATH)libft.h $(RL_HEADER) $(RLH_HEADER)
+HEADERS				:=	$(LIBFT_PATH)libft.h
 INCLUDES			:=	$(addprefix -I , $(HEADERS))
-LIBS				:=	-lft -L $(LIBFT_PATH) -lreadline -L $(RL) -lhistory -L $(RL)
+# LIBS				:=	-lft -L $(LIBFT_PATH) -lreadline -L $(RL) -lhistory -L $(RL)
+LIBS				:=	-lreadline -L$(LIBFT_PATH) -lft
 
 # LOADING PROGRESS BAR INIT
 TOTAL_OBJS			:= $(words $(OBJS))
@@ -121,7 +124,7 @@ MSG_PRINTED 		:= false
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS_PATH) $(OBJS) $(HEADERS)
-	@cc $(FLAGS) $(INCLUDES) $(LIBS) $(OBJS) -o $(NAME)
+	@cc $(FLAGS) $(OBJS) $(LIBS) -o $(NAME)
 	@echo "$(GREEN)\n\n$(NAME) created successfully!$(EC)"
 
 $(OBJS_PATH):

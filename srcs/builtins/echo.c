@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:26:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/17 15:36:30 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:03:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	echo_write(char **arr, int flag, int i)
 		{
 			ft_putstr_fd(arr[i], STDOUT_FILENO);
 			if (arr[i + 1])
-				ft_putchar_fd(SPACE, STDOUT_FILENO);
+				ft_putchar_fd(SPCE, STDOUT_FILENO);
 			i++;
 		}
 		ft_putchar_fd(NL, STDOUT_FILENO);
@@ -38,7 +38,7 @@ static void	echo_write(char **arr, int flag, int i)
 		{
 			ft_putstr_fd(arr[i], STDOUT_FILENO);
 			if (arr[i + 1])
-				ft_putchar_fd(SPACE, STDOUT_FILENO);
+				ft_putchar_fd(SPCE, STDOUT_FILENO);
 			i++;
 		}
 	}

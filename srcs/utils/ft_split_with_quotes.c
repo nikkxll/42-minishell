@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:19:28 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/07 03:02:07 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:03:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**wrapper_ft_split_with_quotes(char *str)
 	i = 0;
 	while (str[i] != NULL_TERM)
 	{
-		if (str[i] == SPACE || str[i] == HT)
+		if (str[i] == SPCE || str[i] == HT)
 			str[i] = SEPARATOR;
 		else if (str[i] == D_QUOTE || str[i] == S_QUOTE)
 			i += skip_quotes(str + i);

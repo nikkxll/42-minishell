@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:54:40 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/09 12:41:43 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:03:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*command_part(char *str, int *i, int quote_type)
 static void	modificate_str_utils(char *str, char *r, int *i, int *j)
 {
 	r[*j] = str[*i];
-	str[*i] = SPACE;
+	str[*i] = SPCE;
 	(*j)++;
 	(*i)++;
 }
@@ -78,7 +78,7 @@ static void	fill_redir(char *str, char **redir, int *i, int *j)
 
 	q_flag = 0;
 	while ((str[*i] == REDIR_L || str[*i] == REDIR_R
-			|| str[*i] == SPACE || str[*i] == HT) && str[*i] != NULL_TERM)
+			|| str[*i] == SPCE || str[*i] == HT) && str[*i] != NULL_TERM)
 		modificate_str_utils(str, *redir, i, j);
 	while (str[*i] != NULL_TERM)
 	{
@@ -88,7 +88,7 @@ static void	fill_redir(char *str, char **redir, int *i, int *j)
 			q_flag = 0;
 		else if (str[*i] == D_QUOTE && q_flag == D_QUOTE)
 			q_flag = 0;
-		if (q_flag == 0 && (str[*i] == SPACE || str[*i] == REDIR_L
+		if (q_flag == 0 && (str[*i] == SPCE || str[*i] == REDIR_L
 				|| str[*i] == REDIR_R || str[*i] == HT || str[*i] == NULL_TERM))
 			break ;
 		else

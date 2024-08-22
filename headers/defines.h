@@ -6,7 +6,7 @@
 /*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:11:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/20 22:12:06 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:03:15 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ enum	e_characters
 	L_REDIR_SEPARATOR = 29,
 	R_REDIR_SEPARATOR = 30,
 	SEPARATOR = 31,
-	SPACE = 32,
+	SPCE = 32,
 	D_QUOTE = 34,
 	D_SIGN = 36,
 	AND = 38,
