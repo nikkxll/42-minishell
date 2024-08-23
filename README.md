@@ -108,4 +108,5 @@ brew install readline
 or use homebrew to install it. After that, edit the ```Makefile``` READLINE section with the readline lib path.
 
 ---
-Made by dnikifor: dnikifor@student.hive.fi | LinkedIn: [dnikifor](https://www.linkedin.com/in/dmitriinikiforov/) | Tableau: [dmitriinikiforov](https://public.tableau.com/app/profile/nikiforov.dmitrii/vizzes)
+Made by: dnikifor@student.hive.fi | LinkedIn: [dnikifor](https://www.linkedin.com/in/dmitriinikiforov/) | Tableau: [dmitriinikiforov](https://public.tableau.com/app/profile/nikiforov.dmitrii/vizzes)\
+&emsp;&emsp;&ensp;and dshatilo@student.hive.fi | LinkedIn: [dshatilo](https://www.linkedin.com/in/shatilovdr/)

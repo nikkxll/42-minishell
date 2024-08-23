@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_heredocs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:23:59 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/19 00:18:09 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:42:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ static void	handle_heredoc_line(int fd, char *line, t_minishell *ms,
 	}
 	else
 	{
-		ft_putstr_fd("\033[0;31me-bash: \033[0;0m", STDERR_FILENO);
+		ft_putstr_fd("\033[0;31md-sh: \033[0;0m", STDERR_FILENO);
 		ft_putstr_fd(limiter, STDERR_FILENO);
 		ft_putendl_fd(": malloc() error occured", STDERR_FILENO);
 		close(fd);

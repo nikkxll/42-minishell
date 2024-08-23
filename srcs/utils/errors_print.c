@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:35:52 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/08 12:44:04 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:42:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  */
 void	print_err_msg(char *cmd, char *msg)
 {
-	cmd = ft_strjoin("\033[0;31me-bash: \033[0;0m", cmd);
+	cmd = ft_strjoin("\033[0;31md-sh: \033[0;0m", cmd);
 	if (!cmd)
 		return ;
 	msg = ft_strjoin(cmd, msg);
@@ -43,7 +43,7 @@ void	shlvl_warning(int number)
 	char	*first_num_part;
 	char	*msg;
 
-	first_part = "\033[0;31me-bash: \033[0;0mwarning: minishell level (";
+	first_part = "\033[0;31md-sh: \033[0;0mwarning: minishell level (";
 	num = ft_itoa(number);
 	if (!num)
 		return ;
@@ -67,7 +67,7 @@ void	shlvl_warning(int number)
  */
 void	perror_err_msg(char *cmd, char *arg)
 {
-	cmd = ft_strjoin("\033[0;31me-bash: \033[0;0m", cmd);
+	cmd = ft_strjoin("\033[0;31md-sh: \033[0;0m", cmd);
 	if (!cmd)
 		return ;
 	arg = ft_strjoin(cmd, arg);
@@ -87,7 +87,7 @@ void	perror_err_msg(char *cmd, char *arg)
  */
 void	print_arg_err_msg(char *cmd, char *arg, char *msg)
 {
-	cmd = ft_strjoin("\033[0;31me-bash: \033[0;0m", cmd);
+	cmd = ft_strjoin("\033[0;31md-sh: \033[0;0m", cmd);
 	if (!cmd)
 		return ;
 	arg = ft_strjoin(cmd, arg);
@@ -130,7 +130,7 @@ void	print_syntax_error(char *str)
 			i++;
 	if (i != 0)
 		str[i] = NULL_TERM;
-	ft_putstr_fd("\033[0;31me-bash: \033[0;0msyntax error near "
+	ft_putstr_fd("\033[0;31md-sh: \033[0;0msyntax error near "
 		"unexpected token `", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putendl_fd("'", STDERR_FILENO);
