@@ -93,7 +93,13 @@ The program has to implement:
 
 ![minishell_18_04](https://github.com/nikkxll/42-minishell/assets/125829393/f4d181ee-3213-4573-a91a-959f1277ef32)
 
-Description in progress...
+Description in progress..
+
+❗ Disclaimer ❗
+
+The minishell program was inspired by Bash version 3.2.
+
+If you plan to use a different version as a reference, be aware that the behavior may vary depending on the Bash version used.
 
 ## Usage
 
