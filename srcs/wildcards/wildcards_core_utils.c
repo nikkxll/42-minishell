@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_core_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:09:14 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/03/31 23:16:22 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:42:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	array_with_entities_len(int sub_arr_len)
 	dir = opendir(".");
 	if (dir == NULL)
 	{
-		perror("\033[0;31me-bash: \033[0;0m opendir() error in wildcards");
+		perror("\033[0;31md-sh: \033[0;0m opendir() error in wildcards");
 		return (SYSTEM_ERROR);
 	}
 	entry = readdir(dir);
@@ -141,7 +141,7 @@ int	array_with_entities_len(int sub_arr_len)
 	}
 	if (closedir(dir) == SYSTEM_ERROR)
 	{
-		perror("\033[0;31me-bash: \033[0;0m closedir() error in wildcards");
+		perror("\033[0;31md-sh: \033[0;0m closedir() error in wildcards");
 		return (SYSTEM_ERROR);
 	}
 	if (entry == NULL)

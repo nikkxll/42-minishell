@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:45:53 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/20 22:12:13 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:43:04 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	build_prompt(char *folder_name, char **prompt, char *exit_status)
 	*prompt = ft_calloc(len + 1, sizeof(char));
 	if (!*prompt)
 		return (MALLOC_ERR);
-	ft_strlcat(*prompt, "litbash-1.0 ", len);
+	ft_strlcat(*prompt, "d-sh-1.0 ", len);
 	ft_strlcat(*prompt, folder_name, len);
 	ft_strlcat(*prompt, " [", len);
 	ft_strlcat(*prompt, exit_status, len);

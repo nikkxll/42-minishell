@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:53:09 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/13 23:00:42 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:42:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	initialize_minishell(t_minishell **ms)
 void	terminate_minishell(t_minishell **ms, int status)
 {
 	ft_free_minishell(*ms);
-	ft_putstr_fd("\033[0;31me-bash:\033[0;0m can't initialize "
+	ft_putstr_fd("\033[0;31md-sh:\033[0;0m can't initialize "
 		"t_minishell structure\n", STDERR_FILENO);
 	exit (status);
 }

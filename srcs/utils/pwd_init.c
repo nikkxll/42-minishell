@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:18:37 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/13 00:33:19 by dnikifor         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:42:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	pwd_init_when_pwd_exists(int position, char ***envp, char **pwd)
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
-		perror("\033[0;31me-bash:\033[0;0m getcwd");
+		perror("\033[0;31md-sh:\033[0;0m getcwd");
 		return (GETCWD_ERROR);
 	}
 	*pwd = ft_strdup(cwd);
@@ -70,7 +70,7 @@ static int	pwd_init_when_no_pwd_exists(char ***envp, char **pwd)
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
-		perror("\033[0;31me-bash: \033[0;0m getcwd");
+		perror("\033[0;31md-sh: \033[0;0m getcwd");
 		return (GETCWD_ERROR);
 	}
 	*pwd = ft_strdup(cwd);
