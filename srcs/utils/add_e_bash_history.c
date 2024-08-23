@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 11:08:31 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:02:26 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:42:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	add_to_history_list(char *cmd, char *cmdline, t_minishell **minishell)
  */
 void	print_err_history(char *cmd)
 {
-	ft_putstr_fd("\033[0;31me-bash: \033[0;0m", STDERR_FILENO);
+	ft_putstr_fd("\033[0;31md-sh: \033[0;0m", STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(": can't add to history, ", STDERR_FILENO);
 }

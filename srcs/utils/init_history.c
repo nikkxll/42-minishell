@@ -6,7 +6,7 @@
 /*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:02:33 by dshatilo          #+#    #+#             */
-/*   Updated: 2024/04/15 11:29:52 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:42:56 by dshatilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_history(t_minishell **minishell)
 	t_minishell	*ms;
 
 	ms = *minishell;
-	ms->history_path = ft_strjoin(ms->pwd, "/.e-bash_history");
+	ms->history_path = ft_strjoin(ms->pwd, "/.d-sh_history");
 	if (!ms->history_path)
 	{
 		print_err_msg("History file unsupported for current session", NULL);
@@ -74,7 +74,7 @@ void	read_history_file(t_minishell **ms)
 	if (status != 0 && buffer != NULL)
 		free(buffer);
 	if (status != 0)
-		ft_putstr_fd("\033[0;31me-bash:\033[0;0m GNL error occured while"
+		ft_putstr_fd("\033[0;31md-sh:\033[0;0m GNL error occured while"
 			" reading history file", STDERR_FILENO);
 	close(fd);
 }
