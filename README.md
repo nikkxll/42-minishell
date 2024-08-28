@@ -5,6 +5,7 @@ Minishell created by [@nikkxll](https://github.com/nikkxll) and [@shatilovdr](ht
 ## Table of Contents
 - [Project Description](#project-description)
 - [Implementation](#implementation)
+- [Results](#results)
 - [Usage](#usage)
 
 ## Project Description
