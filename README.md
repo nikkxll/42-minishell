@@ -101,6 +101,10 @@ The minishell program was inspired by Bash version 3.2.
 
 If you plan to use a different version as a reference, be aware that the behavior may vary depending on the Bash version used.
 
+## Results
+
+✅ Passed with 125/100 ✅
+
 ## Usage
 
 To run the program enter
