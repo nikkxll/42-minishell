@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_ctrl_d.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshatilo <dshatilo@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: dnikifor <dnikifor@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:09:48 by dnikifor          #+#    #+#             */
-/*   Updated: 2024/04/17 14:09:44 by dshatilo         ###   ########.fr       */
+/*   Updated: 2024/09/07 10:57:29 by dnikifor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,7 @@ void	ctrl_d_error_handler(char *msg)
  */
 int	handle_ctrl_d(char *prompt)
 {
-	int		len;
-	char	*shift;
-	char	*shift_len;
-
-	len = ft_strlen(prompt);
 	free(prompt);
-	shift_len = ft_itoa(len);
-	if (!shift_len)
-		return (MALLOC_ERR);
-	len = ft_strlen(shift_len) + 4;
-	shift = ft_calloc(len, sizeof(char));
-	if (!shift)
-	{
-		free(shift_len);
-		return (MALLOC_ERR);
-	}
-	ft_strlcat(shift, "\033[", len);
-	ft_strlcat(shift, shift_len, len);
-	free(shift_len);
-	ft_strlcat(shift, "C", len);
-	ft_printf("\033[1A");
-	ft_printf("%s", shift);
-	free(shift);
 	ft_printf("exit\n");
 	return (SUCCESS);
 }
