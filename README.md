@@ -102,6 +102,8 @@ The minishell program was inspired by Bash version 3.2.
 
 If you plan to use a different version as a reference, be aware that the behavior may vary depending on the Bash version used.
 
+The program is fully functional on both macOS and Linux, but please note that the behavior of Linux signals may differ from the original implementation. It is not recommended to use signals as a reference if you are working on Linux.
+
 ## Results
 
 ✅ Passed with 125/100 ✅
